@@ -5,8 +5,10 @@
 
 .article-main{
     display: inline-block;
+    vertical-align: text-bottom;
     margin: 30px; 
     width: 20%;
+    min-height: 700px;
 }
 
 .article-main p{
