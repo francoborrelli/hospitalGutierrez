@@ -33,13 +33,13 @@ left: 0;
 z-index: 1030;
 }
 
-.collapse{
+#collapse{
     margin: 0 auto;
     margin-right: 0;
     display: inherit;
 }
 
-.collapse input {
+#collapse input {
     padding: .5rem .75rem;
     font-size: 1rem;
     line-height: 1.25;
@@ -63,7 +63,7 @@ z-index: 1030;
     border-radius: .25rem;
 }
 
-.toggler{
+#toggler{
     display: none;
     position: absolute;
     right: 1rem;
@@ -80,10 +80,10 @@ z-index: 1030;
 }
 
 @media (max-width : 900px ) {
-    .toggler{
+    #toggler{
         display: block;
     }
-    .collapse{
+    #collapse{
         display: none;
     }
 }
