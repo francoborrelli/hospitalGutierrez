@@ -2,3 +2,9 @@
     background-color: white;
     margin: 0px; 
 }
+
+.article-main{
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+}
