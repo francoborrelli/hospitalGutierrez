@@ -1,0 +1,9 @@
+.card{
+    margin: 50px auto 0;
+    width: 400px;
+}
+
+
+.card .top{
+    background-color: #ff7043;
+}
