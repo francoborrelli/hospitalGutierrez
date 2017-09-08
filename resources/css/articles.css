@@ -1,10 +1,14 @@
 .articles-container{
     background-color: white;
-    margin: 0px; 
+    text-align: center;
 }
 
 .article-main{
     display: inline-block;
-    width: 33%;
-    text-align: center;
+    margin: 30px; 
+    width: 20%;
+}
+
+.article-main p{
+    text-align: left;
 }
