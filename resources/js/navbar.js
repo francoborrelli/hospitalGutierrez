@@ -1,12 +1,8 @@
-(function() {
-    var show = false;
-    document.getElementById("toggler").addEventListener("click", function(){
-        if (!show){
-            document.getElementById("collapse").style.display = 'block';
-            show = true;
-        }else{
-            show = false;
-            document.getElementById("collapse").style.display = 'none';
-        }
-    });
- })();
+function myFunction() {
+    var x = document.getElementById("navbar");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
