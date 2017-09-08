@@ -3,6 +3,10 @@ nav{
     display: flex;
 }
 
+.logo{
+    width: 33px;
+}
+
 .fixed-top{
 background-color: #292b2c!important;
 position: fixed;
