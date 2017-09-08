@@ -12,3 +12,15 @@
 .article-main p{
     text-align: left;
 }
+
+.button{
+    display: inline-block;
+    color: #3a3a3a; 
+    border: 1px solid;
+    border-color: #3a3a3a;
+    min-width: 100px;
+    padding: .5rem;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+}
