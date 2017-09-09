@@ -1,7 +1,6 @@
 .articles-container{
     background-color: #FAFAFA;
     text-align: center;
-    margin-top: 80px;
 }
 
 hr{
@@ -9,6 +8,13 @@ hr{
     margin-bottom: 1rem;
     border: 0;
     border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.banner{
+    object-fit: cover;
+    height: 300px;
+    width: 100%;
+    margin-top: 80px;
 }
 
 .article-main{
