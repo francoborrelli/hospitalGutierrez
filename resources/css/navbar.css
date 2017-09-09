@@ -1,5 +1,4 @@
 .topnav {
-    overflow: hidden;
     padding: 1rem 1rem;
     display: flex;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.22);
@@ -15,14 +14,17 @@
     margin-left: 15px;
 }
 
-.topnav a {
-    float: left;
-    display: block;
-    color: rgba(0, 0, 0, 0.5);
-    text-align: center;
-    padding: 14px 16px;
+a{
     text-decoration: none;
     font-size: 17px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.topnav .nav-item {
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
 }
 
 .topnav .icon {
@@ -71,12 +73,12 @@
 }
 
 @media screen and (max-width: 800px) {
-    .topnav a{font-size: 15px}
-    .topnav a:not(:first-child),
+    .topnav .nav-item{font-size: 15px}
+    .topnav .nav-item:not(:first-child),
     .topnav .search {
         display: none;
     }
-    .topnav a.icon {
+    .topnav .nav-item.icon {
         display: block;
         margin: 0 auto;
         margin-right: 0;
@@ -84,12 +86,12 @@
     .topnav.responsive {
         display: inherit
     }
-    .topnav.responsive a.icon {
+    .topnav.responsive .nav-item.icon {
         position: absolute;
         right: 16px;
         top: 16px;
     }
-    .topnav.responsive a,
+    .topnav.responsive .nav-item,
     .topnav.responsive .search {
         float: none;
         display: block;
@@ -127,4 +129,42 @@
         float: right;
         width: 27%;
     }
+}
+
+.dropup, .dropdown {
+    position: relative;
+} 
+
+.dropdown-menu-right {
+    right: 0;
+}
+
+.show .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+    display: none;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #292b2c;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: .25rem;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 15px 1.5rem;
+    clear: both;
+    color: #292b2c;
+    background: none;
 }

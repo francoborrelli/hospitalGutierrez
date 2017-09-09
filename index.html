@@ -17,12 +17,33 @@
 
 <body>
     <nav class="topnav" id="navbar">
-        <a href="#"><img  class="logo" src="resources/images/Caduceo.png" alt="logo-icon"></a>
-        <form class="search">
+        <a href="#" class="nav-item"><img  class="logo" src="resources/images/Caduceo.png" alt="logo-icon"></a>
+        <a href="#" class="nav-item">Inicio</a>
+        <a href="#" class="nav-item">Pacientes</a>
+        <form class="search" >
             <input type="text" placeholder="Buscar">
             <button class="btn" type="submit">Buscar</button>
         </form>
-        <a href="#" class="signIn">lucio.ringuelet</a>
+        <a href="#" class="signIn nav-item"></a>
+        <div class="dropdown show">
+                <a  class="nav-item" id="dropdown">
+                    lucio.ringuelet
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">   
+            <a class="dropdown-item" id="myProfile" href="  /user/profile  ">
+                <span> 
+                <i class="fa fa-user-circle " aria-hidden="true"></i> </span>
+                &nbsp;
+                <span>Mi Perfil</span>
+                </a>    
+                <a class="dropdown-item" id="myProfile" href="  /user/profile  ">
+                    <span> 
+                    <i class="fa fa-user-circle " aria-hidden="true"></i> </span>
+                    &nbsp;
+                    <span>Mi Perfil</span>
+                    </a>        
+                </div>              
+            </div>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
     </nav>
 </body>
