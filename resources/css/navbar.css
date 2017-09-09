@@ -40,6 +40,11 @@
     margin-right: 0;
 }
 
+.search {
+    margin-top: 4px;
+    margin-left: 10px;
+}
+
 .search input {
     padding: .5rem .75rem;
     font-size: 1rem;
@@ -51,12 +56,7 @@
     border-radius: .25rem;
 }
 
-.search {
-    margin-top: 4px;
-    margin-left: 10px;
-}
-
-.btn {
+.search .btn {
     padding: .5rem .75rem;
     display: inline-block;
     font-weight: 400;
@@ -73,7 +73,7 @@
 @media screen and (max-width: 800px) {
     .topnav a{font-size: 15px}
     .topnav a:not(:first-child),
-    .topnav form {
+    .topnav .search {
         display: none;
     }
     .topnav a.icon {
@@ -90,15 +90,41 @@
         top: 16px;
     }
     .topnav.responsive a,
-    .topnav.responsive form {
+    .topnav.responsive .search {
         float: none;
         display: block;
         text-align: left;
     }
-    .topnav.responsive form {
+
+    .topnav.responsive .signIn{
+            margin-top: 10px;
+    }
+
+    .topnav.responsive .search{
         margin-left: 15px;
-        margin-top: 10px
+        margin-top: 10px;
+        float: right;
     }
 }
 
 
+@media screen and (max-width: 600px) {
+    .topnav.responsive .signIn{
+            margin-top: 10px;
+    }
+
+    .topnav.responsive .search{
+        margin-left: 15px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        float: inherit;
+    }
+    .topnav.responsive .search input{
+        width: 64%;
+    }
+
+    .topnav.responsive .search .btn{
+        float: right;
+        width: 27%;
+    }
+}
