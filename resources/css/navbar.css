@@ -10,14 +10,15 @@
     z-index: 1030;
 }
 
-.name{
+.name {
     margin-left: 15px;
 }
 
-a{
+a {
     text-decoration: none;
     font-size: 17px;
     color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }
 
 .topnav .nav-item {
@@ -73,7 +74,9 @@ a{
 }
 
 @media screen and (max-width: 800px) {
-    .topnav .nav-item{font-size: 15px}
+    .topnav .nav-item {
+        font-size: 15px
+    }
     .topnav .nav-item:not(:first-child),
     .topnav .search {
         display: none;
@@ -97,46 +100,37 @@ a{
         display: block;
         text-align: left;
     }
-
-    .topnav.responsive .signIn{
-            margin-top: 10px;
+    .topnav.responsive .signIn {
+        margin-top: 10px;
     }
-
-    .topnav.responsive .search{
+    .topnav.responsive .search {
         margin-left: 15px;
         margin-top: 10px;
         float: right;
     }
 }
 
-
 @media screen and (max-width: 600px) {
-    .topnav.responsive .signIn{
-            margin-top: 10px;
+    .topnav.responsive .signIn {
+        margin-top: 10px;
     }
-
-    .topnav.responsive .search{
+    .topnav.responsive .search {
         margin-left: 15px;
         margin-top: 10px;
         margin-bottom: 10px;
         float: inherit;
     }
-    .topnav.responsive .search input{
+    .topnav.responsive .search input {
         width: 64%;
     }
-
-    .topnav.responsive .search .btn{
+    .topnav.responsive .search .btn {
         float: right;
         width: 27%;
     }
 }
 
-.dropup, .dropdown {
+.dropdown {
     position: relative;
-} 
-
-.dropdown-menu-right {
-    right: 0;
 }
 
 .show .dropdown-menu {
@@ -144,6 +138,7 @@ a{
 }
 
 .dropdown-menu {
+    right: 0;
     position: absolute;
     top: 100%;
     z-index: 1000;
@@ -157,7 +152,7 @@ a{
     list-style: none;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,0.15);
+    border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: .25rem;
 }
 
@@ -167,4 +162,23 @@ a{
     clear: both;
     color: #292b2c;
     background: none;
+}
+
+.dropdown-item:active {
+    color: white;
+    background-color: red;
+    -webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+#user {
+    -webkit-user-select: none;
+    /* webkit (safari, chrome) browsers */
+    -moz-user-select: none;
+    /* mozilla browsers */
+    -khtml-user-select: none;
+    /* webkit (konqueror) browsers */
+    -ms-user-select: none;
+    /* IE10+ */
 }
