@@ -28,6 +28,11 @@ a {
     padding: 14px 16px;
 }
 
+.topnav .nav-item.patients {
+    position: absolute;
+    right: 150px;
+}
+
 .topnav .icon {
     display: none;
 }
@@ -44,8 +49,9 @@ a {
 }
 
 .search {
-    margin-top: 4px;
+    margin-top: 5px;
     margin-left: 10px;
+    margin-right: 15px;
 }
 
 .search input {
@@ -73,64 +79,11 @@ a {
     cursor: pointer;
 }
 
-@media screen and (max-width: 800px) {
-    .topnav .nav-item {
-        font-size: 15px
-    }
-    .topnav .nav-item:not(:first-child),
-    .topnav .search {
-        display: none;
-    }
-    .topnav .nav-item.icon {
-        display: block;
-        margin: 0 auto;
-        margin-right: 0;
-    }
-    .topnav.responsive {
-        display: inherit
-    }
-    .topnav.responsive .nav-item.icon {
-        position: absolute;
-        right: 16px;
-        top: 16px;
-    }
-    .topnav.responsive .nav-item,
-    .topnav.responsive .search {
-        float: none;
-        display: block;
-        text-align: left;
-    }
-    .topnav.responsive .signIn {
-        margin-top: 10px;
-    }
-    .topnav.responsive .search {
-        margin-left: 15px;
-        margin-top: 10px;
-        float: right;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .topnav.responsive .signIn {
-        margin-top: 10px;
-    }
-    .topnav.responsive .search {
-        margin-left: 15px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        float: inherit;
-    }
-    .topnav.responsive .search input {
-        width: 64%;
-    }
-    .topnav.responsive .search .btn {
-        float: right;
-        width: 27%;
-    }
-}
 
 .dropdown {
-    position: relative;
+    position: absolute;
+    right: 10px;
+
 }
 
 .show .dropdown-menu {
@@ -165,8 +118,7 @@ a {
 }
 
 .dropdown-item:active {
-    color: white;
-    background-color: red;
+    background-color: rgba(77,182,172,0.1);
     -webkit-transition: background-color 400ms linear;
     -ms-transition: background-color 400ms linear;
     transition: background-color 400ms linear;
@@ -181,4 +133,77 @@ a {
     /* webkit (konqueror) browsers */
     -ms-user-select: none;
     /* IE10+ */
+}
+
+@media screen and (max-width: 800px) {
+    .topnav .nav-item {
+        font-size: 15px
+    }
+    .topnav .nav-item a{
+        font-size: 15px
+    }
+    .topnav .nav-item:not(:first-child),
+    .topnav .search {
+        display: none;
+    }
+    .topnav .nav-item.icon {
+        display: block;
+        margin: 0 auto;
+        margin-right: 0;
+    }
+    .topnav.responsive {
+        display: inherit
+    }
+    .topnav.responsive .nav-item.icon {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+    }
+    .topnav.responsive .nav-item,
+    .topnav.responsive .search {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+    .topnav.responsive .signIn {
+        margin-top: 10px;
+    }
+    .topnav.responsive .search {
+        margin-left: 15px;
+        margin-top: 10px;
+        float: right;
+    }
+    .dropdown{
+        position: initial;
+    }
+    
+    .patients{
+        position: relative!important;
+        right: 0!important;
+    }
+
+    .dropdown-menu {
+        margin-top: 20px;
+        position: inherit;
+    }
+    
+}
+
+@media screen and (max-width: 600px) {
+    .topnav.responsive .signIn {
+        margin-top: 10px;
+    }
+    .topnav.responsive .search {
+        margin-left: 15px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        float: inherit;
+    }
+    .topnav.responsive .search input {
+        width: 64%;
+    }
+    .topnav.responsive .search .btn {
+        float: right;
+        width: 27%;
+    }
 }
