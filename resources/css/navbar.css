@@ -135,7 +135,7 @@ a {
     /* IE10+ */
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 865px) {
     .topnav .nav-item {
         font-size: 15px
     }
@@ -200,7 +200,7 @@ a {
         float: inherit;
     }
     .topnav.responsive .search input {
-        width: 64%;
+        width: 63%;
     }
     .topnav.responsive .search .btn {
         float: right;
