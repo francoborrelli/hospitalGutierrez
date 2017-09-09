@@ -8,11 +8,14 @@
     vertical-align: text-bottom;
     margin: 30px; 
     width: 20%;
-    min-height: 700px;
+    min-height: 500px;
 }
 
-.article-main p{
+.article-main .text{
     text-align: justify;
+    height: 190px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .button{
@@ -58,11 +61,19 @@
     transform: scale(1,1);
 }
 
+@media ( max-width : 1350px ) {
+    .article-main{
+        width: 25%;
+    }
+}
 
 @media ( max-width : 1050px ) {
     .article-main{
         width: 50%;
         min-height: inherit;
+    }
+    .article-main .text{
+        height: inherit;
     }
 }
 
