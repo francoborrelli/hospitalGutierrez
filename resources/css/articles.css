@@ -57,3 +57,18 @@
     opacity: 1;
     transform: scale(1,1);
 }
+
+
+@media ( max-width : 1050px ) {
+    .article-main{
+        width: 50%;
+        min-height: inherit;
+    }
+}
+
+@media ( max-width : 550px ) {
+    .article-main{
+        width: 75%;
+        min-height: inherit;
+    }
+}
