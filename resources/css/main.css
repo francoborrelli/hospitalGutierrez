@@ -5,5 +5,7 @@ body{
 }
 
 .main-container{
+    background-color: #FAFAFA;
+    text-align: center;
     margin-top: 78px;
 }
