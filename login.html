@@ -14,17 +14,17 @@
 </head>
 
 <body>
-    <div class="card">
-        <div>
+    <div class="container">
+        <div class="card">
             <div class="top">
-                <h4>Iniciar Sesión</h4>
+                <h4 class="card-title">Iniciar Sesión</h4>
             </div>
-            <div>
+            <div class="bottom">
                 <form>
-                    <input type="email" class="form-control" placeholder="Dirección de email" required>
-                    <input type="password" placeholder="Contraseña" required>
+                    <input type="email" id="_username" name="_username" class="form-control" placeholder="Email" required aria-required="true">
+                    <input type="password" id="_password" name="_password" class="form-control" placeholder="Contraseña" required aria-required="true">
                     <button type="submit">Acceder</button>
-                    <div><a href="">No me acuerdo mi contraseña</a></div>
+                    <div class="forget"><a href="#">No me acuerdo mi contraseña</a></div>
                 </form>
             </div>
         </div>
