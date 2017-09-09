@@ -12,7 +12,9 @@ document.onclick = function() {
         click = false;
     }
     else{
+        if (x.className === "dropdown nav-item show") {
         click = true;
+    }
     }
   }
 
