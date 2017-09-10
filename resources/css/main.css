@@ -2,3 +2,9 @@ body{
     font-family: 'Roboto', sans-serif;
     background-color: #1c1c1c;
 }
+
+.main-container{
+    background-color: #FAFAFA;
+    text-align: center;
+    margin-top: 78px;
+}
