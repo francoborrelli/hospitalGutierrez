@@ -16,6 +16,11 @@ hr{
     vertical-align: text-bottom;
     margin: 30px; 
     width: 20%;
+    color: #424242;
+}
+
+.article-main h1{
+    color: #212121;
 }
 
 .article-main .text{
