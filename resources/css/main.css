@@ -6,6 +6,12 @@ body{
 
 .main-container{
     background-color: #FAFAFA;
-    text-align: center;
     margin-top: 78px;
+    min-height: 250px;
+}
+
+hr {
+    margin-bottom: 8px;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
 }
