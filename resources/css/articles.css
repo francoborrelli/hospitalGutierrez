@@ -19,8 +19,8 @@ hr{
     color: #424242;
 }
 
-.article-main h1{
-    color: #212121;
+.article-main h2{
+    font-weight: lighter;
 }
 
 .article-main .text{
