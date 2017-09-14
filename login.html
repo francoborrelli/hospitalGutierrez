@@ -10,11 +10,20 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="resources/css/main.css" rel="stylesheet">
     <link href="resources/css/login.css" rel="stylesheet">
-
 </head>
 
 <body>
-    <div class="container">
+    <nav class="topnav" id="navbar">
+        <a class="nav-item" href=""><img  class="logo" src="resources/images/Caduceo.png" alt="Logo Hospital Gutierrez"><span class="name">Hospital Dr. Ricardo Gutiérrez</span> </a>
+        <form class="search">
+            <input type="text" placeholder="Buscar" title="clave">
+            <button class="btn" type="submit">Buscar</button>
+        </form>
+        <a href="login.html" class="nav-item signIn">Iniciar Sesion</a>
+        <a href="javascript:void(0);" class="nav-item icon" onclick="myFunction()">&#9776;</a>
+    </nav>
+
+    <div class="main-container login">
         <div class="card">
             <div class="top">
                 <h4 class="card-title">Iniciar Sesión</h4>
@@ -29,6 +38,13 @@
             </div>
         </div>
     </div>
+
+    <footer>
+        <span>Proyecto de Software 2017 - Hospital Dr. Ricardo Gutiérrez.</span>
+    </footer>
+
+    <script src="resources/js/navbar.js"></script>
+    
 </body>
 
 </html>
