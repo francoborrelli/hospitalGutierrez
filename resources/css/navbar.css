@@ -162,10 +162,6 @@ nav .search .btn {
         position: initial;
     }
     
-    .patients{
-        position: relative!important;
-        right: 0!important;
-    }
 
     .dropdown-menu {
         margin-top: 20px;
