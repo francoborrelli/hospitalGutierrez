@@ -17,11 +17,11 @@
     <nav class="topnav" id="navbar">
         <a class="nav-item" href="index.html"><img  class="logo" src="resources/images/Caduceo.png" alt="Logo Hospital Gutierrez"><span class="name">Hospital Dr. Ricardo Gutiérrez</span> </a>
         <form class="search">
-            <input type="text" placeholder="Buscar" title="clave">
+            <input type="text" placeholder="Buscar" title="buscador" id="buscador">
             <button class="btn" type="submit">Buscar</button>
         </form>
         <a href="login.html" class="nav-item signIn">Iniciar Sesión</a>
-        <a href="javascript:void(0);" class="nav-item icon" onclick="showMenu()" onkeypress="showMenu()">&#9776;</a>
+        <a href="javascript:void(0);" class="nav-item icon" onclick="showMenu()" onkeypress="showMenu()" role="button">&#9776;</a>
     </nav>
 
     <div class="main-container login">
@@ -31,8 +31,8 @@
             </div>
             <div class="bottom">
                 <form method="post" action="admin.html">
-                    <input type="email" id="_username" name="_username" class="form-control" placeholder="Email" required aria-required="true">
-                    <input type="password" id="_password" name="_password" class="form-control" placeholder="Contraseña" required aria-required="true">
+                    <input type="email" title="username" id="username" name="username" class="form-control" placeholder="Email" required>
+                    <input type="password" title="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
                     <button type="submit">Acceder</button>
                     <div class="forget"><a href="#">No me acuerdo mi contraseña</a></div>
                 </form>
