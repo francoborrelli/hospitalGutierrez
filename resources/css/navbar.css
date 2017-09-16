@@ -60,6 +60,7 @@ nav .search input {
 }
 
 nav .search .btn {
+    background-color: #dddddd;
     padding: 8px 12px;
     display: inline-block;
     font-weight: 400;
