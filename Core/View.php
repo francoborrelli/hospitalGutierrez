@@ -5,7 +5,7 @@ namespace Core;
 class View
 {
 
-    public function renderTemplate($template, $args = [])
+    public static function renderTemplate($template, $args = [])
     {
         static $twig = null;
 
