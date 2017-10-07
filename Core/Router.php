@@ -38,4 +38,41 @@ class Router
         return false;
     }
 
+    public function dispatch($url)
+    {
+        $url = $this->removeQueryStringVariables($url);
+        if ($this->match($url)) {
+
+            $controller = $this->getController();
+            if (class_exists($controller)) {
+                $controller_instance = new $controller($this->params);
+                $this->executeAction($controller_instance);
+            } else
+                echo "Controlador $controller no ecnontrado";
+
+        } else 
+            echo "Ruta no encontrada";
+    } 
+
+    private function getController()
+    {
+        $controller = $this->params['controller'];
+        $controller = $this->convertToPascalCase($controller);
+        $controller = $this->getNamespace() . $controller;
+    }
+
+    private function generateController($controller_instance)
+    {
+        $action = $this->getAction;
+        if (preg_match('/action$/i', $action) == 0)
+            $controller_instance->$action();
+        else
+            echo "El método $action no puede ser llamado directamente, se debe remover el sufijo Action";
+    }
+
+
+
+
+       
+
 }    
