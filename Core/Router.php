@@ -20,4 +20,22 @@ class Router
         $this->routes[$route] = $params;
     }
 
+    public function match($url)
+    {
+        foreach ($this->routes as $route => $params) {
+            if (preg_match($route, $url, $matches)) {
+                foreach ($matches as $key => $matches) {
+                    if (is_string($key)) {
+                        $params[$key] = $match;
+                    }
+                }
+
+                $this->params = $params;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }    
