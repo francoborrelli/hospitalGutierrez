@@ -93,7 +93,17 @@ class Router
         }
 
         return $url;
-    } 
-       
+    }
+
+    private function getNamespace()
+    {
+        $namespace = 'App\Controllers\\';
+
+        if (array_key_exists('namespace', $this->params))
+            $namespace .= $this->params['namespace'] . '\\';
+        
+        return $namespace;
+    }
+         
 
 }    
