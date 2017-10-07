@@ -64,13 +64,22 @@ class Router
     private function generateController($controller_instance)
     {
         $action = $this->getAction;
+        $this->convertToCamelCase($action);
         if (preg_match('/action$/i', $action) == 0)
             $controller_instance->$action();
         else
             echo "El método $action no puede ser llamado directamente, se debe remover el sufijo Action";
     }
 
+    private function convertToPascalCase($string)
+    {
+        return str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
+    }
 
+    private function convertToCamelCase($string)
+    {
+        return lcfirst($this->convertToPascalCase($string));
+    }
 
 
        
