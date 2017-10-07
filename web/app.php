@@ -1,6 +1,6 @@
 <?php
 
-require '../Core/Router.php';
+require '../vendor/autoload.php';
 
 $router = new Core\Router();
     
