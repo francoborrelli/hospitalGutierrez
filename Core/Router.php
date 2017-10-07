@@ -58,13 +58,13 @@ class Router
     {
         $controller = $this->params['controller'];
         $controller = $this->convertToPascalCase($controller);
-        $controller = $this->getNamespace() . $controller;
+        return $this->getNamespace() . $controller;
     }
 
-    private function generateController($controller_instance)
+    private function executeAction($controller_instance)
     {
-        $action = $this->getAction;
-        $this->convertToCamelCase($action);
+        $action = $this->params['action'];
+        $action = $this->convertToCamelCase($action);
         if (preg_match('/action$/i', $action) == 0)
             $controller_instance->$action();
         else
