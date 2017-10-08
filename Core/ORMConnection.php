@@ -21,6 +21,7 @@ class ORMConnection
                 'user'     => Config::DB_USER,
                 'password' => Config::DB_PASSWORD,
                 'dbname'   => Config::DB_NAME,
+                'host'     => Config::DB_HOST,
             );
 
             $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
