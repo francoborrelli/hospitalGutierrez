@@ -6,13 +6,13 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./web:/var/www/html
+      - .:/var/www/html
     links:
       - db
 
   db:
     image: mariadb:10.0.32
-    enviroment:
+    environment:
       MYSQL_ROOT_PASSWORD: pass
     volumes:
       - db:/var/lib/mysql
