@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Core\ORMConnection;
+
 abstract class Controller
 {
 
@@ -31,6 +33,11 @@ abstract class Controller
 
     protected function after()
     {
+    }
+
+    public function getEntityManager()
+    {
+        return ORMConnection::getEntityManager(); 
     }
 
 }

@@ -4,13 +4,8 @@ namespace App;
 
 class Config
 {
-
-    const DB_HOST = '';
-
-    const DB_NAME = '';
-
-    const DB_USER = '';
-
-    const DB_PASSWORD = '';
-
+    const DB_DRIVER = 'pdo_mysql';
+    const DB_NAME = 'foo';
+    const DB_USER = 'root';
+    const DB_PASSWORD = 'pass';
 }
