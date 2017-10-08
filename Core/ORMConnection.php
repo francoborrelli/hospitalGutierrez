@@ -13,7 +13,7 @@ class ORMConnection
         static $entityManager = null;
 
         if ($entityManager === null) {
-            $paths = array("../App/Models");
+            $paths = array(dirname(__DIR__) . '/App/Models');
             $isDevMode = false;
             
             $dbParams = array(
