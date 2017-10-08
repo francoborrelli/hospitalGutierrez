@@ -35,7 +35,12 @@ abstract class Controller
     {
     }
 
-    public function getEntityManager()
+    protected function render($template, $args = [])
+    {
+        View::renderTemplate($template, $args);
+    }
+
+    protected function getEntityManager()
     {
         return ORMConnection::getEntityManager(); 
     }

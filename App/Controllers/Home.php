@@ -10,7 +10,7 @@ class Home extends Controller
 
     public function indexAction()
     {
-        View::renderTemplate('Home/index.html.twig');
+        $this->render('Home/index.html.twig');
     }
 
 }
