@@ -1,22 +1,9 @@
-{% embed "utils/header/dropdown.html.twig" %}
-    {% import 'utils/header/navItem.html.twig' as navbar %}
+{% import 'utils/header/navItem.html.twig' as navbar %}
+    
+    <ul class="navbar-nav">
+            {{ navbar.item('Pacientes') }}
+    </ul>
 
-    {% block elements %} 
-
-        {{ navbar.dropdownItem('Usuarios', '#', 'dropdown_users' ) }}
-
-        <div class="dropdown-divider"></div>
-
-        {{ navbar.dropdownItem('Roles', '#', 'dropdown_roles') }}
-
-        <div class="dropdown-divider"></div>
-
-        {{ navbar.dropdownItem('Permisos', '#', 'dropdown_permission') }}
-
-        <div class="dropdown-divider"></div>
-
-        {{ navbar.dropdownItem('Configuracion', '#', 'dropdown_config') }}
-
-    {% endblock %}
-
-{% endembed %}
+    <span class="navbar-text">
+      luciano.ringuelet
+    </span>
