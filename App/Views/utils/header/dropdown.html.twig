@@ -1,0 +1,21 @@
+{% import 'utils/header/navItem.html.twig' as navbar %}
+
+    {{ navbar.item('Pacientes') }}
+
+<div class="dropdown">
+
+    <a class="dropdown-toggle nav-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         luciano.ringuelet
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+
+    {% block elements %}{% endblock %}
+
+    <div class="dropdown-divider"></div>
+
+    {{ navbar.dropdownItem('Cerrar Sesión', 'logout') }}
+
+    </div>
+    
+</div>
