@@ -1,0 +1,24 @@
+nav {
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.22);
+  }
+  
+  .bgfaded {
+    background-color: #ffffff;
+  }
+  
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+  
+  
+  @media (max-width: 700px) {
+    #search-navbar {
+      width: 70%;
+      margin-right: 10px;
+    }
+  
+    #btn-search-navbar {
+      width: 27%;
+    }
+  }
+}
