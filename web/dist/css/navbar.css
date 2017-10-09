@@ -10,7 +10,6 @@
     line-height: 36px;
 }
 
-
 .navbar-brand img {
     margin-right: 8px;
 }
@@ -33,7 +32,7 @@ nav a {
     padding-bottom: 17px !important;
 }
 
-nav .dropdown-item:active{
+nav .dropdown-item:active {
     background-color: rgba(8, 34, 58, 0.15);
     color: black;
 }
@@ -50,15 +49,24 @@ nav .dropdown-item:active{
     min-width: 55px;
 }
 
-@media (max-width: 700px) {
+
+@media (max-width: 767px) {
+    .navbar-brand {
+        margin-left: 0px;
+        font-size: 15px;
+    }
+    .navbar-brand img {
+        margin-right: 0px;
+    }
     #search-navbar {
-        width: 70%;
-        margin-right: 10px;
+        width: 77%;
     }
     #btn-search-navbar {
-        width: 27%;
+        width: 19%;
+        margin-left: 10px;
     }
 }
+
 
 /* efecto de navbar */
 
