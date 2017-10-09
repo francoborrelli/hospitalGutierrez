@@ -1,0 +1,19 @@
+body {
+    cursor: default;
+    color: #444;
+    background-color: #1c1c1c;
+  }
+  body [type="button"],
+  body [type="reset"],
+  body [type="submit"] {
+    -webkit-appearance: initial;
+  }
+  body .content {
+    background: #fafafa;
+    padding: 80px 0 70px;
+    min-height: 350px;
+  }
+  
+  button, a {
+    cursor: pointer;
+  }
