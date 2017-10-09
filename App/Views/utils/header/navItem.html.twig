@@ -1,0 +1,14 @@
+{% macro item(name, route, id) %}
+<li class="nav-item">
+    <a class="nav-link"{% if id %} id = "{{id}}" {% endif %} href=" {% if route %} {{route}} {% else %} # {% endif %}">{{ name }}</a>
+</li>
+{% endmacro  item %} 
+
+
+{% macro dropdownItem(name, icon, route, id) %}
+<a class="dropdown-item" {% if id %} id = "{{id}}" {% endif %} href=" {% if route %} {{ route }} {% else %} # {% endif %} ">
+    <span> 
+        <i class="fa {{icon}}" aria-hidden="true"></i></span>&nbsp<span>{{name}}
+    </span>
+</a>
+{% endmacro %}

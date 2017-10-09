@@ -1,0 +1,23 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+
+    <a class="navbar-brand" href="#">
+    <img src="dist/img/logo.png" width="30" height="36" class="d-inline-block align-top" alt="Logo del Hospital">Hospital Dr. Ricardo Gutiérrez</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+        aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" id="search-navbar" type="text" placeholder="Buscar">
+                <button class="btn btn-secundary my-2 my-sm-0" id="btn-search-navbar" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </form>
+        </ul>
+
+        <ul class="navbar-nav">
+            {% include 'utils/header/navbarVisitor.html.twig' %}
+        </ul>
+    </div>
+</nav>
