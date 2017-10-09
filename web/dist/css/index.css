@@ -13,3 +13,40 @@
 .articles .card p{
     text-align: justify;
 }
+
+
+@media (max-width: 1400px) {
+    .articles{
+        padding-top: 60px;
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .articles{
+        padding-top: 60px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+
+@media (max-width: 900px) {
+    .articles{
+        padding-left: 18%;
+        padding-right: 18%;
+    }
+    .articles .card{
+        flex: inherit;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .articles{
+        padding-top: 60px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
