@@ -3,3 +3,13 @@
     height: 300px;
     width: 100%;
 }
+
+.articles{
+    padding-top: 60px;
+    padding-left: 120px;
+    padding-right: 120px;
+}
+
+.articles .card p{
+    text-align: justify;
+}
