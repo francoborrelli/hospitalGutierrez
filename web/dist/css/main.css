@@ -1,6 +1,8 @@
 @import 'footer.css';
 @import 'navbar.css';
 @import 'login.css';
+@import 'table.css';
+
 body {
     cursor: default;
     color: #444;
