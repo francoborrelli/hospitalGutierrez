@@ -1,0 +1,29 @@
+@import 'footer.css';
+@import 'navbar.css';
+@import 'login.css';
+body {
+    cursor: default;
+    color: #444;
+    background-color: #1c1c1c;
+  }
+  body [type="button"],
+  body [type="reset"],
+  body [type="submit"] {
+    -webkit-appearance: initial;
+  }
+  body .content {
+    background: #fafafa;
+    min-height: 350px;
+    padding: 80px 0px 70px;
+  }
+  
+  button, a {
+    cursor: pointer;
+  }
+
+a, a:active, a:focus, a:hover{
+  text-decoration: none;
+  border: none;
+  color: rgba(0,0,0,.5);
+  outline: 0;
+}
