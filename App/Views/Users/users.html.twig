@@ -10,11 +10,12 @@
 <div class="container userReport">
     <div class="card">
         <div class="card-header text-left">
-            <a class="btn btn-primary detalle" id="goBack" data-toggle="tooltip" data-placement="left" title="Volver al inicio" href="#"><i class="fa fa-reply" aria-hidden="true"></i></a>
+            <a class="btn btn-primary detalle" id="goBack" title="Volver al inicio" href="#"><i class="fa fa-reply" aria-hidden="true"></i></a>
             <h3>Usuarios</h3>
         </div>
         <div class="card-block">
             <div class="tablePage">
+                <button type="button" id="agregar-btn" class="btn btn-success btn-sm">Agregar</button>    
                 <table class="table table-striped" id="usuarios">
                     <thead>
                         <tr>
@@ -33,7 +34,12 @@
                             <td>Borrelli</td>
                             <td>francoborrelli96@outlook.com</td>
                             <td>Bloqueado</td>
-                            <td>@mdo</td>
+                           <td class="text-center">
+                                <div class="btn-group" role="group">
+                                    <button type="button" data-toggle="tooltip" title="Editar" class="btn btn-orange btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                    <button type="button" data-toggle="tooltip" title="Eliminar" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>pedrobrost</td>
@@ -41,7 +47,12 @@
                             <td>Brost</td>
                             <td>laroca@gmail.com</td>
                             <td>Activo</td>
-                            <td>@mdo</td>
+                            <td class="text-center">
+                                <div class="btn-group" role="group">
+                                    <button type="button" data-toggle="tooltip" title="Editar" class="btn btn-orange btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                    <button type="button" data-toggle="tooltip" title="Eliminar" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

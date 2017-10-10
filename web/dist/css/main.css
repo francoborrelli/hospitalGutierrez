@@ -29,3 +29,9 @@ a, a:active, a:focus, a:hover{
   color: rgba(0,0,0,.5);
   outline: 0;
 }
+
+.btn-orange{
+  background-color: #FF5722;
+  border-color: #FF5722;
+  color: white;
+}

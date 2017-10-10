@@ -1,37 +1,53 @@
-@charset "UTF-8";
 .container.userReport {
-  margin-top: 40px;
+    margin-top: 40px;
 }
+
 .container.userReport .card .card-header .btn.detalle {
-  float: right;
-  margin-right: 15px;
+    float: right;
+    margin-right: 15px;
 }
+
 .container.userReport .card .card-header h3 {
-  padding-top: 5px;
-  margin: 0;
+    padding-top: 5px;
+    margin: 0;
 }
 
-.tablePage{
-  padding-top: 15px;
-  padding-bottom: 10px;
+.tablePage {
+    padding-top: 15px;
+    padding-bottom: 10px;
 }
 
+#agregar-btn {
+    float: right;
+    margin-right: 25px;
+}
 
-@media screen and (max-width: 990px) {
-  #usuarios_wrapper .col-sm-12{
-    padding: 0px;
-  }
+@media (max-width: 990px) {
+    #usuarios_wrapper .col-sm-12 {
+        padding: 0px;
+    }
+}
+
+@media (max-width: 385px) {
+  #agregar-btn {
+    margin-right: 10px;
+}
+}
+@media (max-width: 358px) {
+  #agregar-btn {
+    margin-right: 2px;
+}
 }
 
 .carta {
-  margin-top: 40px;
-  background-color: white;
-  padding-top: 24px;
-  padding-bottom: 15px;
-  border-radius: 9px;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+    margin-top: 40px;
+    background-color: white;
+    padding-top: 24px;
+    padding-bottom: 15px;
+    border-radius: 9px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-#usuarios{
-  width: 100%!important;
+#usuarios {
+    width: 100%!important;
 }
