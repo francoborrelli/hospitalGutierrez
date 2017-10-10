@@ -1,13 +1,13 @@
-.signIn .card {
+.logIn .card {
     margin: 50px auto 0;
     width: 400px;
 }
 
-.signIn input:active, .signIn input:focus {
+.logIn input:active, .logIn input:focus {
     border-color: #009688;
 }
 
-.signIn .card .card-header{
+.logIn .card .card-header{
     background-color: #009690;
     border-color: #009690;
     color: white;
@@ -16,12 +16,12 @@
     text-align: center;
 }
 
-.signIn .card-title {
+.logIn .card-title {
     margin: 0;
 }
 
 @media (max-width: 450px) {
-    .signIn {
+    .logIn {
         width: initial;
     }
 }
