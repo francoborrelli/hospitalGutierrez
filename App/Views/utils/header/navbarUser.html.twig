@@ -1,9 +1,5 @@
 {% import 'utils/header/navItem.html.twig' as navbar %}
     
-    <ul class="navbar-nav">
-            {{ navbar.item('Pacientes') }}
-    </ul>
+{{ navbar.item('Pacientes') }}
 
-    <span class="navbar-text">
-      luciano.ringuelet
-    </span>
+{% embed "utils/header/dropdown.html.twig" %}{% endembed %}  

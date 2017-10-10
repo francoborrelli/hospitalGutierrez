@@ -5,8 +5,8 @@
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
         aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-md-0">
@@ -16,6 +16,9 @@
             </form>
         </ul>
 
-            {% include 'utils/header/navbarVisitor.html.twig' %}
+        <ul class="navbar-nav">
+            {% include 'utils/header/navbarUser.html.twig' %}
+        </ul>
+
     </div>
 </nav>

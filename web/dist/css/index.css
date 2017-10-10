@@ -14,6 +14,9 @@
     text-align: justify;
 }
 
+.articles .card .card-footer{
+    height: 65px;
+}
 
 @media (max-width: 1400px) {
     .articles{
