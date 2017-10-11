@@ -14,14 +14,14 @@ $.validator.addMethod("alphanumeric", function(value, element) {
 }, "Username must contain only letters, numbers, or dashes.");
 
 $.validator.addMethod("checkboxGroup", function(value, element) { 
-    result = $("input[type=checkbox]:checked").length > 0;
+    result = $('#addUser').find("input[type=checkbox]:checked").length > 0;
     if (result) {
-        $("input[type=checkbox]").each(function() {
+        $('#addUser').find("input[type=checkbox]").each(function() {
             $( this ).removeClass('is-invalid');
         })
     }
     else {
-        $("input[type=checkbox]").each(function() {
+        $('#addUser').find("input[type=checkbox]").each(function() {
             $( this ).addClass('is-invalid');
         })
     }
@@ -117,9 +117,14 @@ $('#addUser').validate({
 });
 
 
-$("input[type=checkbox]").each(function(){
-    $(this).rules("add", "checkboxGroup");
+$( document ).ready(function() {
+    $('#addUser').find("input[type=checkbox]").each(function(){
+        $(this).rules("add", "checkboxGroup");
+    });
 });
+    
+    
+
 
 // Buttons Actions
 
