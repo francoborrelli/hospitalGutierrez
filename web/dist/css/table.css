@@ -51,3 +51,7 @@
 #usuarios {
     width: 100%!important;
 }
+
+.dtr-details tr:last-of-type{
+    display: none;
+}
