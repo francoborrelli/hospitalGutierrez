@@ -24,8 +24,12 @@ $.validator.addMethod("checkboxGroup", function(value, element) {
         })
     }
     return result;
-});
+}, "");
   
+
+$.validator.messages.required = '';
+
+
 $('#addUser').validate({
     rules: {
         _name: {
@@ -62,15 +66,6 @@ $('#addUser').validate({
             minlength: 6,
             equalTo: '#_pass',
         },
-        recepcionista: {
-            checkboxGroup: true,
-        },
-        administrador: {
-            checkboxGroup: true,
-        },
-        pediatra: {
-            checkboxGroup: true,
-        }
     },
     messages: {
         _name: {
@@ -105,18 +100,6 @@ $('#addUser').validate({
             email: "Ingrese un email valido",
             required: "Ingrese el email"
         },
-        recepcionista:{
-            required: "",
-            checkboxGroup: ""
-        },
-        administrador:{
-            required: "",
-            checkboxGroup: ""
-        },
-        pediatra:{
-            required: "",
-            checkboxGroup: ""
-        }
     },
     highlight: function (element) {
         $(element).addClass('is-invalid');
@@ -128,6 +111,11 @@ $('#addUser').validate({
         form.submit();
     },
 
+});
+
+
+$("input[type=checkbox]").each(function(){
+    $(this).rules("add", "checkboxGroup");
 });
 
 goBack = function (step){
