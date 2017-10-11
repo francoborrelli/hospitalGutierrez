@@ -18,6 +18,7 @@
             { responsivePriority: 3 },
             { responsivePriority: 4 },
             { responsivePriority: 2 },
+            { responsivePriority: 2 },
             { responsivePriority: 1 }
         ],
         "order": [
@@ -25,7 +26,7 @@
         ],
         "aoColumnDefs": [{
             "bSortable": false,
-            "aTargets": [5]
+            "aTargets": [6]
         }],
         "bLengthChange": false,
         "info": false,
