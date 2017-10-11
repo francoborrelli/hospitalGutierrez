@@ -35,71 +35,71 @@ $.validator.messages.required = '';
 
 $('#addUser').validate({
     rules: {
-        _name: {
+        firstName: {
             alphanumeric: true,
             required: true,
             nonNumeric: true,
             maxlength: 50,
         },
-        _surname: {
+        lastName: {
             alphanumeric: true,
             required: true,
             nonNumeric: true,
             maxlength: 50,
         },
-        _username: {
+        username: {
             alphanumeric: true,
             minlength: 6,
             required: true,
             noSpace: true,
             maxlength: 50,
         },
-        _email: {
+        email: {
             required: true,
             email: true,
             maxlength: 255,
         },
-        _pass: {
+        pass: {
             required: true,
             minlength: 6,
             maxlength: 255,
         },
-        _confirmPass: {
+        confirmPass: {
             required: true,
             minlength: 6,
-            equalTo: '#_pass',
+            equalTo: '#pass',
         },
     },
     messages: {
-        _name: {
+        firstName: {
             required: "Ingrese el nombre",
             nonNumeric: "Debe contener solo letras",
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres"
         },
-        _username: {
+        username: {
             required: "Ingrese el nombre de usuario",
             minlength: "Debe tener al menos 6 caracteres",
             noSpace: "No puede tener espacios en blanco",
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres"
         },
-        _surname: {
+        lastName: {
             required: "Ingrese el apellido",
             nonNumeric: "Debe contener solo letras",
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres",
         },
-        _pass: {
+        pass: {
             required: "Ingrese la contraseña",
             minlength: "Debe tener al menos 6 caracteres"
         },
-        _confirmPass: {
+        confirmPass: {
             required: "Re-ingrese la contraseña",
             minlength: "Debe tener al menos 6 caracteres",
             equalTo: "La contraseña no coincide"
         },
-        _email: {
+        email: {
             email: "Ingrese un email valido",
             required: "Ingrese el email"
         },
@@ -128,7 +128,7 @@ $("#goBack").click(function(){
 });
 
 $("#goNext").click(function(){
-    if ($('#_name').valid() & $('#_surname').valid() & $('#_email').valid() & $('#_username').valid() & $('#_pass').valid() & $('#_confirmPass').valid()) {
+    if ($('#firstName').valid() & $('#lastName').valid() & $('#email').valid() & $('#username').valid() & $('#pass').valid() & $('#confirmPass').valid()) {
         $('#addUser').trigger('next.m.2');
     }
 });
