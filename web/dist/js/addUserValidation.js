@@ -1,3 +1,5 @@
+// custom validation methods
+
 $.validator.addMethod("nonNumeric", function (value, element) {
     return this.optional(element) || isNaN(Number(value));
 });
@@ -26,9 +28,10 @@ $.validator.addMethod("checkboxGroup", function(value, element) {
     return result;
 }, "");
   
-
 $.validator.messages.required = '';
 
+
+// validation definition
 
 $('#addUser').validate({
     rules: {
@@ -118,18 +121,22 @@ $("input[type=checkbox]").each(function(){
     $(this).rules("add", "checkboxGroup");
 });
 
-goBack = function (step){
-    $('#addUser').trigger('next.m.' + step); 
-}
+// Buttons Actions
 
-goTo = function (step) {
-    switch (step) {
-        case 2:
-            if ($('#_name').valid() & $('#_surname').valid() & $('#_email').valid() & $('#_username').valid() & $('#_pass').valid() & $('#_confirmPass').valid()) {
-                $('#addUser').trigger('next.m.' + step);
-            }
-        case 3:
-            break;
-        default:
+$("#goBack").click(function(){
+    $('#addUser').trigger('next.m.1'); 
+});
+
+$("#goNext").click(function(){
+    if ($('#_name').valid() & $('#_surname').valid() & $('#_email').valid() & $('#_username').valid() & $('#_pass').valid() & $('#_confirmPass').valid()) {
+        $('#addUser').trigger('next.m.2');
     }
-}
+});
+
+$("#cancelbtn").click(function(){
+    $('#addUser').modal('hide')
+    $('#addUser')[0].reset();
+    $('#addUser').validate().resetForm();    
+    return true
+})
+
