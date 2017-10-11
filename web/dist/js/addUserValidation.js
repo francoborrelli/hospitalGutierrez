@@ -6,6 +6,11 @@ $.validator.addMethod("noSpace", function(value, element) {
     return value.indexOf(" ") < 0 && value != ""; 
   });
 
+
+$.validator.addMethod("alphanumeric", function(value, element) {
+    return this.optional(element) || /^[a-z0-9\-\s]+$/i.test(value);
+}, "Username must contain only letters, numbers, or dashes.");
+
 $.validator.addMethod("checkboxGroup", function(value, element) { 
     result = $("input[type=checkbox]:checked").length > 0;
     if (result) {
@@ -24,25 +29,33 @@ $.validator.addMethod("checkboxGroup", function(value, element) {
 $('#addUser').validate({
     rules: {
         _name: {
+            alphanumeric: true,
             required: true,
             nonNumeric: true,
+            maxlength: 50,
         },
         _surname: {
+            alphanumeric: true,
             required: true,
             nonNumeric: true,
+            maxlength: 50,
         },
         _username: {
+            alphanumeric: true,
             minlength: 6,
             required: true,
             noSpace: true,
+            maxlength: 50,
         },
         _email: {
             required: true,
-            email: true
+            email: true,
+            maxlength: 255,
         },
         _pass: {
             required: true,
             minlength: 6,
+            maxlength: 255,
         },
         _confirmPass: {
             required: true,
@@ -62,16 +75,22 @@ $('#addUser').validate({
     messages: {
         _name: {
             required: "Ingrese el nombre",
-            nonNumeric: "Ingrese un nombre valido",
+            nonNumeric: "Debe contener solo letras",
+            alphanumeric: "Debe contener solo letras",
+            maxlength: "No puede tener más de 50 caracteres"
         },
         _username: {
             required: "Ingrese el nombre de usuario",
             minlength: "Debe tener al menos 6 caracteres",
-            noSpace: "No puede tener espacios en blanco"
+            noSpace: "No puede tener espacios en blanco",
+            alphanumeric: "Debe contener solo letras",
+            maxlength: "No puede tener más de 50 caracteres"
         },
         _surname: {
             required: "Ingrese el apellido",
-            nonNumeric: "Ingrese un apellido valido",
+            nonNumeric: "Debe contener solo letras",
+            alphanumeric: "Debe contener solo letras",
+            maxlength: "No puede tener más de 50 caracteres",
         },
         _pass: {
             required: "Ingrese la contraseña",
