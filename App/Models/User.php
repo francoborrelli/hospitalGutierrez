@@ -15,6 +15,7 @@ class User
      * @var int
      *
      * @Column(type="integer")
+     * @Id
      * @GeneratedValue
      */
     private $id;
