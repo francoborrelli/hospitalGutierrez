@@ -1,0 +1,32 @@
+{% extends 'utils/base.html.twig' %} 
+
+{% block stylesheets %}
+<link rel="stylesheet" href="assets/dataTables/css/dataTables.bootstrap4.min.css"> 
+<link rel="stylesheet" href="assets/dataTables/css/responsive.bootstrap4.min.css"> 
+{% endblock %} 
+
+{% block body %}
+
+<div class="container userReport">
+    <div class="card">
+        <div class="card-header text-left">
+            <a class="btn btn-primary detalle" id="goBack" title="Volver al inicio" href="#"><i class="fa fa-reply" aria-hidden="true"></i></a>
+            <h3>Usuarios</h3>
+        </div>
+        <div class="card-block">
+            <div class="tablePage">
+                <button type="button" id="agregar-btn" class="btn btn-success btn-sm">Agregar</button>    
+                <table class="table table-striped" id="usuarios">
+                    {% include 'Users/users.html.twig' %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %} {% block javascripts %}
+<script src="assets/dataTables/js/datatables.min.js"></script>
+<script src="assets/dataTables/js/responsive.bootstrap4.min.js"></script>
+<script src="dist/js/users.js"></script>
+{% endblock %}
