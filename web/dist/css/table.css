@@ -5,6 +5,9 @@
 .container.userReport .card .card-header .btn.detalle {
     float: right;
     margin-right: 15px;
+    border-color: #ababab;
+    background-color: #ababab;
+    color: white;
 }
 
 .container.userReport .card .card-header h3 {
