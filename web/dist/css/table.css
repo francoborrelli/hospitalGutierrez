@@ -58,3 +58,7 @@
 .dtr-details tr:last-of-type{
     display: none;
 }
+
+.container.tab-pane{
+    padding-top: 20px;
+} 
