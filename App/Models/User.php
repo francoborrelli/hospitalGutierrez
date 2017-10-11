@@ -76,6 +76,36 @@ class User
      */
     private $createdAt;
 
+    /**
+     * @ManyToMany(targetEntity="Role")
+     * @JoinTable(name="users_roles",
+     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")}
+     *      )
+     */
+    private $roles;
+
+
+    public function __construct() {
+        $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function addRole($role)
+    {
+        $this->roles[] = $role;
+
+        return $this;
+    }
+
+    public function removeRole($role)
+    {
+        $this->roles->removeElement($role);
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
 
     /**
      * Set id
