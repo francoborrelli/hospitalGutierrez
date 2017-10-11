@@ -5,11 +5,22 @@ $.validator.addMethod("nonNumeric", function (value, element) {
 $.validator.addMethod("noSpace", function(value, element) { 
     return value.indexOf(" ") < 0 && value != ""; 
   });
-  
-$.validator.addMethod("requireOne", function(value, element) {
-       return ($('.require-one:checked').size() > 0);
-});
 
+$.validator.addMethod("checkboxGroup", function(value, element) { 
+    result = $("input[type=checkbox]:checked").length > 0;
+    if (result) {
+        $("input[type=checkbox]").each(function() {
+            $( this ).removeClass('is-invalid');
+        })
+    }
+    else {
+        $("input[type=checkbox]").each(function() {
+            $( this ).addClass('is-invalid');
+        })
+    }
+    return result;
+});
+  
 $('#addUser').validate({
     rules: {
         _name: {
@@ -38,14 +49,14 @@ $('#addUser').validate({
             minlength: 6,
             equalTo: '#_pass',
         },
-        Recepcionista:{
-            requireOne: true
+        recepcionista: {
+            checkboxGroup: true,
         },
-        Admin:{
-            requireOne: true
+        administrador: {
+            checkboxGroup: true,
         },
-        Pediatra:{
-            requireOne: true
+        pediatra: {
+            checkboxGroup: true,
         }
     },
     messages: {
@@ -75,14 +86,17 @@ $('#addUser').validate({
             email: "Ingrese un email valido",
             required: "Ingrese el email"
         },
-        Recepcionista:{
-            required: ""
+        recepcionista:{
+            required: "",
+            checkboxGroup: ""
         },
-        Admin:{
-            required: ""
+        administrador:{
+            required: "",
+            checkboxGroup: ""
         },
-        Pediatra:{
-            required: ""
+        pediatra:{
+            required: "",
+            checkboxGroup: ""
         }
     },
     highlight: function (element) {

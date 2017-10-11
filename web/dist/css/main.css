@@ -34,3 +34,9 @@ a, a:active, a:focus, a:hover{
   border-color: #FF5722;
   color: white;
 }
+
+label.error{
+  font-size: 80%;
+  font-weight: 400;
+  color: #636c72!important;
+}
