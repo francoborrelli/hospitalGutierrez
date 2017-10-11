@@ -3,12 +3,12 @@
 namespace App\Models;
 
 /**
- * Role
+ * Permission
  *
- * @Table(name="roles")
+ * @Table(name="permissions")
  * @Entity
  */
-class Role
+class Permission
 {
 
     /**
@@ -57,7 +57,7 @@ class Role
      *
      * @param string $name
      *
-     * @return Role
+     * @return Permission
      */
     public function setName($name)
     {
