@@ -140,3 +140,13 @@ $("#cancelbtn").click(function(){
     return true
 })
 
+$(".deletebtn").click(function(){
+    $("#deletedId").val($(this).data("id"))
+    tr = $(this).closest('tr')
+    name = $(tr).find("td").eq(1).text()
+    console.log($(tr).find("td").eq(1).text())
+    surname = $(tr).find("td").eq(2).text()
+    $(".modalText").text(name + ' ' + surname);
+});
+
+
