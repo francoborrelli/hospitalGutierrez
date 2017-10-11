@@ -27,6 +27,36 @@ class Role
      */
     private $name;
 
+    /**
+     * @ManyToMany(targetEntity="Permission")
+     * @JoinTable(name="roles_permissions",
+     *      joinColumns={@JoinColumn(name="role_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="permission_id", referencedColumnName="id")}
+     *      )
+     */
+    private $permissions;
+
+
+    public function __construct() {
+        $this->permissions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function addPermission($permission)
+    {
+        $this->permissions[] = $permission;
+
+        return $this;
+    }
+
+    public function removePermission($permission)
+    {
+        $this->permissions->removeElement($permission);
+    }
+
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
 
     /**
      * Set id
