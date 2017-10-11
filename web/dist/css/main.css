@@ -23,7 +23,6 @@ body {
 
 a, a:active, a:focus, a:hover{
   text-decoration: none;
-  border: none;
   color: rgba(0,0,0,.5);
   outline: 0;
 }
