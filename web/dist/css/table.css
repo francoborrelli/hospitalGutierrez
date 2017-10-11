@@ -32,14 +32,15 @@
 }
 
 @media (max-width: 385px) {
-  #agregar-btn {
-    margin-right: 10px;
+    #agregar-btn {
+        margin-right: 10px;
+    }
 }
-}
+
 @media (max-width: 358px) {
-  #agregar-btn {
-    margin-right: 2px;
-}
+    #agregar-btn {
+        margin-right: 2px;
+    }
 }
 
 .carta {
@@ -55,10 +56,15 @@
     width: 100%!important;
 }
 
-.dtr-details tr:last-of-type{
+.dtr-details tr:last-of-type {
     display: none;
 }
 
-.container.tab-pane{
+.container.tab-pane {
     padding-top: 20px;
-} 
+}
+
+.modal-body.step-1 {
+    padding-left: 30px;
+    padding-right: 30px;
+}
