@@ -7,6 +7,8 @@
 
 {% block body %}
 
+{% include 'Users/addUser.html.twig' %}
+
 <div class="container userReport">
     <div class="card">
         <div class="card-header text-left">
@@ -15,7 +17,7 @@
         </div>
         <div class="card-block">
             <div class="tablePage">
-                <button type="button" id="agregar-btn" class="btn btn-success btn-sm">Agregar</button>    
+                <button type="button" id="agregar-btn" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addUser">Agregar</button>    
                 <table class="table table-striped" id="usuarios">
                     {% include 'Users/users.html.twig' %}
                 </table>
@@ -29,4 +31,7 @@
 <script src="assets/dataTables/js/datatables.min.js"></script>
 <script src="assets/dataTables/js/responsive.bootstrap4.min.js"></script>
 <script src="dist/js/users.js"></script>
+<script src="dist/js/multi-step-modal.js"></script>
+<script src="assets/jquery-validate/jquery.validate.min.js"></script>
+<script src="dist/js/addUserValidation.js"></script>
 {% endblock %}
