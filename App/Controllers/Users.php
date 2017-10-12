@@ -41,27 +41,29 @@ class Users extends Controller
         $user = $em->getRepository(User::class)->find($_POST['userId']);
         $originalEmail = $user->getEmail();
         $originalUserName = $user->getUsername();
-        $user->setData($_POST);
-        $validationErrors = $this->userValidation($user);
+        $validationUser = clone $user;
+        $validationUser->setData($_POST);
+        $validationErrors = $this->userValidation($validationUser);
 
-        if ($user->getEmail() == $originalEmail) {
+        if ($validationUser->getEmail() == $originalEmail) {
             if (($key = array_search('emailExists', $validationErrors)) !== false) {
                     unset($validationErrors[$key]);
             }
         }
 
-        if ($user->getUsername() == $originalUserName) {
+        if ($validationUser->getUsername() == $originalUserName) {
             if (($key = array_search('usrExists', $validationErrors)) !== false) {
                     unset($validationErrors[$key]);
             }
         }
 
         if (empty($validationErrors)) {
+            $user->setData($_POST);
             $em->flush();
 
             $this->redirect('/admin/users');
         } else {
-            $this->render('Users/usersTable.html.twig', ['users' => $userRepository->findAll(), 'editErrors' => $validationErrors, 'user' => $user]);
+            $this->render('Users/usersTable.html.twig', ['users' => $userRepository->findAll(), 'editErrors' => $validationErrors, 'user' => $validationUser]);
         }
          
     }
