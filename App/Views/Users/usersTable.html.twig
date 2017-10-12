@@ -34,7 +34,12 @@
 <script src="/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
 <script src="/dist/js/users.js"></script>
 <script src="/dist/js/multi-step-modal.js"></script>
-<script src="/assets/jquery-validate/jquery.validate.min.js"></script>
 <script src="/dist/js/addUserValidation.js"></script>
 <script src="/dist/js/editUserValidation.js"></script>
+{% if errors is defined %}
+<script>
+    $('#addUser').modal('show')
+</script>
+{% endif %}
+
 {% endblock %}

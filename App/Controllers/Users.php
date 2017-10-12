@@ -15,19 +15,23 @@ class Users extends Controller
 
     public function newAction()
     {
-        $user = new User();
-
-        $user->setEmail($_POST['email']);
-        $user->setFirstName($_POST['firstName']);
-        $user->setLastName($_POST['lastName']);
-        $user->setUsername($_POST['username']);
-        $user->setPassword('test');
-
         $em = $this->getEntityManager();
-        $em->persist($user);
-        $em->flush();
 
-        $this->render('Home/index.html.twig');
+        $user = new User($_POST);
+        $userRepository = $em->getRepository(User::class);
+        $usrExists = $userRepository->usrExists($user->getUsername());
+        $emailExists = $userRepository->emailExists($user->getEmail());
+        $validationErrors = $user->validationErrors($usrExists, $emailExists);
+        if (empty($validationErrors)){
+            $em->persist($user);
+            $em->flush();
+
+            //$this->addFlashMessage('Usuario agregado correctamente');
+            $this->redirect('/admin/users');
+        } else {
+            $this->render('Users/usersTable.html.twig', ['errors' => $validationErrors, 'user' => $user]);
+            //$this->render('utils/dump.html.twig', ['var' => $validationErrors]);
+        }
     }
 
 }
