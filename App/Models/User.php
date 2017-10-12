@@ -45,6 +45,10 @@ class User
 
     private $passwordConfirm;
 
+    private $actualPass = '';
+
+    private $oldPass;
+
     /**
      * @var string
      *
@@ -96,13 +100,27 @@ class User
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
         $this->active = true;
+        $this->setData($data);
+    }
+
+    public function setData($data)
+    {
         $this->email = $data['email'];
         $this->firstName = $data['firstName'];
         $this->lastName = $data['lastName'];
         $this->username = $data['username'];
-        $this->plainPassword = $data['pass'];
-        $this->password = $data['pass'];
-        $this->passwordConfirm = $data['confirmPass'];
+        if (!strlen($data['pass']) == 0) {
+            if (isset($data['actualPass'])) {
+                $this->actualPass = $data['actualPass'];
+                $this->oldPass = $this->password;
+            }
+            $this->password = password_hash($data['pass'], PASSWORD_DEFAULT);
+            $this->plainPassword = $data['pass'];
+            $this->passwordConfirm = $data['confirmPass'];
+        } else {
+            $this->plainPassword = 'plainPassword';
+            $this->passwordConfirm = 'plainPassword';
+        } 
     }
 
     public function addRole($role)
@@ -365,6 +383,9 @@ class User
 
         if ($emailExists)
             $validationErrors[] = 'emailExists';
+
+        if (!strlen($this->actualPass) == 0 && !password_verify($this->actualPass, $this->oldPass))
+            $validationErrors[] = 'incorrectPassword';
 
         return $validationErrors;
     }

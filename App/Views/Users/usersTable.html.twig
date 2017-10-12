@@ -37,10 +37,14 @@
 <script src="/dist/js/multi-step-modal.js"></script>
 <script src="/dist/js/addUserValidation.js"></script>
 <script src="/dist/js/editUserValidation.js"></script>
-{% if errors is defined %}
-<script>
-    $('#addUser').modal('show')
-</script>
+{% if newErrors is defined %}
+    <script>
+        $('#addUser').modal('show')
+    </script>
+{% elseif editErrors is defined %}
+    <script>
+        $('#editUser').modal('show')
+    </script>
 {% endif %}
 
 {% endblock %}
