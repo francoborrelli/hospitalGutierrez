@@ -40,6 +40,12 @@ abstract class Controller
         View::renderTemplate($template, $args);
     }
 
+    protected function redirect($path)
+    {
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . $path, true, 303); 
+        exit;
+    }
+
     protected function getEntityManager()
     {
         return ORMConnection::getEntityManager(); 
