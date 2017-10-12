@@ -2,6 +2,8 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+
 $router = new Core\Router();
 
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
