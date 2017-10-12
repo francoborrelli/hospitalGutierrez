@@ -100,7 +100,7 @@ class User
         $this->firstName = $data['firstName'];
         $this->lastName = $data['lastName'];
         $this->username = $data['username'];
-        $this->password = $data['pass'];
+        $this->plainPassword = $data['pass'];
         $this->passwordConfirm = $data['confirmPass'];
     }
 
