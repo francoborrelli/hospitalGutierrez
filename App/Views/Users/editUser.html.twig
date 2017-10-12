@@ -2,10 +2,6 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                {% for error in editErrors %}
-                    <br>
-                    {{ error }}
-                {% endfor %}
                 <h5 class="modal-title">Editar Usurio</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -32,26 +28,33 @@
                         <div class="row">
                             <div class="form-group col">
                                 <label for="Nombre">Nombre</label>
-                                <input type="text" id="editName" name="firstName" class="form-control" placeholder="Nombre">
+                                <input type="text" id="editName" name="firstName"  value="{{user.firstName}}" class="form-control {% if 'firstName' in editErrors %}is-invalid{% endif %}" placeholder="Nombre">
+                                 {% if 'firstName' in editErrors %}<label id="firstName-error" class="error" for="firstName">Ingrese el nombre</label>{% endif %}
                             </div>
                             <div class="form-group col">
                                 <label for="Apellido">Apellido</label>
-                                <input type="text" id="editLastName" name="lastName" class="form-control" placeholder="Apellido">
+                                <input type="text" value="{{user.lastName}}" id="editLastName" name="lastName" class="form-control" placeholder="Apellido">
+                                {% if 'lastName' in editErrors %}<label id="lastName-error" class="error" for="lastName">Ingrese el apellido</label>{% endif %}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="Direccion De Email">Dirección de Email</label>
-                            <input type="email" id="editEmail" name="email" class="form-control" placeholder="Email">
+                            <input type="email"  value="{{user.email}}" id="editEmail" name="email" class="form-control {% if ('email' in editErrors) or ('emailExists' in editErrors) %}is-invalid{% endif %}" placeholder="Email">
+                            {% if 'email' in editErrors %}<label id="email-error" class="error" for="email">Debe ingresar un email valido</label>{% endif %}
+                            {% if 'emailExists' in editErrors %}<label id="email-error" class="error" for="email">El correo ingresado ya esta registrado</label>{% endif %}
                         </div>
                         <div class="form-group">
                             <label for="nombre de usuario">Nombre de Usuario </label>
-                            <input type="text" id="editUsername" name="username" class="form-control" placeholder="Nombre de usuario">
+                            <input type="text" value="{{user.username}}" id="editUsername" name="username" class="form-control  {% if ('usrLength' in editErrors) or ('usrExists' in editErrors) %}is-invalid{% endif %}" placeholder="Nombre de usuario">
+                                {% if 'usrLength' in editErrors %}<label id="username-error" class="error" for="username">Debe tener al menos 6 caracteres</label>{% endif %}
+                                {% if 'usrExists' in editErrors %}<label id="username-error" class="error" for="username">Nombre de usuario ya registrado</label>{% endif %}
                         </div>
                     </div>
                     <div class="container tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
                         <div class="form-group">
                             <label for="Direccion De Email">Contraseña Actual</label>
-                            <input type="password" id="editPass" name="actualPass" class="form-control" placeholder="Contraseña">
+                            <input type="password" id="editPass" name="actualPass" class="form-control {% if 'passwordLength' in editErrors %}is-invalid{% endif %}" placeholder="Contraseña">
+                            {% if 'passwordLength' in editErrors %}<label id="actualPass-error" class="error" for="actualPass">Debe tener al menos 6 caracteres</label>{% endif %}
                         </div>
                         <div class="row">
                             <div class="form-group col">
