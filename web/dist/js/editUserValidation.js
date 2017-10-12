@@ -38,20 +38,6 @@ reset = function(){
     $('#editUser').validate().resetForm();    
 }
 
-$.validator.addMethod("editGroup", function(value, element) { 
-    result = $('#editUser').find("input[type=checkbox]:checked").length > 0;
-    if (result) {
-        $('#editUser').find("input[type=checkbox]").each(function() {
-            $( this ).removeClass('is-invalid');
-        })
-    }
-    else {
-        $('#editUser').find("input[type=checkbox]").each(function() {
-            $( this ).addClass('is-invalid');
-        })
-    }
-    return result;
-}, "");
   
 
 
@@ -154,9 +140,12 @@ $('#editUser').validate({
 });
 
 $( document ).ready(function() {
-    $('#editUser').find("input[type=checkbox]").each(function(){
-        $(this).rules("add", "editGroup");
-    });
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+        }
+      });
 
     $('.nav-link').click(function(e){
         if (!$('#editUser').valid()){
