@@ -10,7 +10,7 @@
         <div class="card-block container">
             <ul class="nav nav-tabs" id="myTab" role="tablist" style="padding-top: 20px">
                 <li class="nav-item">
-                    <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-expanded="true">Datos del Sitio</a>
+                    <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-expanded="true">Sitio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="pagination-tab" data-toggle="tab" href="#pagination" role="tab" aria-controls="pagination">Paginación</a>
@@ -38,7 +38,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pagination" role="tabpanel" aria-labelledby="pagination-tab">...</div>
+                <div class="tab-pane fade" id="pagination" role="tabpanel" aria-labelledby="pagination-tab">
+                    <div class="container pageChange form">
+                     <div class="col-sm-12 input">
+                        <div class="col-xs-3 col-xs-offset-3">
+                            <label for="pageAmount">Elementos por página</label>
+                            <div class="input-group number-spinner">
+                                <span class="input-group-btn data-dwn">
+                                    <button class="btn btn-default" id="dwn" type="button" data-dir="dwn"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                </span>
+                                <input type="number" id="pageAmount" name="pageAmount" class="form-control text-center" min="0" value="0" placeholder="Ingrese el nuevo numero de elementos por página">
+                                <span class="input-group-btn data-up">
+                                    <button class="btn btn-default"  id="up"  type="button" data-dir="up"><i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
                 <div class="tab-pane fade" id="mantenimiento" role="tabpanel" aria-labelledby="mantenimiento-tab">...</div>
             </div>
         </div>
@@ -46,7 +64,7 @@
 </form>
 {% endblock %} 
 
-
 {% block javascripts %}
-<script src="/dist/js/autoresize.jquery.js"></script>
+<script src="/assets/jquery-validate/autoresize.jquery.js"></script>
+<script src="/dist/js/config.js"></script>
 {% endblock %}
