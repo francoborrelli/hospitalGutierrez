@@ -1,0 +1,104 @@
+<form class="modal fade" id="editUser">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Usurio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-expanded="true">Datos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="password">Contraseña</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="roles-tab" data-toggle="tab" href="#roles" role="tab" aria-controls="roles">Roles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="state-tab" data-toggle="tab" href="#state" role="tab" aria-controls="state">Estado</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="container tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <input type="hidden" id="userId" name="userId" value="">
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="Nombre">Nombre</label>
+                                <input type="text" id="editName" name="editName" class="form-control" placeholder="Nombre">
+                            </div>
+                            <div class="form-group col">
+                                <label for="Apellido">Apellido</label>
+                                <input type="text" id="editLastName" name="editLastName" class="form-control" placeholder="Apellido">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Direccion De Email">Dirección de Email</label>
+                            <input type="email" id="editEmail" name="editEmail" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre de usuario">Nombre de Usuario </label>
+                            <input type="text" id="editUsername" name="editUsername" class="form-control" placeholder="Nombre de usuario">
+                        </div>
+                    </div>
+                    <div class="container tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                        <div class="form-group">
+                            <label for="Direccion De Email">Contraseña Actual</label>
+                            <input type="password" id="editPass" name="editPass" class="form-control" placeholder="Contraseña">
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="Contraseña">Nueva Contraseña</label>
+                                <input type="password" id="newPass" name="newPass" class="form-control" placeholder="Contraseña">
+                            </div>
+                            <div class="form-group col">
+                                <label for="Confirmar Contraseña">Confirmar contraseña</label>
+                                <input type="password" id="confirmNewPass" name="confirmNewPass" class="form-control" placeholder="Confirmar contraseña">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container tab-pane fade" id="roles" role="tabpanel" aria-labelledby="roles-tab">
+                        <div class="form-check">
+                            <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="editRecepc" name="editRecepc">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Recepcionista</span>
+                    </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="editPediatra" name="editPediatra">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Pediatra</span>
+                    </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="editAdmin" name ="editAdmin">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Administrador</span>
+                    </label>
+                        </div>
+                    </div>
+                    <div class="container tab-pane fade text-center" id="state" role="tabpanel" aria-labelledby="state-tab">
+                        <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="activeState" id="activeState"> Activo
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="blockedState" id="blockedState"> Bloqueado
+                        </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</form>

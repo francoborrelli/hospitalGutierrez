@@ -1,6 +1,8 @@
 @import 'footer.css';
 @import 'navbar.css';
 @import 'login.css';
+@import 'table.css';
+
 body {
     cursor: default;
     color: #444;
@@ -25,4 +27,16 @@ a, a:active, a:focus, a:hover{
   text-decoration: none;
   color: rgba(0,0,0,.5);
   outline: 0;
+}
+
+.btn-orange{
+  background-color: #FF5722;
+  border-color: #FF5722;
+  color: white;
+}
+
+label.error{
+  font-size: 80%;
+  font-weight: 400;
+  color: #636c72!important;
 }
