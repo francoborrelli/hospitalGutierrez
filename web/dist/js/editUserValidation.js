@@ -32,7 +32,7 @@ $(".editbtn").click(function(){
 reset = function(){
     $('#editUser')[0].reset();
     $('#activeState').closest("label").removeClass("active")
-    $('#blockedState').closest("label").addClass("active")
+    $('#blockedState').closest("label").removeClass("active")
     $('#editPass').removeClass('is-invalid');
     $('#newPass').removeClass('is-invalid');
     $('#confirmNewPass').removeClass('is-invalid');
