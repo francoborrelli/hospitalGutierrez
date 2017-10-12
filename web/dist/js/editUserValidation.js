@@ -36,6 +36,8 @@ reset = function(){
     $('#editPass').removeClass('is-invalid');
     $('#newPass').removeClass('is-invalid');
     $('#confirmNewPass').removeClass('is-invalid');
+    $('#activeState').attr('checked', false);  
+    $('#blockedState').attr('checked', false);  
     $('#editUser').validate().resetForm();    
 }
 
