@@ -1,43 +1,20 @@
 {% extends 'utils/base.html.twig' %} 
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="/dist/css/index.css">
-{% endblock %}
-
+	<link rel="stylesheet" href="/dist/css/index.css"> 
+{% endblock %} 
 
 {% block body %}
-    <img src="/dist/img/hospital.jpg" class="banner" alt="Banner Hospital"> 
-<div class=" jarallax w3ls-about w3ls-section " id="about">
-	<div class="container articles ">
-		<h3 class="h3-w3l">Nosotros</h3>
-		<div class="card-deck about-head text-center">
-			<div class="card wthree-s1 ">
-				 <span class="fa fa-heartbeat sicon" aria-hidden="true"></span>
-				 <h4>Guardia</h4>
-				 <p>Hospital Dr. Ricardo Gutierrez de La Plata dispone de un sofisticado servicio de guardias médicas las 24 horas para la atención de distintas urgencias. La administración de la institución hace viable una eficiente separación de los pacientes según el nivel de seriedad y tipo de patología.</p>
-				 <div class="w3-button">
-					<a href="#">Leer más</a>
-				</div>
+
+	<!-- banner -->
+	<img src="/dist/img/hospital.jpg" class="banner" alt="Banner Hospital">
+	
+	<!-- articles -->
+	<div class="w3ls-about w3ls-section">
+		<div class=" articles ">
+			<div class="card-deck about-head text-center">
+				{% include 'Home/articles.html.twig' %}
 			</div>
-			<div class="card wthree-s1">
-				 <span class="fa fa-hospital-o sicon" aria-hidden="true"></span>
-				 <h4>El Hospital</h4>
-				 <p>Este centro de salud tiene un programa de residencias de primer nivel en el pais. Se ofrecen oportunidades de práctica intensiva y supervisada en ámbitos profesionales y por la misma - por supuesto - se recibe un salario mensual, acorde a lo que la regulación médica profesional lo indica en cada momento.</p>
-				 <div class="w3-button">
-					<a href="#">Leer más</a>
-				</div>
-			</div>
-			<div class="card wthree-s1">
-				 <span class="fa fa-stethoscope sicon" aria-hidden="true"></span>
-				 <h4>Especialidades</h4>
-				 <p>Acorde a una respetable trayectoria en materia de medicina y salud, en Hospital Dr. Ricardo GUtierrez de La Plata podemos encontrar profesionales de las principales especialidades de salud. Del mismo modo, se brinda atención programada y de urgencias, se realizan estudios médicos y se brinda soporte en muchas de las ramas comunes de la medicina moderna.</p>
-				 <div class="w3-button">
-					<a href="#">Leer más</a>
-				</div>
-			</div>
-		</div>		
+		</div>
 	</div>
-
-</div>
-
 {% endblock %}
