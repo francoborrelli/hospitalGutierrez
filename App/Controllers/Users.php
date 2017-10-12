@@ -10,7 +10,9 @@ class Users extends Controller
 
     public function showAction()
     {
-        $this->render('Users/usersTable.html.twig');
+        $userRepository = $this->getEntityManager()->getRepository(User::class);
+        $users = $userRepository->findAll();
+        $this->render('Users/usersTable.html.twig', ['users' => $users]);
     }
 
     public function newAction()
@@ -29,7 +31,7 @@ class Users extends Controller
             //$this->addFlashMessage('Usuario agregado correctamente');
             $this->redirect('/admin/users');
         } else {
-            $this->render('Users/usersTable.html.twig', ['errors' => $validationErrors, 'user' => $user]);
+            $this->render('Users/usersTable.html.twig', ['users' => $userRepository->findAll(), 'errors' => $validationErrors, 'user' => $user]);
             //$this->render('utils/dump.html.twig', ['var' => $validationErrors]);
         }
     }

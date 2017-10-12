@@ -11,13 +11,15 @@
 </thead>
 
 </tbody>
+
+{% for user in users %}
 <tr>
-    <td>francoborrelli</td>
-    <td>Franco Martin</td>
-    <td>Borrelli</td>
-    <td>francoborrelli96@outlook.com</td>
-    <td>Pediatra</td>
-    <td>Bloqueado</td>
+    <td>{{ user.userName }}</td>
+    <td>{{ user.firstName }}</td>
+    <td>{{ user.lastName }}</td>
+    <td>{{ user.email }}</td>
+    <td>Falta</td>
+    <td>{% if user.active %}Activo{% else %}Bloqueado{% endif %}</td>
     <td class="text-center">
         <div class="btn-group" role="group">
             <button type="button" data-toggle="modal" data-target="#editUser" title="Editar" data-id="1" class="btn btn-orange btn-sm editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
@@ -25,19 +27,6 @@
         </div>
     </td>
 </tr>
+{% endfor %}
 
-<tr>
-    <td>pedrobrost</td>
-    <td>Pedro</td>
-    <td>Brost</td>
-    <td>laroca@gmail.com</td>
-    <td>Recepcionista</td>
-    <td>Activo</td>
-    <td class="text-center">
-        <div class="btn-group" role="group">
-            <button type="button" data-toggle="modal" data-target="#editUser"  title="Editar" data-id="2" class="btn btn-orange btn-sm editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-            <button type="button" data-toggle="modal" data-target="#deleteUser"  data-id="2" class="btn btn-danger btn-sm deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-        </div>
-    </td>
-</tr>
 </tbody>
