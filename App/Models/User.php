@@ -109,6 +109,12 @@ class User
         $this->firstName = $data['firstName'];
         $this->lastName = $data['lastName'];
         $this->username = $data['username'];
+
+	if (isset($data['state']) && $data['state'] == 'blocked')
+            $this->active = false;
+        else if (isset($data['state']))
+            $this->active = true;
+
         if (!strlen($data['pass']) == 0) {
             if (isset($data['actualPass'])) {
                 $this->actualPass = $data['actualPass'];
