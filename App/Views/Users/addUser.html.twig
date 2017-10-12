@@ -13,28 +13,36 @@
                     <div class="form-group col">
                         <label for="Nombre">Nombre</label>
                         <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Nombre">
+                        {% if 'firstName' in errors %}<span>error</span>{% endif %}
                     </div>
                     <div class="form-group col">
                         <label for="Apellido">Apellido</label>
                         <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Apellido">
+                        {% if 'lastName' in errors %}<span>error</span>{% endif %}
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="Direccion De Email">Dirección de Email</label>
                     <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+                    {% if 'email' in errors %}<span>error</span>{% endif %}
+                    {% if 'enailExists' in errors %}<span>error</span>{% endif %}
                 </div>
                 <div class="form-group">
                     <label for="nombre de usuario">Nombre de Usuario </label>
                     <input type="text" id="username" name="username" class="form-control" placeholder="Nombre de usuario">
+                    {% if 'usrLength' in errors %}<span>error</span>{% endif %}
+                    {% if 'usrExists' in errors %}<span>error</span>{% endif %}
                 </div>
                 <div class="row">
                     <div class="form-group col">
                         <label for="Contraseña">Contraseña</label>
                         <input type="password" id="pass" name="pass" class="form-control" placeholder="Contraseña">
+                        {% if 'passwordLength' in errors %}<span>error</span>{% endif %}
                     </div>
                     <div class="form-group col">
                         <label for="Confirmar Contraseña">Confirmar contraseña</label>
                         <input type="password" id="confirmPass" name="confirmPass" class="form-control" placeholder="Confirmar contraseña">
+                        {% if 'passwordConfirm' in errors %}<span>error</span>{% endif %}
                     </div>
                 </div>
             </div>
