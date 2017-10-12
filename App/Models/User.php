@@ -6,7 +6,7 @@ namespace App\Models;
  * User
  *
  * @Table(name="users")
- * @Entity
+ * @Entity(repositoryClass="App\Repositories\UserRepository")
  */
 class User
 {
@@ -30,7 +30,7 @@ class User
     /**
      * @var string
      *
-     * @Column(type="string", length=50)
+     * @Column(type="string", length=50, unique=true)
      */
     private $username;
 
@@ -40,6 +40,10 @@ class User
      * @Column(type="string", length=255)
      */
     private $password;
+
+    private $plainPassword;
+
+    private $passwordConfirm;
 
     /**
      * @var string
@@ -86,12 +90,18 @@ class User
     private $roles;
 
 
-    public function __construct() {
+    public function __construct($data) {
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
         $this->active = true;
+        $this->email = $data['email'];
+        $this->firstName = $data['firstName'];
+        $this->lastName = $data['lastName'];
+        $this->username = $data['username'];
+        $this->password = $data['pass'];
+        $this->passwordConfirm = $data['confirmPass'];
     }
 
     public function addRole($role)
@@ -326,6 +336,38 @@ class User
     {
         return $this->createdAt;
     }
+
+    public function validationErrors($usrExists, $emailExists)
+    {
+        $validationErrors = [];
+
+        if (strlen($this->firstName) > 50 || strlen($this->firstName) == 0)
+            $validationErrors[] = 'firstName';
+
+        if (strlen($this->lastName) > 50 || strlen($this->lastName) == 0)
+            $validationErrors[] = 'lastName';
+
+        if (strlen($this->plainPassword) < 6 || strlen($this->plainPassword) == 0)
+            $validationErrors[] = 'passwordLength';
+
+        if ($this->plainPassword != $this->passwordConfirm)
+            $validationErrors[] = 'passwordConfirm';
+
+        if (strlen($this->username) < 6 || strlen($this->username) == 0)
+            $validationErrors[] = 'usrLength';
+
+        if ($usrExists)
+            $validationErrors[] = 'usrExists';
+
+        if (strlen($this->email) == 0 || filter_var($this->email, FILTER_VALIDATE_EMAIL) === false)
+            $validationErrors[] = 'email';
+
+        if ($emailExists)
+            $validationErrors[] = 'emailExists';
+
+        return $validationErrors;
+    }
+
 }
 
 
