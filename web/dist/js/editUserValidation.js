@@ -1,7 +1,8 @@
 $(".editbtn").click(function(){
     reset();
+    id = $(this).attr("data-id");
     modal = $("#editUser")
-    modal.find("#UserId").val($(this).data("id"))
+    $('#userId').val(id)
     tr = $(this).closest('tr').find("td")
     $("#editUsername").val($(tr).eq(0).text())
     $("#editName").val($(tr).eq(1).text())
