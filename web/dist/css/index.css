@@ -1,17 +1,7 @@
 .banner {
     object-fit: cover;
-    height: 300px;
+    height: 450px;
     width: 100%;
-}
-
-.articles{
-    padding-top: 60px;
-    padding-left: 120px;
-    padding-right: 120px;
-}
-
-.articles .card p{
-    text-align: justify;
 }
 
 .articles .card .card-footer{
@@ -34,7 +24,6 @@
     }
 }
 
-
 @media (max-width: 900px) {
     .articles{
         padding-left: 18%;
@@ -42,6 +31,7 @@
     }
     .articles .card{
         flex: inherit;
+        width: 100%;
         margin-bottom: 30px;
     }
 }
@@ -52,4 +42,174 @@
         padding-left: 20px;
         padding-right: 20px;
     }
+}
+
+
+p {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    line-height: 2;
+    font-size: 1em;
+    color: #888;
+}
+
+.wthree-s1:hover span.sicon, .s1-active span.sicon {
+    color: #fff;
+}
+.wthree-s1 h4 {
+    text-transform: capitalize;
+    margin: 2em 0 1em;
+    font-weight: 600;
+    font-size: 1.5em;
+    color: black;
+}
+
+span.sicon {
+    font-size: 3em;
+    color: #009ec5;
+    display: block;
+}
+.w3-button a {
+    padding: 0.8em 2em;
+    text-decoration: none;
+    margin: 0;
+    font-size: 1em;
+    background: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    visibility: hidden;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    position: absolute;
+    bottom: 12px;
+    left: 105px;
+    color: white;
+}
+
+.w3-button {
+    margin: 1em 0 0;
+}
+.w3ls-section {
+    padding: 4em 0;
+}
+.jarallax {
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.h3-w3l {
+    font-size: 2.5em;
+    color: #009ec5;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Titillium Web', sans-serif;
+}
+.w3-button {
+    margin: 1em 0 0;
+}
+.wthree-s1:hover .w3-button a, .s1-active a {
+    visibility: visible;
+}
+.w3-button a:hover {
+    color: #fff;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+
+.wthree-s1 {
+    padding: 2em;
+    border-color: transparent;
+    width: 30.8%;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+
+.wthree-s1:hover, .s1-active {
+    background: #009ec5;
+    border-radius: 10px;
+}
+
+s1 {
+    margin: 0 3em;
+}
+
+.wthree-s1:hover p, .wthree-s1:hover h4, .s1-active h4 , .s1-active p {
+    color: #fff;
+}
+
+.space {
+    margin-top: 40px;
+}
+.btn-form, .btn-form:hover, .btn-form:focus {
+    background-color: #0cb8b6;
+    color: #fff;
+    border-radius: 0px;
+    padding: 10px 20px;
+}
+.br-radius-zero {
+    border-radius: 0px;
+}
+.form-control{
+	height: 40px;
+}
+
+.validation {
+    color: red;
+    display:none;
+    margin: 0 0 20px;
+    font-weight:400;
+    font-size:13px;
+}
+
+#sendmessage {
+    color: green;
+    border:1px solid green;
+    display:none;
+    text-align:center;
+    padding:15px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+#errormessage {
+    color: red;
+    display:none;
+    border:1px solid red;
+    text-align:center;
+    padding:15px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+#sendmessage.show, #errormessage.show, .show {
+	display:block;
+}
+
+.section-padding{
+    padding: 60px 0px;
+    background-color: #1c1c1c;
+    margin-bottom: -71px;
+
+}
+
+@media (max-width: 892px){
+.card-deck .card {
+    width: 100%;
+    flex: auto;
+}
 }
