@@ -39,11 +39,13 @@ $('#addUser').validate({
             required: true,
             noSpace: true,
             maxlength: 50,
+            remote: '/admin/security/validateUserName'
         },
         email: {
             required: true,
             email: true,
             maxlength: 255,
+            remote: '/admin/security/validateEmail'
         },
         pass: {
             required: true,
@@ -68,7 +70,8 @@ $('#addUser').validate({
             minlength: "Debe tener al menos 6 caracteres",
             noSpace: "No puede tener espacios en blanco",
             alphanumeric: "Debe contener solo letras",
-            maxlength: "No puede tener más de 50 caracteres"
+            maxlength: "No puede tener más de 50 caracteres",
+            remote: "El nombre de usuario ya ha sido utilizado"
         },
         lastName: {
             required: "Ingrese el apellido",
@@ -87,7 +90,8 @@ $('#addUser').validate({
         },
         email: {
             email: "Ingrese un email valido",
-            required: "Ingrese el email"
+            required: "Ingrese el email",
+            remote: "El correo ingresado ya ha sido utilizado"
         },
     },
     highlight: function (element) {
