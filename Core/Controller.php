@@ -3,6 +3,7 @@
 namespace Core;
 
 use Core\ORMConnection;
+use App\Authentication;
 
 abstract class Controller
 {
@@ -49,6 +50,14 @@ abstract class Controller
     protected function getEntityManager()
     {
         return ORMConnection::getEntityManager(); 
+    }
+
+    protected function requireLogin()
+    {
+        if (!Authentication::getUser()) {
+            Authentication::rememberRequestedPage();
+            $this->redirect('/login');
+        }
     }
 
 }

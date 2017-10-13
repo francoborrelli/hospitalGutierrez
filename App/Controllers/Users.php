@@ -9,6 +9,11 @@ use App\Models\Role;
 class Users extends Controller
 {
 
+    protected function before()
+    {
+        $this->requireLogin();
+    }
+
     public function showAction()
     {
         $this->render('Users/usersTable.html.twig', ['data' => $this->getData()]);
