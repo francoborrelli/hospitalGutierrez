@@ -76,3 +76,7 @@
     margin-left: -23px;
     margin-right: 30px;
 }
+
+table.dataTable tbody td {
+    vertical-align: middle;
+  }
