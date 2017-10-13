@@ -1,0 +1,156 @@
+{% import 'utils/switch.html.twig' as switch %} 
+
+<form method="post" action="" class="modal fade" id="editPatient">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Paciente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-expanded="true">Datos personales</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="demogra-tab" data-toggle="tab" href="#demogra" role="tab" aria-controls="demogra">Datos Demograficos</a>
+                    </li>
+                </ul>
+
+                <!-- Datos Personales -->
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="container tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    
+                    <input type="hidden" id="patientId" name="patientId" value="">
+
+                    <div class="row">
+                    <div class="form-group col">
+                        <label for="Nombre">Nombre*</label>
+                        <input type="text" id="editFirstName" name="firstName" class="form-control {% if 'firstName' in editErrors %}is-invalid{% endif %}" placeholder="Nombre" {% if  editErrors is defined %}value="{{patient.firstName}}"{% endif %}>
+                        {% if 'firstName' in editErrors %}<label id="firstName-error" class="error" for="firstName">Ingrese el nombre</label>{% endif %}
+                    </div>
+                    <div class="form-group col">
+                        <label for="Apellido">Apellido*</label>
+                        <input type="text" id="editLastName" name="lastName" class="form-control {% if 'lastName' in editErrors %}is-invalid{% endif %}" placeholder="Apellido" {% if  editErrors is defined %} value="{{patient.lastName}}"{% endif %}>
+                        {% if 'lastName' in editErrors %}<label id="lastName-error" class="error" for="lastName">Ingrese el apellido</label>{% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="Nombre">Tipo Documento*</label>
+                        <select id="editTypeDni" name="typeDni" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                            <option value="DNI">DNI</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                            <option value="Partida">Partida de nacimiento</option>
+                            <option value="Otro">Otro</option>
+                            </select>
+                        {% if 'typeDni' in editErrors %}<label id="typeDni-error" class="error" for="typeDni">Ingrese el tipo de documento</label>{% endif %}
+                    </div>
+                    <div class="form-group col">
+                        <label for="Nº documento">Nº documento*</label>
+                        <input type="number" id="editDni" name="dni" class="form-control {% if 'dni' in editErrors %}is-invalid{% endif %}" placeholder="Numero de documento" {% if  editErrors is defined %} value="{{patient.dni}}"{% endif %}>
+                        {% if 'dni' in editErrors %}<label id="dni-error" class="error" for="dni">Ingrese el nº de documento</label>{% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="Nombre">Género*</label>
+                        <select id="editGender" name="gender" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="birthday">Fecha de Nacimiento*</label>
+                        <input type="date" id="editBirthday" name="birthday" min="1900-01-01" max="{{ "now"|date("Y-m-d") }}"class="form-control {% if 'lastName' in editErrors %}is-invalid{% endif %}" placeholder="Nacimiento">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Domicilio*</label>
+                    <input type="text" id="editAddress" name="address" class="form-control {% if 'address' in editErrors %}is-invalid{% endif %}"{% if  editErrors is defined %}  value="{{patient.address}}"{% endif %} placeholder="Domicilio">
+                    {% if 'address' in editErrors %}<label id="address-error" class="error" for="address">Debe ingresar una dirección</label>{% endif %}
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="Nombre">Teléfono</label>
+                        <input type="number" minlength="5" id="editPhone" name="phone" class="form-control {% if 'phone' in editErrors %}is-invalid{% endif %}" placeholder="Teléfono" {% if  editErrors is defined %}value="{{patient.phone}}"{% endif %}>
+                        {% if 'phone' in editErrors %}<label id="phone-error" class="error" for="phone">Ingrese el nombre</label>{% endif %}
+                    </div>
+                    <div class="form-group col">
+                        <label for="insurance">Obra Social</label>
+                            <select id="editInsurance" class="form-control form-control-chosen-required" data-placeholder="Obra Social">
+                                <option value="Ninguna">Ninguna</option>
+                                <option value="IOMA">IOMA</option>
+                                <option value="OSDE">OSDE</option>
+                                <option value="Galeno">Galeno</option>
+                                <option value="PAMI">PAMI</option>
+                            </select>
+                    </div>
+                </div>
+                    </div>
+
+                    <!-- Datos demograficos -->
+
+                    <div class="container tab-pane fade" id="demogra" role="tabpanel" aria-labelledby="roles-tab">
+<div class="row">
+                    <div class="form-group col">
+                        <label for="editHouse">¿Tipo de vivienda?*</label>
+                        <select id="editHouse" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
+                            <option value="Casa">Casa</option>
+                            <option value="Departamento">Departamento</option>
+                            <option value="Rancho">Rancho</option>
+                            <option value="Pieza en inquilinato">Pieza en inquilinato</option>
+                            <option value="Pension">Pension</option>
+                            <option value="Vivienda movil">Vivienda móvil</option>
+                            <option value="Calle">Calle</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="editHeat">¿Tipo de calefacción?*</label>
+                        <select id="editHeat" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            <option value="Gas">Gas</option>
+                            <option value="Electrica">Electrica</option>
+                            <option value="Otro">Otro</option>
+                            <option value="No">No dispone</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="editWater">¿Tipo de agua?*</label>
+                        <select id="editWater" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            <option value="Red Publica">Red Publica</option>
+                            <option value="Cisterna">Cisterna</option>
+                            <option value="bomba a Motor">Bomba a Motor</option>
+                            <option value="bomba Manual">Bomba manual</option>
+                            <option value="Pozo">Pozo</option>
+                            <option value="natural">Fuente natural</option>
+                        </select>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="form-group col text-center">
+                        <label for="fridge">¿Tiene heladera?*</label>
+                        {{ switch.item('Tiene','No tiene', 'editFridge') }}
+                    </div>
+                    <div class="form-group col text-center">
+                        <label for="electricity">¿Tiene electricidad?*</label>
+                        {{ switch.item('Tiene','No tiene', 'editElectricity') }}
+                    </div>
+                    <div class="form-group col text-center">
+                        <label for="pets">¿Tiene mascotas?*</label>
+                        {{ switch.item('Tiene','No tiene', 'editPets') }}
+                    </div>
+                </div>           
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</form>

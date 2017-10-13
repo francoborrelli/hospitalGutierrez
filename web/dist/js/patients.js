@@ -23,6 +23,7 @@ var oTable =  $('#patients').DataTable({
         { responsivePriority: 8 }, //Tel
         { responsivePriority: 5 }, //Obra social
         { responsivePriority: 10 }, //heladera
+        { responsivePriority: 10 }, //Electricidad
         { responsivePriority: 10 }, //Mascotas
         { responsivePriority: 10 }, //Vivienda
         { responsivePriority: 10 }, //calefaccion
