@@ -68,6 +68,15 @@ class Users extends Controller
          
     }
 
+    public function removeAction()
+    {
+        $em = $this->getEntityManager();
+        $user = $em->getRepository(User::class)->find($_POST['deletedId']);
+        $em->remove($user);
+        $em->flush();
+        $this->redirect('/admin/users');
+    }
+
     private function userValidation($user)
     {
         $userRepository = $this->getEntityManager()->getRepository(User::class);
