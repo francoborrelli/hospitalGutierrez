@@ -60,6 +60,7 @@ $('#addPatient').validate({
         birthday: {
             required: "Ingrese la fecha",
             max: "Ingrese una fecha valida",
+            min: "Ingrese una fecha valida",
         },
         address: {
             required: "Ingrese la dirección del domicilio",
@@ -96,5 +97,6 @@ $("#cancelbtn").click(function(){
     $('#addPatient').modal('hide')
     $('#addPatient')[0].reset();
     $('#addPatient').validate().resetForm();    
+    $('#addPatient').trigger('next.m.1'); 
     return true
 })

@@ -1,3 +1,6 @@
+{% import 'utils/switch.html.twig' as switch %} 
+
+
 <form method="post" action="" class="modal fade multi-step" id="addPatient">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -52,7 +55,7 @@
                     </div>
                     <div class="form-group col">
                         <label for="Apellido">Fecha de Nacimiento</label>
-                        <input type="date" id="birthday" name="birthday" max="{{ "now"|date("Y-m-d") }}"class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Nacimiento">
+                        <input type="date" id="birthday" name="birthday" min="1900-01-01" max="{{ "now"|date("Y-m-d") }}"class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Nacimiento">
                     </div>
                 </div>
                 <div class="form-group">
@@ -82,16 +85,59 @@
             <!-- Datos Demograficos -->
 
             <div class="modal-body step step-2">
-                {% for role in data.roles %}
-                    <div class="form-check">
-                        <label class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="roles[]" value="{{ role.id }}" {% if newErrors is defined and patient.hasRole(role.id)%}checked{% endif %}>
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">{{ role.name }}</span>
-                        </label>
+             <div class="row">
+                    <div class="form-group col">
+                        <label for="insurance">¿Tipo de vivienda?</label>
+                        <select id="house" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
+                            <option value="Casa">Casa</option>
+                            <option value="Departamento">Departamento</option>
+                            <option value="Rancho">Rancho</option>
+                            <option value="Pieza">Pieza en inquilinato</option>
+                            <option value="Pension">Pensión</option>
+                            <option value="Pieza">Pieza en inquilinato</option>
+                            <option value="Movil">Vivienda móvil</option>
+                            <option value="Calle">Calle</option>
+                        </select>
                     </div>
-                {% endfor %}
+                    <div class="form-group col">
+                        <label for="insurance">¿Tipo de calefacción?</label>
+                        <select id="heat" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            <option value="Gas">Gas</option>
+                            <option value="Electrica">Electrica</option>
+                            <option value="Otro">Otro</option>
+                            <option value="No">No dispone</option>
+                        </select>
+                    </div>
+                                        <div class="form-group col">
+                        <label for="insurance">¿Tipo de agua?</label>
+                        <select id="heat" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            <option value="red">Red Pública</option>
+                            <option value="cisterna">Cisterna</option>
+                            <option value="bombaMotor">Bomba a Motor</option>
+                            <option value="bombaManual">Bomba manual</option>
+                            <option value="pozo">Pozo</option>
+                            <option value="natural">De lluvia, arrollo, canal o rio</option>
+                        </select>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="form-group col text-center">
+                        <label for="fridge">¿Tiene heladera?</label>
+                        {{ switch.item('Tiene','No tiene', 'fridge') }}
+                    </div>
+                    <div class="form-group col text-center">
+                        <label for="electricity">¿Tiene electricidad?</label>
+                        {{ switch.item('Tiene','No tiene', 'electricity') }}
+                    </div>
+                    <div class="form-group col text-center">
+                        <label for="pets">¿Tiene mascotas?</label>
+                        {{ switch.item('Tiene','No tiene', 'pets') }}
+                    </div>
+                </div>           
             </div>
+
+            <!-- Botones -->
+
             <div class="modal-footer">
                 <button type="reset" class="btn btn-default" id="cancelbtn">Cancelar</button>
                 <button type="button" class="btn btn-primary step step-1" id="goNext" data-step="1">Continuar</button>

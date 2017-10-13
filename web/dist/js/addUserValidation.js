@@ -121,7 +121,8 @@ $("#goNext").click(function(){
 $("#cancelbtn").click(function(){
     $('#addUser').modal('hide')
     $('#addUser')[0].reset();
-    $('#addUser').validate().resetForm();    
+    $('#addUser').validate().resetForm();  
+    $('#addUser').trigger('next.m.1');   
     return true
 })
 
