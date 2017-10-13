@@ -1,0 +1,52 @@
+@import 'footer.css';
+@import 'navbar.css';
+@import 'login.css';
+@import 'table.css';
+
+body {
+    cursor: default;
+    color: #444;
+    background-color: #1c1c1c;
+  }
+  body [type="button"],
+  body [type="reset"],
+  body [type="submit"] {
+    -webkit-appearance: initial;
+  }
+  body .content {
+    background: #fafafa;
+    min-height: 350px;
+    padding: 80px 0px 70px;
+  }
+  
+  button, a {
+    cursor: pointer;
+  }
+
+a, a:active, a:focus, a:hover{
+  text-decoration: none;
+  color: rgba(0,0,0,.5);
+  outline: 0;
+}
+
+.btn-orange{
+  background-color: #FF5722;
+  border-color: #FF5722;
+  color: white;
+}
+
+label.error{
+  font-size: 80%;
+  font-weight: 400;
+  color: #636c72!important;
+}
+
+.alertContainer{
+  position: absolute;
+  width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  left: 0;
+  right: 0;
+}

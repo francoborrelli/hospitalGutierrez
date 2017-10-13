@@ -1,0 +1,17 @@
+{
+    "require": {
+        "twig/twig": "~1.0",
+        "doctrine/orm": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "App\\": "App/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "5.6"
+        }
+    }
+}
