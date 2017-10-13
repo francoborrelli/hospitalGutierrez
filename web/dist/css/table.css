@@ -80,21 +80,18 @@ table.dataTable tbody td {
         margin-left: -24px;
         margin-right: 10px;
     } 
-}
-
-@media (max-width: 528px) {
-    #stateFilter{
-        margin-left: -24px;
-        margin-right: 10px;
-    } 
-}
-
-@media (max-width: 385px) {
-    #stateFilter {
-        width: 79px;
-        margin-left: -9px;
-        margin-right: 4px;
+    #usuarios_filter input{
+        width: 140px;
     }
+}
+
+@media (max-width: 540px) {
+    #stateFilter{
+    width: 179px;
+    margin-left: -9px;
+    margin-right: 4px;
+    padding-top: 5px;
+    } 
     #agregar-btn {
         margin-right: 5px;
     }
@@ -106,8 +103,21 @@ table.dataTable tbody td {
     }
 }
 
-@media (max-width: 358px) {
+
+@media (max-width: 455px) {
+    #stateFilter{
+    width: 115px;
+    margin-left: -9px;
+    margin-right: 4px;
+    padding-top: 5px;
+    } 
     #agregar-btn {
-        margin-right: 2px;
+        margin-right: 5px;
+    }
+    #usuarios_filter{
+        padding-left: 5px;
+    }
+    #usuarios_filter input{
+        width: 100px;
     }
 }
