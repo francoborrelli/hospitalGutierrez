@@ -31,11 +31,10 @@ class Users extends Controller
             $em->persist($user);
             $em->flush();
 
-            //$this->addFlashMessage('Usuario agregado correctamente');
+            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al usuario correctamente');
             $this->redirect('/admin/users');
         } else {
             $this->render('Users/usersTable.html.twig', ['data' => $this->getData(), 'newErrors' => $validationErrors, 'user' => $user]);
-            //$this->render('utils/dump.html.twig', ['var' => $validationErrors]);
         }
     }
 
@@ -68,6 +67,7 @@ class Users extends Controller
             $user->setData($_POST, $roles);
             $em->flush();
 
+            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del usuario correctamente');
             $this->redirect('/admin/users');
         } else {
             $this->render('Users/usersTable.html.twig', ['data' => $this->getData(), 'editErrors' => $validationErrors, 'user' => $validationUser]);
@@ -81,6 +81,8 @@ class Users extends Controller
         $user = $em->getRepository(User::class)->find($_POST['deletedId']);
         $em->remove($user);
         $em->flush();
+
+        $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha eliminado al usuario correctamente');
         $this->redirect('/admin/users');
     }
 
