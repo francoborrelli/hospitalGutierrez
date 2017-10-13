@@ -40,3 +40,8 @@ label.error{
   font-weight: 400;
   color: #636c72!important;
 }
+
+.alertContainer{
+  padding-right: 250px; 
+  padding-left: 250px
+}
