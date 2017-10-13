@@ -32,10 +32,12 @@ $(".editbtn").click(function(){
 reset = function(){
     $('#editUser')[0].reset();
     $('#activeState').closest("label").removeClass("active")
-    $('#blockedState').closest("label").addClass("active")
+    $('#blockedState').closest("label").removeClass("active")
     $('#editPass').removeClass('is-invalid');
     $('#newPass').removeClass('is-invalid');
     $('#confirmNewPass').removeClass('is-invalid');
+    $('#activeState').attr('checked', false);  
+    $('#blockedState').attr('checked', false);  
     $('#editUser').validate().resetForm();    
 }
 
@@ -44,38 +46,38 @@ reset = function(){
 
 $('#editUser').validate({
     rules: {
-        editName: {
+        firstName: {
             alphanumeric: true,
             required: true,
             nonNumeric: true,
             maxlength: 50,
         },
-        editLastName: {
+        lastName: {
             alphanumeric: true,
             required: true,
             nonNumeric: true,
             maxlength: 50,
         },
-        editUsername: {
+        username: {
             alphanumeric: true,
             minlength: 6,
             required: true,
             noSpace: true,
             maxlength: 50,
         },
-        editEmail: {
+        email: {
             required: true,
             email: true,
             maxlength: 255,
         },
-        editPass: {
+        actualPass: {
             required: function(element){
                 return (($("#newPass").val().length > 0) || ($("#confirmNewPass").val().length > 0));
             },
             minlength: 6,
             maxlength: 255,
         },
-        newPass: {
+        pass: {
             required: function(element){
                 return (($("#editPass").val().length > 0) || ($("#confirmNewPass").val().length > 0));
             },
@@ -91,30 +93,30 @@ $('#editUser').validate({
         },
     },
     messages: {
-        editName: {
+        firstName: {
             required: "Ingrese el nombre",
             nonNumeric: "Debe contener solo letras",
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres"
         },
-        editUsername: {
+        username: {
             required: "Ingrese el nombre de usuario",
             minlength: "Debe tener al menos 6 caracteres",
             noSpace: "No puede tener espacios en blanco",
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres"
         },
-        editLastName: {
+        lastName: {
             required: "Ingrese el apellido",
             nonNumeric: "Debe contener solo letras",
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres",
         },
-        editPass: {
+        actualPass: {
             required: "Ingrese la contraseña",
             minlength: "Debe tener al menos 6 caracteres"
         },
-        newPass: {
+        pass: {
             required: "Ingrese la contraseña",
             minlength: "Debe tener al menos 6 caracteres"
         },
@@ -123,7 +125,7 @@ $('#editUser').validate({
             minlength: "Debe tener al menos 6 caracteres",
             equalTo: "La contraseña no coincide"
         },
-        editEmail: {
+        email: {
             email: "Ingrese un email valido",
             required: "Ingrese el email"
         },

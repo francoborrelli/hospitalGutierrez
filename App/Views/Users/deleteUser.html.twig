@@ -1,7 +1,7 @@
 <div class="modal fade" id="deleteUser" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form class="deleteUserForm">
+            <form method="post" action="/admin/users/remove" class="deleteUserForm">
                 <div class="modal-header">
                     <h4 class="modal-title">Eliminar Usuario</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -12,7 +12,7 @@
                     <p>Esta a punto de eliminar al usuario <span class="modalText"></span>, ¿Está seguro que desea continuar?</p>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" id="deletedId" name="deletedId" value="">
+                    <input type="hidden" id="deletedId" name="deletedId">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-secondary">Eliminar</button>
                 </div>

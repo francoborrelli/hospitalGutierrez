@@ -1,17 +1,3 @@
-<thead>
-    <tr>
-        <th>Nombre de Usuario</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Email</th>
-        <th>Roles</th>
-        <th>Estado</th>
-        <th>Opciones</th>
-    </tr>
-</thead>
-
-</tbody>
-
 {% for user in users %}
 <tr>
     <td>{{ user.userName }}</td>
@@ -22,11 +8,9 @@
     <td>{% if user.active %}Activo{% else %}Bloqueado{% endif %}</td>
     <td class="text-center">
         <div class="btn-group" role="group">
-            <button type="button" data-toggle="modal" data-target="#editUser" title="Editar" data-id="1" class="btn btn-orange btn-sm editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-            <button type="button" data-toggle="modal" data-target="#deleteUser" title="Eliminar" data-id="1" class="btn btn-danger btn-sm deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            <button type="button" data-toggle="modal" data-target="#editUser" title="Editar" data-id="{{ user.id }}" class="btn btn-orange btn-sm editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+            <button type="button" data-toggle="modal" data-target="#deleteUser" title="Eliminar" data-id="{{ user.id }}" class="btn btn-danger btn-sm deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
         </div>
     </td>
 </tr>
 {% endfor %}
-
-</tbody>
