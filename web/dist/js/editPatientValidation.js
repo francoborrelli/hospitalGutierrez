@@ -7,7 +7,7 @@ $(".editbtn").click(function(){
     tr = $(this).closest('tr').find("td")
 
     $("#editTypeDni").val($(tr).eq(0).text())
-    $("#editDni").val(parseInt($(tr).eq(1).text()))
+    $("#editDni").val($(tr).eq(1).text())
     $("#editFirstName").val($(tr).eq(2).text())
     $("#editLastName").val($(tr).eq(3).text())
     $("#editGender").val($(tr).eq(5).text())

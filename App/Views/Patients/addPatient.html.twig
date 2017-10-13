@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group col">
                         <label for="Nº documento">Nº documento*</label>
-                        <input type="number" id="dni" name="dni" class="form-control {% if 'dni' in newErrors %}is-invalid{% endif %}" placeholder="Numero de documento" {% if  newErrors is defined %} value="{{patient.dni}}"{% endif %}>
+                        <input type="text" id="dni" name="dni" class="form-control {% if 'dni' in newErrors %}is-invalid{% endif %}" placeholder="Numero de documento" {% if  newErrors is defined %} value="{{patient.dni}}"{% endif %}>
                         {% if 'dni' in newErrors %}<label id="dni-error" class="error" for="dni">Ingrese el nº de documento</label>{% endif %}
                     </div>
                 </div>
