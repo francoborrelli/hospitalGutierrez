@@ -45,10 +45,6 @@ class User
 
     private $passwordConfirm;
 
-    private $actualPass = '';
-
-    private $oldPass;
-
     /**
      * @var string
      *
@@ -117,10 +113,6 @@ class User
             $this->active = true;
 
         if (!strlen($data['pass']) == 0) {
-            if (isset($data['actualPass'])) {
-                $this->actualPass = $data['actualPass'];
-                $this->oldPass = $this->password;
-            }
             $this->password = password_hash($data['pass'], PASSWORD_DEFAULT);
             $this->plainPassword = $data['pass'];
             $this->passwordConfirm = $data['confirmPass'];
@@ -404,9 +396,6 @@ class User
 
         if ($emailExists)
             $validationErrors[] = 'emailExists';
-
-        if (!strlen($this->actualPass) == 0 && !password_verify($this->actualPass, $this->oldPass))
-            $validationErrors[] = 'incorrectPassword';
 
         return $validationErrors;
     }

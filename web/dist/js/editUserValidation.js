@@ -72,26 +72,19 @@ $('#editUser').validate({
                 }
             }
         },
-        actualPass: {
+        pass: {
             required: function(element){
                 return (($("#newPass").val().length > 0) || ($("#confirmNewPass").val().length > 0));
             },
             minlength: 6,
             maxlength: 255,
         },
-        pass: {
+        confirmPass: {
             required: function(element){
-                return (($("#editPass").val().length > 0) || ($("#confirmNewPass").val().length > 0));
+                return (($("#newPass").val().length > 0) || ($("#confirmNewPass").val().length > 0));
             },
             minlength: 6,
-            maxlength: 255,
-        },
-        confirmNewPass: {
-            required: function(element){
-                return (($("#newPass").val().length > 0) || ($("#editPass").val().length > 0));
-            },
-            minlength: 6,
-            equalTo: '#pass',
+            equalTo: '#newPass',
         },
     },
     messages: {
@@ -115,18 +108,14 @@ $('#editUser').validate({
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres",
         },
-        actualPass: {
-            required: "Ingrese la contraseña",
-            minlength: "Debe tener al menos 6 caracteres"
-        },
         pass: {
             required: "Ingrese la contraseña",
             minlength: "Debe tener al menos 6 caracteres"
         },
-        confirmNewPass: {
+        confirmPass: {
             required: "Re-ingrese la contraseña",
             minlength: "Debe tener al menos 6 caracteres",
-            equalTo: "La contraseña no coincide"
+            equalTo: "Las contraseñas no coinciden"
         },
         email: {
             email: "Ingrese un email valido",
