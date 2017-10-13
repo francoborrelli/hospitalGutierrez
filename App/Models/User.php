@@ -363,6 +363,15 @@ class User
         return $this->createdAt;
     }
 
+    public function hasRole($id)
+    {
+        foreach ($this->roles as $role) {
+            if ($role->getId() == $id)
+                return true;
+        }
+        return false;
+    }
+
     public function validationErrors($usrExists, $emailExists)
     {
         $validationErrors = [];
