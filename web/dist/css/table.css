@@ -61,6 +61,13 @@
     padding-top: 5px;
 }
 
+
+.modal-footer label{
+    position: absolute;
+    left: 36px;
+    bottom: 10px;
+}
+
 table.dataTable tbody td {
     vertical-align: middle;
   }

@@ -17,19 +17,19 @@
             <div class="modal-body step step-1">
                 <div class="row">
                     <div class="form-group col">
-                        <label for="Nombre">Nombre</label>
+                        <label for="Nombre">Nombre*</label>
                         <input type="text" id="firstName" name="firstName" class="form-control {% if 'firstName' in newErrors %}is-invalid{% endif %}" placeholder="Nombre" {% if  newErrors is defined %}value="{{patient.firstName}}"{% endif %}>
                         {% if 'firstName' in newErrors %}<label id="firstName-error" class="error" for="firstName">Ingrese el nombre</label>{% endif %}
                     </div>
                     <div class="form-group col">
-                        <label for="Apellido">Apellido</label>
+                        <label for="Apellido">Apellido*</label>
                         <input type="text" id="lastName" name="lastName" class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Apellido" {% if  newErrors is defined %} value="{{patient.lastName}}"{% endif %}>
                         {% if 'lastName' in newErrors %}<label id="lastName-error" class="error" for="lastName">Ingrese el apellido</label>{% endif %}
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col">
-                        <label for="Nombre">Tipo Documento</label>
+                        <label for="Nombre">Tipo Documento*</label>
                         <select id="typeDni" name="typeDni" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
                             <option value="DNI">DNI</option>
                             <option value="Pasaporte">Pasaporte</option>
@@ -39,14 +39,14 @@
                         {% if 'typeDni' in newErrors %}<label id="typeDni-error" class="error" for="typeDni">Ingrese el tipo de documento</label>{% endif %}
                     </div>
                     <div class="form-group col">
-                        <label for="Nº documento">Nº documento</label>
+                        <label for="Nº documento">Nº documento*</label>
                         <input type="number" id="dni" name="dni" class="form-control {% if 'dni' in newErrors %}is-invalid{% endif %}" placeholder="Numero de documento" {% if  newErrors is defined %} value="{{patient.dni}}"{% endif %}>
                         {% if 'dni' in newErrors %}<label id="dni-error" class="error" for="dni">Ingrese el nº de documento</label>{% endif %}
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col">
-                        <label for="Nombre">Género</label>
+                        <label for="Nombre">Género*</label>
                         <select id="gender" name="gender" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
                             <option value="M">Masculino</option>
                             <option value="F">Femenino</option>
@@ -54,12 +54,12 @@
                         </select>
                     </div>
                     <div class="form-group col">
-                        <label for="Apellido">Fecha de Nacimiento</label>
+                        <label for="Apellido">Fecha de Nacimiento*</label>
                         <input type="date" id="birthday" name="birthday" min="1900-01-01" max="{{ "now"|date("Y-m-d") }}"class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Nacimiento">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="address">Domicilio</label>
+                    <label for="address">Domicilio*</label>
                     <input type="text" id="address" name="address" class="form-control {% if 'address' in newErrors %}is-invalid{% endif %}"{% if  newErrors is defined %}  value="{{patient.address}}"{% endif %} placeholder="Domicilio">
                     {% if 'address' in newErrors %}<label id="address-error" class="error" for="address">Debe ingresar una dirección</label>{% endif %}
                 </div>
@@ -87,7 +87,7 @@
             <div class="modal-body step step-2">
              <div class="row">
                     <div class="form-group col">
-                        <label for="insurance">¿Tipo de vivienda?</label>
+                        <label for="insurance">¿Tipo de vivienda?*</label>
                         <select id="house" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
                             <option value="Casa">Casa</option>
                             <option value="Departamento">Departamento</option>
@@ -100,7 +100,7 @@
                         </select>
                     </div>
                     <div class="form-group col">
-                        <label for="insurance">¿Tipo de calefacción?</label>
+                        <label for="insurance">¿Tipo de calefacción?*</label>
                         <select id="heat" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
                             <option value="Gas">Gas</option>
                             <option value="Electrica">Electrica</option>
@@ -109,7 +109,7 @@
                         </select>
                     </div>
                                         <div class="form-group col">
-                        <label for="insurance">¿Tipo de agua?</label>
+                        <label for="insurance">¿Tipo de agua?*</label>
                         <select id="heat" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
                             <option value="red">Red Pública</option>
                             <option value="cisterna">Cisterna</option>
@@ -122,15 +122,15 @@
                 </div>  
                 <div class="row">
                     <div class="form-group col text-center">
-                        <label for="fridge">¿Tiene heladera?</label>
+                        <label for="fridge">¿Tiene heladera?*</label>
                         {{ switch.item('Tiene','No tiene', 'fridge') }}
                     </div>
                     <div class="form-group col text-center">
-                        <label for="electricity">¿Tiene electricidad?</label>
+                        <label for="electricity">¿Tiene electricidad?*</label>
                         {{ switch.item('Tiene','No tiene', 'electricity') }}
                     </div>
                     <div class="form-group col text-center">
-                        <label for="pets">¿Tiene mascotas?</label>
+                        <label for="pets">¿Tiene mascotas?*</label>
                         {{ switch.item('Tiene','No tiene', 'pets') }}
                     </div>
                 </div>           
@@ -139,6 +139,7 @@
             <!-- Botones -->
 
             <div class="modal-footer">
+                <label id="error" class="error">*Campos Obligatorios</label>
                 <button type="reset" class="btn btn-default" id="cancelbtn">Cancelar</button>
                 <button type="button" class="btn btn-primary step step-1" id="goNext" data-step="1">Continuar</button>
                 <button type="button" class="btn btn-primary step step-2"  id="goBack" data-step="1">Volver</button>
