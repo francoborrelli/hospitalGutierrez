@@ -1,6 +1,4 @@
 {% extends 'utils/base.html.twig' %} 
-{% import 'utils/alert.html.twig' as alert %}
-    
 
 {% block stylesheets %}
 <link rel="stylesheet" href="/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
@@ -13,13 +11,6 @@
     {% include 'Users/editUser.html.twig' %}
 
     <div class="container userReport">
-
-
-        {{ alert.item('¡Felicidades','Se ha agregado al usuario correctamente.') }}
-        {{ alert.item('¡Felicidades','Se han modificado los datos del usuario correctamente.') }}
-        {{ alert.item('¡Felicidades','Se ha borrado al usuario correctamente.') }}
-
-
         <div class="card">
             <div class="card-header text-left">
                 <a class="btn detalle" id="goBack" title="Volver al inicio" href="/"><i class="fa fa-reply" aria-hidden="true"></i></a>

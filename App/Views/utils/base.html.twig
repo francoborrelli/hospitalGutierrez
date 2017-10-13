@@ -1,3 +1,5 @@
+{% import 'utils/alert.html.twig' as alert %}
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -19,6 +21,11 @@
     {% include 'utils/header/navbar.html.twig' %}
 
     <div class="content">
+
+        {% for message in flashes %}
+            {{ alert.item(message.type, message.title, message.body) }}
+        {% endfor %}
+
         {% block body %}
         {% endblock %}
     </div>
