@@ -100,16 +100,16 @@ class User
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
         $this->active = true;
-        $this->setData($data);
-        $this->roles = $roles;
+        $this->setData($data, $roles);
     }
 
-    public function setData($data)
+    public function setData($data, $roles)
     {
         $this->email = $data['email'];
         $this->firstName = $data['firstName'];
         $this->lastName = $data['lastName'];
         $this->username = $data['username'];
+        $this->roles = $roles;
 
 	if (isset($data['state']) && $data['state'] == 'blocked')
             $this->active = false;

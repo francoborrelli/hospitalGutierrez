@@ -43,7 +43,8 @@ class Users extends Controller
         $originalEmail = $user->getEmail();
         $originalUserName = $user->getUsername();
         $validationUser = clone $user;
-        $validationUser->setData($_POST);
+        $roles = $em->getRepository(Role::class)->findById($_POST['roles']);
+        $validationUser->setData($_POST, $roles);
         $validationErrors = $this->userValidation($validationUser);
 
         if ($validationUser->getEmail() == $originalEmail) {
@@ -59,7 +60,7 @@ class Users extends Controller
         }
 
         if (empty($validationErrors)) {
-            $user->setData($_POST);
+            $user->setData($_POST, $roles);
             $em->flush();
 
             $this->redirect('/admin/users');
