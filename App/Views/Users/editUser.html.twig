@@ -51,11 +51,6 @@
                         </div>
                     </div>
                     <div class="container tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-                        <div class="form-group">
-                            <label for="Direccion De Email">Contraseña Actual</label>
-                            <input type="password" id="editPass" name="actualPass" class="form-control {% if 'passwordLength' in editErrors %}is-invalid{% endif %}" placeholder="Contraseña">
-                            {% if 'passwordLength' in editErrors %}<label id="actualPass-error" class="error" for="actualPass">Debe tener al menos 6 caracteres</label>{% endif %}
-                        </div>
                         <div class="row">
                             <div class="form-group col">
                                 <label for="Contraseña">Nueva Contraseña</label>

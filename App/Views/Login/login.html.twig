@@ -7,9 +7,9 @@
     
         {% block content %}
             
-        <form id="logInForm">
-            <div class="form-group"><input type="email" id="_username" name="_username" class="form-control" placeholder="Dirección de email" required></div>
-            <div class="form-group"><input type="password" id="_password" name="_password" class="form-control" placeholder="Contraseña" required></div>
+        <form method="post" action="/login/create" id="logInForm">
+            <div class="form-group"><input type="email" id="_email" name="email" class="form-control" placeholder="Dirección de email" value="{{ email }}" required></div>
+            <div class="form-group"><input type="password" id="_password" name="pass" class="form-control" placeholder="Contraseña" required></div>
             <button class="form-group btn btn-lg btn-secundary btn-block" type="submit">Acceder</button>
             <div class="text-center"><a href="">No me acuerdo mi contraseña</a></div>
         </form>
@@ -23,6 +23,6 @@
 
 
 {% block javascripts %}
-    <script src="assets/jquery-validate/jquery.validate.min.js"></script>
-    <script src="dist/js/logInValidation.js"></script>
+    <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
+    <script src="/web/dist/js/logInValidation.js"></script>
 {% endblock %}

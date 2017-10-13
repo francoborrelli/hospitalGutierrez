@@ -1,10 +1,8 @@
 {% extends 'utils/base.html.twig' %} 
-{% import 'utils/alert.html.twig' as alert %}
-    
 
 {% block stylesheets %}
-<link rel="stylesheet" href="/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
-<link rel="stylesheet" href="/assets/dataTables/css/responsive.bootstrap4.min.css"> 
+<link rel="stylesheet" href="/web/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
+<link rel="stylesheet" href="/web/assets/dataTables/css/responsive.bootstrap4.min.css"> 
 {% endblock %} 
 
 {% block body %}
@@ -13,13 +11,6 @@
     {% include 'Users/editUser.html.twig' %}
 
     <div class="container userReport">
-
-
-        {{ alert.item('¡Felicidades','Se ha agregado al usuario correctamente.') }}
-        {{ alert.item('¡Felicidades','Se han modificado los datos del usuario correctamente.') }}
-        {{ alert.item('¡Felicidades','Se ha borrado al usuario correctamente.') }}
-
-
         <div class="card">
             <div class="card-header text-left">
                 <a class="btn detalle" id="goBack" title="Volver al inicio" href="/"><i class="fa fa-reply" aria-hidden="true"></i></a>
@@ -28,7 +19,7 @@
             <div class="card-block">
                 <div class="tablePage">
                     <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addUser">Agregar</button>
-                                    <select class="custom-select" id="stateFilter">
+                                    <select class="form-control" id="stateFilter">
                                         <option selected value="">Seleccione Estado</option>
                                         <option value="Activo">Activo</option>
                                         <option value="Bloqueado">Bloqueado</option>
@@ -57,13 +48,13 @@
 
 
 {% block javascripts %}
-    <script src="/assets/jquery-validate/jquery.validate.min.js"></script>
-    <script src="/assets/dataTables/js/datatables.min.js"></script>
-    <script src="/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
-    <script src="/dist/js/users.js"></script>
-    <script src="/dist/js/multi-step-modal.js"></script>
-    <script src="/dist/js/addUserValidation.js"></script>
-    <script src="/dist/js/editUserValidation.js"></script>
+    <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
+    <script src="/web/assets/dataTables/js/datatables.min.js"></script>
+    <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
+    <script src="/web/dist/js/users.js"></script>
+    <script src="/web/dist/js/multi-step-modal.js"></script>
+    <script src="/web/dist/js/addUserValidation.js"></script>
+    <script src="/web/dist/js/editUserValidation.js"></script>
 
     {% if newErrors is defined %}
         <script>

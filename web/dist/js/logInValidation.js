@@ -1,32 +1,32 @@
 $( window ).resize(function() {
     if ($(window).width() < 875){
     $('#_password').popover('hide')
-    $('#_username').popover('hide')
+    $('#_email').popover('hide')
     }else{
         if (($(window).width() > 875)){
             $('#_password').popover('show')
-            $('#_username').popover('show')
+            $('#_email').popover('show')
         }
     }
   });
 
 $('#logInForm').validate({
     rules: {
-        _username: {
+        email: {
             required: true,
             email: true
         },
-        _password: {
+        pass: {
             minlength: 6,
             required: true,
         },
     },
     messages: {
-        _password: {
+        pass: {
             required: "Por favor ingrese su contraseña",
             minlength: "Su contraseña debe tener al menos 6 caracteres"
         },
-        _username: {
+        email: {
             email: "Por favor ingrese un email valido",
             required: "Por favor ingrese su email"
         },
