@@ -1,4 +1,4 @@
-    $('#usuarios').DataTable({
+var oTable =  $('#usuarios').DataTable({
         responsive: {
             details: {
                 display: $.fn.dataTable.Responsive.display.modal( {
@@ -55,3 +55,11 @@
             },
         }
     });
+
+
+    $(document).ready(function() {
+        /* Initialise datatables */
+    
+        /* Add event listener to the dropdown input */
+        $('select#stateFilter').change( function() { oTable.columns(5).search(this.value).draw(); } );
+    } );
