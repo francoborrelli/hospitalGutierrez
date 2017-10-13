@@ -372,6 +372,11 @@ class User
         return false;
     }
 
+    public function validatePassword($password)
+    {
+        return password_verify($password, $this->password);
+    }
+
     public function validationErrors($usrExists, $emailExists)
     {
         $validationErrors = [];
