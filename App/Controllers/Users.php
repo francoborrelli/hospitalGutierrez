@@ -4,22 +4,23 @@ namespace App\Controllers;
 
 use Core\Controller;
 use App\Models\User;
+use App\Models\Role;
 
 class Users extends Controller
 {
 
     public function showAction()
     {
-        $userRepository = $this->getEntityManager()->getRepository(User::class);
-        $users = $userRepository->findAll();
-        $this->render('Users/usersTable.html.twig', ['users' => $users]);
+        $this->render('Users/usersTable.html.twig', ['data' => $this->getData()]);
     }
 
     public function newAction()
     {
         $em = $this->getEntityManager();
         $userRepository = $em->getRepository(User::class);
-        $user = new User($_POST);
+
+        $roles = $em->getRepository(Role::class)->findById($_POST['roles']);
+        $user = new User($_POST, $roles);
         $validationErrors = $this->userValidation($user);
         if (empty($validationErrors)){
             $em->persist($user);
@@ -28,7 +29,7 @@ class Users extends Controller
             //$this->addFlashMessage('Usuario agregado correctamente');
             $this->redirect('/admin/users');
         } else {
-            $this->render('Users/usersTable.html.twig', ['users' => $userRepository->findAll(), 'newErrors' => $validationErrors, 'user' => $user]);
+            $this->render('Users/usersTable.html.twig', ['data' => $this->getData(), 'newErrors' => $validationErrors, 'user' => $user]);
             //$this->render('utils/dump.html.twig', ['var' => $validationErrors]);
         }
     }
@@ -63,7 +64,7 @@ class Users extends Controller
 
             $this->redirect('/admin/users');
         } else {
-            $this->render('Users/usersTable.html.twig', ['users' => $userRepository->findAll(), 'editErrors' => $validationErrors, 'user' => $validationUser]);
+            $this->render('Users/usersTable.html.twig', ['data' => $this->getData(), 'editErrors' => $validationErrors, 'user' => $validationUser]);
         }
          
     }
@@ -83,6 +84,13 @@ class Users extends Controller
         $usrExists = $userRepository->usrExists($user->getUsername());
         $emailExists = $userRepository->emailExists($user->getEmail());
         return $user->validationErrors($usrExists, $emailExists);
+    }
+
+    public function getData(){
+        $em = $this->getEntityManager();
+        $users = $em->getRepository(User::class)->findAll();
+        $roles = $em->getRepository(Role::class)->findAll();
+        return ['users' => $users, 'roles' => $roles];
     }
 
 }

@@ -47,27 +47,15 @@
                 </div>
             </div>
             <div class="modal-body step step-2">
-                <div class="form-check">
-                    <label class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="recepcionista" name="recepcionista">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Recepcionista</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="pediatra" name="pediatra">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Pediatra</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="administrador" name ="administrador">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Administrador</span>
-                    </label>
-                </div>
+                {% for role in data.roles %}
+                    <div class="form-check">
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="roles[]" value="{{ role.id }}">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ role.name }}</span>
+                        </label>
+                    </div>
+                {% endfor %}
             </div>
             <div class="modal-footer">
                 <button type="reset" class="btn btn-default" id="cancelbtn">Cancelar</button>

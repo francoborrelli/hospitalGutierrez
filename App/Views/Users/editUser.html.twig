@@ -68,27 +68,15 @@
                         </div>
                     </div>
                     <div class="container tab-pane fade" id="roles" role="tabpanel" aria-labelledby="roles-tab">
-                        <div class="form-check">
-                            <label class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="editRecepc" name="editRecepc">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Recepcionista</span>
-                    </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="editPediatra" name="editPediatra">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Pediatra</span>
-                    </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="editAdmin" name ="editAdmin">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Administrador</span>
-                    </label>
-                        </div>
+                        {% for role in data.roles %}
+                            <div class="form-check">
+                                <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" name="roles[]">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">{{ role.name }}</span>
+                                </label>
+                            </div>
+                        {% endfor %}
                     </div>
                     <div class="container tab-pane fade text-center" id="state" role="tabpanel" aria-labelledby="state-tab">
                         <div class="btn-group" data-toggle="buttons">
