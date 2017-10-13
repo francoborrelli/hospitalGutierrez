@@ -1,9 +1,14 @@
-{% extends 'utils/base.html.twig' %} {% block stylesheets %}
-<link rel="stylesheet" href="/dist/css/config.css"> 
-<link rel="stylesheet" href="/dist/css/switch.css"> 
-{% endblock %} {% block body %}
+{% import 'utils/switch.html.twig' as switch %} 
 
-<form class="container config userReport">
+{% extends 'utils/base.html.twig' %} 
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/dist/css/config.css"> 
+{% endblock %} 
+
+
+{% block body %}
+<div class="container config userReport">
     <div class="card">
         <div class="card-header text-left">
             <a class="btn detalle" id="goBack" title="Volver al inicio" href="/"><i class="fa fa-reply" aria-hidden="true"></i></a>
@@ -42,44 +47,39 @@
                 </div>
                 <div class="tab-pane fade" id="pagination" role="tabpanel" aria-labelledby="pagination-tab">
                     <div class="pageChange form">
-                     <div class="col-sm-12 input">
-                        <div class="col-xs-3 col-xs-offset-3">
-                            <label for="pageAmount">Elementos por página</label>
-                            <div class="input-group number-spinner">
-                                <span class="input-group-btn data-dwn">
-                                    <button class="btn btn-default" id="dwn" type="button" data-dir="dwn"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                                </span>
-                                <input type="number" id="pageAmount" name="pageAmount" class="form-control text-center" min="0" value="0" placeholder="Ingrese el nuevo numero de elementos por página">
-                                <span class="input-group-btn data-up">
-                                    <button class="btn btn-default"  id="up"  type="button" data-dir="up"><i class="fa fa-plus" aria-hidden="true"></i>
-                                    </button>
-                                </span>
+                        <div class="col-sm-12 input">
+                            <div class="col-xs-3 col-xs-offset-3">
+                                <label for="pageAmount">Elementos por página</label>
+                                <div class="input-group number-spinner">
+                                    <span class="input-group-btn data-dwn">
+                                        <button class="btn btn-default" id="dwn" type="button" data-dir="dwn"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                    </span>
+                                    <input type="number" id="pageAmount" name="pageAmount" class="form-control text-center" min="0" value="0" placeholder="Ingrese el nuevo numero de elementos por página">
+                                    <span class="input-group-btn data-up">
+                                        <button class="btn btn-default"  id="up"  type="button" data-dir="up"><i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="mantenimiento" role="tabpanel" aria-labelledby="mantenimiento-tab">
                     <div class="ChangeMantenimiento">
-                        <div class="text-center custom-switch custom-switch-label-io">
-                            <input class="custom-switch-input" id="actived" type="checkbox">
-                            <label class="custom-switch-btn" for="actived"></label>
-                            <div class="custom-switch-content-checked">
-                                Sitio Activado
-                            </div>
-                            <div class="custom-switch-content-unchecked">
-                                Sitio en Mantenimiento
-                            </div>
-                            </div>
+                        {{ switch.item('Sitio activo','Sitio en mantenimiento') }}
                     </div>
                 </div>
             </div>
         </div>
+        <div class="card-footer text-muted text-right">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
     </div>
-</form>
+</div>
 {% endblock %} 
 
+
 {% block javascripts %}
-<script src="/assets/jquery-validate/autoresize.jquery.js"></script>
-<script src="/dist/js/config.js"></script>
+    <script src="/assets/jquery-validate/autoresize.jquery.js"></script>
+    <script src="/dist/js/config.js"></script>
 {% endblock %}

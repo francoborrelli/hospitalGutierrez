@@ -9,6 +9,10 @@
   max-width: 610px;
 }
 
+.config .card-block.container{
+  min-height: 270px;
+}
+
 .config textarea{
         width: 100%;
         height: auto;
@@ -18,8 +22,9 @@
         font-size: 15px;
         border: 1px solid rgba(0, 0, 0, 0.190);
 }
-.pageChange{
+.pageChange, .ChangeMantenimiento{
   padding-top: 20px;
+  position: relative;
 }
 .pageChange .cancel {
     margin-right: 5px !important;
@@ -29,6 +34,12 @@
   }
   .pageChange .col-sm-12.input {
     margin-bottom: 30px;
+    position: absolute;
+    top: 50%;
+    height: 6em;
+    margin-top: 3em;
+    padding-left: 100px;
+    padding-right: 100px;
   }
   .pageChange .col-sm-12.input input {
     border: 1px solid rgba(0, 0, 0, 0.15) !important;
@@ -43,7 +54,19 @@
     outline: none;
   }
   
-
 .ChangeMantenimiento{
   padding: 20px;
+}
+
+.ChangeMantenimiento .custom-switch{
+  height: 6em;
+  margin-top: 3em;
+}
+
+
+@media (max-width: 550px){
+  .pageChange .col-sm-12.input {
+    padding-left: inherit;
+    padding-right:inherit;
+  } 
 }

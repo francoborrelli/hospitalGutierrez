@@ -1,0 +1,13 @@
+
+{% macro item(on, off) %}
+    <div class="text-center custom-switch custom-switch-label-io">
+        <input class="custom-switch-input" id="actived" type="checkbox">
+        <label class="custom-switch-btn" for="actived"></label>
+        <div class="custom-switch-content-checked">
+            {{on}}
+        </div>
+        <div class="custom-switch-content-unchecked">
+            {{off}}
+        </div>
+    </div>
+{% endmacro %}
