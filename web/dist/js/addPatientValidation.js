@@ -100,3 +100,11 @@ $("#cancelbtn").click(function(){
     $('#addPatient').trigger('next.m.1'); 
     return true
 })
+
+$(".deletebtn").click(function(){
+    $("#deletedId").val($(this).data("id"))
+    tr = $(this).closest('tr')
+    name = $(tr).find("td").eq(2).text()
+    surname = $(tr).find("td").eq(3).text()
+    $(".modalText").text(name + ' ' + surname);
+});
