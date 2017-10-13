@@ -71,7 +71,7 @@
                         {% for role in data.roles %}
                             <div class="form-check">
                                 <label class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="roles[]" value="{{ role.id }}">
+                                    <input type="checkbox" class="custom-control-input" id="edit{{ role.name }}" name="roles[]" value="{{ role.id }}">
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">{{ role.name }}</span>
                                 </label>

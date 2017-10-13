@@ -8,25 +8,11 @@ $(".editbtn").click(function(){
     $("#editName").val($(tr).eq(1).text())
     $("#editLastName").val($(tr).eq(2).text())
     $("#editEmail").val($(tr).eq(3).text())
-    roles = $(tr).eq(4).text();
-    if (~roles.indexOf("Recepcionista")){
-        $('#editRecepc').prop('checked', true);
-    }
-    if (~roles.indexOf("Pediatra")){
-        $('#editPediatra').prop('checked', true);
-    }
-    if (~roles.indexOf("Administrador")){
-        $('#editAdmin').prop('checked', true);
-    }
+    roles = $(tr).eq(4).text().split(/(?=[A-Z])/);
 
-    state = $(tr).eq(5).text();
-    if (~state.indexOf("Activo")){
-        $('#activeState').attr('checked', true);  
-        $('#activeState').closest("label").addClass("active")
-    }else{
-        $('#blockedState').attr('checked', true);  
-        $('#blockedState').closest("label").addClass("active")
-    }
+    roles.forEach(function(element) {
+            $('#edit' + element ).prop('checked', true);
+    }, this);
 });
 
 reset = function(){
