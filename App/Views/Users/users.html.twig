@@ -1,17 +1,3 @@
-<thead>
-    <tr>
-        <th>Nombre de Usuario</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Email</th>
-        <th>Roles</th>
-        <th>Estado</th>
-        <th>Opciones</th>
-    </tr>
-</thead>
-
-</tbody>
-
 {% for user in users %}
 <tr>
     <td>{{ user.userName }}</td>
@@ -28,5 +14,3 @@
     </td>
 </tr>
 {% endfor %}
-
-</tbody>
