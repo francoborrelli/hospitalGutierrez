@@ -2,6 +2,9 @@
 
 namespace App;
 
+use Core\ORMConnection;
+use App\Models\User;
+
 class Authentication
 {
 
@@ -37,7 +40,18 @@ class Authentication
 
     public static function returnPage()
     {
-        return $_SESSION['returnTo'] ?? '/';
+        if (isset($_SESSION['returnTo'])) 
+            return $_SESSION['returnTo'];
+        else
+            return '/';
+    }
+
+    public static function getUser()
+    {
+        if (isset($_SESSION['userId'])) {
+            $userRepository = ORMConnection::getEntityManager()->getRepository(User::class);
+            return $userRepository->find($_SESSION['userId']);
+        }
     }
 
 }

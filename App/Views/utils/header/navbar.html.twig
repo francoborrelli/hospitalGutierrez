@@ -17,7 +17,11 @@
         </ul>
 
         <ul class="navbar-nav">
-            {% include 'utils/header/navbarUser.html.twig' %}
+            {% if currentUser %}
+                {% include 'utils/header/navbarUser.html.twig' %}
+            {% else %}
+                {% include 'utils/header/navbarVisitor.html.twig' %}
+            {% endif %}
         </ul>
 
     </div>
