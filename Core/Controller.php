@@ -3,6 +3,7 @@
 namespace Core;
 
 use Core\ORMConnection;
+use Core\Flash;
 use App\Authentication;
 
 abstract class Controller
@@ -58,6 +59,11 @@ abstract class Controller
             Authentication::rememberRequestedPage();
             $this->redirect('/login');
         }
+    }
+
+    protected function addFlashMessage($type, $title, $body)
+    {
+        Flash::addMessage($type, $title, $body);
     }
 
 }

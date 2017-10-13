@@ -13,6 +13,7 @@ class View
             $loader = new \Twig_Loader_Filesystem('../App/Views');
             $twig = new \Twig_Environment($loader);
             $twig->addGlobal('currentUser', \App\Authentication::getUser());
+            $twig->addGlobal('flashes', \Core\Flash::getMessages());
         }
 
         echo $twig->render($template, $args);
