@@ -1,0 +1,103 @@
+<form method="post" action="" class="modal fade multi-step" id="addPatient">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title step-1" data-step="1">Datos Personales</h4>
+                <h4 class="modal-title step-2" data-step="2">Datos Demograficos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Datos Personales -->
+
+            <div class="modal-body step step-1">
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="Nombre">Nombre</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control {% if 'firstName' in newErrors %}is-invalid{% endif %}" placeholder="Nombre" {% if  newErrors is defined %}value="{{patient.firstName}}"{% endif %}>
+                        {% if 'firstName' in newErrors %}<label id="firstName-error" class="error" for="firstName">Ingrese el nombre</label>{% endif %}
+                    </div>
+                    <div class="form-group col">
+                        <label for="Apellido">Apellido</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Apellido" {% if  newErrors is defined %} value="{{patient.lastName}}"{% endif %}>
+                        {% if 'lastName' in newErrors %}<label id="lastName-error" class="error" for="lastName">Ingrese el apellido</label>{% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="Nombre">Tipo Documento</label>
+                        <select id="typeDni" name="typeDni" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                            <option value="DNI">DNI</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                            <option value="Partida">Partida de nacimiento</option>
+                            <option value="Otro">Otro</option>
+                            </select>
+                        {% if 'typeDni' in newErrors %}<label id="typeDni-error" class="error" for="typeDni">Ingrese el tipo de documento</label>{% endif %}
+                    </div>
+                    <div class="form-group col">
+                        <label for="Nº documento">Nº documento</label>
+                        <input type="number" id="dni" name="dni" class="form-control {% if 'dni' in newErrors %}is-invalid{% endif %}" placeholder="Numero de documento" {% if  newErrors is defined %} value="{{patient.dni}}"{% endif %}>
+                        {% if 'dni' in newErrors %}<label id="dni-error" class="error" for="dni">Ingrese el nº de documento</label>{% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="Nombre">Género</label>
+                        <select id="gender" name="gender" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                            <option value="O">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="Apellido">Fecha de Nacimiento</label>
+                        <input type="date" id="birthday" name="birthday" max="{{ "now"|date("Y-m-d") }}"class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Nacimiento">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Domicilio</label>
+                    <input type="text" id="address" name="address" class="form-control {% if 'address' in newErrors %}is-invalid{% endif %}"{% if  newErrors is defined %}  value="{{patient.address}}"{% endif %} placeholder="Domicilio">
+                    {% if 'address' in newErrors %}<label id="address-error" class="error" for="address">Debe ingresar una dirección</label>{% endif %}
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="Nombre">Teléfono</label>
+                        <input type="number" minlength="5" id="phone" name="phone" class="form-control {% if 'phone' in newErrors %}is-invalid{% endif %}" placeholder="Teléfono" {% if  newErrors is defined %}value="{{patient.phone}}"{% endif %}>
+                        {% if 'phone' in newErrors %}<label id="phone-error" class="error" for="phone">Ingrese el nombre</label>{% endif %}
+                    </div>
+                    <div class="form-group col">
+                        <label for="insurance">Obra Social</label>
+                            <select id="insurance" class="form-control form-control-chosen-required" data-placeholder="Obra Social">
+                                <option value="Ninguna">Ninguna</option>
+                                <option value="IOMA">IOMA</option>
+                                <option value="OSDE">OSDE</option>
+                                <option value="Galeno">Galeno</option>
+                                <option value="PAMI">PAMI</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Datos Demograficos -->
+
+            <div class="modal-body step step-2">
+                {% for role in data.roles %}
+                    <div class="form-check">
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="roles[]" value="{{ role.id }}" {% if newErrors is defined and patient.hasRole(role.id)%}checked{% endif %}>
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ role.name }}</span>
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-default" id="cancelbtn">Cancelar</button>
+                <button type="button" class="btn btn-primary step step-1" id="goNext" data-step="1">Continuar</button>
+                <button type="button" class="btn btn-primary step step-2"  id="goBack" data-step="1">Volver</button>
+                <button type="submit" id="submitpatient" class="btn btn-primary step step-2" data-step="1">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</form>

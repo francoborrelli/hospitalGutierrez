@@ -45,3 +45,7 @@ label.error{
   padding-right: 250px; 
   padding-left: 250px
 }
+
+input[type="date"] {
+  height: 38px;
+}
