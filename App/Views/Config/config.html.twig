@@ -1,5 +1,7 @@
 {% extends 'utils/base.html.twig' %} {% block stylesheets %}
-<link rel="stylesheet" href="/dist/css/config.css"> {% endblock %} {% block body %}
+<link rel="stylesheet" href="/dist/css/config.css"> 
+<link rel="stylesheet" href="/dist/css/switch.css"> 
+{% endblock %} {% block body %}
 
 <form class="container config userReport">
     <div class="card">
@@ -39,7 +41,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="pagination" role="tabpanel" aria-labelledby="pagination-tab">
-                    <div class="container pageChange form">
+                    <div class="pageChange form">
                      <div class="col-sm-12 input">
                         <div class="col-xs-3 col-xs-offset-3">
                             <label for="pageAmount">Elementos por página</label>
@@ -57,7 +59,20 @@
                     </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="mantenimiento" role="tabpanel" aria-labelledby="mantenimiento-tab">...</div>
+                <div class="tab-pane fade" id="mantenimiento" role="tabpanel" aria-labelledby="mantenimiento-tab">
+                    <div class="ChangeMantenimiento">
+                        <div class="text-center custom-switch custom-switch-label-io">
+                            <input class="custom-switch-input" id="actived" type="checkbox">
+                            <label class="custom-switch-btn" for="actived"></label>
+                            <div class="custom-switch-content-checked">
+                                Sitio Activado
+                            </div>
+                            <div class="custom-switch-content-unchecked">
+                                Sitio en Mantenimiento
+                            </div>
+                            </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

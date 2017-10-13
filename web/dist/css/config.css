@@ -5,6 +5,10 @@
 
 }
 
+.config{
+  max-width: 610px;
+}
+
 .config textarea{
         width: 100%;
         height: auto;
@@ -14,7 +18,9 @@
         font-size: 15px;
         border: 1px solid rgba(0, 0, 0, 0.190);
 }
-
+.pageChange{
+  padding-top: 20px;
+}
 .pageChange .cancel {
     margin-right: 5px !important;
   }
@@ -37,3 +43,7 @@
     outline: none;
   }
   
+
+.ChangeMantenimiento{
+  padding: 20px;
+}
