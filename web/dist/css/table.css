@@ -1,5 +1,6 @@
 .container.userReport {
-    margin-top: 40px;
+    margin-top: 80px;
+    margin-bottom: 50px;
 }
 
 .container.userReport .card .card-header .btn.detalle {
