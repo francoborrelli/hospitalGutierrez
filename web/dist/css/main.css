@@ -2,6 +2,7 @@
 @import 'navbar.css';
 @import 'login.css';
 @import 'table.css';
+@import 'search.css';
 
 body {
     cursor: default;
