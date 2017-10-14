@@ -105,7 +105,8 @@ class User
         $this->firstName = $data['firstName'];
         $this->lastName = $data['lastName'];
         $this->username = $data['username'];
-        $this->roles = $roles;
+        if (!is_null($roles))
+            $this->roles = $roles;
 
 	if (isset($data['state']) && $data['state'] == 'blocked')
             $this->active = false;
