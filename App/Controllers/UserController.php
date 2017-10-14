@@ -11,13 +11,13 @@ class UserController extends Controller
 
     public function showAction()
     {
-        //$this->denyAccessUnlessPermissionGranted('usuario_index');
+        $this->denyAccessUnlessPermissionGranted('usuario_index');
         $this->render('Users/usersTable.html.twig', ['data' => $this->getData()]);
     }
 
     public function newAction()
     {
-        //$this->denyAccessUnlessPermissionGranted('usuario_new');
+        $this->denyAccessUnlessPermissionGranted('usuario_new');
 
         $em = $this->getEntityManager();
         $userRepository = $em->getRepository(User::class);
