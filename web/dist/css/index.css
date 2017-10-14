@@ -39,10 +39,6 @@ body .content {
     transition: 350ms ease all;
 }
 
-.iconbox-4:hover i {
-    font-size: 70px;
-}
-
 [class^="icon-"], [class*=" icon-"] {
     font-family: 'webfont-medical-icons';
     speak: none;
