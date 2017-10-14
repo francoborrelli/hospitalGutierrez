@@ -17,6 +17,8 @@ $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('admin/users', ['controller' => 'User', 'action' => 'show']);
 $router->add('admin/users/{action}', ['controller' => 'User']);
 
+$router->add('patients', ['controller' => 'Patient', 'action' => 'index']);
+
 $router->add('login', ['controller' => 'Login', 'action' => 'show']);
 $router->add('login/{action}', ['controller' => 'Login']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
