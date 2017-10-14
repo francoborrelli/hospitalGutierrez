@@ -119,4 +119,35 @@ class Patient
      */
     private $waterType;
 
+    public function __construct($data)
+    {
+        $this->firstName = $data['firstName'];
+        $this->lastName = $data['lastName'];
+        $this->birthday = $data['birthday'];
+        $this->docNumber = $data['docNumber'];
+        $this->address = $data['address'];
+        if (isset($data['phone']) && !empty($data['phone']))
+            $this->phone = $data['phone'];
+        if(isset($data['refrigerator']))
+            $this->refrigerator = true;
+        else
+            $this->refrigerator = false;
+        if(isset($data['electricity']))
+            $this->electricity = true;
+        else
+            $this->electricity = false;
+        if(isset($data['pet']))
+            $this->pet = true;
+        else
+            $this->pet = false;
+
+        $this->gender = $data['gender'];
+        $this->documentType = $data['documentType'];
+        $this->waterType = $data['waterType'];
+        $this->houseType = $data['houseType'];
+        $this->heatingType = $data['heatingType'];
+        if(isset($data['insurance']))
+            $this->insurance = $data['insurance'];
+    }
+
 }
