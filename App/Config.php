@@ -9,4 +9,5 @@ class Config
     const DB_USER = 'root';
     const DB_PASSWORD = 'pass';
     const DB_HOST = 'db';
+    const DEBUG_MODE = false;
 }

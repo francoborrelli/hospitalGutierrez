@@ -1,55 +1,166 @@
+body .content {
+    padding: 80px 0px 0px;
+}
+
 .banner {
     object-fit: cover;
-    height: 300px;
+    height: 350px;
     width: 100%;
 }
 
-.articles{
-    padding-top: 60px;
-    padding-left: 120px;
-    padding-right: 120px;
+
+.br-radius-zero {
+    border-radius: 0px;
 }
 
-.articles .card p{
-    text-align: justify;
+.pb-60 {
+    padding-bottom: 60px;
 }
 
-.articles .card .card-footer{
-    height: 65px;
+.pt-60 {
+    padding-top: 30px;
 }
 
-@media (max-width: 1400px) {
-    .articles{
-        padding-top: 60px;
-        padding-left: 60px;
-        padding-right: 60px;
+.bgcolor1 {
+    background-color: #fff;
+}
+.iconbox-4 {
+    position: relative;
+    text-align: center;
+    background-color: #fff;
+    margin: 20px 0px;
+}
+
+.iconbox-4 i {
+    color: #1696e7;
+    display: inline-block;
+    font-size: 60px;
+    -webkit-transition: 350ms ease all;
+    transition: 350ms ease all;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'webfont-medical-icons';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.iconbox-4 .heading {
+    font-weight: 700;
+    color: #111;
+    font-size: 2em;
+    letter-spacing: 1px;
+
+font-family: 'Poppins', sans-serif;
+}
+
+.heading {
+    font-weight: 400;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Volkhov', serif;
+    color: #1a1a1a;
+    text-transform: capitalize;
+    margin-top: 0em;
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+}
+
+.iconbox-4 p {
+    color: #777;
+    margin: 0px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.btn-black {
+    background-color: #303b41;
+    color: #f9f9f9;
+    border: 0px;
+
+}
+
+.btn-black:hover{
+    color: #706d6d;
+}
+
+
+.btn {
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    border-radius: 4px;
+    border: 0;
+    padding: 12px 30px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    overflow: hidden;
+    -webkit-transition: 350ms ease all;
+    transition: 350ms ease all;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v5/gG8m82oGcrBJF727xHU04fY6323mHUZFJMgTvxaG2iE.woff2) format('woff2');
+    unicode-range: U+02BC, U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200B-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v5/F4YWuALHubF63LLQPw0rMfY6323mHUZFJMgTvxaG2iE.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v5/HLBysyo0MQBO_7E-DWLwzg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+  }
+
+
+@media (min-width: 990px) {
+    .iconbox-4{
+        min-height: 460px;
     }
+    .iconbox-4 p{
+        text-align: justify;
+    }
+    .btn-black {
+        position: absolute;
+        bottom: -30px;
+        right: 80px;
+    }
+    
 }
 
-@media (max-width: 1100px) {
-    .articles{
-        padding-top: 60px;
-        padding-left: 20px;
-        padding-right: 20px;
+@media (min-width: 1200px) {
+    .iconbox-4{
+        min-height: 393px;
     }
+    .btn-black {
+        bottom: -25px;
+        right: 107px;
+    }
+    
 }
 
 
-@media (max-width: 900px) {
-    .articles{
-        padding-left: 18%;
-        padding-right: 18%;
-    }
-    .articles .card{
-        flex: inherit;
-        margin-bottom: 30px;
-    }
-}
-
-@media (max-width: 600px) {
-    .articles{
-        padding-top: 60px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-}
