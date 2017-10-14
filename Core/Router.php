@@ -57,7 +57,7 @@ class Router
     {
         $controller = $this->params['controller'];
         $controller = $this->convertToPascalCase($controller);
-        return $this->getNamespace() . $controller;
+        return $this->getNamespace() . $controller . 'Controller';
     }
 
     private function executeAction($controller_instance)
