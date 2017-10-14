@@ -9,22 +9,24 @@ use App\Models\Role;
 class Users extends Controller
 {
 
-    protected function before()
-    {
-        $this->requireLogin();
-    }
-
     public function showAction()
     {
+        $this->denyAccessUnlessPermissionGranted('usuario_index');
         $this->render('Users/usersTable.html.twig', ['data' => $this->getData()]);
     }
 
     public function newAction()
     {
+        $this->denyAccessUnlessPermissionGranted('usuario_new');
+
         $em = $this->getEntityManager();
         $userRepository = $em->getRepository(User::class);
 
-        $roles = $em->getRepository(Role::class)->findById($_POST['roles']);
+        if (!empty($_POST['roles']))
+            $roles = $em->getRepository(Role::class)->findById($_POST['roles']);
+        else
+            $roles = null;
+
         $user = new User($_POST, $roles);
         $validationErrors = $this->userValidation($user);
         if (empty($validationErrors)){
@@ -40,6 +42,9 @@ class Users extends Controller
 
     public function editAction()
     {
+        
+        $this->denyAccessUnlessPermissionGranted('usuario_update');
+
         $em = $this->getEntityManager();
         $userRepository = $em->getRepository(User::class);
 
@@ -47,7 +52,12 @@ class Users extends Controller
         $originalEmail = $user->getEmail();
         $originalUserName = $user->getUsername();
         $validationUser = clone $user;
-        $roles = $em->getRepository(Role::class)->findById($_POST['roles']);
+
+        if (!empty($_POST['roles']))
+            $roles = $em->getRepository(Role::class)->findById($_POST['roles']);
+        else
+            $roles = [];
+
         $validationUser->setData($_POST, $roles);
         $validationErrors = $this->userValidation($validationUser);
 
@@ -77,6 +87,8 @@ class Users extends Controller
 
     public function removeAction()
     {
+        $this->denyAccessUnlessPermissionGranted('usuario_destroy');
+
         $em = $this->getEntityManager();
         $user = $em->getRepository(User::class)->find($_POST['deletedId']);
         $em->remove($user);
