@@ -13,11 +13,12 @@ set_exception_handler('Core\Error::exceptionHandler');
 $router = new Core\Router();
 
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
+
 $router->add('admin/users', ['controller' => 'User', 'action' => 'show']);
-$router->add('admin/{controller}/{action}');
+$router->add('admin/users/{action}', ['controller' => 'User']);
+
 $router->add('login', ['controller' => 'Login', 'action' => 'show']);
 $router->add('login/{action}', ['controller' => 'Login']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
-//$router->add('{controller}/{action}');
 
 $router->dispatch($_SERVER['QUERY_STRING']);
