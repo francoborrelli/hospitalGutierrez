@@ -16,6 +16,7 @@ $router->add('', ['controller' => 'Home', 'action' => 'index']);
 
 $router->add('admin/users', ['controller' => 'User', 'action' => 'show']);
 $router->add('admin/users/{action}', ['controller' => 'User']);
+$router->add('admin/{controller}/{action}');
 
 $router->add('patients', ['controller' => 'Patient', 'action' => 'index']);
 

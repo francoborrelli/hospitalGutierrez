@@ -1,0 +1,18 @@
+.searchForm p{
+    text-align: right;
+}
+
+.searchForm .card-header h5{
+    margin-bottom: 0px
+}
+
+@media (max-width: 768px){
+    .col-md-3{
+        padding-bottom: 20px;
+    }
+}
+
+.page-item.active .page-link {
+    border-color: #a6a6a6;
+    background-color: #a6a6a6;
+}

@@ -3,6 +3,7 @@
 @import 'login.css';
 @import 'table.css';
 @import 'switch.css';
+@import 'search.css';
 
 body {
     cursor: default;
