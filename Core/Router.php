@@ -48,17 +48,16 @@ class Router
                 $controller_instance = new $controller($this->params);
                 $this->executeAction($controller_instance);
             } else
-                echo "Controlador $controller no ecnontrado";
-
+                throw new \Exception("Controlador $controller no ecnontrado");
         } else 
-            echo "Ruta no encontrada";
+            throw new \Exception('Ruta no encontrada', 404);
     } 
 
     private function getController()
     {
         $controller = $this->params['controller'];
         $controller = $this->convertToPascalCase($controller);
-        return $this->getNamespace() . $controller;
+        return $this->getNamespace() . $controller . 'Controller';
     }
 
     private function executeAction($controller_instance)
@@ -68,7 +67,7 @@ class Router
         if (preg_match('/action$/i', $action) == 0)
             $controller_instance->$action();
         else
-            echo "El método $action no puede ser llamado directamente, se debe remover el sufijo Action";
+            throw new \Exception("El método $action no puede ser llamado directamente, se debe remover el sufijo Action");
     }
 
     private function convertToPascalCase($string)

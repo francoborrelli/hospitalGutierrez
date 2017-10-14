@@ -105,7 +105,8 @@ class User
         $this->firstName = $data['firstName'];
         $this->lastName = $data['lastName'];
         $this->username = $data['username'];
-        $this->roles = $roles;
+        if (!is_null($roles))
+            $this->roles = $roles;
 
 	if (isset($data['state']) && $data['state'] == 'blocked')
             $this->active = false;
@@ -302,7 +303,7 @@ class User
      *
      * @return boolean
      */
-    public function getActive()
+    public function isActive()
     {
         return $this->active;
     }
@@ -359,6 +360,15 @@ class User
     {
         foreach ($this->roles as $role) {
             if ($role->getId() == $id)
+                return true;
+        }
+        return false;
+    }
+
+    public function hasPermission($permission)
+    {
+        foreach ($this->roles as $role) {
+            if ($role->hasPermission($permission))
                 return true;
         }
         return false;

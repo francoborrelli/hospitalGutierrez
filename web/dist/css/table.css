@@ -1,4 +1,4 @@
-.container.userReport {
+.container.userReport, .logIn{
     margin-top: 80px;
     margin-bottom: 50px;
 }
@@ -128,7 +128,6 @@ table.dataTable tbody td {
         width: 100px;
     }
 }
-
-  table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before {
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before {
     top: inherit!important; 
-  }
+}

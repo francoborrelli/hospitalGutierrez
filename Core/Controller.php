@@ -26,7 +26,7 @@ abstract class Controller
                 $this->after();
             }
         } else
-           echo "El método $method no se encontró en el controlador " . get_class($this); 
+           throw new \Exception("El método $method no se encontró en el controlador " . get_class($this)); 
     }
 
     protected function before()
@@ -44,7 +44,11 @@ abstract class Controller
 
     protected function redirect($path)
     {
-        header('Location: https://' . $_SERVER['HTTP_HOST'] . $path, true, 303); 
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+	    $protocol = 'https://'; 	
+        } else 
+            $protocol = 'http://';
+        header('Location: ' . $protocol . $_SERVER['HTTP_HOST'] . $path, true, 303); 
         exit;
     }
 
@@ -64,6 +68,20 @@ abstract class Controller
     protected function addFlashMessage($type, $title, $body)
     {
         Flash::addMessage($type, $title, $body);
+    }
+
+    protected function denyAccessUnlessPermissionGranted($permission)
+    {
+        $this->requireLogin();
+        if (!$this->getUser()->hasPermission($permission)) {
+            $this->addFlashMessage('warning', 'Lo sentimos.', "Usted posee el permiso $permission");
+            $this->redirect('/');
+        }
+    }
+
+    protected function getUser()
+    {
+        return Authentication::getUser();
     }
 
 }
