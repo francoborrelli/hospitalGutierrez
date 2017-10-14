@@ -26,7 +26,7 @@ abstract class Controller
                 $this->after();
             }
         } else
-           echo "El método $method no se encontró en el controlador " . get_class($this); 
+           throw new \Exception("El método $method no se encontró en el controlador " . get_class($this)); 
     }
 
     protected function before()
