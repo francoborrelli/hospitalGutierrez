@@ -44,7 +44,11 @@ abstract class Controller
 
     protected function redirect($path)
     {
-        header('Location: https://' . $_SERVER['HTTP_HOST'] . $path, true, 303); 
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+	    $protocol = 'https://'; 	
+        } else 
+            $protocol = 'http://';
+        header('Location: ' . $protocol . $_SERVER['HTTP_HOST'] . $path, true, 303); 
         exit;
     }
 
