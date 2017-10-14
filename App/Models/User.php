@@ -364,6 +364,15 @@ class User
         return false;
     }
 
+    public function hasPermission($permission)
+    {
+        foreach ($this->roles as $role) {
+            if ($role->hasPermission($permission))
+                return true;
+        }
+        return false;
+    }
+
     public function validatePassword($password)
     {
         return password_verify($password, $this->password);

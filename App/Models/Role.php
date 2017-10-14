@@ -58,6 +58,15 @@ class Role
         return $this->permissions;
     }
 
+    public function hasPermission($permissionName)
+    {
+        foreach ($this->permissions as $permission) {
+            if ($permission->getName() == $permissionName)
+                return true;
+        }
+        return false;
+    }
+
     /**
      * Set id
      *
