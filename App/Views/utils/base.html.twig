@@ -1,3 +1,5 @@
+{% import 'utils/alert.html.twig' as alert %}
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -5,9 +7,9 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/dist/css/main.css">
+    <link rel="stylesheet" href="/web/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/web/assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/web/dist/css/main.css">
 
     {% block stylesheets %}
     {% endblock %}
@@ -19,16 +21,21 @@
     {% include 'utils/header/navbar.html.twig' %}
 
     <div class="content">
+
+        {% for message in flashes %}
+            {{ alert.item(message.type, message.title, message.body) }}
+        {% endfor %}
+
         {% block body %}
         {% endblock %}
     </div>
 
     {% include 'utils/footer/footer.html.twig' %}
 
-    <script src="/assets/jquery/jquery.min.js"></script>
-    <script src="/assets/bootstrap/js/popper.min.js"></script>
-    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/dist/js/initialize.js"></script>
+    <script src="/web/assets/jquery/jquery.min.js"></script>
+    <script src="/web/assets/bootstrap/js/popper.min.js"></script>
+    <script src="/web/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/web/dist/js/initialize.js"></script>
     {% block javascripts %}
     {% endblock %}
 
