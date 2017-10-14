@@ -61,3 +61,7 @@ table.dataTable tbody td {
 #usuarios_wrapper{
     margin-top: 35px;
 }
+
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before {
+    top: auto!important;
+}
