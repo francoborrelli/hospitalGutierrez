@@ -1,5 +1,5 @@
 {% macro item(name, route, id) %}
-<li class="nav-item">
+<li class="nav-item item">
     <a class="nav-link"{% if id %} id = "{{id}}" {% endif %} href=" {% if route %} {{route}} {% else %} # {% endif %}">{{ name }}</a>
 </li>
 {% endmacro  item %} 

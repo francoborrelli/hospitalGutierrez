@@ -1,0 +1,123 @@
+.container.userReport {
+    margin-top: 80px;
+    margin-bottom: 50px;
+}
+
+.container.userReport .card .card-header .btn.detalle {
+    float: right;
+    margin-right: 15px;
+    border-color: #ababab;
+    background-color: #ababab;
+    color: white;
+}
+
+.container.userReport .card .card-header h3 {
+    padding-top: 5px;
+    margin: 0;
+}
+
+.tablePage {
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+#agregar-btn {
+    float: right;
+    margin-right: 25px;
+}
+
+.carta {
+    margin-top: 40px;
+    background-color: white;
+    padding-top: 24px;
+    padding-bottom: 15px;
+    border-radius: 9px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+#usuarios {
+    width: 100%!important;
+}
+
+.dtr-details tr:last-of-type {
+    display: none;
+}
+
+.container.tab-pane {
+    padding-top: 20px;
+}
+
+.modal-body.step-1 {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#stateFilter{
+    float: right;
+    height: 32px;
+    width: 178px;
+    margin-left: -23px;
+    margin-right: 30px;
+    padding-top: 5px;
+}
+
+table.dataTable tbody td {
+    vertical-align: middle;
+  }
+
+
+  @media (max-width: 990px) {
+    #usuarios_wrapper .col-sm-12 {
+        padding: 0px;
+    }
+    #stateFilter{
+        margin-left: 124px;
+    } 
+}
+
+@media (max-width: 767px) {
+    #stateFilter{
+        margin-left: -24px;
+        margin-right: 10px;
+    } 
+    #usuarios_filter input{
+        width: 140px;
+    }
+}
+
+@media (max-width: 540px) {
+    #stateFilter{
+    width: 179px;
+    margin-left: -9px;
+    margin-right: 4px;
+    padding-top: 5px;
+    } 
+    #agregar-btn {
+        margin-right: 5px;
+    }
+    #usuarios_filter{
+        padding-left: 5px;
+    }
+    #usuarios_filter input{
+        width: 100px;
+    }
+}
+
+
+@media (max-width: 455px) {
+    #stateFilter{
+    width: 115px;
+    margin-left: -9px;
+    margin-right: 4px;
+    padding-top: 5px;
+    } 
+    #agregar-btn {
+        margin-right: 5px;
+    }
+    #usuarios_filter{
+        padding-left: 5px;
+    }
+    #usuarios_filter input{
+        width: 100px;
+    }
+}

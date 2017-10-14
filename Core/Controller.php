@@ -3,6 +3,8 @@
 namespace Core;
 
 use Core\ORMConnection;
+use Core\Flash;
+use App\Authentication;
 
 abstract class Controller
 {
@@ -24,7 +26,7 @@ abstract class Controller
                 $this->after();
             }
         } else
-           echo "El método $method no se encontró en el controlador " . get_class($this); 
+           throw new \Exception("El método $method no se encontró en el controlador " . get_class($this)); 
     }
 
     protected function before()
@@ -40,9 +42,32 @@ abstract class Controller
         View::renderTemplate($template, $args);
     }
 
+    protected function redirect($path)
+    {
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+	    $protocol = 'https://'; 	
+        } else 
+            $protocol = 'http://';
+        header('Location: ' . $protocol . $_SERVER['HTTP_HOST'] . $path, true, 303); 
+        exit;
+    }
+
     protected function getEntityManager()
     {
         return ORMConnection::getEntityManager(); 
+    }
+
+    protected function requireLogin()
+    {
+        if (!Authentication::getUser()) {
+            Authentication::rememberRequestedPage();
+            $this->redirect('/login');
+        }
+    }
+
+    protected function addFlashMessage($type, $title, $body)
+    {
+        Flash::addMessage($type, $title, $body);
     }
 
 }
