@@ -20,10 +20,15 @@ class Login extends Controller
         if (is_null($user) || !$user->validatePassword($_POST['pass']))
             $user = false;
 
-        if ($user) {
+        if ($user && $user->isActive()) {
             Authentication::login($user);
             $this->redirect(Authentication::returnPage());
         } else {
+            if ($user && !$user->isActive())
+                $this->addFlashMessage('danger', 'Lo sentimos.', 'Su cuenta se encuentra bloqueada');
+            else
+                $this->addFlashMessage('danger', 'Lo sentimos.', 'Los datos ingresados no son correntos, intente nuevamente');
+
             $this->render('Login/login.html.twig', ['email' => $_POST['email']]);
         }
     }

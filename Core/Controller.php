@@ -70,4 +70,18 @@ abstract class Controller
         Flash::addMessage($type, $title, $body);
     }
 
+    protected function denyAccessUnlessPermissionGranted($permission)
+    {
+        $this->requireLogin();
+        if (!$this->getUser()->hasPermission($permission)) {
+            $this->addFlashMessage('warning', 'Lo sentimos.', "Usted posee el permiso $permission");
+            $this->redirect('/');
+        }
+    }
+
+    protected function getUser()
+    {
+        return Authentication::getUser();
+    }
+
 }
