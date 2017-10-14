@@ -73,16 +73,16 @@ hr {
     padding-top: 90px;
 }
 
-.deletebtn, .editbtn, .backbtn{
+#deletebtn, #editbtn, #backbtn{
     float: right;
     color: white!important;
 }
 
-.deletebtn, .editbtn{
+#deletebtn, #editbtn{
     margin-right: 5px;
 }
 
-.backbtn{
+#backbtn{
     background-color: #969696;
     border-color: #969696;
 }

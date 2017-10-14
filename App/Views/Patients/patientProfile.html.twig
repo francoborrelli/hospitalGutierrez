@@ -1,54 +1,56 @@
 {% extends 'utils/base.html.twig' %} 
 
-
 {% block stylesheets %}
 <link rel="stylesheet" href="/web/dist/css/patientProfile.css"> 
 {% endblock %} 
 
- {% block body %}
+{% block body %} 
 
-    {% include 'Patients/deletePatient.html.twig' %}
+{% include 'Patients/deletePatient.html.twig' %} 
+{% include 'Patients/editPersonalInfo.html.twig'%}
+{% include 'Patients/editDemographicInfo.html.twig'%}
 
-    
 <div class="container userReport">
-<div class="card ">
-<div class="card-header">
-    Franco  Borrelli       
-<a data-toggle="modal" data-target="#deletePatient" title="Volver" class="btn btn-sm backbtn"><i class="fa fa-reply" aria-hidden="true"></i></a>
+  <div class="card ">
 
-<a data-toggle="modal" data-target="#editPatient" title="Editar"class="btn btn-orange btn-sm editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-    
-    <button data-toggle="modal" data-target="#deletePatient" title="Eliminar" class="btn btn-danger btn-sm deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-  </div>
+    <!-- header -->
+    <div class="card-header">
+      Franco Borrelli
+      <a title="Volver" class="btn btn-sm" id="backbtn" href="#"><i class="fa fa-reply" aria-hidden="true"></i></a>
+      <a data-toggle="modal" data-target="#editPersonalInfo" title="Editar" class="btn btn-orange btn-sm" id="editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+      <button data-toggle="modal" data-target="#deletePatient" title="Eliminar" class="btn btn-danger btn-sm" id="deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+    </div>
 
-  <div class="card-body">
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-expanded="true">Datos Personales</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="demographic-tab" data-toggle="tab" href="#demographic" role="tab" aria-controls="demographic">Datos Demograficos</a>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
-    
-    {% include 'Patients/personalProfile.html.twig' %}
-  
-  
-  
-  </div>
-  <div class="tab-pane fade" id="demographic" role="tabpanel" aria-labelledby="demographic-tab">
-      {% include 'Patients/demographicProfile.html.twig' %}
-  </div>
 
+    <div class="card-body">
+      <!-- nav links -->
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="personal-tab" data-form="#editPersonalInfo" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-expanded="true">Datos Personales</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="demographic-tab"  data-form="#editDemographicInfo"  data-toggle="tab" href="#demographic" role="tab" aria-controls="demographic">Datos Demograficos</a>
+        </li>
+      </ul>
+
+      <!-- body -->
+      <div class="tab-content" id="myTabContent">
+
+        <!-- datos personales -->
+        <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+          {% include 'Patients/personalProfile.html.twig' %}
+        </div>
+
+        <!-- datos demograficos -->
+        <div class="tab-pane fade" id="demographic" role="tabpanel" aria-labelledby="demographic-tab">
+          {% include 'Patients/demographicProfile.html.twig' %}
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-</div>
 </div>
 
 {% endblock %} {% block javascripts %}
 <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
-<script src="/web/dist/js/patients.js"></script>
 <script src="/web/dist/js/editPatientValidation.js"></script>
 {% endblock %}
