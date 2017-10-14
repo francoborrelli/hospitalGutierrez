@@ -7,9 +7,44 @@ var oTable =  $('#patients').DataTable({
                     return 'Paciente '+data[2]+' '+data[3];
                 }
             } ),
-            renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
-                tableClass: 'table'
-            } )
+
+            //Renderiza la tabla de datos del usuario en el modal de detalles.
+
+            renderer: function ( api, rowIdx, columns ) {
+                    var first = '<table class="table"><br>'
+                    columns.slice(0,8).forEach(function ( col, i ) {
+                            first += ('<tr data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+                                '<td>'+col.title+':'+'</td> '+
+                                '<td>'+col.data+'</td>'+
+                            '</tr>')
+                    } )
+                    first += "</table>";
+
+                    var second = '<table class="table"><br>'
+                    columns.slice(9,15).forEach(function ( col, i ) {
+                            second += ('<tr data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+                                '<td>'+col.title+':'+'</td> '+
+                                '<td>'+col.data+'</td>'+
+                            '</tr>')
+                    } )
+                    second += "</div></table>";
+
+                    var myvar = '<ul class="nav nav-tabs" id="myTab" role="tablist">'+
+                    '                <li class="nav-item">'+
+                    '                  <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-expanded="true">Datos Personales</a>'+
+                    '                </li>'+
+                    '                <li class="nav-item">'+
+                    '                  <a class="nav-link" id="demo-tab" data-toggle="tab" href="#demo" role="tab" aria-controls="demo">Datos Demograficos</a>'+
+                    '                </li>'+
+                    '              </ul>'+
+                    '              <div class="tab-content" id="myTabContent">'+
+                    '                <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab"><table class"table">' + first +
+                                    '</table></div>'+
+                    '                <div class="tab-pane fade" id="demo" role="tabpanel" aria-labelledby="demo-tab">' + second +'</div>'+
+                    '             </div>';
+                    console.log(first)
+                    return myvar
+                }
         }
     },
     columns: [
