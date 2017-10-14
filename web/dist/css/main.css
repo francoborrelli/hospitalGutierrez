@@ -42,6 +42,15 @@ label.error{
   color: #636c72!important;
 }
 
+small.error{
+  font-size: 80%;
+  font-weight: 400;
+  color: #636c72;
+  position: absolute;
+  bottom: 30px;
+  left: 35px;
+}
+
 .alertContainer{
   position: absolute;
   width: 650px;

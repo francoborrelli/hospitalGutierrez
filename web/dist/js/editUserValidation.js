@@ -1,3 +1,7 @@
+$( document ).ready(function() {
+    navValidate('#editUser');
+});
+    
 $(".editbtn").click(function(){
     reset();
     id = $(this).attr("data-id");
@@ -26,9 +30,6 @@ reset = function(){
     $('#blockedState').attr('checked', false);  
     $('#editUser').validate().resetForm();    
 }
-
-  
-
 
 $('#editUser').validate({
     rules: {
@@ -135,12 +136,3 @@ $('#editUser').validate({
 
 });
 
-$( document ).ready(function() {
-    $('.nav-link').click(function(e){
-        if (!$('#editUser').valid()){
-        e.preventDefault();
-        e.stopPropagation();
-        }
-    })
-});
-    

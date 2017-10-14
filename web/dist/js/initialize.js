@@ -25,3 +25,12 @@ $(document).ready(function () {
   });
   
 });
+
+navValidate = function(form){
+  $('.nav-link').click(function(e){
+      if (!$(form).valid()){
+      e.preventDefault();
+      e.stopPropagation();
+      }
+  })
+}

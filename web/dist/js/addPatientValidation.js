@@ -95,11 +95,12 @@ $("#goNext").click(function(){
 
 $("#cancelbtn").click(function(){
     $('#addPatient').modal('hide')
-    $('#addPatient')[0].reset();
-    $('#addPatient').validate().resetForm();    
-    $('#addPatient').trigger('next.m.1'); 
-    return true
+    $('#addPatient')[0].reset();  
+    $('#addPatient').trigger('next.m.1');   
+    $('#addPatient').validate().resetForm()
 })
+
+
 
 $(".deletebtn").click(function(){
     $("#deletedId").val($(this).data("id"))
