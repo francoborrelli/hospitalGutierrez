@@ -1,13 +1,14 @@
 {% extends 'utils/base.html.twig' %} 
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="/web/dist/css/index.css">
-{% endblock %}
+	<link rel="stylesheet" href="/web/dist/css/index.css"> 
+{% endblock %} 
 
 {% block body %}
-    <img src="/web/dist/img/hospital.jpg" class="banner" alt="Banner Hospital">
-    
-    <div class="articles"> 
-        {% include 'Home/articles.html.twig' %}
-    </div>
+
+	<!-- banner -->
+	<img src="/web/dist/img/hospital.jpg" class="banner" alt="Banner Hospital">
+	
+	<!-- articles -->
+    {% include 'Home/articles.html.twig' %}
 {% endblock %}
