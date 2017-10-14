@@ -29,7 +29,7 @@ $('#addPatient').validate({
             nonNumeric: true,
             maxlength: 50,
         },
-        dni: {
+        documentNumber: {
             required: true,
             maxlength: 50,
         },
@@ -47,7 +47,7 @@ $('#addPatient').validate({
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres"
         },
-        dni: {
+        documentNumber: {
             required: "Ingrese el documento",
             maxlength: "Ingrese un documento valido",
         },

@@ -1,7 +1,6 @@
 {% import 'utils/switch.html.twig' as switch %} 
 
-
-<form method="post" action="" class="modal fade multi-step" id="addPatient">
+<form method="post" action="/patients/new" class="modal fade multi-step" id="addPatient">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -30,18 +29,18 @@
                 <div class="row">
                     <div class="form-group col">
                         <label for="Nombre">Tipo Documento*</label>
-                        <select id="typeDni" name="typeDni" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                        <select id="typeDni" name="documentType" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
                             <option value="DNI">DNI</option>
                             <option value="Pasaporte">Pasaporte</option>
                             <option value="Partida">Partida de nacimiento</option>
                             <option value="Otro">Otro</option>
                             </select>
-                        {% if 'typeDni' in newErrors %}<label id="typeDni-error" class="error" for="typeDni">Ingrese el tipo de documento</label>{% endif %}
+                        {% if 'documentType' in newErrors %}<label id="typeDni-error" class="error" for="documentType">Ingrese el tipo de documento</label>{% endif %}
                     </div>
                     <div class="form-group col">
                         <label for="Nº documento">Nº documento*</label>
-                        <input type="text" id="dni" name="dni" class="form-control {% if 'dni' in newErrors %}is-invalid{% endif %}" placeholder="Numero de documento" {% if  newErrors is defined %} value="{{patient.dni}}"{% endif %}>
-                        {% if 'dni' in newErrors %}<label id="dni-error" class="error" for="dni">Ingrese el nº de documento</label>{% endif %}
+                        <input type="text" id="dni" name="documentNumber" class="form-control {% if 'dni' in newErrors %}is-invalid{% endif %}" placeholder="Numero de documento" {% if  newErrors is defined %} value="{{patient.dni}}"{% endif %}>
+                        {% if 'documentNumber' in newErrors %}<label id="dni-error" class="error" for="documentNumber">Ingrese el nº de documento</label>{% endif %}
                     </div>
                 </div>
                 <div class="row">

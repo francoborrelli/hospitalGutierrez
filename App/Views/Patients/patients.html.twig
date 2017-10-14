@@ -1,14 +1,14 @@
-
-<tr>
-    <td>DNI</td>
-    <td>44.444.444</td>
-    <td>Franco</td>
-    <td>Borrelli</td>
-    <td class="text-center">
-        <div class="btn-group" role="group">
-            <button type="button" data-toggle="modal" data-target="#editPatient" title="Editar" data-id="2" class="btn btn-orange btn-sm editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-            <button type="button" data-toggle="modal" data-target="#deletePatient" title="Eliminar" data-id="2" class="btn btn-danger btn-sm deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-        </div>
-    </td>
-</tr>
-
+{% for patient in patients %}
+    <tr>
+        <td>{{ patiend.documentType }}</td>
+        <td>{{ patient.docNumber }}</td>
+        <td>{{ patient.firstName }}</td>
+        <td>{{ patient.lastName }}</td>
+        <td class="text-center">
+            <div class="btn-group" role="group">
+                <button type="button" data-toggle="modal" data-target="#editPatient" title="Editar" data-id="2" class="btn btn-orange btn-sm editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button type="button" data-toggle="modal" data-target="#deletePatient" title="Eliminar" data-id="2" class="btn btn-danger btn-sm deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            </div>
+        </td>
+    </tr>
+{% endfor %}
