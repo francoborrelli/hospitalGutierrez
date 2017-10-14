@@ -6,7 +6,7 @@ use Core\Controller;
 use App\Models\User;
 use App\Models\Role;
 
-class Users extends Controller
+class UserController extends Controller
 {
 
     public function showAction()

@@ -6,7 +6,7 @@ use Core\Controller;
 use App\Models\User;
 use App\Authentication;
 
-class Login extends Controller
+class LoginController extends Controller
 {
     public function showAction()
     {

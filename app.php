@@ -13,7 +13,7 @@ set_exception_handler('Core\Error::exceptionHandler');
 $router = new Core\Router();
 
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
-$router->add('admin/{controller}', ['action' => 'show']);
+$router->add('admin/users', ['controller' => 'User', 'action' => 'show']);
 $router->add('admin/{controller}/{action}');
 $router->add('login', ['controller' => 'Login', 'action' => 'show']);
 $router->add('login/{action}', ['controller' => 'Login']);
