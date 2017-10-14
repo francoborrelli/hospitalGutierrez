@@ -1,169 +1,170 @@
+body .content {
+    padding: 80px 0px 0px;
+}
+
 .banner {
     object-fit: cover;
-    height: 300px;
+    height: 350px;
     width: 100%;
 }
 
-.articles {
-    margin-top: -25px;
-    margin-bottom: -100px;
-    padding-left: 140px;
-    padding-right: 140px;
-}
-
-.articles .card .card-footer {
-    height: 65px;
-}
-
-.articles p {
-    margin: 0;
-    font-family: 'Lato', sans-serif;
-    line-height: 2;
-    font-size: 1em;
-    color: #888;
-}
-
-.wthree-s1 h4 {
-    text-transform: capitalize;
-    margin: 2em 0 1em;
-    font-weight: 600;
-    font-size: 1.5em;
-    color: black;
-}
-
-span.sicon {
-    font-size: 3em;
-    color: #009ec5;
-    display: block;
-}
-
-.w3-button a {
-    padding: 0.8em 2em;
-    text-decoration: none;
-    margin: 0;
-    font-size: 1em;
-    background: none;
-    font-weight: 700;
-    text-transform: uppercase;
-    visibility: hidden;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-
-.w3-button {
-    margin: 1em 0 0;
-}
-
-.w3ls-section {
-    padding: 4em 0;
-}
-
-.h3-w3l {
-    font-size: 2.5em;
-    color: #009ec5;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 0.7em;
-    border-radius: 10px;
-    text-align: center;
-    font-family: 'Titillium Web', sans-serif;
-}
-
-.w3-button {
-    margin: 1em 0 0;
-}
-
-.wthree-s1:hover .w3-button a,
-.s1-active a {
-    visibility: visible;
-}
-
-.w3-button a:hover {
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-}
-
-.wthree-s1 {
-    padding: 2em;
-    border-color: transparent;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-}
-
-.wthree-s1:hover,
-.s1-active {
-    border-color: #009ec5;
-    border-radius: 10px;
-    border-width: 2px;
-}
-
-s1 {
-    margin: 0 3em;
-}
-
-.space {
-    margin-top: 40px;
-}
-
-.btn-form,
-.btn-form:hover,
-.btn-form:focus {
-    background-color: #0cb8b6;
-    border-radius: 0px;
-    padding: 10px 20px;
-}
 
 .br-radius-zero {
     border-radius: 0px;
 }
 
-@media (max-width: 1400px) {
-    .articles {
-        margin-top: -70px;
-        padding-top: 60px;
-        padding-left: 60px;
-        padding-right: 60px;
-    }
+.pb-60 {
+    padding-bottom: 60px;
 }
 
-@media (max-width: 1100px) {
-    .articles {
-        padding-top: 60px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+.pt-60 {
+    padding-top: 30px;
 }
 
-@media (max-width: 900px) {
-    .articles {
-        padding-left: 18%;
-        padding-right: 18%;
-    }
-    .articles .card {
-        flex: inherit;
-        width: 100%;
-        margin-bottom: 30px;
-    }
+.bgcolor1 {
+    background-color: #fff;
+}
+.iconbox-4 {
+    position: relative;
+    text-align: center;
+    background-color: #fff;
+    margin: 20px 0px;
 }
 
-@media (max-width: 892px) {
-    .card-deck .card {
-        width: 100%;
-    }
+.iconbox-4 i {
+    color: #1696e7;
+    display: inline-block;
+    font-size: 60px;
+    -webkit-transition: 350ms ease all;
+    transition: 350ms ease all;
 }
 
-@media (max-width: 600px) {
-    .articles {
-        padding-top: 60px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+.iconbox-4:hover i {
+    font-size: 70px;
 }
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'webfont-medical-icons';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.iconbox-4 .heading {
+    font-weight: 700;
+    color: #111;
+    font-size: 2em;
+    letter-spacing: 1px;
+
+font-family: 'Poppins', sans-serif;
+}
+
+.heading {
+    font-weight: 400;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Volkhov', serif;
+    color: #1a1a1a;
+    text-transform: capitalize;
+    margin-top: 0em;
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+}
+
+.iconbox-4 p {
+    color: #777;
+    margin: 0px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.btn-black {
+    background-color: #303b41;
+    color: #f9f9f9;
+    border: 0px;
+
+}
+
+.btn-black:hover{
+    color: #706d6d;
+}
+
+
+.btn {
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    border-radius: 4px;
+    border: 0;
+    padding: 12px 30px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    overflow: hidden;
+    -webkit-transition: 350ms ease all;
+    transition: 350ms ease all;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v5/gG8m82oGcrBJF727xHU04fY6323mHUZFJMgTvxaG2iE.woff2) format('woff2');
+    unicode-range: U+02BC, U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200B-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v5/F4YWuALHubF63LLQPw0rMfY6323mHUZFJMgTvxaG2iE.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Poppins Regular'), local('Poppins-Regular'), url(https://fonts.gstatic.com/s/poppins/v5/HLBysyo0MQBO_7E-DWLwzg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+  }
+
+
+@media (min-width: 990px) {
+    .iconbox-4{
+        min-height: 460px;
+    }
+    .iconbox-4 p{
+        text-align: justify;
+    }
+    .btn-black {
+        position: absolute;
+        bottom: -30px;
+        right: 80px;
+    }
+    
+}
+
+@media (min-width: 1200px) {
+    .iconbox-4{
+        min-height: 393px;
+    }
+    .btn-black {
+        bottom: -25px;
+        right: 107px;
+    }
+    
+}
+
+
