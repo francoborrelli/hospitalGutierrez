@@ -14,6 +14,7 @@ class View
             $twig = new \Twig_Environment($loader);
             $twig->addGlobal('currentUser', \App\Authentication::getUser());
             $twig->addGlobal('flashes', \Core\Flash::getMessages());
+            $twig->addGlobal('site', \App\Site::getSite());
         }
 
         echo $twig->render($template, $args);
