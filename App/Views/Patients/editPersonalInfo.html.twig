@@ -13,15 +13,13 @@
                             <div class="form-group col">
                                 <label for="Nombre">Nombre *</label>
                                 <input type="text" id="editFirstName" name="firstName" class="form-control {% if 'firstName' in editErrors %}is-invalid{% endif %}"
-                                    placeholder="Nombre" {% if editErrors is defined %}value="{{patient.firstName}}" {% endif
-                                    %}> {% if 'firstName' in editErrors %}<label id="firstName-error"
+                                    placeholder="Nombre" value="{{patient.firstName}}"> {% if 'firstName' in editErrors %}<label id="firstName-error"
                                     class="error" for="firstName">Ingrese el nombre</label>{% endif %}
                             </div>
                             <div class="form-group col">
                                 <label for="Apellido">Apellido *</label>
                                 <input type="text" id="editLastName" name="lastName" class="form-control {% if 'lastName' in editErrors %}is-invalid{% endif %}"
-                                    placeholder="Apellido" {% if editErrors is defined %} value="{{patient.lastName}}" {% endif
-                                    %}> {% if 'lastName' in editErrors %}<label id="lastName-error"
+                                    placeholder="Apellido" value="{{patient.lastName}}"> {% if 'lastName' in editErrors %}<label id="lastName-error"
                                     class="error" for="lastName">Ingrese el apellido</label>{% endif %}
                             </div>
                         </div>
@@ -30,18 +28,17 @@
                                 <label for="Nombre">Tipo Documento *</label>
                                 <select id="editTypeDni" name="typeDni" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
                             <option value="">Seleccione el tipo de documento</option>
-                            <option value="DNI">DNI</option>
-                            <option value="Pasaporte">Pasaporte</option>
-                            <option value="Partida">Partida de nacimiento</option>
-                            <option value="Otro">Otro</option>
-                            </select> {% if 'typeDni' in editErrors %}<label id="typeDni-error"
-                                    class="error" for="typeDni">Ingrese el tipo de documento</label>{% endif %}
+                            <option value="DNI"{% if patient.documentType.name == 'DNI' %}selected="selected"{% endif %}>DNI</option>
+                            <option value="Pasaporte"{% if patient.documentType.name == 'Pasaporte' %}selected="selected"{% endif %}>Pasaporte</option>
+                            <option value="Partida"{% if patient.documentType.name == 'Partida' %}selected="selected"{% endif %}>Partida de nacimiento</option>
+                            <option value="Otro"{% if patient.documentType.name == 'Otro' %}selected="selected"{% endif %}>Otro</option>
+                            </select> {% if 'typeDni' in editErrors %}<label id="typeDni-error" class="error" for="typeDni">Ingrese el tipo de documento</label>{% endif %}
                             </div>
                             <div class="form-group col">
                                 <label for="Nº documento">Nº documento *</label>
-                                <input type="text" id="editDni" name="dni" class="form-control {% if 'dni' in editErrors %}is-invalid{% endif %}" placeholder="Numero de documento"
-                                    {% if editErrors is defined %} value="{{patient.dni}}" {% endif %}>                                {% if 'dni' in editErrors %}<label id="dni-error" class="error" for="dni">Ingrese el nº de documento</label>{%
-                                endif %}
+                                <input type="number" id="editDni" name="dni" class="form-control {% if 'dni' in editErrors %}is-invalid{% endif %}" placeholder="Numero de documento"
+                                    value="{{patient.docNumber}}">                                
+                                    {% if 'dni' in editErrors %}<label id="dni-error" class="error" for="dni">Ingrese el nº de documento</label>{% endif %}
                             </div>
                         </div>
                         <div class="row">
@@ -49,39 +46,39 @@
                                 <label for="Nombre">Género *</label>
                             <select id="editGender" name="gender" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
                             <option value="">Seleccione el género </option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                            <option value="Otro">Otro</option>
+                            <option value="Masculino" {% if patient.gender.name == 'Masculino' %}selected="selected"{% endif %}>Masculino</option>
+                            <option value="Femenino" {% if patient.gender.name == 'Femenino' %}selected="selected"{% endif %}>Femenino</option>
+                            <option value="Otro"{% if patient.gender.name == 'Otro' %}selected="selected"{% endif %}>Otro</option>
                         </select>
                             </div>
                             <div class="form-group col">
                                 <label for="birthday">Fecha de Nacimiento *</label>
-                                <input type="date" id="editBirthday" name="birthday" min="1900-01-01" max="{{ " now "|date("Y-m-d ") }}"class="form-control {% if 'lastName' in editErrors %}is-invalid{% endif %}"
+                                <input value="{{patient.birthday|date("Y-m-d")}}" type="date" id="editBirthday" name="birthday" min="1900-01-01" max="{{ " now "|date("Y-m-d ") }}"class="form-control {% if 'lastName' in editErrors %}is-invalid{% endif %}"
                                     placeholder="Nacimiento">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="address">Domicilio *</label>
                             <input type="text" id="editAddress" name="address" class="form-control {% if 'address' in editErrors %}is-invalid{% endif %}"
-                                {% if editErrors is defined %} value="{{patient.address}}" {% endif %} placeholder="Domicilio">                            {% if 'address' in editErrors %}<label id="address-error" class="error" for="address">Debe ingresar una dirección</label>{%
+                                value="{{patient.address}}" placeholder="Domicilio">                            {% if 'address' in editErrors %}<label id="address-error" class="error" for="address">Debe ingresar una dirección</label>{%
                             endif %}
                         </div>
                         <div class="row">
                             <div class="form-group col">
                                 <label for="Nombre">Teléfono</label>
                                 <input type="number" minlength="5" id="editPhone" name="phone" class="form-control {% if 'phone' in editErrors %}is-invalid{% endif %}"
-                                    placeholder="Teléfono" {% if editErrors is defined %}value="{{patient.phone}}" {% endif %}>                                {% if 'phone' in editErrors %}<label id="phone-error" class="error" for="phone">Ingrese el nombre</label>{%
+                                    placeholder="Teléfono" value="{{patient.phone}}">                                {% if 'phone' in editErrors %}<label id="phone-error" class="error" for="phone">Ingrese el nombre</label>{%
                                 endif %}
                             </div>
                             <div class="form-group col">
                                 <label for="insurance">Obra Social</label>
                                 <select id="editInsurance" class="form-control form-control-chosen-required" data-placeholder="Obra Social">
                                 <option value="">Seleccione la obra social</option>
-                                <option value="Ninguna">Ninguna</option>
-                                <option value="IOMA">IOMA</option>
-                                <option value="OSDE">OSDE</option>
-                                <option value="Galeno">Galeno</option>
-                                <option value="PAMI">PAMI</option>
+                                <option value="Ninguna" {% if patient.injurence == 'Ninguna' %}selected="selected"{% endif %}>Ninguna</option>
+                                <option value="IOMA" {% if patient.injurence == 'IOMA' %}selected="selected"{% endif %}>IOMA</option>
+                                <option value="OSDE" {% if patient.injurence == 'OSDE' %}selected="selected"{% endif %}>OSDE</option>
+                                <option value="Galeno" {% if patient.injurence == 'Galeno' %}selected="selected"{% endif %}>Galeno</option>
+                                <option value="PAMI" {% if patient.injurence == 'PAMI' %}selected="selected"{% endif %}>PAMI</option>
                             </select>
                             </div>
                         </div>

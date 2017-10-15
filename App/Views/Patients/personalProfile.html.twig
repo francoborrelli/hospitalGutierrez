@@ -30,6 +30,15 @@
                     </div>
                     <hr>
                     <div class="row text-center m-t-10">
+                        <div class="col-md-6 b-r"><strong>Teléfono</strong>
+                            <p>{% if patient.phone is defined %}{{patient.phone}}{% else %}-{% endif %}</p>
+                        </div>
+                        <div class="col-md-6"><strong>Obra Social</strong>
+                            <p>{% if patient.insurence is defined %}{{patient.injurence}}{% else %}-{% endif %}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center m-t-10">
                         <div class="col-md-12"><strong>Domicilio</strong>
                             <p>{{ patient.address }}</p>
                         </div>
