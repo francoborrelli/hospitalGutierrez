@@ -40,10 +40,17 @@ class Router
 
     public function dispatch($url)
     {
+
         $url = $this->removeQueryStringVariables($url);
         if ($this->match($url)) {
 
             $controller = $this->getController();
+
+            if ($this->siteInMaintenance() && $controller != 'App\Controllers\ConfigController' && $controller != 'App\Controllers\LoginController') {
+                $this->renderMaintenance();
+                exit;
+            }
+
             if (class_exists($controller)) {
                 $controller_instance = new $controller($this->params);
                 $this->executeAction($controller_instance);
@@ -102,6 +109,16 @@ class Router
             $namespace .= $this->params['namespace'] . '\\';
         
         return $namespace;
+    }
+
+    private function siteInMaintenance()
+    {
+        return ! \App\Site::getSite()->getEnabled();
+    }
+    
+    private function renderMaintenance()
+    {
+        \Core\View::renderTemplate('Exceptions/maintenance.html.twig', []);
     }
          
 

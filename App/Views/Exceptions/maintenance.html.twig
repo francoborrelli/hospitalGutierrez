@@ -1,14 +1,7 @@
-{% extends 'utils/base.html.twig' %}
+{% extends 'Exceptions/errorBase.html.twig' %}
 
+{% import 'Exceptions/error.html.twig' as error %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="/web/dist/css/error.css">
-{% endblock %}
-
-
-{% block body %}
-    <div class="errores">
-        <h2>Mantenimiento</h2>
-        <section>Intente acceder más tarde</section>
-    </div>
+{% block errorMessage %}
+            {{ error.item("h2", "En mantenimiento", "Intente acceder más tarde" ) }}
 {% endblock %}

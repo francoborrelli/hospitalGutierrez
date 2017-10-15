@@ -1,27 +1,17 @@
-<div class="col-md-3">
-    <div class=" card searchForm">
-        <div class="card-header">
-            <h5>Buscar por:</h5>
+{% embed 'utils/tablePage/search.html.twig' with {'action': '/admin/users'} %} 
+    {% block content %}
+        <div class="form-group">
+            <label class="col-xs-3 control-label">Nombre de usuario:</label>
+            <input type="text" name="username" value="{{ data.username }}" class="form-control" aria-describedby="emailHelp" placeholder="Nombre de Usuario">
         </div>
-        <div class="card-block">
-            <form class="form-horizontal" method="get" }}>
-                <div class="container">
-                    <br>
-                    <div class="form-group">
-                        <label class="col-xs-3 control-label">Nombre de usuario:</label>
-                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Nombre de Usuario">
-                    </div>
-                    <div class="form-group">
-                        <label class="col-xs-3 control-label">Estado:</label>
-                        <select class="form-control">
-                        <option selected value="">Seleccione Estado</option>
-                        <option value="Activo">Activo</option>
-                        <option value="Bloqueado">Bloqueado</option>
-                    </select>
-                    </div>
-                    <p><button type="submit" class="btn btn-primary" role="button"><i class="fa fa-search"></i> Buscar</button></p>
-                </div>
-            </form>
+        <div class="form-group">
+            <label class="col-xs-3 control-label">Estado:</label>
+            <select class="form-control" name="state">
+            <option {% if data.state is empty %}selected{% endif %} value="">Seleccione Estado</option>
+            <option {% if data.state == 'active' %}selected{% endif %} value="active">Activo</option>
+            <option {% if data.state == 'blocked' %}selected{% endif %} value="blocked">Bloqueado</option>
+            </select>
         </div>
-    </div>
-</div>
+    {% endblock %} 
+    
+{% endembed %}

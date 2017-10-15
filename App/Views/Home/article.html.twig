@@ -1,14 +1,25 @@
 {% macro new_article(title, icon, text, route) %}
-
-<div class="col-lg-4">
-    <div class="iconbox-4">
-        <i class="fa {{ icon }}"></i>
-        <br><br>
-        <h4 class="heading">{{ title }}</h4>
-        <p>{{text}}</p>
-        <br>
-        <a href="{% if route %} {{ route }} {% else %} # {% endif %}" class="btn btn-black btn-sm">Leer más</a>
+    <div class="col-lg-4">
+        <div class="iconbox-4">
+            <i class="fa {{ icon }}"></i>
+            <br><br>
+            <h2 class="heading">{{ title }}</h4>
+            <p>{{text}}</p>
+            <br>
+            <a href="{% if route %} {{ route }} {% else %} # {% endif %}" class="btns btn-black btn-sm">Leer más</a>
+        </div>
     </div>
-</div>
-
 {% endmacro new_article %}
+
+
+{% macro edit_article(title, id, icon, body, route) %}
+    <div class="col-lg-4">
+        <div class="iconbox-4">
+            <i class="fa {{ icon }}"></i>
+            <br><br>
+            <input maxlength="25" type="text" class="title" id="title{{id}}" name="title{{id}}" class="heading" value="{{ title }}" required placeholder="Complete el título">
+            <textarea class="body" id="body{{id}}" name="body{{id}}" required placeholder="Escriba aquí el texto">{{body}}</textarea>
+            <br>
+        </div>
+    </div>
+{% endmacro edit_article %}

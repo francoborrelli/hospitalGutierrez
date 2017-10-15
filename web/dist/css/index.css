@@ -2,12 +2,17 @@ body .content {
     padding: 80px 0px 0px;
 }
 
+
+/* imagen del sitio */
+
 .banner {
     object-fit: cover;
-    height: 350px;
+    height: 225px;
     width: 100%;
 }
 
+
+/* articulos */ 
 
 .br-radius-zero {
     border-radius: 0px;
@@ -24,6 +29,7 @@ body .content {
 .bgcolor1 {
     background-color: #fff;
 }
+
 .iconbox-4 {
     position: relative;
     text-align: center;
@@ -39,7 +45,8 @@ body .content {
     transition: 350ms ease all;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"],
+[class*=" icon-"] {
     font-family: 'webfont-medical-icons';
     speak: none;
     font-style: normal;
@@ -51,15 +58,6 @@ body .content {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.iconbox-4 .heading {
-    font-weight: 700;
-    color: #111;
-    font-size: 2em;
-    letter-spacing: 1px;
-
-font-family: 'Poppins', sans-serif;
-}
-
 .heading {
     font-weight: 400;
 }
@@ -68,8 +66,12 @@ h4 {
     font-size: 20px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Volkhov', serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: #1a1a1a;
     text-transform: capitalize;
     margin-top: 0em;
@@ -77,31 +79,28 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
 }
 
-.iconbox-4 p {
+.iconbox-4 p, textarea {
     color: #777;
     margin: 0px;
     font-family: 'Poppins', sans-serif;
 }
 
-
 .btn-black {
     background-color: #303b41;
     color: #f9f9f9;
     border: 0px;
-
 }
 
-.btn-black:hover{
+.btn-black:hover,
+.btn-black:active {
     color: #706d6d;
 }
 
-.card-header{
+.card-header {
     font-family: 'Poppins', sans-serif;
 }
 
-
-
-.btn {
+.btns {
     position: relative;
     font-family: 'Open Sans', sans-serif;
     color: #fff;
@@ -117,31 +116,25 @@ h1, h2, h3, h4, h5, h6 {
     transition: 350ms ease all;
 }
 
+/* @medias  */
+
 @media (min-width: 990px) {
-    .iconbox-4{
+    .iconbox-4 {
         min-height: 460px;
-    }
-    .iconbox-4 p{
-        text-align: justify;
     }
     .btn-black {
         position: absolute;
         bottom: -30px;
         right: 80px;
     }
-    
 }
 
 @media (min-width: 1200px) {
-    .iconbox-4{
+    .iconbox-4 {
         min-height: 393px;
     }
     .btn-black {
         bottom: -25px;
         right: 107px;
     }
-    
-
 }
-
-

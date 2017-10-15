@@ -1,11 +1,4 @@
-$('.nav-link').click(function () {
-    $('#editbtn').attr('data-target', $(this).data("form"));
-})
-
-$('#btnClose').click(function(){
-    $(this).closest('form')[0].reset();
-    $(this).closest('form').validate().resetForm()
-})
+// metodos adicionales del validador
 
 $.validator.addMethod("nonNumeric", function (value, element) {
     return this.optional(element) || isNaN(Number(value));
@@ -20,15 +13,8 @@ $.validator.addMethod("alphanumeric", function(value, element) {
     return this.optional(element) || /^[a-z0-9\-\s]+$/i.test(value);
 }, "Username must contain only letters, numbers, or dashes.");
 
-  //evita submit on enter
 
-  $(window).keydown(function (event) {
-    if (event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
-  });
-  
+//inicializacion de la validacion del formulario de datos personales
   
 $('#editPersonalInfo').validate({
     rules: {
@@ -108,6 +94,7 @@ $('#editPersonalInfo').validate({
 
 });
 
+//inicializacion de la validacion del formulario de datos demograficos
 
 $('#editDemographicInfo').validate({
     rules: {
@@ -143,3 +130,32 @@ $('#editDemographicInfo').validate({
     },
 
 });
+
+//Efecto en los botones
+$('.nav-link').click(function () {
+    form = $(this).attr("data-form")
+    if ($(form).length == 0){
+        $("#editbtn").prop('disabled', true);
+    }else{
+        $("#editbtn").prop('disabled', false);
+        $('#editbtn').attr('data-target', $(this).data("form"));
+    }
+})
+
+$( document ).ready(function() {
+    form = $('.nav-link.active').attr("data-form")
+    if ($(form).length == 0){
+        $("#editbtn").prop('disabled', true);
+    }else{
+        $("#editbtn").prop('disabled', false);
+        $('#editbtn').attr('data-target', $(this).data("form"));
+    }  
+});
+
+
+
+$('#btnClose').click(function(){
+    $(this).closest('form')[0].reset();
+    $(this).closest('form').validate().resetForm()
+})
+

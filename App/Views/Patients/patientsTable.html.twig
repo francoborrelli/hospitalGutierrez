@@ -7,13 +7,14 @@
 {% endblock %} 
 
 {% block body %}
-
+ {% if currentUser.hasPermission('paciente_new') %}
    {% include 'Patients/addPatient.html.twig' %}
+{% endif %}
 
-    <div class="container userReport">
+    <div class="container userReport tableScreen">
         <div class="row">
             {% include 'Patients/patientSearch.html.twig' %}
-            <div class ="col-lg-9">
+            <div class ="col-md-9">
         <div class="card">
             <div class="card-header text-left">
                 <a class="btn detalle" id="goBack" title="Volver al inicio" href="/"><i class="fa fa-reply" aria-hidden="true"></i></a>
@@ -21,21 +22,46 @@
             </div>
             <div class="card-block">
                 <div class="tablePage">
-                    <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addPatient">Agregar</button>  
+                    {% if currentUser.hasPermission('paciente_new') %}
+                        <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addPatient">Agregar</button>  
+                    {% endif %}
                     <table class="table table-striped" id="patients">
                     <thead>
                         <tr>
-                            <th>Tipo doc.</th>
-                            <th>Nº documento</th>
                             <th>Nombre</th>
                             <th>Apellido</th> 
+                            <th>Tipo doc.</th>
+                            <th>Nº documento</th>
                             <th>Ver detalle</th>
                         </tr>
                     </thead>
                     </tbody>
                         {% include 'Patients/patients.html.twig' %}
                     </tbody>
-                    </table>
+                </table>
+
+                <!-- paginacion -->
+                <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item {% if data.page == 1 %} disabled {% endif %}">
+                                <a class="page-link"
+                                    href="/patients/{{ data.page - 1 }}?name={{ data.firstName }}&lastName={{ data.lastName }}&documentType={{ data.documentType }}&docNumber={{ data.docNumber }}"
+                                    tabindex="-1">Ant
+                                </a>
+                            </li>
+                            {% for i in 1..data.pages %}
+                                <li class="page-item {% if i == data.page %} active {% endif %}">
+                                    <a class="page-link"
+                                        href="/patients/{{ i }}?name={{ data.firstName }}&lastName={{ data.lastName  }}&documentType={{ data.documentType }}&docNumber={{ data.docNumber }}">{{ i }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                            <li class="page-item {% if data.page == data.pages %} disabled {% endif %}">
+                                <a class="page-link" href="/patients/{{ data.page + 1 }}?name={{ data.firstName }}&lastName={{ data.lastName  }}&documentType={{ data.documentType }}&docNumber={{ data.docNumber }}">Sig</a>
+                            </li>
+                        </ul>
+                    </nav>
+
                 </div>
             </div>
 
@@ -52,10 +78,23 @@
     <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
     <script src="/web/dist/js/patients.js"></script>
     <script src="/web/dist/js/multi-step-modal.js"></script>
-    <script src="/web/dist/js/addPatientValidation.js"></script>
+
+    {% if currentUser.hasPermission('paciente_new') %}
+        <script src="/web/dist/js/addPatientValidation.js"></script>
+    {% endif %}
+
    {% if newErrors is defined %}
         <script>
             $('#addPatient').modal('show')
+        </script>
+    {% endif %}
+
+    
+   {% if not currentUser.hasPermission('paciente_show') %}
+        <script>
+            $(document).ready(function() {
+                oTable.column(4).visible(false)
+            } );
         </script>
     {% endif %}
 

@@ -1,35 +1,15 @@
-$( document ).ready(function() {
+navValidate = function(form){
+    $('.nav-link').click(function(e){
+        if (!$(form).valid()){
+        e.preventDefault();
+        e.stopPropagation();
+        }
+    })
+  }
+  
+  $( document ).ready(function() {
     navValidate('#editUser');
 });
-    
-$(".editbtn").click(function(){
-    reset();
-    id = $(this).attr("data-id");
-    modal = $("#editUser")
-    $('#userId').val(id)
-    tr = $(this).closest('tr').find("td")
-    $("#editUsername").val($(tr).eq(0).text())
-    $("#editName").val($(tr).eq(1).text())
-    $("#editLastName").val($(tr).eq(2).text())
-    $("#editEmail").val($(tr).eq(3).text())
-    roles = $(tr).eq(4).text().split(/(?=[A-Z])/);
-
-    roles.forEach(function(element) {
-            $('#edit' + element ).prop('checked', true);
-    }, this);
-});
-
-reset = function(){
-    $('#editUser')[0].reset();
-    $('#activeState').closest("label").removeClass("active")
-    $('#blockedState').closest("label").removeClass("active")
-    $('#editPass').removeClass('is-invalid');
-    $('#newPass').removeClass('is-invalid');
-    $('#confirmNewPass').removeClass('is-invalid');
-    $('#activeState').attr('checked', false);  
-    $('#blockedState').attr('checked', false);  
-    $('#editUser').validate().resetForm();    
-}
 
 $('#editUser').validate({
     rules: {
@@ -136,13 +116,37 @@ $('#editUser').validate({
 
 });
 
-  //evita submit on enter
+// Inicializa correctamente los datos del editar
+    
+$(".editbtn").click(function(){
+    reset();
+    id = $(this).attr("data-id");
+    modal = $("#editUser")
+    $('#userId').val(id)
+    tr = $(this).closest('tr').find("td")
+    $("#editUsername").val($(tr).eq(0).text())
+    $("#editName").val($(tr).eq(1).text())
+    $("#editLastName").val($(tr).eq(2).text())
+    $("#editEmail").val($(tr).eq(3).text())
+    roles = $(tr).eq(4).text().split(/(?=[A-Z])/);
 
-  $(window).keydown(function (event) {
-    if (event.keyCode == 13) {
-      event.preventDefault();
-      return false;
+    roles.forEach(function(element) {
+            $('#edit' + element ).prop('checked', true);
+    }, this);
+
+
+    status = $(tr).eq(5).text();
+
+    if (status == "Activo"){
+        $('#status').attr('checked', true);  
     }
-  });
-  
+});
+
+reset = function(){
+    $('#editUser')[0].reset();
+    $('#editPass').removeClass('is-invalid');
+    $('#newPass').removeClass('is-invalid');
+    $('#confirmNewPass').removeClass('is-invalid');  
+    $('#editUser').validate().resetForm();  
+}
 

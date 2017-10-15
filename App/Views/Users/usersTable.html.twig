@@ -1,18 +1,26 @@
 {% extends 'utils/base.html.twig' %} 
 
 {% block stylesheets %}
-<link rel="stylesheet" href="/web/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
-<link rel="stylesheet" href="/web/assets/dataTables/css/responsive.bootstrap4.min.css"> 
+    <link rel="stylesheet" href="/web/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
+    <link rel="stylesheet" href="/web/assets/dataTables/css/responsive.bootstrap4.min.css"> 
 {% endblock %} 
 
 {% block body %}
-    {% include 'Users/addUser.html.twig' %}
-    {% include 'Users/deleteUser.html.twig' %}
-    {% include 'Users/editUser.html.twig' %}
+
+    {% if currentUser.hasPermission('usuario_new') %}
+        {% include 'Users/addUser.html.twig' %}
+    {% endif %}    
+
+    {% if currentUser.hasPermission('usuario_destroy') %}
+        {% include 'Users/deleteUser.html.twig' %}
+    {% endif %} 
+
+    {% if currentUser.hasPermission('usuario_update') %}
+        {% include 'Users/editUser.html.twig' %}
+    {% endif %} 
 
 
-
-    <div class="container userReport">
+    <div class="container userReport tableScreen">
         <div class="row">
             {% include 'Users/userSearch.html.twig' %}
             <div class ="col-md-9">
@@ -23,7 +31,9 @@
                     </div>
                     <div class="card-block">
                         <div class="tablePage">
-                            <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addUser">Agregar</button>
+                            {% if currentUser.hasPermission('usuario_new') %}
+                                <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addUser">Agregar</button>
+                            {% endif %} 
                             <table class="table table-striped" id="usuarios">
                             <thead>
                                 <tr>
@@ -40,6 +50,29 @@
                                 {% include 'Users/users.html.twig' %}
                             </tbody>
                             </table>
+
+                            <!-- paginacion -->
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item {% if data.page == 1 %} disabled {% endif %}">
+                                        <a class="page-link"
+                                            href="/admin/users/{{ data.page - 1 }}?username={{ data.username }}&state={{ data.state }}"
+                                            tabindex="-1">Ant
+                                        </a>
+                                    </li>
+                                    {% for i in 1..data.pages %}
+                                        <li class="page-item {% if i == data.page %} active {% endif %}">
+                                            <a class="page-link"
+                                                href="/admin/users/{{ i }}?username={{ data.username }}&state={{ data.state  }}">{{ i }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                    <li class="page-item {% if data.page == data.pages %} disabled {% endif %}">
+                                        <a class="page-link" href="/admin/users/{{ data.page + 1 }}?username={{ data.username }}&state={{ data.state  }}">Sig</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            
                         </div>
                     </div>
                 </div>
@@ -50,25 +83,39 @@
 
 
 {% block javascripts %}
+
     <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
     <script src="/web/assets/dataTables/js/datatables.min.js"></script>
     <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
     <script src="/web/dist/js/users.js"></script>
     <script src="/web/dist/js/multi-step-modal.js"></script>
-    <script src="/web/dist/js/addUserValidation.js"></script>
-    <script src="/web/dist/js/editUserValidation.js"></script>
 
+    <!-- scripts requeridos de acuerdo a permisos -->
+    {% if currentUser.hasPermission('usuario_new') %}
+        <script src="/web/dist/js/addUserValidation.js"></script>
+    {% endif %}
+
+    {% if currentUser.hasPermission('usuario_update') %}  
+        <script src="/web/dist/js/editUserValidation.js"></script>
+    {% endif %}
+
+   {% if (not currentUser.hasPermission('usuario_update')) and (not currentUser.hasPermission('usuario_destroy')) %}  
+        <script>
+        $(document).ready(function() {
+                oTable.column(6).visible(false)
+        } );
+        </script>
+    {% endif %}
+
+    <!-- scripts requeridos de acuerdo a errores de validación -->
     {% if newErrors is defined %}
         <script>
             $('#addUser').modal('show')
         </script>
-
-
     {% elseif editErrors is defined %}
         <script>
             $('#editUser').modal('show')
         </script>
     {% endif %}
-
 
 {% endblock %}

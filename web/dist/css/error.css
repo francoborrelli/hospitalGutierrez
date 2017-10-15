@@ -12,8 +12,8 @@
 }
 
 .errores h2 {
-    font-size: 160px;
-    line-height: 160px;
+    font-size: 126px;
+    line-height: 126px;
     font-family: 'Roboto', 'Open Sans', sans-serif;
     font-weight: 700;
     margin: 0;
@@ -22,7 +22,7 @@
 
 .errores section {
     text-transform: uppercase;
-    font-size: 70px;
+    font-size: 57px;
     font-family: 'Roboto', 'Open Sans', sans-serif;
     font-weight: 200;
 }
@@ -33,11 +33,11 @@
         line-height: 220px;
     }
     .errores h2 {
-        font-size: 100px;
-        line-height: 124px;
+        font-size: 90px;
+        line-height: 90px;
     }
     .errores section {
-        font-size: 50px;
+        font-size: 45px;
     }
 }
 
@@ -47,11 +47,11 @@
         line-height: 200px;
     }
     .errores h2 {
-        font-size: 70px;
-        line-height: 85px;
+        font-size: 65px;
+        line-height: 65px;
     }
     .errores section {
-        font-size: 35px;
+        font-size: 30px;
     }
 }
 
@@ -61,11 +61,11 @@
         line-height: 170px;
     }
     .errores h2 {
-        font-size: 40px;
-        line-height: 60px;
+        font-size: 35px;
+        line-height: 35px;
     }
     .errores section {
-        font-size: 25px;
+        font-size: 20px;
     }
 }
 

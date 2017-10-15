@@ -14,50 +14,53 @@
                         <!-- tipo de vivienda -->
                         <div class="form-group col">
                             <label for="houseTypeId">¿Tipo de vivienda? *</label>
-                            <select id="houseTypeId" name="houseTypeId" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
+                            <select id="houseTypeId" name="houseTypeId" class="form-control form-control-chosen-required {% if 'houseType' in editErrors %}is-invalid{% endif %}" data-placeholder="Vivienda">
                                 <option value="">Selecciona tipo de casa</option>
                                 {% for houseType in patientFields.houseType %}
                                 <option value="{{ houseType.id }}" {% if houseType.id == patient.houseType.id %}selected="selected"{% endif %}>{{ houseType.name }}</option>
                                 {% endfor %}
                         </select>
+                         {% if 'houseType' in editErrors %}<label id="houseTypeId-error" class="error" for="houseTypeId">Selecciona un tipo de casa</label>{% endif %}
                         </div>
 
                         <!-- tipo de calefaccion -->
                         <div class="form-group col">
                             <label for="heatingTypeId">¿Tipo de calefacción? *</label>
-                            <select id="heatingTypeId" name="heatingTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            <select id="heatingTypeId" name="heatingTypeId" class="form-control form-control-chosen-required {% if 'heatingType' in editErrors %}is-invalid{% endif %}" data-placeholder="Calefaccion">
                                 <option value="">Selecciona tipo de calefacción</option>
                                 {% for heatingType in patientFields.heatingType %}
                                 <option value="{{ heatingType.id }}" {% if heatingType.id == patient.heatingType.id %}selected="selected"{% endif %}>{{ heatingType.name }}</option>
                                 {% endfor %}
                         </select>
+                        {% if 'heatingType' in editErrors %}<label id="heatingTypeId-error" class="error" for="heatingTypeId">Selecciona un tipo de calefacción</label>{% endif %}
                         </div>
 
                         <!-- tipo de agua -->
                         <div class="form-group col">
                             <label for="waterTypeId">¿Tipo de agua? *</label>
-                            <select id="waterTypeId" name="waterTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            <select id="waterTypeId" name="waterTypeId" class="form-control form-control-chosen-required {% if 'waterType' in editErrors %}is-invalid{% endif %}" data-placeholder="Calefaccion">
                                 <option value="">Selecciona tipo de agua</option>
                                 {% for waterType in patientFields.waterType %}
                                 <option value="{{ waterType.id }}" {% if waterType.id == patient.waterType.id %}selected="selected"{% endif %}>{{ waterType.name }}</option>
                                 {% endfor %}
                         </select>
+                        {% if 'waterType' in editErrors %}<label id="waterTypeId-error" class="error" for="waterTypeId">Selecciona un tipo de agua</label>{% endif %}
                         </div>
                     </div>
                     <div class="row">
                         <!-- heladera? -->
                         <div class="form-group col text-center">
-                            <label for="fridge">¿Tiene heladera? *</label> {{ switch.item('Tiene','No tiene', 'refrigerator', patient.refrigerator)}}
+                            <label for="fridge">¿<span class="hidden">Tiene</span> heladera? *</label> {{ switch.item('Tiene','No tiene', 'refrigerator', patient.refrigerator)}}
                         </div>
 
                         <!-- electricidad? -->
                         <div class="form-group col text-center">
-                            <label for="electricity">¿Tiene electricidad? *</label> {{ switch.item('Tiene','No tiene', 'electricity', patient.electricity)}}
+                            <label for="electricity">¿<span class="hidden">Tiene</span> electricidad? *</label> {{ switch.item('Tiene','No tiene', 'electricity', patient.electricity)}}
                         </div>
 
                         <!-- mascotas? -->
                         <div class="form-group col text-center">
-                            <label for="pets">¿Tiene mascotas? *</label> {{ switch.item('Tiene','No tiene', 'pet', patient.pet) }}
+                            <label for="pets">¿<span class="hidden">Tiene</span> mascotas? *</label> {{ switch.item('Tiene','No tiene', 'pet', patient.pet) }}
                         </div>
                     </div>
             </div>

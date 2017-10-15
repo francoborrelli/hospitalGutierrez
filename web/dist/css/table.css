@@ -1,4 +1,5 @@
-.container.userReport, .logIn{
+.container.userReport,
+.logIn {
     margin-top: 80px;
     margin-bottom: 50px;
 }
@@ -35,7 +36,8 @@
     border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-#usuarios, #patients {
+#usuarios,
+#patients {
     width: 100%!important;
 }
 
@@ -52,9 +54,7 @@
     padding-right: 30px;
 }
 
-
-
-.modal-footer label{
+.modal-footer label {
     position: absolute;
     left: 36px;
     bottom: 10px;
@@ -62,15 +62,51 @@
 
 table.dataTable tbody td {
     vertical-align: middle;
-  }
-
-table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before {
-    top: inherit!important; 
 }
-#patients_wrapper, #usuarios_wrapper{
+
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before {
+    top: inherit!important;
+}
+
+#patients_wrapper,
+#usuarios_wrapper {
     margin-top: 35px;
 }
 
-.searchForm{
+.searchForm {
     margin-bottom: 30px;
+}
+
+.pagination {
+    float: right;
+    margin-right: 17px;
+}
+
+.pagination .page-link {
+    line-height: 0
+}
+
+@media(max-width: 765px) {
+    .container.userReport {
+        margin-bottom: -20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container.tableScreen {
+        max-width: 855px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container.tableScreen {
+        max-width: 985px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container.tableScreen {
+        max-width: 1190px;
+    }
 }

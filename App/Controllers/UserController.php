@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Core\Controller;
 use App\Models\User;
 use App\Models\Role;
@@ -12,7 +14,54 @@ class UserController extends Controller
     public function showAction()
     {
         $this->denyAccessUnlessPermissionGranted('usuario_index');
-        $this->render('Users/usersTable.html.twig', ['data' => $this->getData()]);
+
+        $data = $this->getIndexData();
+        $this->render('Users/usersTable.html.twig', ['data' => $data]);
+    }
+
+    private function getIndexData()
+    {
+        $em = $this->getEntityManager();
+        $userRepository = $em->getRepository(User::class);
+        $page = isset($this->getRouteParams()['page']) ? $this->getRouteParams()['page'] : 1;
+
+        $username = $this->usernameGiven();
+        $state = $this->stateGiven();
+        $users = $userRepository->findByUsernameAndState($username, $state);
+
+        $listAmount = $this->getSite()->getListAmount();
+        $users = new ArrayCollection($users);
+        $pages = ceil($users->count() / $listAmount);
+        $pages = ($pages == 0) ? 1 : $pages;
+        $users = $users->matching(Criteria::create()
+            ->setFirstResult(($page - 1) * $listAmount)
+            ->setMaxResults($listAmount)
+        );
+
+        $data = ['roles' => $em->getRepository(Role::class)->findAll(),
+                 'users' => $users,
+                 'page' => $page,
+                 'pages' => $pages,
+                 'username' => $username,
+                 'state' => $state];
+
+        return $data;
+    }
+
+    public function usernameGiven()
+    {
+        if (isset($_GET['username']) && !empty($_GET['username']))
+            return $_GET['username'];
+        else
+            return '';
+    }
+
+    public function stateGiven()
+    {
+        if (isset($_GET['state']) && !empty($_GET['state']))
+            return $_GET['state'];
+        else
+            return null;
     }
 
     public function newAction()
@@ -36,7 +85,7 @@ class UserController extends Controller
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al usuario correctamente');
             $this->redirect('/admin/users');
         } else {
-            $this->render('Users/usersTable.html.twig', ['data' => $this->getData(), 'newErrors' => $validationErrors, 'user' => $user]);
+            $this->render('Users/usersTable.html.twig', ['data' => $this->getIndexData(), 'newErrors' => $validationErrors, 'user' => $user]);
         }
     }
 
@@ -104,13 +153,6 @@ class UserController extends Controller
         $usrExists = $userRepository->usrExists($user->getUsername());
         $emailExists = $userRepository->emailExists($user->getEmail());
         return $user->validationErrors($usrExists, $emailExists);
-    }
-
-    public function getData(){
-        $em = $this->getEntityManager();
-        $users = $em->getRepository(User::class)->findAll();
-        $roles = $em->getRepository(Role::class)->findAll();
-        return ['users' => $users, 'roles' => $roles];
     }
 
 }

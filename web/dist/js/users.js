@@ -31,6 +31,7 @@ var oTable =  $('#usuarios').DataTable({
         "bLengthChange": false,
         "bFilter": false,
         "info": false,
+        "bPaginate": false,
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ usuarios",
@@ -58,9 +59,57 @@ var oTable =  $('#usuarios').DataTable({
     });
 
 
-    $(document).ready(function() {
-        /* Initialise datatables */
-    
-        /* Add event listener to the dropdown input */
-        $('select#stateFilter').change( function() { oTable.columns(5).search(this.value).draw(); } );
-    } );
+$(document).ready(function() {
+    $('select#stateFilter').change( function() { oTable.columns(5).search(this.value).draw(); } );
+    } 
+);
+
+
+  //evita submit on enter
+
+  $(window).keydown(function (event) {
+    if (event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+  
+//Habilita enter en el search
+
+$('.searchForm').find('input').each(function () {
+    $(this).on('keydown', function (e) {
+        if (e.which == 13) {
+            $('#searchForm').submit()
+            console.log("hola")
+        }
+    });
+
+})
+
+// Buttons Actions
+
+$("#goBack").click(function(){
+    $('#addUser').trigger('next.m.1'); 
+});
+
+$("#goNext").click(function(){
+    if ($('#firstName').valid() & $('#lastName').valid() & $('#email').valid() & $('#username').valid() & $('#pass').valid() & $('#confirmPass').valid()) {
+        $('#addUser').trigger('next.m.2');
+    }
+});
+
+$("#cancelbtn").click(function(){
+    $('#addUser').modal('hide')
+    $('#addUser')[0].reset();
+    $('#addUser').validate().resetForm();  
+    $('#addUser').trigger('next.m.1');   
+    return true
+})
+
+$(".deletebtn").click(function(){
+    $("#deletedId").val($(this).data("id"))
+    tr = $(this).closest('tr')
+    name = $(tr).find("td").eq(1).text()
+    surname = $(tr).find("td").eq(2).text()
+    $(".modalText").text(name + ' ' + surname);
+});

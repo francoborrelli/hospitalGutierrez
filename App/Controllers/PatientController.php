@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Core\Controller;
 use App\Models\Patient;
 use App\Models\WaterType;
@@ -18,9 +20,67 @@ class PatientController extends Controller
     {
         $this->denyAccessUnlessPermissionGranted('paciente_index');
 
-        $patientRepository = $this->getEntityManager()->getRepository(Patient::class);
-        $patients = $patientRepository->findAll();
-        $this->render('Patients/patientsTable.html.twig', ['patients' => $patients, 'patientFields' => $this->getPatientFields()]);
+        $em = $this->getEntityManager();
+        $patientRepository = $em->getRepository(Patient::class);
+        $page = isset($this->getRouteParams()['page']) ? $this->getRouteParams()['page'] : 1;
+
+        $firstName = $this->firstNameGiven();
+        $lastName = $this->lastNameGiven();
+        $documentType = $this->documentTypeGiven();
+        $docNumber = $this->docNumberGiven();
+        $patients = $patientRepository->findSearch($firstName, $lastName, $documentType, $docNumber);
+
+        $listAmount = $this->getSite()->getListAmount();
+        $patients = new ArrayCollection($patients);
+        $pages = ceil($patients->count() / $listAmount);
+        $pages = ($pages == 0) ? 1 : $pages;
+        $patients = $patients->matching(Criteria::create()
+            ->setFirstResult(($page - 1) * $listAmount)
+            ->setMaxResults($listAmount)
+        );
+
+        $data = ['patients' => $patients,
+                 'page' => $page,
+                 'pages' => $pages,
+                 'patientFields' => $this->getPatientFields(),
+                 'firstName' => $firstName,
+                 'lastName' => $lastName,
+                 'documentType' => $documentType,
+                 'docNumber' => $docNumber];
+
+        $this->render('Patients/patientsTable.html.twig', ['data' => $data]);
+    }
+
+    private function firstNameGiven()
+    {
+        if (isset($_GET['name']) && !empty($_GET['name']))
+            return $_GET['name'];
+        else
+            return '';
+    }
+
+    private function docNumberGiven()
+    {
+        if (isset($_GET['docNumber']) && !empty($_GET['docNumber']))
+            return $_GET['docNumber'];
+        else
+            return null;
+    }
+
+    private function lastNameGiven()
+    {
+        if (isset($_GET['lastName']) && !empty($_GET['lastName']))
+            return $_GET['lastName'];
+        else
+            return null;
+    }
+
+    private function documentTypeGiven()
+    {
+        if (isset($_GET['documentType']) && !empty($_GET['documentType']))
+            return $_GET['documentType'];
+        else
+            return null;
     }
 
     public function newAction()
@@ -84,8 +144,14 @@ class PatientController extends Controller
         $patientRepository = $em->getRepository(Patient::class);
 
         $patient = $patientRepository->find($this->getRouteParams()['id']);
-
-        $validationErrors = $patient->validationErrors();
+        
+        $validationPatient = clone $patient;
+        if ($mode == 'patient') 
+            $validationPatient->setData($data);
+        else 
+            $validationPatient->setDemographicData($data);
+        
+        $validationErrors = $validationPatient->validationErrors();
         if (empty($validationErrors)) {
             if ($mode == 'patient') 
                 $patient->setData($data);
@@ -94,10 +160,10 @@ class PatientController extends Controller
 
             $em->flush();
 
-            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del usuario correctamente');
+            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente');
             $this->redirect('/patient/' . $this->getRouteParams()['id']);
         } else {
-            $this->render('Patients/patientProfile.html.twig', ['newErrors' => $validationErrors, 'patient' => $patient]);
+            $this->render('Patients/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => $mode]);
         }
     }
 

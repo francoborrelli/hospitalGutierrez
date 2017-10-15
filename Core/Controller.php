@@ -79,7 +79,7 @@ abstract class Controller
     {
         $this->requireLogin();
         if (!$this->getUser()->hasPermission($permission)) {
-            $this->addFlashMessage('warning', 'Lo sentimos.', "Usted posee el permiso $permission");
+            $this->addFlashMessage('warning', 'Lo sentimos.', "Usted posee los permisos necesarios para realizar la operacion");
             $this->redirect('/');
         }
     }
@@ -99,6 +99,11 @@ abstract class Controller
     protected function getUser()
     {
         return Authentication::getUser();
+    }
+
+    protected function getSite()
+    {
+        return \App\Site::getSite();
     }
 
 }

@@ -95,8 +95,8 @@ class User
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
-        $this->active = true;
         $this->setData($data, $roles);
+        $this->active = true;
     }
 
     public function setData($data, $roles)
@@ -108,10 +108,10 @@ class User
         if (!is_null($roles))
             $this->roles = $roles;
 
-	if (isset($data['state']) && $data['state'] == 'blocked')
-            $this->active = false;
-        else if (isset($data['state']))
+        if(isset($data['status']))
             $this->active = true;
+        else
+            $this->active = false;
 
         if (!strlen($data['pass']) == 0) {
             $this->password = password_hash($data['pass'], PASSWORD_DEFAULT);

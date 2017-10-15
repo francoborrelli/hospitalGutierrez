@@ -1,15 +1,25 @@
 {% for user in data.users %}
 <tr>
+
     <td>{{ user.userName }}</td>
     <td>{{ user.firstName }}</td>
     <td>{{ user.lastName }}</td>
     <td>{{ user.email }}</td>
     <td>{% for role in user.roles %}{{ role.name }}<br>{% endfor %}</td>
     <td>{% if user.active %}Activo{% else %}Bloqueado{% endif %}</td>
+
     <td class="text-center">
+
         <div class="btn-group" role="group">
-            <button type="button" data-toggle="modal" data-target="#editUser" title="Editar" data-id="{{ user.id }}" class="btn btn-orange btn-sm editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-            <button type="button" data-toggle="modal" data-target="#deleteUser" title="Eliminar" data-id="{{ user.id }}" class="btn btn-danger btn-sm deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+
+            {% if currentUser.hasPermission('usuario_update') %}
+                <button type="button" data-toggle="modal" data-target="#editUser" title="Editar" data-id="{{ user.id }}" class="btn btn-orange btn-sm editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+            {% endif %} 
+
+            {% if currentUser.hasPermission('usuario_destroy') %}
+                <button type="button" data-toggle="modal" data-target="#deleteUser" title="Eliminar" data-id="{{ user.id }}" class="btn btn-danger btn-sm deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            {% endif %}
+
         </div>
     </td>
 </tr>
