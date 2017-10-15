@@ -60,13 +60,23 @@ class PatientController extends Controller
         $this->render('Patients/patientProfile.html.twig', ['patient' => $patient, 'patientFields' => $this->getPatientFields()]);
     }
 
-    public function editAction()
+    public function editPatientAction()
+    {
+        $this->edit($this->getParientData());
+    }
+
+    public function editDemographicAction()
+    {
+        $this->edit($this->getDemographicData());
+    }
+
+    private function edit($data)
     {
         $em = $this->getEntityManager();
+        
         $patientRepository = $em->getRepository(Patient::class);
 
         $patient = $patientRepository->find($this->getRouteParams()['id']);
-        $data = $this->getPatientData($_POST);
         $validationErrors = [];
         if (empty($validationErrors)) {
             $patient->setData($data);
@@ -79,6 +89,7 @@ class PatientController extends Controller
             $this->render('Patients/patientProfile.html.twig');
         }
     }
+
 
     private function getPatientData($data)
     {
