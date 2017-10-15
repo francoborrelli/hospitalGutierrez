@@ -20,6 +20,7 @@ $router->add('admin/users/{action}', ['controller' => 'User']);
 $router->add('admin/{controller}/{action}');
 
 $router->add('patients', ['controller' => 'Patient', 'action' => 'index']);
+$router->add('patients/{page:\d+}', ['controller' => 'Patient', 'action' => 'index']);
 $router->add('patients/{action}', ['controller' => 'Patient']);
 $router->add('patient/{id:\d+}', ['controller' => 'Patient', 'action' => 'show']);
 $router->add('patient/{id:\d+}/{action}', ['controller' => 'Patient']);
