@@ -10,3 +10,16 @@
         </div>
     </div>
 {% endmacro new_article %}
+
+
+{% macro edit_article(title, id, icon, body, route) %}
+    <div class="col-lg-4">
+        <div class="iconbox-4">
+            <i class="fa {{ icon }}"></i>
+            <br><br>
+            <input type="text" class="title" id="title{{id}}" name="title{{id}}" class="heading" value="{{ title }}">
+            <textarea class="body" id="body{{id}}" name="body{{id}}">{{body}}</textarea>
+            <br>
+        </div>
+    </div>
+{% endmacro edit_article %}

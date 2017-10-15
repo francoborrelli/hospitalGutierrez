@@ -79,7 +79,7 @@ h6 {
     line-height: 1.2;
 }
 
-.iconbox-4 p {
+.iconbox-4 p, textarea {
     color: #777;
     margin: 0px;
     font-family: 'Poppins', sans-serif;
