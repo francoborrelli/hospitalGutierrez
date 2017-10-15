@@ -11,7 +11,7 @@
 }
 
 .title {
-    border: 1px transparent;
+    border: 1px solid transparent;
     text-align: center;
     color: #1a1a1a;
     text-transform: capitalize;
@@ -20,6 +20,14 @@
     font-weight: 400;
     font-size: 28px;
     width: auto;
+    border-radius: 5px;
+}
+
+.title.is-invalid, .title.is-invalid:hover,
+.title.is-invalid:active,
+.title.is-invalid:focus{
+    border: 1px solid;
+    border-color: #dc3545;
 }
 
 .title:hover,
@@ -27,7 +35,6 @@
 .title:focus {
     outline: none;
     border: 1px solid rgba(0, 0, 0, 0.190);
-    border-radius: 10px;
 }
 
 textarea {
@@ -35,14 +42,37 @@ textarea {
     height: auto;
     resize: none;
     outline: none;
-    border-radius: 3px;
+    border-radius: 5px;
     font-size: 15px;
-    border: 1px transparent;
+    border: 1px solid transparent;
     text-align: center;
     padding-left: 10px;
     padding-right: 10px;
+    height: auto;
 }
 
 textarea:hover, textarea:active, textarea:focus{
     border: 1px solid rgba(0, 0, 0, 0.190);   
 }
+
+
+textarea.is-invalid, textarea.is-invalid:hover,
+textarea.is-invalid:active,
+textarea.is-invalid:focus{
+    border: 1px solid;
+    border-color: #dc3545;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #949494
+  }
+
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #949494
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #949494
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: #949494
+  }
