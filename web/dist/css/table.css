@@ -74,3 +74,12 @@ table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before,
 .searchForm{
     margin-bottom: 30px;
 }
+
+.pagination{
+    float: right;
+    margin-right: 17px;
+}
+
+.pagination .page-link{
+    line-height: 0
+}
