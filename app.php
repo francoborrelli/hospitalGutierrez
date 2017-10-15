@@ -26,6 +26,7 @@ $router->add('patient/{id:\d+}', ['controller' => 'Patient', 'action' => 'show']
 $router->add('patient/{id:\d+}/{action}', ['controller' => 'Patient']);
 
 $router->add('admin/config', ['controller' => 'Config', 'action' => 'index']);
+$router->add('admin/articles/update', ['controller' => 'ArticleController', 'action' => 'update']);
 
 $router->add('login', ['controller' => 'Login', 'action' => 'show']);
 $router->add('login/{action}', ['controller' => 'Login']);
