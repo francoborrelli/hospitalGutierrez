@@ -1,38 +1,31 @@
-<div class="col-md-3">
-    <div class=" card searchForm">
-        <div class="card-header">
-            <h5>Buscar por:</h5>
+{% embed 'utils/tablePage/search.html.twig' %} 
+
+    {% block content %}
+        <div class="form-group">
+            <label class="col-xs-3 control-label">Nombre:</label>
+            <input type="text" name="name" value="{{ data.firstName }}" class="form-control" placeholder="Nombre">
         </div>
-        <div class="card-block">
-            <form id="searchForm" class="form-horizontal" method="get" }}>
-                <div class="container">
-                    <br>
-                    <div class="form-group">
-                        <label class="col-xs-3 control-label">Nombre:</label>
-                        <input type="text" name="name" value="{{ data.firstName }}" class="form-control" placeholder="Nombre">
-                    </div>
-                    <div class="form-group">
-                        <label class="col-xs-3 control-label">Apellido:</label>
-                        <input type="text" name="lastName" value="{{ data.lastName }}" class="form-control" placeholder="Apellido">
-                    </div>
-                <div class="row">
-                    <div class="form-group col">
-                    <label for="Nombre">Tipo:</label>
-                    <select id="typeDni" name="documentType" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
-                        <option {% if data.documentType is empty %}selected{% endif %} value="">Tipo Documento</option>
-                        {% for documentType in data.patientFields.documentType %}
+        <div class="form-group">
+            <label class="col-xs-3 control-label">Apellido:</label>
+            <input type="text" name="lastName" value="{{ data.lastName }}" class="form-control" placeholder="Apellido">
+        </div>
+        <div class="row">
+            <div class="form-group col">
+                <label for="Nombre">Tipo:</label>
+                <select id="typeDni" name="documentType" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                    <option {% if data.documentType is empty %}selected{% endif %} value="">Tipo Documento</option>
+                
+                    {% for documentType in data.patientFields.documentType %}
                         <option {% if data.documentType == documentType.id %}selected{% endif %} value="{{ documentType.id }}">{{ documentType.name }}</option>
-                        {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group col">
-                        <label for="dni">Documento</label>
-                        <input type="text" id="dni" name="docNumber" value="{{ data.docNumber }}" class="form-control" placeholder="Documento">
-                    </div>
-                </div>
-                    <p><button type="submit" class="btn btn-primary" role="button"><i class="fa fa-search"></i> Buscar</button></p>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group col">
+                <label for="dni">Documento</label>
+                <input type="text" id="dni" name="docNumber" value="{{ data.docNumber }}" class="form-control" placeholder="Documento">
+            </div>
+         </div>
+    {% endblock %} 
+    
+{% endembed %}

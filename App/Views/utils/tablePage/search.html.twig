@@ -1,0 +1,17 @@
+<div class="col-md-3">
+    <div class=" card searchForm">
+        <div class="card-header">
+            <h5>Buscar por:</h5>
+        </div>
+        <div class="card-block">
+            <form id="searchForm" class="form-horizontal" method="get" {% if action is defined %} action="{{action}}" {% endif %}>
+                <div class="container">
+                    <br>
+                    {% block content %} 
+                    {% endblock %}
+                    <p><button type="submit" class="btn btn-primary" role="button"><i class="fa fa-search"></i> Buscar</button></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
