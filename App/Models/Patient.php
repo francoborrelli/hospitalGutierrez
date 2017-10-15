@@ -537,7 +537,7 @@ class Patient
         if (strlen($this->address) == 0)
             $validationErrors[] = 'address';
 
-        if ($this->birthday > \DateTime())
+        if ($this->birthday > new \DateTime())
             $validationUser[] = 'birthday';
 
         return $validationErrors;

@@ -1,7 +1,7 @@
 <div class="modal fade" id="deletePatient" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="post" action="" class="deleteUserForm">
+            <form method="post" action="/patient/{{ patient.id }}/remove" class="deleteUserForm">
                 <div class="modal-header">
                     <h4 class="modal-title">Eliminar Paciente</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
