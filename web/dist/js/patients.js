@@ -16,10 +16,10 @@ var oTable =  $('#patients').DataTable({
         }
     },
     columns: [
-        { responsivePriority: 2 }, //Tipo doc
-        { responsivePriority: 2 }, // documento
-        { responsivePriority: 4 }, //nombre
-        { responsivePriority: 4 }, //apellido
+        { responsivePriority: 3 }, //Tipo doc
+        { responsivePriority: 3 }, // documento
+        { responsivePriority: 2 }, //nombre
+        { responsivePriority: 2 }, //apellido
         { responsivePriority: 1 }   //Opciones
     ],
     "order": [
@@ -32,6 +32,7 @@ var oTable =  $('#patients').DataTable({
     "bLengthChange": false,
     "info": false,
     "bFilter": false,
+    "bPaginate": false,
     "language": {
         "sProcessing": "Procesando...",
         "sLengthMenu": "Mostrar _MENU_ usuarios",
