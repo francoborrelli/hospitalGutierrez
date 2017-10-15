@@ -11,6 +11,9 @@
    {% include 'Patients/addPatient.html.twig' %}
 
     <div class="container userReport">
+        <div class="row">
+            {% include 'Patients/patientSearch.html.twig' %}
+            <div class ="col-lg-9">
         <div class="card">
             <div class="card-header text-left">
                 <a class="btn detalle" id="goBack" title="Volver al inicio" href="/"><i class="fa fa-reply" aria-hidden="true"></i></a>
@@ -35,7 +38,10 @@
                     </table>
                 </div>
             </div>
+
         </div>
+    </div>
+            </div>
     </div>
 {% endblock %} 
 
@@ -47,5 +53,5 @@
     <script src="/web/dist/js/patients.js"></script>
     <script src="/web/dist/js/multi-step-modal.js"></script>
     <script src="/web/dist/js/addPatientValidation.js"></script>
-        <script src="/web/dist/js/editPatientValidation.js"></script>
+    <script src="/web/dist/js/editPatientValidation.js"></script>
 {% endblock %}

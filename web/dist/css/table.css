@@ -64,10 +64,13 @@ table.dataTable tbody td {
     vertical-align: middle;
   }
 
-
 table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before {
     top: inherit!important; 
 }
-#usuarios_wrapper{
+#patients_wrapper, #usuarios_wrapper{
     margin-top: 35px;
+}
+
+.searchForm{
+    margin-bottom: 30px;
 }
