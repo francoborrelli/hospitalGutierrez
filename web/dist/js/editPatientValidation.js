@@ -98,3 +98,39 @@ $('#editPersonalInfo').validate({
     },
 
 });
+
+
+$('#editDemographicInfo').validate({
+    rules: {
+        houseTypeId: {
+            required: true,
+        },
+        heatingTypeId: {
+            required: true,
+        },
+        waterTypeId: {
+            required: true,
+        }
+    },
+    messages: {
+        heatingTypeId: {
+            required: "Seleccione el tipo de calefacción",
+        },        
+        houseTypeId: {
+            required: "Seleccione el tipo de casa",
+        },
+        waterTypeId: {
+            required: "Seleccione el tipo de Agua",
+        },
+    },
+    highlight: function (element) {
+        $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element) {
+        $(element).removeClass('is-invalid');
+    },
+    submitHandler: function (form) {
+        form.submit();
+    },
+
+});

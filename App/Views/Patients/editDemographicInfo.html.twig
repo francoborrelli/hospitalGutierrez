@@ -11,11 +11,11 @@
             </div>
             <div class="modal-body">
                 <div class="tab-content" id="myTabContent">
-                    <div class="row">
                         <!-- tipo de vivienda -->
                         <div class="form-group col">
-                            <label for="editHouse">¿Tipo de vivienda? *</label>
-                            <select id="editHouse" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
+                            <label for="houseTypeId">¿Tipo de vivienda? *</label>
+                            <select id="houseTypeId" name="houseTypeId" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
+                            <option value="">Selecciona tipo de casa</option>
                             <option value="Casa">Casa</option>
                             <option value="Departamento">Departamento</option>
                             <option value="Rancho">Rancho</option>
@@ -28,8 +28,9 @@
 
                         <!-- tipo de calefaccion -->
                         <div class="form-group col">
-                            <label for="editHeat">¿Tipo de calefacción? *</label>
-                            <select id="editHeat" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            <label for="heatingTypeId">¿Tipo de calefacción? *</label>
+                            <select id="heatingTypeId" name="heatingTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            <option value="">Selecciona tipo de calefacción</option>
                             <option value="Gas">Gas</option>
                             <option value="Electrica">Electrica</option>
                             <option value="Otro">Otro</option>
@@ -39,8 +40,9 @@
 
                         <!-- tipo de agua -->
                         <div class="form-group col">
-                            <label for="editWater">¿Tipo de agua? *</label>
-                            <select id="editWater" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            <label for="waterTypeId">¿Tipo de agua? *</label>
+                            <select id="waterTypeId" name="waterTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            <option value="">Selecciona tipo de agua</option>
                             <option value="Red Publica">Red Publica</option>
                             <option value="Cisterna">Cisterna</option>
                             <option value="bomba a Motor">Bomba a Motor</option>
@@ -66,7 +68,6 @@
                             <label for="pets">¿Tiene mascotas? *</label> {{ switch.item('Tiene','No tiene', 'editPets', patient.pet) }}
                         </div>
                     </div>
-                </div>
             </div>
     <div class="modal-footer">
         <small id="error" class="error">*Campos Obligatorios</small>
