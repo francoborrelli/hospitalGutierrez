@@ -26,10 +26,10 @@ class UserController extends Controller
 	    $qb->select('u')
                 ->from('App\Models\User', 'a')
                 ->where('u.username = :username')
-                ->setParameter('username', $_GET['username']);
+                ->setParameter('username', 'pedrobrost' );
 	    $users = $qb->getQuery()->getResult();
         }
-        //$users = $userRepository->findAll();
+        $users = $userRepository->findAll();
         $users = new ArrayCollection($users);
         $pages = ceil($users->count() / 1);
         $pages = ($pages == 0) ? 1 : $pages;

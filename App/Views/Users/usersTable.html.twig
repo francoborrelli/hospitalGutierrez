@@ -54,20 +54,16 @@
                             <!-- paginacion -->
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
-                                    <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Anterior">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Anterior</span>
-                                    </a>
+                                    <li class="page-item {% if page == 1 %} disabled {% endif %}">
+                                        <a class="page-link" href="/admin/users/{{ page - 1 }}" tabindex="-1">Ant</a>
                                     </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Posterior">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Posterior</span>
-                                    </a>
+                                    {% for i in 1..pages %}
+                                        <li class="page-item {% if i == page %} active {% endif %}">
+                                            <a class="page-link" href="/admin/users/{{ i }}">{{ i }}</a>
+                                        </li>
+                                    {% endfor %}
+                                    <li class="page-item {% if page == pages %} disabled {% endif %}">
+                                        <a class="page-link" href="/admin/users/{{ page + 1 }}">Sig</a>
                                     </li>
                                 </ul>
                             </nav>
