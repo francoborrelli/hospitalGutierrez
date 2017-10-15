@@ -52,10 +52,29 @@ class PatientController extends Controller
         $this->redirect('/patients');
     }
 
-    public function showAction(){
+    public function showAction()
+    {
         $em = $this->getEntityManager();
         $patient = $em->getRepository(Patient::class)->find($this->getRouteParams()['id']);
         $this->render('Patients/patientProfile.html.twig', ['patient' => $patient]);
+    }
+
+    public function editAction()
+    {
+        $em = $this->getEntityManager();
+        $patientRepository = $em->getRepository(Patient::class);
+
+        $patient = $patientRepository->find($this->getRouteParams()['id']);
+        $validationErrors = [];
+        if (empty($validationErrors)) {
+            $user->setData($_POST);
+            $em->flush();
+
+            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del usuario correctamente');
+            $this->redirect('/patient/' . $this->getRouteParams()['id']);
+        } else {
+            $this->render('Patients/patientProfile.html.twig');
+        }
     }
 
     private function getPatientData($data)
