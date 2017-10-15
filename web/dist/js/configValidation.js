@@ -9,7 +9,7 @@ $('#configForm').validate({
             email: true,
             maxlength: 255,
         },
-        pageAmount: {
+        listAmount: {
             required: true,
             number: true,
         },
@@ -19,7 +19,7 @@ $('#configForm').validate({
             required: "Ingrese el título",
             maxlength: "No puede tener más de 50 caracteres"
         },
-        pageAmount: {
+        listAmount: {
             required: "",
             number: "",
             min: "",
