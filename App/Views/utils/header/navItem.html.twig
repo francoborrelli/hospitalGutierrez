@@ -8,7 +8,7 @@
 {% macro dropdownItem(name, icon, route, id) %}
 <a class="dropdown-item" {% if id %} id = "{{id}}" {% endif %} href=" {% if route %} {{ route }} {% else %} # {% endif %} ">
     <span> 
-        <i class="fa {{icon}}" aria-hidden="true"></i></span>&nbsp<span>{{name}}
+        <i class="fa {{icon}}" aria-hidden="true"></i></span>&nbsp&nbsp<span>{{name}}
     </span>
 </a>
 {% endmacro %}
