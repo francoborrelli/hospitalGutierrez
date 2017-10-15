@@ -53,7 +53,7 @@
                             {% if 'genderId' in editErrors %}<label id="genderId-error" class="error" for="genderId">Seleccione el género</label>{% endif %}
                             </div>
                             <div class="form-group col">
-                                <label for="birthday">Fecha de Nacimiento *</label>
+                                <label for="birthday"><span class="hidden">Fecha de </span>Nacimiento *</label>
                                 <input value="{{patient.birthday|date("Y-m-d")}}" type="date" id="birthday" name="birthday" min="1900-01-01" max="{{ " now "|date("Y-m-d ") }}"class="form-control {% if 'birthday' in editErrors %}is-invalid{% endif %}"
                                     placeholder="Nacimiento">
                                 {% if 'birthday' in editErrors %}<label id="birthday-error" class="error" for="birthday">Ingrese la fecha de nacimiento</label>{% endif %}
