@@ -30,7 +30,7 @@ class Article
     /**
      * @var text
      *
-     * @Column(type="text", length=255)
+     * @Column(type="text")
      */
     private $body;
 
