@@ -113,7 +113,7 @@ class Router
 
     private function siteInMaintenance()
     {
-        return \App\Site::getSite()->getEnabled();
+        return ! \App\Site::getSite()->getEnabled();
     }
     
     private function renderMaintenance()

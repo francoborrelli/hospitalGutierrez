@@ -83,9 +83,9 @@
                 <div class="tab-pane fade" id="mantenimiento" role="tabpanel" aria-labelledby="mantenimiento-tab">
                     <div class="ChangeMantenimiento">
                         {% if validationSite is defined %} 
-                            {{ switch.item('Sitio en mantenimiento','Sitio activo', 'enabled', validationSite.enabled) }}
+                            {{ switch.item('Sitio activo','Sitio en mantenimiento', 'enabled', validationSite.enabled) }}
                         {% else %} 
-                            {{ switch.item('Sitio en mantenimiento','Sitio activo', 'enabled', site.enabled) }}
+                            {{ switch.item('Sitio activo','Sitio en mantenimiento', 'enabled', site.enabled) }}
                         {% endif %}
                     </div>
                 </div>
