@@ -16,10 +16,10 @@ var oTable =  $('#patients').DataTable({
         }
     },
     columns: [
-        { responsivePriority: 3 }, //Tipo doc
-        { responsivePriority: 3 }, // documento
         { responsivePriority: 2 }, //nombre
         { responsivePriority: 2 }, //apellido
+        { responsivePriority: 3 }, //Tipo doc
+        { responsivePriority: 3 }, //documento
         { responsivePriority: 1 }   //Opciones
     ],
     "order": [
