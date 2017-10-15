@@ -16,6 +16,8 @@ class PatientController extends Controller
 
     public function indexAction()
     {
+        $this->denyAccessUnlessPermissionGranted('paciente_index');
+
         $patientRepository = $this->getEntityManager()->getRepository(Patient::class);
         $patients = $patientRepository->findAll();
         $this->render('Patients/patientsTable.html.twig', ['patients' => $patients, 'patientFields' => $this->getPatientFields()]);
@@ -23,6 +25,8 @@ class PatientController extends Controller
 
     public function newAction()
     {
+        $this->denyAccessUnlessPermissionGranted('paciente_new');
+
         $em = $this->getEntityManager();
 
         $data = $this->getPatientData($_POST);
@@ -43,6 +47,8 @@ class PatientController extends Controller
 
     public function removeAction()
     {
+        $this->denyAccessUnlessPermissionGranted('paciente_destroy');
+
         $em = $this->getEntityManager();
         $patientRepository = $em->getRepository(Patient::class);
         $patient = $patientRepository->find($this->getRouteParams()['id']);
@@ -55,6 +61,8 @@ class PatientController extends Controller
 
     public function showAction()
     {
+        $this->denyAccessUnlessPermissionGranted('paciente_show');
+
         $em = $this->getEntityManager();
         $patient = $em->getRepository(Patient::class)->find($this->getRouteParams()['id']);
         $this->render('Patients/patientProfile.html.twig', ['patient' => $patient, 'patientFields' => $this->getPatientFields()]);
