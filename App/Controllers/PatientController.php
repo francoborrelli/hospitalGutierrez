@@ -27,8 +27,7 @@ class PatientController extends Controller
 
         $data = $this->getPatientData($_POST);
         $patient = new Patient($data);
-        //$validationErrors = $patient->validationErrors();
-        $validationErrors = [];
+        $validationErrors = $patient->validationErrors();
         if (empty($validationErrors)){
             $em->persist($patient);
             $em->flush();
@@ -36,6 +35,7 @@ class PatientController extends Controller
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al paciente correctamente');
             $this->redirect('/patients');
         } else {
+            $this->addFlashMessage('danger', 'Noup.', 'Hubo errores');
             $this->render('Patients/patientsTable.html.twig');
         }
     }
