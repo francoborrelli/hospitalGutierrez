@@ -53,15 +53,6 @@ body .content {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.iconbox-4 .heading {
-    font-weight: 700;
-    color: #111;
-    font-size: 2em;
-    letter-spacing: 1px;
-
-font-family: 'Poppins', sans-serif;
-}
-
 .heading {
     font-weight: 400;
 }
@@ -71,7 +62,6 @@ h4 {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Volkhov', serif;
     color: #1a1a1a;
     text-transform: capitalize;
     margin-top: 0em;
