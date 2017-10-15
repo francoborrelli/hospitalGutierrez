@@ -58,6 +58,18 @@ class Site
     private $enabled;
 
 
+    public function setData($data)
+    {
+        $this->title = $data['title'];
+        $this->email = $data['email'];
+        $this->description = $data['description'];
+        if (isset($data['enabled']))
+            $this->enabled = true;
+        else
+            $this->enabled = false;
+        $this->listAmount = $data['listAmount'];
+    }
+
     /**
      * Get id
      *
