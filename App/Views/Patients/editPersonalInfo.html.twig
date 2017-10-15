@@ -57,7 +57,7 @@
                                     placeholder="Nacimiento">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group addressGroup">
                             <label for="address">Domicilio *</label>
                             <input type="text" id="address" name="address" class="form-control {% if 'address' in editErrors %}is-invalid{% endif %}"
                                 value="{{patient.address}}" placeholder="Domicilio">                            {% if 'address' in editErrors %}<label id="address-error" class="error" for="address">Debe ingresar una dirección</label>{%
