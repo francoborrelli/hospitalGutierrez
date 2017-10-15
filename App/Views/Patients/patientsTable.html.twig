@@ -21,7 +21,9 @@
             </div>
             <div class="card-block">
                 <div class="tablePage">
-                    <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addPatient">Agregar</button>  
+                    {% if currentUser.hasPermission('paciente_new') %}
+                        <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addPatient">Agregar</button>  
+                    {% endif %}
                     <table class="table table-striped" id="patients">
                     <thead>
                         <tr>
@@ -58,6 +60,12 @@
             $('#addPatient').modal('show')
         </script>
     {% endif %}
-
+   {% if not currentUser.hasPermission('paciente_show') %}
+        <script>
+            $(document).ready(function() {
+                oTable.column(4).visible(false)
+            } );
+        </script>
+    {% endif %}
 {% endblock %}
 
