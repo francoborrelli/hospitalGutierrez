@@ -6,7 +6,7 @@ namespace App\Models;
  * Patient
  *
  * @Table(name="patients")
- * @Entity
+ * @Entity(repositoryClass="App\Repositories\PatientRepository")
  */
 class Patient
 {

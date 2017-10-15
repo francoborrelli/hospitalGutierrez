@@ -31,7 +31,7 @@
                         <label for="Nombre">Tipo Documento *</label>
                         <select id="documentTypeId" name="documentTypeId" class="form-control form-control-chosen-required {% if 'documentTypeId' in newErrors %}is-invalid{% endif %}" data-placeholder="Tipo de documento">
                             <option value="">Seleccione el tipo de documento</option>
-                            {% for documentType in patientFields.documentType %}
+                            {% for documentType in data.patientFields.documentType %}
                             <option value="{{ documentType.id }}" {% if newErrors is defined and documentType.id == patient.documentType.id %}selected="selected"{% endif %}>{{ documentType.name }}</option>
                             {% endfor %}
                         </select>
@@ -48,7 +48,7 @@
                         <label for="genderId">Género *</label>
                         <select id="genderId" name="genderId" class="form-control form-control-chosen-required {% if 'genderId' in newErrors %}is-invalid{% endif %}">
                             <option value="">Seleccione el género </option>
-                            {% for gender in patientFields.gender %}
+                            {% for gender in data.patientFields.gender %}
                             <option value="{{ gender.id }}"{% if newErrors is defined and gender.id == patient.gender.id %}selected="selected"{% endif %}>{{ gender.name }}</option>
                             {% endfor %}
                         </select>
@@ -74,7 +74,7 @@
                         <label for="insuranceId">Obra Social</label>
                         <select id="insuranceId" name="insuranceId" class="form-control form-control-chosen-required">
                             <option value=""> Seleccione la obra social</option>
-                            {% for insurance in patientFields.insurance %}
+                            {% for insurance in data.patientFields.insurance %}
                                 <option value="{{ insurance.id }}"{% if newErrors is defined and insurance.id == patient.insurance.id %}selected="selected"{% endif %}>{{ insurance.name }}</option>
                             {% endfor %}
                         </select>
@@ -89,7 +89,7 @@
                         <label for="insurance">¿Tipo de vivienda? *</label>
                         <select id="houseTypeId" name="houseTypeId" class="form-control form-control-chosen-required {% if 'houseType' in newErrors %}is-invalid{% endif %}" data-placeholder="Vivienda">
                             <option value="">Seleccione tipo de casa</option>
-                            {% for houseType in patientFields.houseType %}
+                            {% for houseType in data.patientFields.houseType %}
                             <option value="{{ houseType.id }}" {% if newErrors is defined and houseType.id == patient.houseType.id %}selected="selected"{% endif %}>{{ houseType.name }}</option>
                             {% endfor %}
                         </select>
@@ -99,7 +99,7 @@
                         <label for="heatingTypeId">¿Tipo de calefacción? *</label>
                         <select id="heatingTypeId" name="heatingTypeId" class="form-control form-control-chosen-required {% if 'heatingType' in newErrors %}is-invalid{% endif %}" data-placeholder="Calefaccion">
                             <option value="">Seleccione tipo de calefaccion</option>
-                            {% for heatingType in patientFields.heatingType %}
+                            {% for heatingType in data.patientFields.heatingType %}
                             <option value="{{ heatingType.id }}"{% if newErrors is defined and heatingType.id == patient.heatingType.id %}selected="selected"{% endif %}>{{ heatingType.name }}</option>
                             {% endfor %}
                         </select>
@@ -109,7 +109,7 @@
                         <label for="waterTypeId">¿Tipo de agua? *</label>
                         <select id="waterTypeId" name="waterTypeId" class="form-control form-control-chosen-required {% if 'waterType' in newErrors %}is-invalid{% endif %}" data-placeholder="Calefaccion">
                             <option value="">Seleccione tipo de agua</option>
-                            {% for waterType in patientFields.waterType %}
+                            {% for waterType in data.patientFields.waterType %}
                             <option value="{{ waterType.id }}"{% if newErrors is defined and waterType.id == patient.waterType.id %}selected="selected"{% endif %}>{{ waterType.name }}</option>
                             {% endfor %}
                         </select>

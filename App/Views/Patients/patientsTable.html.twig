@@ -38,27 +38,29 @@
                     </tbody>
                         {% include 'Patients/patients.html.twig' %}
                     </tbody>
-                    </table>
-                        <!-- paginacion -->
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Anterior">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Anterior</span>
+                </table>
+
+                <!-- paginacion -->
+                <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item {% if data.page == 1 %} disabled {% endif %}">
+                                <a class="page-link"
+                                    href="/patients/{{ data.page - 1 }}?name={{ data.firstName }}&lastName={{ data.lastName }}&documentType={{ data.documentType }}&docNumber={{ data.docNumber }}"
+                                    tabindex="-1">Ant
                                 </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Posterior">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Posterior</span>
+                            </li>
+                            {% for i in 1..data.pages %}
+                                <li class="page-item {% if i == data.page %} active {% endif %}">
+                                    <a class="page-link"
+                                        href="/patients/{{ i }}?name={{ data.firstName }}&lastName={{ data.lastName  }}&documentType={{ data.documentType }}&docNumber={{ data.docNumber }}">{{ i }}
                                     </a>
                                 </li>
-                            </ul>
-                        </nav>
+                            {% endfor %}
+                            <li class="page-item {% if data.page == data.pages %} disabled {% endif %}">
+                                <a class="page-link" href="/patients/{{ data.page + 1 }}?name={{ data.firstName }}&lastName={{ data.lastName  }}&documentType={{ data.documentType }}&docNumber={{ data.docNumber }}">Sig</a>
+                            </li>
+                        </ul>
+                    </nav>
 
                 </div>
             </div>
