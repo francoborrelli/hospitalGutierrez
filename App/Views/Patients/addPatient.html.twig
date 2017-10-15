@@ -16,48 +16,50 @@
             <div class="modal-body step step-1">
                 <div class="row">
                     <div class="form-group col">
-                        <label for="Nombre">Nombre*</label>
+                        <label for="Nombre">Nombre *</label>
                         <input type="text" id="firstName" name="firstName" class="form-control {% if 'firstName' in newErrors %}is-invalid{% endif %}" placeholder="Nombre" {% if  newErrors is defined %}value="{{patient.firstName}}"{% endif %}>
                         {% if 'firstName' in newErrors %}<label id="firstName-error" class="error" for="firstName">Ingrese el nombre</label>{% endif %}
                     </div>
                     <div class="form-group col">
-                        <label for="Apellido">Apellido*</label>
+                        <label for="Apellido">Apellido *</label>
                         <input type="text" id="lastName" name="lastName" class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Apellido" {% if  newErrors is defined %} value="{{patient.lastName}}"{% endif %}>
                         {% if 'lastName' in newErrors %}<label id="lastName-error" class="error" for="lastName">Ingrese el apellido</label>{% endif %}
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col">
-                        <label for="Nombre">Tipo Documento*</label>
-                        <select id="typeDni" name="documentTypeId" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                        <label for="Nombre">Tipo Documento *</label>
+                        <select id="documentTypeId" name="documentTypeId" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                            <option value="">Seleccione el tipo de documento</option>
                             {% for documentType in patientFields.documentType %}
                             <option value="{{ documentType.id }}">{{ documentType.name }}</option>
                             {% endfor %}
                         </select>
-                        {% if 'documentType' in newErrors %}<label id="typeDni-error" class="error" for="documentType">Ingrese el tipo de documento</label>{% endif %}
+                        {% if 'documentType' in newErrors %}<label id="documentTypeId-error" class="error" for="documentTypeId">Ingrese el tipo de documento</label>{% endif %}
                     </div>
                     <div class="form-group col">
-                        <label for="Nº documento">Nº documento*</label>
-                        <input type="text" id="dni" name="documentNumber" class="form-control {% if 'dni' in newErrors %}is-invalid{% endif %}" placeholder="Numero de documento" {% if  newErrors is defined %} value="{{patient.dni}}"{% endif %}>
-                        {% if 'documentNumber' in newErrors %}<label id="dni-error" class="error" for="documentNumber">Ingrese el nº de documento</label>{% endif %}
+                        <label for="documentNumber">Nº documento *</label>
+                        <input type="text" id="documentNumber" name="documentNumber" class="form-control {% if 'dni' in newErrors %}is-invalid{% endif %}" placeholder="Numero de documento" {% if  newErrors is defined %} value="{{patient.dni}}"{% endif %}>
+                        {% if 'documentNumber' in newErrors %}<label id="documentNumber-error" class="error" for="documentNumber">Ingrese el nº de documento</label>{% endif %}
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col">
-                        <label for="Nombre">Género*</label>
-                        <select id="gender" name="genderId" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                        <label for="genderId">Género *</label>
+                        <select id="genderId" name="genderId" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                            <option value="">Seleccione el género </option>
                             {% for gender in patientFields.gender %}
                             <option value="{{ gender.id }}">{{ gender.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="form-group col">
-                        <label for="Apellido">Fecha de Nacimiento*</label>
+                        <label for="birthday">Fecha de Nacimiento *</label>
                         <input type="date" id="birthday" name="birthday" min="1900-01-01" max="{{ "now"|date("Y-m-d") }}"class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Nacimiento">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="address">Domicilio*</label>
+                    <label for="address">Domicilio *</label>
                     <input type="text" id="address" name="address" class="form-control {% if 'address' in newErrors %}is-invalid{% endif %}"{% if  newErrors is defined %}  value="{{patient.address}}"{% endif %} placeholder="Domicilio">
                     {% if 'address' in newErrors %}<label id="address-error" class="error" for="address">Debe ingresar una dirección</label>{% endif %}
                 </div>
@@ -68,8 +70,9 @@
                         {% if 'phone' in newErrors %}<label id="phone-error" class="error" for="phone">Ingrese el nombre</label>{% endif %}
                     </div>
                     <div class="form-group col">
-                        <label for="insurance">Obra Social</label>
-                        <select id="insurance" name="insuranceId" class="form-control form-control-chosen-required" data-placeholder="Obra Social">
+                        <label for="insuranceId">Obra Social</label>
+                        <select id="insuranceId" name="insuranceId" class="form-control form-control-chosen-required" data-placeholder="Obra Social">
+                            <option value="-1"> Seleccione la obra social</option>
                             {% for insurance in patientFields.insurance %}
                             <option value="{{ insurance.id }}">{{ insurance.name }}</option>
                             {% endfor %}
@@ -83,24 +86,27 @@
             <div class="modal-body step step-2">
              <div class="row">
                     <div class="form-group col">
-                        <label for="insurance">¿Tipo de vivienda?*</label>
-                        <select id="house" name="houseTypeId" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
+                        <label for="insurance">¿Tipo de vivienda? *</label>
+                        <select id="houseTypeId" name="houseTypeId" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
+                            <option value="-1">Seleccione tipo de casa</option>
                             {% for houseType in patientFields.houseType %}
                             <option value="{{ houseType.id }}">{{ houseType.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="form-group col">
-                        <label for="insurance">¿Tipo de calefacción?*</label>
-                        <select id="heat" name="heatingTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                        <label for="heatingTypeId">¿Tipo de calefacción? *</label>
+                        <select id="heatingTypeId" name="heatingTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            <option value="">Seleccione tipo de calefaccion</option>
                             {% for heatingType in patientFields.heatingType %}
                             <option value="{{ heatingType.id }}">{{ heatingType.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="form-group col">
-                        <label for="insurance">¿Tipo de agua?*</label>
-                        <select id="heat" name="waterTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                        <label for="waterTypeId">¿Tipo de agua? *</label>
+                        <select id="waterTypeId" name="waterTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            <option value="">Seleccione tipo de agua</option>
                             {% for waterType in patientFields.waterType %}
                             <option value="{{ waterType.id }}">{{ waterType.name }}</option>
                             {% endfor %}
