@@ -15,6 +15,7 @@ $router = new Core\Router();
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 
 $router->add('admin/users', ['controller' => 'User', 'action' => 'show']);
+$router->add('admin/users/{page:\d+}', ['controller' => 'User', 'action' => 'show']);
 $router->add('admin/users/{action}', ['controller' => 'User']);
 $router->add('admin/{controller}/{action}');
 

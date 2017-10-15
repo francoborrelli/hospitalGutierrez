@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Core\Controller;
 use App\Models\User;
 use App\Models\Role;
@@ -12,7 +14,30 @@ class UserController extends Controller
     public function showAction()
     {
         $this->denyAccessUnlessPermissionGranted('usuario_index');
-        $this->render('Users/usersTable.html.twig', ['data' => $this->getData()]);
+
+        $userRepository = $this->getEntityManager()->getRepository(User::class);
+        if (isset($this->getRouteParams()['page']))
+            $page = $this->getRouteParams()['page'];
+        else
+            $page = 1;
+
+        if (true || isset($_GET['username'])) {
+            $qb = $userRepository->createQueryBuilder('u');
+	    $qb->select('u')
+                ->from('App\Models\User', 'a')
+                ->where('u.username = :username')
+                ->setParameter('username', $_GET['username']);
+	    $users = $qb->getQuery()->getResult();
+        }
+        //$users = $userRepository->findAll();
+        $users = new ArrayCollection($users);
+        $pages = ceil($users->count() / 1);
+        $pages = ($pages == 0) ? 1 : $pages;
+        $users = $users->matching(Criteria::create()
+            ->setFirstResult(($page - 1) * 1)
+            ->setMaxResults(1)
+        );
+        $this->render('Users/usersTable.html.twig', ['users' => $users, 'page' => $page, 'pages' => $pages, 'data' => $this->getData()]);
     }
 
     public function newAction()
@@ -108,9 +133,8 @@ class UserController extends Controller
 
     public function getData(){
         $em = $this->getEntityManager();
-        $users = $em->getRepository(User::class)->findAll();
         $roles = $em->getRepository(Role::class)->findAll();
-        return ['users' => $users, 'roles' => $roles];
+        return ['roles' => $roles];
     }
 
 }
