@@ -101,4 +101,9 @@ abstract class Controller
         return Authentication::getUser();
     }
 
+    protected function getSite()
+    {
+        return \App\Site::getSite();
+    }
+
 }

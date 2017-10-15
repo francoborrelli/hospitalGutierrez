@@ -23,12 +23,13 @@ class UserController extends Controller
         $state = $this->stateGiven();
         $users = $userRepository->findByUsernameAndState($username, $state);
 
+        $listAmount = $this->getSite()->getListAmount();
         $users = new ArrayCollection($users);
-        $pages = ceil($users->count() / 2);
+        $pages = ceil($users->count() / $listAmount);
         $pages = ($pages == 0) ? 1 : $pages;
         $users = $users->matching(Criteria::create()
-            ->setFirstResult(($page - 1) * 2)
-            ->setMaxResults(2)
+            ->setFirstResult(($page - 1) * $listAmount)
+            ->setMaxResults($listAmount)
         );
 
         $data = ['roles' => $em->getRepository(Role::class)->findAll(),

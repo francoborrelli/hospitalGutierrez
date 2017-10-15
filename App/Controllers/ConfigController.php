@@ -10,7 +10,7 @@ class ConfigController extends Controller
 
     public function indexAction()
     {
-        $this->render('Config/config.html.twig', ['site' => $this->getSite()]);
+        $this->render('Config/config.html.twig');
     }
 
     public function updateAction()
@@ -21,11 +21,6 @@ class ConfigController extends Controller
 
         $this->addFlashMessage('success', 'Felicitaciones!.', 'Los datos del sitio se han actualizado correctamente');
         $this->redirect('/admin/config');
-    }
-
-    public function getSite()
-    {
-        return $this->getentitymanager()->getrepository(site::class)->findAll()[0];
     }
 
 }
