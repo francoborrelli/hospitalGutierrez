@@ -23,7 +23,6 @@ nav.navbar {
     background-color: #fff;
 }
 
-
 nav a {
     -webkit-transition: 0.5s;
     -moz-transition: 0.5s;
@@ -33,7 +32,7 @@ nav a {
     padding-bottom: 17px !important;
 }
 
-nav a.dropdown-item{
+nav a.dropdown-item {
     padding-top: 3px!important;
     padding-bottom: 3px!important;
 }
@@ -55,7 +54,6 @@ nav .dropdown-item:active {
     min-width: 55px;
 }
 
-
 @media (max-width: 767px) {
     .navbar-brand {
         margin-left: 0px;
@@ -72,4 +70,3 @@ nav .dropdown-item:active {
         margin-left: 10px;
     }
 }
-

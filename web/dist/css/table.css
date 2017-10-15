@@ -3,11 +3,6 @@
     margin-top: 80px;
     margin-bottom: 50px;
 }
-@media(max-width: 765px){
-    .container.userReport {
-        margin-bottom: -20px;
-    }
-}
 
 .container.userReport .card .card-header .btn.detalle {
     float: right;
@@ -90,6 +85,12 @@ table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before 
 
 .pagination .page-link {
     line-height: 0
+}
+
+@media(max-width: 765px) {
+    .container.userReport {
+        margin-bottom: -20px;
+    }
 }
 
 @media (min-width: 768px) {
