@@ -23,8 +23,8 @@ class UserRepository extends EntityRepository
             ->from('App\Models\User', 'p');
 
         if (!empty($username)) {
-            $qb->andWhere('u.username = :username')
-               ->setParameter('username', $username);
+            $qb->andWhere('LOWER(u.username) LIKE :username')
+                ->setParameter('username', '%'.$username.'%');
         }
 
         if (!empty($state)) {
