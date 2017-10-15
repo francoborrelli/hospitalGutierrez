@@ -84,6 +84,18 @@ abstract class Controller
         }
     }
 
+    protected function denyAccessUnlessOneGranted($permissions)
+    {
+        $this->requireLogin();
+        foreach ($permissions as $permission) {
+            if ($this->getUser()->hasPermission($permission)) {
+                return;
+            }
+        }
+        $this->addFlashMessage('warning', 'Lo sentimos.', "Usted posee el permiso");
+        $this->redirect('/');
+    }
+
     protected function getUser()
     {
         return Authentication::getUser();
