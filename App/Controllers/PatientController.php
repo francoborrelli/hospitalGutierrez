@@ -30,12 +30,13 @@ class PatientController extends Controller
         $docNumber = $this->docNumberGiven();
         $patients = $patientRepository->findSearch($firstName, $lastName, $documentType, $docNumber);
 
+        $listAmount = $this->getSite()->getListAmount();
         $patients = new ArrayCollection($patients);
-        $pages = ceil($patients->count() / 2);
+        $pages = ceil($patients->count() / $listAmount);
         $pages = ($pages == 0) ? 1 : $pages;
         $patients = $patients->matching(Criteria::create()
-            ->setFirstResult(($page - 1) * 2)
-            ->setMaxResults(2)
+            ->setFirstResult(($page - 1) * $listAmount)
+            ->setMaxResults($listAmount)
         );
 
         $data = ['patients' => $patients,
