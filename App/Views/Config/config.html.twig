@@ -40,16 +40,16 @@
                         <div class="row">
                             <div class="form-group col">
                                 <label for="title">Título</label>
-                                <input type="text" id="title" name="title" class="form-control" placeholder="Título">
+                                <input type="text" id="title" name="title" value="{{ site.title }}" class="form-control" placeholder="Título">
                             </div>
                             <div class="form-group col">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+                                <input type="email" id="email" name="email" value="{{ site.email }}" class="form-control" placeholder="Email">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="descripcion">Descripción</label>
-                            <textarea id="descripcion" name="descripcion" class="form-control" placeholder="Descripción"></textarea>
+                            <textarea id="descripcion" name="description" class="form-control" placeholder="Descripción">{{ site.description }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                                     <span class="input-group-btn data-dwn">
                                         <button class="btn btn-default" id="dwn" type="button" data-dir="dwn"><i class="fa fa-minus" aria-hidden="true"></i></button>
                                     </span>
-                                    <input type="number" id="pageAmount" name="pageAmount" class="form-control text-center" min="1" value="1" placeholder="Ingrese el nuevo numero de elementos por página" required>
+                                    <input type="number" id="pageAmount" name="listAmount" class="form-control text-center" min="1" value="{{ site.listAmount }}" placeholder="Ingrese el nuevo numero de elementos por página" required>
                                     <span class="input-group-btn data-up">
                                         <button class="btn btn-default"  id="up"  type="button" data-dir="up"><i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
@@ -78,7 +78,7 @@
                 <!-- Mantenimiento  -->
                 <div class="tab-pane fade" id="mantenimiento" role="tabpanel" aria-labelledby="mantenimiento-tab">
                     <div class="ChangeMantenimiento">
-                        {{ switch.item('Sitio activo','Sitio en mantenimiento', 'actived') }}
+                        {{ switch.item('Sitio activo','Sitio en mantenimiento', 'enabled', site.enabled) }}
                     </div>
                 </div>
             </div>

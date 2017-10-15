@@ -16,7 +16,7 @@
         {% endif %}
 
         {% if currentUser.hasPermission("config_index") %}
-            {{ navbar.dropdownItem("Configuracion", "fa-user", "/", "dropdown_config") }}
+            {{ navbar.dropdownItem("Configuracion", "fa-user", "/admin/config", "dropdown_config") }}
             <div class="dropdown-divider"></div>
         {% endif %}
  
