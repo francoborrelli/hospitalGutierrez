@@ -4,7 +4,7 @@ var oTable =  $('#patients').DataTable({
             display: $.fn.dataTable.Responsive.display.modal( {
                 header: function ( row ) {
                     var data = row.data();
-                    return 'Paciente '+data[2]+' '+data[3];
+                    return 'Paciente '+data[0]+' '+data[1];
                 }
             } ),
 
