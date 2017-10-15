@@ -4,7 +4,7 @@ body .content {
 
 .banner {
     object-fit: cover;
-    height: 350px;
+    height: 300px;
     width: 100%;
 }
 
@@ -91,7 +91,7 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-.btn-black:hover{
+.btn-black:hover, .btn-black:active{
     color: #706d6d;
 }
 
@@ -101,7 +101,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-.btn {
+.btns {
     position: relative;
     font-family: 'Open Sans', sans-serif;
     color: #fff;
