@@ -26,7 +26,7 @@ class ConfigController extends Controller
             $this->getEntityManager()->flush();
 
             $this->addFlashMessage('success', 'Felicitaciones!.', 'Los datos del sitio se han actualizado correctamente');
-            $this->redirect('/admin/config');
+            $this->redirect('/config');
         }else{
             $this->render('Config/config.html.twig', ['errors' => $validationErrors, 'validationSite' => $validationSite]);
         }    
