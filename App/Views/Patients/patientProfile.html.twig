@@ -19,7 +19,6 @@
 
 <div class="container userReport">
   <div class="card ">
-
     <!-- header -->
     <div class="card-header">
         {{ patient.firstName }} {{ patient.lastName }}
@@ -73,11 +72,27 @@
 {% endblock %} 
 
 {% block javascripts %}
+
 <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
-<script src="/web/dist/js/editPatientValidation.js"></script>
+<!-- <script src="/web/dist/js/editPatientValidation.js"></script> -->
+
 {% if not currentUser.hasPermission('paciente_show') %}
 <script>
   $('#demographic-tab').trigger("click");
 </script>
 {% endif %}
+
+{% if editErrors is defined %}
+  {% if mode == 'patient' %}
+    <script>
+      $('#editPersonalInfo').modal('show')
+    </script>
+  {% else %}
+    <script>
+      $('#editDemographicInfo').modal('show')
+    </script>
+  {% endif %}  
+
+{% endif %}
+
 {% endblock %}
