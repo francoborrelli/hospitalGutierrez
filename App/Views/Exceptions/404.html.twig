@@ -1,14 +1,7 @@
-{% extends 'utils/base.html.twig' %}
+{% extends 'Exceptions/errorBase.html.twig' %}
 
+{% import 'Exceptions/error.html.twig' as error %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="/web/dist/css/error.css">
-{% endblock %}
-
-
-{% block body %}
-    <div class="errores">
-        <h1>404</h1>
-        <section>Página no encontrada</section>
-    </div>
+{% block errorMessage %}
+            {{ error.item("h1", "404", "Página no encontrada" ) }}
 {% endblock %}

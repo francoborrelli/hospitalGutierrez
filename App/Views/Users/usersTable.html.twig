@@ -1,23 +1,23 @@
 {% extends 'utils/base.html.twig' %} 
 
 {% block stylesheets %}
-<link rel="stylesheet" href="/web/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
-<link rel="stylesheet" href="/web/assets/dataTables/css/responsive.bootstrap4.min.css"> 
+    <link rel="stylesheet" href="/web/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
+    <link rel="stylesheet" href="/web/assets/dataTables/css/responsive.bootstrap4.min.css"> 
 {% endblock %} 
 
 {% block body %}
 
-{% if currentUser.hasPermission('usuario_new') %}
-    {% include 'Users/addUser.html.twig' %}
-{% endif %}    
+    {% if currentUser.hasPermission('usuario_new') %}
+        {% include 'Users/addUser.html.twig' %}
+    {% endif %}    
 
-{% if currentUser.hasPermission('usuario_destroy') %}
-    {% include 'Users/deleteUser.html.twig' %}
-{% endif %} 
+    {% if currentUser.hasPermission('usuario_destroy') %}
+        {% include 'Users/deleteUser.html.twig' %}
+    {% endif %} 
 
-{% if currentUser.hasPermission('usuario_update') %}
-    {% include 'Users/editUser.html.twig' %}
-{% endif %} 
+    {% if currentUser.hasPermission('usuario_update') %}
+        {% include 'Users/editUser.html.twig' %}
+    {% endif %} 
 
 
     <div class="container userReport tableScreen">
@@ -83,12 +83,14 @@
 
 
 {% block javascripts %}
+
     <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
     <script src="/web/assets/dataTables/js/datatables.min.js"></script>
     <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
     <script src="/web/dist/js/users.js"></script>
     <script src="/web/dist/js/multi-step-modal.js"></script>
-    
+
+    <!-- scripts requeridos de acuerdo a permisos -->
     {% if currentUser.hasPermission('usuario_new') %}
         <script src="/web/dist/js/addUserValidation.js"></script>
     {% endif %}
@@ -105,6 +107,7 @@
         </script>
     {% endif %}
 
+    <!-- scripts requeridos de acuerdo a errores de validación -->
     {% if newErrors is defined %}
         <script>
             $('#addUser').modal('show')
