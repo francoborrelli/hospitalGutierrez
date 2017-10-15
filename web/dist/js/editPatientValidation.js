@@ -1,6 +1,8 @@
-$('.nav-link').click(function(){
+$('.nav-link').click(function () {
     $('#editbtn').attr('data-target', $(this).data("form"));
 })
+
+
 
 $('#editPersonalInfo').validate({
     rules: {
@@ -16,7 +18,7 @@ $('#editPersonalInfo').validate({
             nonNumeric: true,
             maxlength: 50,
         },
-        dni: {
+        documentNumber: {
             required: true,
             maxlength: 50,
         },
@@ -34,7 +36,7 @@ $('#editPersonalInfo').validate({
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres"
         },
-        dni: {
+        documentNumber: {
             required: "Ingrese el documento",
             maxlength: "Ingrese un documento valido",
         },
@@ -67,5 +69,3 @@ $('#editPersonalInfo').validate({
     },
 
 });
-
-
