@@ -26,6 +26,7 @@ class PatientController extends Controller
         $em = $this->getEntityManager();
 
         $data = $this->getPatientData($_POST);
+        $data = $this->getDemographicData($data);
         $patient = new Patient($data);
         $validationErrors = $patient->validationErrors();
         if (empty($validationErrors)){
@@ -65,14 +66,16 @@ class PatientController extends Controller
         $patientRepository = $em->getRepository(Patient::class);
 
         $patient = $patientRepository->find($this->getRouteParams()['id']);
+        $data = $this->getPatientData($_POST);
         $validationErrors = [];
         if (empty($validationErrors)) {
-            $user->setData($_POST);
+            $patient->setData($data);
             $em->flush();
 
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del usuario correctamente');
             $this->redirect('/patient/' . $this->getRouteParams()['id']);
         } else {
+            $this->addFlashMessage('danger', '¡Felicitaciones!', 'Se han modificado los datos del usuario correctamente');
             $this->render('Patients/patientProfile.html.twig');
         }
     }
@@ -80,12 +83,18 @@ class PatientController extends Controller
     private function getPatientData($data)
     {
         $em = $this->getEntityManager();
-        $data['waterType'] = $em->getRepository(WaterType::class)->find($data['waterTypeId']);
-        $data['houseType'] = $em->getRepository(HouseType::class)->find($data['houseTypeId']);
-        $data['heatingType'] = $em->getRepository(HeatingType::class)->find($data['heatingTypeId']);
         $data['gender'] = $em->getRepository(Gender::class)->find($data['genderId']);
         $data['documentType'] = $em->getRepository(DocumentType::class)->find($data['documentTypeId']);
         $data['insurance'] = $em->getRepository(Insurance::class)->find($data['insuranceId']);
+        return $data;
+    }
+
+    private function getDemographicData($data)
+    {
+        $em = $this->getEntityManager();
+        $data['waterType'] = $em->getRepository(WaterType::class)->find($data['waterTypeId']);
+        $data['houseType'] = $em->getRepository(HouseType::class)->find($data['houseTypeId']);
+        $data['heatingType'] = $em->getRepository(HeatingType::class)->find($data['heatingTypeId']);
         return $data;
     }
 

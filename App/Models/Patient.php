@@ -121,6 +121,12 @@ class Patient
 
     public function __construct($data)
     {
+        $this->setData($data);
+        $this->setDemographicData($data);
+    }
+
+    public function setData($data)
+    {
         $this->firstName = $data['firstName'];
         $this->lastName = $data['lastName'];
         $this->birthday = new \DateTime($data['birthday']);
@@ -128,26 +134,32 @@ class Patient
         $this->address = $data['address'];
         if (isset($data['phone']) && !empty($data['phone']))
             $this->phone = $data['phone'];
+        $this->gender = $data['gender'];
+        $this->documentType = $data['documentType'];
+        if(isset($data['insurance']))
+            $this->insurance = $data['insurance'];
+    }
+
+    public function setDemographicData($data)
+    {
         if(isset($data['refrigerator']))
             $this->refrigerator = true;
         else
             $this->refrigerator = false;
+
         if(isset($data['electricity']))
             $this->electricity = true;
         else
             $this->electricity = false;
+
         if(isset($data['pet']))
             $this->pet = true;
         else
             $this->pet = false;
 
-        $this->gender = $data['gender'];
-        $this->documentType = $data['documentType'];
         $this->waterType = $data['waterType'];
         $this->houseType = $data['houseType'];
         $this->heatingType = $data['heatingType'];
-        if(isset($data['insurance']))
-            $this->insurance = $data['insurance'];
     }
 
 
