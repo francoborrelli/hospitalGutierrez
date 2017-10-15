@@ -41,23 +41,18 @@ $('#addPatient').validate({
         },
         documentTypeId: {
             required: true,
-            min: 0,
         },
         genderId: {
             required: true,
-            min: 0,
         },
         houseTypeId: {
             required: true,
-            min: 0,
         },
         heatingTypeId: {
             required: true,
-            min: 0,
         },
         waterTypeId: {
             required: true,
-            min: 0,
         }
     },
     messages: {
