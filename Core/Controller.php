@@ -37,6 +37,11 @@ abstract class Controller
     {
     }
 
+    protected function getRouteParams()
+    {
+        return $this->route_params;
+    }
+
     protected function render($template, $args = [])
     {
         View::renderTemplate($template, $args);
