@@ -13,13 +13,13 @@ class PatientRepository extends EntityRepository
             ->from('App\Models\Patient', 'l');
 
         if (!empty($firstName)) {
-            $qb->andWhere('p.firstName = :firstName')
-               ->setParameter('firstName', $firstName);
+            $qb->andWhere('LOWER(p.firstName) LIKE :firstName')
+                ->setParameter('firstName', '%'.$firstName.'%');
         }
 
-        if (!empty($lastname)) {
-            $qb->andwhere('p.lastname = :lastname')
-               ->setparameter('lastname', $lastname);
+        if (!empty($lastName)) {
+            $qb->andwhere('LOWER(p.lastName) LIKE :lastname')
+               ->setparameter('lastname', '%'.$lastName.'%');
         }
 
         if (!empty($documentType)) {
