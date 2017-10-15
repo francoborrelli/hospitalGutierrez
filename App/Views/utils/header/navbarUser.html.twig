@@ -6,27 +6,29 @@
     {% block elements %} 
 
         {% if currentUser.hasPermission("paciente_index") %}
-            {{ navbar.dropdownItem("Pacientes", "fa-user", "/patients") }}
+            {{ navbar.dropdownItem("Pacientes", "fa-user-md", "/patients") }}
+
             <div class="dropdown-divider"></div>
         {% endif %}
 
         {% if currentUser.hasPermission("usuario_index") %}
-            {{ navbar.dropdownItem("Usuarios", "fa-user", "/admin/users", "dropdown_users" ) }}
-            <div class="dropdown-divider"></div>
-        {% endif %}
+            {{ navbar.dropdownItem("Usuarios", "fa-users", "/admin/users", "dropdown_users" ) }}
 
-        {% if currentUser.hasPermission("config_index") %}
-            {{ navbar.dropdownItem("Configuracion", "fa-user", "/admin/config", "dropdown_config") }}
             <div class="dropdown-divider"></div>
         {% endif %}
  
-        {{ navbar.dropdownItem("Roles", "fa-user", "/", "dropdown_roles") }}
+        {{ navbar.dropdownItem("Roles", "fa-star", "/", "dropdown_roles") }}
 
         <div class="dropdown-divider"></div>
 
-        {{ navbar.dropdownItem("Roles", "fa-user", "/", "dropdown_roles") }}
+        {{ navbar.dropdownItem("Permisos", "fa-thumbs-o-up", "/", "dropdown_roles") }}
                 
         <div class="dropdown-divider"></div>
+
+        {% if currentUser.hasPermission("config_index") %}
+            {{ navbar.dropdownItem("Configuración", "fa-cog", "/admin/config", "dropdown_config") }}    
+            <div class="dropdown-divider"></div>
+        {% endif %}
 
         {% endblock %}
 

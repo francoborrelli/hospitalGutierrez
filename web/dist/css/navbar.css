@@ -34,8 +34,8 @@ nav a {
 }
 
 nav a.dropdown-item{
-    padding-top: inherit !important;
-    padding-bottom: inherit !important;
+    padding-top: 3px!important;
+    padding-bottom: 3px!important;
 }
 
 nav .dropdown-item:active {

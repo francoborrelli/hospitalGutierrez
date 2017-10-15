@@ -1,10 +1,12 @@
 body .content {
+    background: #fafafa;
+    min-height: 350px;
     padding: 80px 0px 0px;
 }
 
 .banner {
     object-fit: cover;
-    height: 300px;
+    height: 225px;
     width: 100%;
 }
 
