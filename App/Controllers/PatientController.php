@@ -57,7 +57,7 @@ class PatientController extends Controller
     {
         $em = $this->getEntityManager();
         $patient = $em->getRepository(Patient::class)->find($this->getRouteParams()['id']);
-        $this->render('Patients/patientProfile.html.twig', ['patient' => $patient]);
+        $this->render('Patients/patientProfile.html.twig', ['patient' => $patient, 'patientFields' => $this->getPatientFields()]);
     }
 
     public function editAction()
