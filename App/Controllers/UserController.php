@@ -15,29 +15,46 @@ class UserController extends Controller
     {
         $this->denyAccessUnlessPermissionGranted('usuario_index');
 
-        $userRepository = $this->getEntityManager()->getRepository(User::class);
-        if (isset($this->getRouteParams()['page']))
-            $page = $this->getRouteParams()['page'];
-        else
-            $page = 1;
+        $em = $this->getEntityManager();
+        $userRepository = $em->getRepository(User::class);
+        $page = isset($this->getRouteParams()['page']) ? $this->getRouteParams()['page'] : 1;
 
-        if (true || isset($_GET['username'])) {
-            $qb = $userRepository->createQueryBuilder('u');
-	    $qb->select('u')
-                ->from('App\Models\User', 'a')
-                ->where('u.username = :username')
-                ->setParameter('username', 'pedrobrost' );
-	    $users = $qb->getQuery()->getResult();
-        }
-        $users = $userRepository->findAll();
+        $username = $this->usernameGiven();
+        $state = $this->stateGiven();
+        $users = $userRepository->findByUsernameAndState($username, $state);
+
         $users = new ArrayCollection($users);
-        $pages = ceil($users->count() / 1);
+        $pages = ceil($users->count() / 2);
         $pages = ($pages == 0) ? 1 : $pages;
         $users = $users->matching(Criteria::create()
-            ->setFirstResult(($page - 1) * 1)
-            ->setMaxResults(1)
+            ->setFirstResult(($page - 1) * 2)
+            ->setMaxResults(2)
         );
-        $this->render('Users/usersTable.html.twig', ['users' => $users, 'page' => $page, 'pages' => $pages, 'data' => $this->getData()]);
+
+        $data = ['roles' => $em->getRepository(Role::class)->findAll(),
+                 'users' => $users,
+                 'page' => $page,
+                 'pages' => $pages,
+                 'username' => $username,
+                 'state' => $state];
+
+        $this->render('Users/usersTable.html.twig', ['data' => $data]);
+    }
+
+    public function usernameGiven()
+    {
+        if (isset($_GET['username']) && !empty($_GET['username']))
+            return $_GET['username'];
+        else
+            return '';
+    }
+
+    public function stateGiven()
+    {
+        if (isset($_GET['state']) && !empty($_GET['state']))
+            return $_GET['state'];
+        else
+            return null;
     }
 
     public function newAction()
@@ -129,12 +146,6 @@ class UserController extends Controller
         $usrExists = $userRepository->usrExists($user->getUsername());
         $emailExists = $userRepository->emailExists($user->getEmail());
         return $user->validationErrors($usrExists, $emailExists);
-    }
-
-    public function getData(){
-        $em = $this->getEntityManager();
-        $roles = $em->getRepository(Role::class)->findAll();
-        return ['roles' => $roles];
     }
 
 }

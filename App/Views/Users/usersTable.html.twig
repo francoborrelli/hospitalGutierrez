@@ -54,16 +54,21 @@
                             <!-- paginacion -->
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
-                                    <li class="page-item {% if page == 1 %} disabled {% endif %}">
-                                        <a class="page-link" href="/admin/users/{{ page - 1 }}" tabindex="-1">Ant</a>
+                                    <li class="page-item {% if data.page == 1 %} disabled {% endif %}">
+                                        <a class="page-link"
+                                            href="/admin/users/{{ data.page - 1 }}?username={{ data.username }}&state={{ data.state }}"
+                                            tabindex="-1">Ant
+                                        </a>
                                     </li>
-                                    {% for i in 1..pages %}
-                                        <li class="page-item {% if i == page %} active {% endif %}">
-                                            <a class="page-link" href="/admin/users/{{ i }}">{{ i }}</a>
+                                    {% for i in 1..data.pages %}
+                                        <li class="page-item {% if i == data.page %} active {% endif %}">
+                                            <a class="page-link"
+                                                href="/admin/users/{{ i }}?username={{ data.username }}&state={{ data.state  }}">{{ i }}
+                                            </a>
                                         </li>
                                     {% endfor %}
-                                    <li class="page-item {% if page == pages %} disabled {% endif %}">
-                                        <a class="page-link" href="/admin/users/{{ page + 1 }}">Sig</a>
+                                    <li class="page-item {% if data.page == data.pages %} disabled {% endif %}">
+                                        <a class="page-link" href="/admin/users/{{ data.page + 1 }}?username={{ data.username }}&state={{ data.state  }}">Sig</a>
                                     </li>
                                 </ul>
                             </nav>

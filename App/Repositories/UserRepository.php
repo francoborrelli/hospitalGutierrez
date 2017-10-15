@@ -17,4 +17,23 @@ class UserRepository extends EntityRepository
         return !is_null($this->findOneBy(['email' => $email]));
     }
 
+    public function findByUsernameAndState($username, $state)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->from('App\Models\User', 'p');
+
+        if (!empty($username)) {
+            $qb->andWhere('u.username = :username')
+               ->setParameter('username', $username);
+        }
+
+        if (!empty($state)) {
+            $qb->andWhere('u.active = :active')
+               ->setParameter('active', $state == 'active');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 }
