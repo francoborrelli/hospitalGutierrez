@@ -14,7 +14,7 @@
                     <div class="row">
                         <!-- tipo de vivienda -->
                         <div class="form-group col">
-                            <label for="editHouse">¿Tipo de vivienda?*</label>
+                            <label for="editHouse">¿Tipo de vivienda? *</label>
                             <select id="editHouse" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
                             <option value="Casa">Casa</option>
                             <option value="Departamento">Departamento</option>
@@ -28,7 +28,7 @@
 
                         <!-- tipo de calefaccion -->
                         <div class="form-group col">
-                            <label for="editHeat">¿Tipo de calefacción?*</label>
+                            <label for="editHeat">¿Tipo de calefacción? *</label>
                             <select id="editHeat" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
                             <option value="Gas">Gas</option>
                             <option value="Electrica">Electrica</option>
@@ -39,7 +39,7 @@
 
                         <!-- tipo de agua -->
                         <div class="form-group col">
-                            <label for="editWater">¿Tipo de agua?*</label>
+                            <label for="editWater">¿Tipo de agua? *</label>
                             <select id="editWater" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
                             <option value="Red Publica">Red Publica</option>
                             <option value="Cisterna">Cisterna</option>
@@ -53,22 +53,23 @@
                     <div class="row">
                         <!-- heladera? -->
                         <div class="form-group col text-center">
-                            <label for="fridge">¿Tiene heladera?*</label> {{ switch.item('Tiene','No tiene', 'editFridge')}}
+                            <label for="fridge">¿Tiene heladera? *</label> {{ switch.item('Tiene','No tiene', 'editFridge', patient.refrigerator)}}
                         </div>
 
                         <!-- electricidad? -->
                         <div class="form-group col text-center">
-                            <label for="electricity">¿Tiene electricidad?*</label> {{ switch.item('Tiene','No tiene', 'editElectricity')}}
+                            <label for="electricity">¿Tiene electricidad? *</label> {{ switch.item('Tiene','No tiene', 'editElectricity', patient.electricity)}}
                         </div>
 
                         <!-- mascotas? -->
                         <div class="form-group col text-center">
-                            <label for="pets">¿Tiene mascotas?*</label> {{ switch.item('Tiene','No tiene', 'editPets') }}
+                            <label for="pets">¿Tiene mascotas? *</label> {{ switch.item('Tiene','No tiene', 'editPets', patient.pet) }}
                         </div>
                     </div>
                 </div>
             </div>
     <div class="modal-footer">
+        <small id="error" class="error">*Campos Obligatorios</small>
         <button type="submit" class="btn btn-primary">Guardar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
     </div>
