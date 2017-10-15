@@ -40,6 +40,18 @@ class PatientController extends Controller
         }
     }
 
+    public function removeAction()
+    {
+        $em = $this->getEntityManager();
+        $patientRepository = $em->getRepository(Patient::class);
+        $patient = $patientRepository->find($this->getRouteParams()['id']);
+        $em->remove($patient);
+        $em->flush();
+
+        $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha eliminado al paciente correctamente');
+        $this->redirect('/patients');
+    }
+
     public function showAction(){
         $em = $this->getEntityManager();
         $patient = $em->getRepository(Patient::class)->find($this->getRouteParams()['id']);
