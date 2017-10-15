@@ -146,7 +146,10 @@ class PatientController extends Controller
         $patient = $patientRepository->find($this->getRouteParams()['id']);
         
         $validationPatient = clone $patient;
-        $validationPatient->setData($data);
+        if ($mode == 'patient') 
+            $validationPatient->setData($data);
+        else 
+            $validationPatient->setDemographicData($data);
         
         $validationErrors = $validationPatient->validationErrors();
         if (empty($validationErrors)) {
