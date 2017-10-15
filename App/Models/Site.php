@@ -28,11 +28,11 @@ class Site
     private $title;
 
     /**
-     * @var string
+     * @var text
      *
-     * @Column(type="string", length=255)
+     * @Column(type="text")
      */
-    private $description;
+    private $footer;
 
     /**
      * @var string
@@ -41,7 +41,6 @@ class Site
      */
     private $email;
 
-
     /**
      * @var int
      *
@@ -49,7 +48,6 @@ class Site
      */
     private $listAmount;
 
-    
     /**
      * @var bool
      *
@@ -57,17 +55,56 @@ class Site
      */
     private $enabled;
 
+    /**
+     * Many User have Many Phonenumbers.
+     * @ManyToMany(targetEntity="Article")
+     * @JoinTable(name="sites_articles",
+     *      joinColumns={@JoinColumn(name="site_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="article_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    private $articles;
+
 
     public function setData($data)
     {
         $this->title = $data['title'];
         $this->email = $data['email'];
-        $this->description = $data['description'];
+        $this->footer = $data['footer'];
         if (isset($data['enabled']))
             $this->enabled = true;
         else
             $this->enabled = false;
         $this->listAmount = $data['listAmount'];
+    }
+
+
+    public function validationErrors()
+    {
+        $validationErrors = [];
+
+        if (strlen($this->email) == 0 || filter_var($this->email, FILTER_VALIDATE_EMAIL) === false)
+            $validationErrors[] = 'email';
+
+        if (strlen($this->title) == 0)
+            $validationErrors[] = 'title';
+
+
+        if (strlen($this->title) > 50)
+            $validationErrors[] = 'titleLength';
+
+        if (strlen($this->listAmount) == 0)
+            $validationErrors[] = 'listAmount';
+
+        return $validationErrors;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -105,27 +142,27 @@ class Site
     }
 
     /**
-     * Set description
+     * Set footer
      *
-     * @param string $description
+     * @param string $footer
      *
      * @return Site
      */
-    public function setDescription($description)
+    public function setFooter($footer)
     {
-        $this->description = $description;
+        $this->footer = $footer;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get footer
      *
      * @return string
      */
-    public function getDescription()
+    public function getFooter()
     {
-        return $this->description;
+        return $this->footer;
     }
 
     /**
@@ -200,23 +237,37 @@ class Site
         return $this->enabled;
     }
 
-    public function validationErrors()
+    /**
+     * Add article
+     *
+     * @param \App\Models\Article $article
+     *
+     * @return Site
+     */
+    public function addArticle($article)
     {
-        $validationErrors = [];
+        $this->articles[] = $article;
 
-        if (strlen($this->email) == 0 || filter_var($this->email, FILTER_VALIDATE_EMAIL) === false)
-            $validationErrors[] = 'email';
+        return $this;
+    }
 
-        if (strlen($this->title) == 0)
-            $validationErrors[] = 'title';
+    /**
+     * Remove article
+     *
+     * @param \App\Models\Article $article
+     */
+    public function removeArticle($article)
+    {
+        $this->articles->removeElement($article);
+    }
 
-
-        if (strlen($this->title) > 50)
-            $validationErrors[] = 'titleLength';
-
-        if (strlen($this->listAmount) == 0)
-            $validationErrors[] = 'listAmount';
-
-        return $validationErrors;
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 }
