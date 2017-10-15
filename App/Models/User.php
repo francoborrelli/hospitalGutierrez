@@ -95,8 +95,8 @@ class User
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
-        $this->active = true;
         $this->setData($data, $roles);
+        $this->active = true;
     }
 
     public function setData($data, $roles)
