@@ -41,15 +41,7 @@ $('#configForm').validate({
 
 });
 
-  //evita submit on enter
-
-  $(window).keydown(function (event) {
-    if (event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
-  });
-  
+// Desabilita las pestallas cuando hay un error de validación
 
 $( document ).ready(function() {
     $('.nav-link').click(function(e){

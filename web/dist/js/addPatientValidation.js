@@ -1,19 +1,22 @@
+// métodos personalizados del validador
+
 $.validator.addMethod("nonNumeric", function (value, element) {
     return this.optional(element) || isNaN(Number(value));
 });
 
-$.validator.addMethod("noSpace", function(value, element) { 
-    return value.indexOf(" ") < 0 && value != ""; 
-  });
+$.validator.addMethod("noSpace", function (value, element) {
+    return value.indexOf(" ") < 0 && value != "";
+});
 
 
-$.validator.addMethod("alphanumeric", function(value, element) {
+$.validator.addMethod("alphanumeric", function (value, element) {
     return this.optional(element) || /^[a-z0-9\-\s]+$/i.test(value);
 }, "Username must contain only letters, numbers, or dashes.");
 
-  
+
 $.validator.messages.required = '';
 
+// Inicializacion del validador del formulario addPatients
 
 $('#addPatient').validate({
     rules: {
@@ -61,7 +64,7 @@ $('#addPatient').validate({
             nonNumeric: "Debe contener solo letras",
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres",
-            pattern:"Debe contener solo letras",
+            pattern: "Debe contener solo letras",
         },
         documentNumber: {
             required: "Ingrese el documento",
@@ -72,7 +75,7 @@ $('#addPatient').validate({
             nonNumeric: "Debe contener solo letras",
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres",
-            pattern:"Debe contener solo letras",
+            pattern: "Debe contener solo letras",
         },
         birthday: {
             required: "Ingrese la fecha",
@@ -93,7 +96,7 @@ $('#addPatient').validate({
         },
         heatingTypeId: {
             required: "Seleccione el tipo de calefacción",
-        },        
+        },
         houseTypeId: {
             required: "Seleccione el tipo de casa",
         },
@@ -111,41 +114,4 @@ $('#addPatient').validate({
         form.submit();
     },
 
-});
-
-  //evita submit on enter
-
-  $(window).keydown(function (event) {
-    if (event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
-  });
-  
-
-$("#goBack").click(function(){
-    $('#addPatient').trigger('next.m.1'); 
-});
-
-$("#goNext").click(function(){
-    if ($('#firstName').valid() & $('#lastName').valid() & $('#documentNumber').valid() & $('#documentTypeId').valid()& $('#birthday').valid() & $('#address').valid() & $('#phone').valid()& $('#genderId').valid()) {
-        $('#addPatient').trigger('next.m.2');
-    }
-});
-
-$("#cancelbtn").click(function(){
-    $('#addPatient').modal('hide')
-    $('#addPatient')[0].reset();  
-    $('#addPatient').trigger('next.m.1');   
-    $('#addPatient').validate().resetForm()
-})
-
-
-
-$(".deletebtn").click(function(){
-    $("#deletedId").val($(this).data("id"))
-    tr = $(this).closest('tr')
-    name = $(tr).find("td").eq(2).text()
-    surname = $(tr).find("td").eq(3).text()
-    $(".modalText").text(name + ' ' + surname);
 });
