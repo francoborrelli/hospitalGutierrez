@@ -1,35 +1,44 @@
 {% import 'utils/header/navItem.html.twig' as navbar %}
-        
 
-{% embed "utils/header/dropdown.html.twig" %}
+<div class="dropdown">
 
-    {% block elements %} 
+    <a class="dropdown-toggle nav-link item" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ currentUser.username }}
+    </a>
 
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+        <!-- Pacientes -->
         {% if currentUser.hasPermission("paciente_index") %}
             {{ navbar.dropdownItem("Pacientes", "fa-user-md", "/patients") }}
-
             <div class="dropdown-divider"></div>
         {% endif %}
 
+        <!-- Usuarios -->
         {% if currentUser.hasPermission("usuario_index") %}
             {{ navbar.dropdownItem("Usuarios", "fa-users", "/admin/users", "dropdown_users" ) }}
-
             <div class="dropdown-divider"></div>
         {% endif %}
  
-        {{ navbar.dropdownItem("Roles", "fa-star", "/", "dropdown_roles") }}
+        <!-- Roles -->
+        {% if currentUser.hasPermission("roles_index") %}
+            {{ navbar.dropdownItem("Roles", "fa-star", "/", "dropdown_roles") }}
+            <div class="dropdown-divider"></div>
+        {% endif %}
 
-        <div class="dropdown-divider"></div>
+        <!-- Permisos -->
+        {% if currentUser.hasPermission("permisos_index") %}
+            {{ navbar.dropdownItem("Permisos", "fa-thumbs-o-up", "/", "dropdown_roles") }}
+            <div class="dropdown-divider"></div>
+        {% endif %}
 
-        {{ navbar.dropdownItem("Permisos", "fa-thumbs-o-up", "/", "dropdown_roles") }}
-                
-        <div class="dropdown-divider"></div>
-
+        <!-- Configuración -->
         {% if currentUser.hasPermission("config_index") %}
             {{ navbar.dropdownItem("Configuración", "fa-cog", "/admin/config", "dropdown_config") }}    
             <div class="dropdown-divider"></div>
         {% endif %}
 
-        {% endblock %}
+        <!-- Cerrar Sesión -->
+        {{ navbar.dropdownItem('Cerrar Sesión','fa-sign-out', '/logout') }} 
 
-    {% endembed %}
+    </div>   
+</div>
