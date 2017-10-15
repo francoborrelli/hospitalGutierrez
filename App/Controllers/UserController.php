@@ -15,6 +15,12 @@ class UserController extends Controller
     {
         $this->denyAccessUnlessPermissionGranted('usuario_index');
 
+        $data = $this->getIndexData();
+        $this->render('Users/usersTable.html.twig', ['data' => $data]);
+    }
+
+    private function getIndexData()
+    {
         $em = $this->getEntityManager();
         $userRepository = $em->getRepository(User::class);
         $page = isset($this->getRouteParams()['page']) ? $this->getRouteParams()['page'] : 1;
@@ -39,7 +45,7 @@ class UserController extends Controller
                  'username' => $username,
                  'state' => $state];
 
-        $this->render('Users/usersTable.html.twig', ['data' => $data]);
+        return $data;
     }
 
     public function usernameGiven()
@@ -79,7 +85,7 @@ class UserController extends Controller
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al usuario correctamente');
             $this->redirect('/admin/users');
         } else {
-            $this->render('Users/usersTable.html.twig', ['data' => $this->getData(), 'newErrors' => $validationErrors, 'user' => $user]);
+            $this->render('Users/usersTable.html.twig', ['data' => $this->getIndexData(), 'newErrors' => $validationErrors, 'user' => $user]);
         }
     }
 
