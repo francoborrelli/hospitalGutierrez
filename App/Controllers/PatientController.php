@@ -40,8 +40,7 @@ class PatientController extends Controller
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al paciente correctamente');
             $this->redirect('/patients');
         } else {
-            $this->addFlashMessage('danger', 'Noup.', 'Hubo errores');
-            $this->render('Patients/patientsTable.html.twig');
+            $this->render('Patients/patientsTable.html.twig', ['newErrors' => $validationErrors, 'patient' => $patient]);
         }
     }
 
@@ -85,7 +84,9 @@ class PatientController extends Controller
         $patientRepository = $em->getRepository(Patient::class);
 
         $patient = $patientRepository->find($this->getRouteParams()['id']);
-        $validationErrors = [];
+        $data = $this->getPatientData($_POST);
+
+        $validationErrors = $patient->validationErrors();
         if (empty($validationErrors)) {
             if ($mode == 'patient')
                 $patient->setData($data);
@@ -96,8 +97,7 @@ class PatientController extends Controller
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del usuario correctamente');
             $this->redirect('/patient/' . $this->getRouteParams()['id']);
         } else {
-            $this->addFlashMessage('danger', '¡Felicitaciones!', 'Se han modificado los datos del usuario correctamente');
-            $this->render('Patients/patientProfile.html.twig');
+            $this->render('Patients/patientProfile.html.twig', ['newErrors' => $validationErrors, 'patient' => $patient]);
         }
     }
 
