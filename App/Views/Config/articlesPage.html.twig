@@ -9,7 +9,7 @@
 
 {% block body %}
 
-<form method="post" action="/config/articles/update">
+<form method="post" id="editArticles" action="/config/articles/update">
 
     <div class="bgcolor1 pt-60 pb-60  cbp-fbscroller" id="cbp-fbscroller">
     <div class="container">
@@ -24,9 +24,6 @@
     <button class="btn btn-edit btn-primary text-right" type="submit">Guardar</button>  
     <a class="btn btn-edit btn-outline-primary" href="/config">Volver</a> 
     </div>
-
-    </div>
-
 </form>
 {% endblock %}
 
@@ -34,5 +31,6 @@
 {% block javascripts %}
     <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
     <script src="/web/assets/jquery-validate/autoresize.jquery.js"></script>
+    <script src="/web/dist/js/articlesValidation.js"></script>
     <script> $('textarea').autoResize(); </script>
 {% endblock %}
