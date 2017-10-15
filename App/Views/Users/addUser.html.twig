@@ -40,8 +40,8 @@
                         {% if 'passwordLength' in newErrors %}<label id="pass-error" class="error" for="pass">Debe tener al menos 6 caracteres</label>{% endif %}
                     </div>
                     <div class="form-group col">
-                        <label for="Confirmar Contraseña">Confirmar contraseña *</label>
-                        <input type="password" id="confirmPass" name="confirmPass" class="form-control {% if 'passwordConfirm' in newErrors %}is-invalid{% endif %}" placeholder="Confirmar contraseña">
+                        <label for="Confirmar Contraseña">Confirmar <span class="hidden">contraseña </span>*</label>
+                        <input type="password" id="confirmPass" name="confirmPass" class="form-control {% if 'passwordConfirm' in newErrors %}is-invalid{% endif %}" placeholder="Contraseña">
                         {% if 'passwordConfirm' in newErrors %}<label id="confirmPass-error" class="error" for="confirmPass">No coinciden</label>{% endif %}
                     </div>
                 </div>
