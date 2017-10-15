@@ -29,12 +29,11 @@
                 <div class="row">
                     <div class="form-group col">
                         <label for="Nombre">Tipo Documento*</label>
-                        <select id="typeDni" name="documentType" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
-                            <option value="DNI">DNI</option>
-                            <option value="Pasaporte">Pasaporte</option>
-                            <option value="Partida">Partida de nacimiento</option>
-                            <option value="Otro">Otro</option>
-                            </select>
+                        <select id="typeDni" name="documentTypeId" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                            {% for documentType in patientFields.documentType %}
+                            <option value="{{ documentType.id }}">{{ documentType.name }}</option>
+                            {% endfor %}
+                        </select>
                         {% if 'documentType' in newErrors %}<label id="typeDni-error" class="error" for="documentType">Ingrese el tipo de documento</label>{% endif %}
                     </div>
                     <div class="form-group col">
@@ -46,10 +45,10 @@
                 <div class="row">
                     <div class="form-group col">
                         <label for="Nombre">Género*</label>
-                        <select id="gender" name="gender" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                            <option value="Otro">Otro</option>
+                        <select id="gender" name="genderId" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                            {% for gender in patientFields.gender %}
+                            <option value="{{ gender.id }}">{{ gender.name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="form-group col">
@@ -70,13 +69,11 @@
                     </div>
                     <div class="form-group col">
                         <label for="insurance">Obra Social</label>
-                            <select id="insurance" class="form-control form-control-chosen-required" data-placeholder="Obra Social">
-                                <option value="Ninguna">Ninguna</option>
-                                <option value="IOMA">IOMA</option>
-                                <option value="OSDE">OSDE</option>
-                                <option value="Galeno">Galeno</option>
-                                <option value="PAMI">PAMI</option>
-                            </select>
+                        <select id="insurance" name="insuranceId" class="form-control form-control-chosen-required" data-placeholder="Obra Social">
+                            {% for insurance in patientFields.insurance %}
+                            <option value="{{ insurance.id }}">{{ insurance.name }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                 </div>
             </div>
@@ -87,41 +84,33 @@
              <div class="row">
                     <div class="form-group col">
                         <label for="insurance">¿Tipo de vivienda?*</label>
-                        <select id="house" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
-                            <option value="Casa">Casa</option>
-                            <option value="Departamento">Departamento</option>
-                            <option value="Rancho">Rancho</option>
-                            <option value="Pieza en inquilinato">Pieza en inquilinato</option>
-                            <option value="Pension">Pension</option>
-                            <option value="Vivienda movil">Vivienda móvil</option>
-                            <option value="Calle">Calle</option>
+                        <select id="house" name="houseTypeId" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
+                            {% for houseType in patientFields.houseType %}
+                            <option value="{{ houseType.id }}">{{ houseType.name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="insurance">¿Tipo de calefacción?*</label>
-                        <select id="heat" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
-                            <option value="Gas">Gas</option>
-                            <option value="Electrica">Electrica</option>
-                            <option value="Otro">Otro</option>
-                            <option value="No">No dispone</option>
+                        <select id="heat" name="heatingTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            {% for heatingType in patientFields.heatingType %}
+                            <option value="{{ heatingType.id }}">{{ heatingType.name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
-                                        <div class="form-group col">
+                    <div class="form-group col">
                         <label for="insurance">¿Tipo de agua?*</label>
-                        <select id="heat" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
-                            <option value="Red Publica">Red Publica</option>
-                            <option value="Cisterna">Cisterna</option>
-                            <option value="bomba a Motor">Bomba a Motor</option>
-                            <option value="bomba Manual">Bomba manual</option>
-                            <option value="Pozo">Pozo</option>
-                            <option value="natural">Fuente natural</option>
+                        <select id="heat" name="waterTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                            {% for waterType in patientFields.waterType %}
+                            <option value="{{ waterType.id }}">{{ waterType.name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>  
                 <div class="row">
                     <div class="form-group col text-center">
                         <label for="fridge">¿Tiene heladera?*</label>
-                        {{ switch.item('Tiene','No tiene', 'fridge') }}
+                        {{ switch.item('Tiene','No tiene', 'refrigerator') }}
                     </div>
                     <div class="form-group col text-center">
                         <label for="electricity">¿Tiene electricidad?*</label>
@@ -129,7 +118,7 @@
                     </div>
                     <div class="form-group col text-center">
                         <label for="pets">¿Tiene mascotas?*</label>
-                        {{ switch.item('Tiene','No tiene', 'pets') }}
+                        {{ switch.item('Tiene','No tiene', 'pet') }}
                     </div>
                 </div>           
             </div>
