@@ -40,6 +40,12 @@ class PatientController extends Controller
         }
     }
 
+    public function showAction(){
+        $em = $this->getEntityManager();
+        $patient = $em->getRepository(Patient::class)->find($this->getRouteParams()['id']);
+        $this->render('Patients/patientProfile.html.twig', ['patient' => $patient]);
+    }
+
     private function getPatientData($data)
     {
         $em = $this->getEntityManager();
