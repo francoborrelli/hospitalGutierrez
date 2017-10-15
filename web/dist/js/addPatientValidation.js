@@ -113,7 +113,15 @@ $('#addPatient').validate({
 
 });
 
+  //evita submit on enter
 
+  $(window).keydown(function (event) {
+    if (event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+  
 
 $("#goBack").click(function(){
     $('#addPatient').trigger('next.m.1'); 

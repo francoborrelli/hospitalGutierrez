@@ -20,7 +20,16 @@ $.validator.addMethod("alphanumeric", function(value, element) {
     return this.optional(element) || /^[a-z0-9\-\s]+$/i.test(value);
 }, "Username must contain only letters, numbers, or dashes.");
 
+  //evita submit on enter
 
+  $(window).keydown(function (event) {
+    if (event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+  
+  
 $('#editPersonalInfo').validate({
     rules: {
         firstName: {

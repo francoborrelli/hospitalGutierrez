@@ -41,6 +41,16 @@ $('#configForm').validate({
 
 });
 
+  //evita submit on enter
+
+  $(window).keydown(function (event) {
+    if (event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+  
+
 $( document ).ready(function() {
     $('.nav-link').click(function(e){
         if (!$('#configForm').valid()){
