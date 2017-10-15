@@ -1,4 +1,4 @@
-<form method="post" action="" class="modal fade" id="editPersonalInfo">
+<form method="post" action="/patient/{{ patient.id }}/edit" class="modal fade" id="editPersonalInfo">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,11 +27,10 @@
                             <div class="form-group col">
                                 <label for="documentTypeId">Tipo Documento *</label>
                                 <select id="documentTypeId" name="documentTypeId" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
-                            <option value="">Seleccione el tipo de documento</option>
-                            <option value="DNI"{% if patient.documentType.name == 'DNI' %}selected="selected"{% endif %}>DNI</option>
-                            <option value="Pasaporte"{% if patient.documentType.name == 'Pasaporte' %}selected="selected"{% endif %}>Pasaporte</option>
-                            <option value="Partida"{% if patient.documentType.name == 'Partida' %}selected="selected"{% endif %}>Partida de nacimiento</option>
-                            <option value="Otro"{% if patient.documentType.name == 'Otro' %}selected="selected"{% endif %}>Otro</option>
+                                    <option value="">Seleccione el tipo de documento</option>
+                                    {% for documentType in patientFields.documentType %}
+                                    <option value="{{ documentType.id }}"{% if patient.documentType.id == documentType.id %}selected="selected"{% endif %}>{{ documentType.name }}</option>
+                                    {% endfor %}
                             </select> {% if 'typeDni' in editErrors %}<label id="typeDni-error" class="error" for="typeDni">Ingrese el tipo de documento</label>{% endif %}
                             </div>
                             <div class="form-group col">
@@ -45,10 +44,10 @@
                             <div class="form-group col">
                                 <label for="Nombre">Género *</label>
                             <select id="genderId" name="genderId" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
-                            <option value="">Seleccione el género </option>
-                            <option value="Masculino" {% if patient.gender.name == 'Masculino' %}selected="selected"{% endif %}>Masculino</option>
-                            <option value="Femenino" {% if patient.gender.name == 'Femenino' %}selected="selected"{% endif %}>Femenino</option>
-                            <option value="Otro"{% if patient.gender.name == 'Otro' %}selected="selected"{% endif %}>Otro</option>
+                                <option value="">Seleccione el género </option>
+                                {% for gender in patientFields.gender %}
+                                <option value="{{ gender.id }}" {% if patient.gender.id == gender.id %}selected="selected"{% endif %}>{{ gender.name }}</option>
+                                {% endfor %}
                         </select>
                             </div>
                             <div class="form-group col">
@@ -72,13 +71,11 @@
                             </div>
                             <div class="form-group col">
                                 <label for="insurance">Obra Social</label>
-                                <select id="editInsurance" class="form-control form-control-chosen-required" data-placeholder="Obra Social">
-                                <option value="">Seleccione la obra social</option>
-                                <option value="Ninguna" {% if patient.injurence == 'Ninguna' %}selected="selected"{% endif %}>Ninguna</option>
-                                <option value="IOMA" {% if patient.injurence == 'IOMA' %}selected="selected"{% endif %}>IOMA</option>
-                                <option value="OSDE" {% if patient.injurence == 'OSDE' %}selected="selected"{% endif %}>OSDE</option>
-                                <option value="Galeno" {% if patient.injurence == 'Galeno' %}selected="selected"{% endif %}>Galeno</option>
-                                <option value="PAMI" {% if patient.injurence == 'PAMI' %}selected="selected"{% endif %}>PAMI</option>
+                                <select id="editInsurance" name="insuranceId"class="form-control form-control-chosen-required" data-placeholder="Obra Social">
+                                    <option value="">Seleccione la obra social</option>
+                                    {% for insurance in patientFields.insurance %}
+                                    <option value="{{ insurance.id }}" {% if patient.insurance.id == insurance.id %}selected="selected"{% endif %}>{{ insurance.name }}</option>
+                                    {% endfor %}
                             </select>
                             </div>
                         </div>
