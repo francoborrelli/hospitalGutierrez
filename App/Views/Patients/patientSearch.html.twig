@@ -17,7 +17,7 @@
                     </div>
                 <div class="row">
                     <div class="form-group col">
-                    <label for="Nombre">Tipo</label>
+                    <label for="Nombre">Tipo:</label>
                     <select id="typeDni" name="documentType" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
                         <option {% if data.documentType is empty %}selected{% endif %} value="">Tipo Documento</option>
                         {% for documentType in data.patientFields.documentType %}

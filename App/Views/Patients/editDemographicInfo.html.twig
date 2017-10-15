@@ -50,17 +50,17 @@
                     <div class="row">
                         <!-- heladera? -->
                         <div class="form-group col text-center">
-                            <label for="fridge">¿Tiene heladera? *</label> {{ switch.item('Tiene','No tiene', 'refrigerator', patient.refrigerator)}}
+                            <label for="fridge">¿<span class="hidden">Tiene</span> heladera? *</label> {{ switch.item('Tiene','No tiene', 'refrigerator', patient.refrigerator)}}
                         </div>
 
                         <!-- electricidad? -->
                         <div class="form-group col text-center">
-                            <label for="electricity">¿Tiene electricidad? *</label> {{ switch.item('Tiene','No tiene', 'electricity', patient.electricity)}}
+                            <label for="electricity">¿<span class="hidden">Tiene</span> electricidad? *</label> {{ switch.item('Tiene','No tiene', 'electricity', patient.electricity)}}
                         </div>
 
                         <!-- mascotas? -->
                         <div class="form-group col text-center">
-                            <label for="pets">¿Tiene mascotas? *</label> {{ switch.item('Tiene','No tiene', 'pet', patient.pet) }}
+                            <label for="pets">¿<span class="hidden">Tiene</span> mascotas? *</label> {{ switch.item('Tiene','No tiene', 'pet', patient.pet) }}
                         </div>
                     </div>
             </div>
