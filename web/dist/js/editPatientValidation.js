@@ -45,6 +45,12 @@ $('#editPersonalInfo').validate({
         address: {
             required: true,
         },
+        documentTypeId: {
+            required: true,
+        },
+        genderId: {
+            required: true,
+        },
     },
     messages: {
         firstName: {
@@ -73,7 +79,13 @@ $('#editPersonalInfo').validate({
         },
         phone: {
             minlength: "Ingrese un teléfono válido"
-        }
+        },
+        documentTypeId: {
+            required: "Seleccione el tipo de documento",
+        },
+        genderId: {
+            required: "Seleccione el género",
+        },
     },
     highlight: function (element) {
         $(element).addClass('is-invalid');
