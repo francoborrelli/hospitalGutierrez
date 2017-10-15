@@ -1,6 +1,6 @@
 {% import 'utils/switch.html.twig' as switch %}
 
-<form method="post" action="" class="modal fade" id="editDemographicInfo">
+<form method="post" action="/patient/{{ patient.id }}/editDemographic" class="modal fade" id="editDemographicInfo">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,14 +15,10 @@
                         <div class="form-group col">
                             <label for="houseTypeId">¿Tipo de vivienda? *</label>
                             <select id="houseTypeId" name="houseTypeId" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
-                            <option value="">Selecciona tipo de casa</option>
-                            <option value="Casa">Casa</option>
-                            <option value="Departamento">Departamento</option>
-                            <option value="Rancho">Rancho</option>
-                            <option value="Pieza en inquilinato">Pieza en inquilinato</option>
-                            <option value="Pension">Pension</option>
-                            <option value="Vivienda movil">Vivienda móvil</option>
-                            <option value="Calle">Calle</option>
+                                <option value="">Selecciona tipo de casa</option>
+                                {% for houseType in patientFields.houseType %}
+                                <option value="{{ houseType.id }}" {% if houseType.id == patient.houseType.id %}selected="selected"{% endif %}>{{ houseType.name }}</option>
+                                {% endfor %}
                         </select>
                         </div>
 
@@ -30,11 +26,10 @@
                         <div class="form-group col">
                             <label for="heatingTypeId">¿Tipo de calefacción? *</label>
                             <select id="heatingTypeId" name="heatingTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
-                            <option value="">Selecciona tipo de calefacción</option>
-                            <option value="Gas">Gas</option>
-                            <option value="Electrica">Electrica</option>
-                            <option value="Otro">Otro</option>
-                            <option value="No">No dispone</option>
+                                <option value="">Selecciona tipo de calefacción</option>
+                                {% for heatingType in patientFields.heatingType %}
+                                <option value="{{ heatingType.id }}" {% if heatingType.id == patient.heatingType.id %}selected="selected"{% endif %}>{{ heatingType.name }}</option>
+                                {% endfor %}
                         </select>
                         </div>
 
@@ -42,30 +37,27 @@
                         <div class="form-group col">
                             <label for="waterTypeId">¿Tipo de agua? *</label>
                             <select id="waterTypeId" name="waterTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
-                            <option value="">Selecciona tipo de agua</option>
-                            <option value="Red Publica">Red Publica</option>
-                            <option value="Cisterna">Cisterna</option>
-                            <option value="bomba a Motor">Bomba a Motor</option>
-                            <option value="bomba Manual">Bomba manual</option>
-                            <option value="Pozo">Pozo</option>
-                            <option value="natural">Fuente natural</option>
+                                <option value="">Selecciona tipo de agua</option>
+                                {% for waterType in patientFields.waterType %}
+                                <option value="{{ waterType.id }}" {% if waterType.id == patient.waterType.id %}selected="selected"{% endif %}>{{ waterType.name }}</option>
+                                {% endfor %}
                         </select>
                         </div>
                     </div>
                     <div class="row">
                         <!-- heladera? -->
                         <div class="form-group col text-center">
-                            <label for="fridge">¿Tiene heladera? *</label> {{ switch.item('Tiene','No tiene', 'editFridge', patient.refrigerator)}}
+                            <label for="fridge">¿Tiene heladera? *</label> {{ switch.item('Tiene','No tiene', 'refrigerator', patient.refrigerator)}}
                         </div>
 
                         <!-- electricidad? -->
                         <div class="form-group col text-center">
-                            <label for="electricity">¿Tiene electricidad? *</label> {{ switch.item('Tiene','No tiene', 'editElectricity', patient.electricity)}}
+                            <label for="electricity">¿Tiene electricidad? *</label> {{ switch.item('Tiene','No tiene', 'electricity', patient.electricity)}}
                         </div>
 
                         <!-- mascotas? -->
                         <div class="form-group col text-center">
-                            <label for="pets">¿Tiene mascotas? *</label> {{ switch.item('Tiene','No tiene', 'editPets', patient.pet) }}
+                            <label for="pets">¿Tiene mascotas? *</label> {{ switch.item('Tiene','No tiene', 'pet', patient.pet) }}
                         </div>
                     </div>
             </div>
