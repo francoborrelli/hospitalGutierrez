@@ -143,8 +143,11 @@ class PatientController extends Controller
         $patientRepository = $em->getRepository(Patient::class);
 
         $patient = $patientRepository->find($this->getRouteParams()['id']);
-
-        $validationErrors = $patient->validationErrors();
+        
+        $validationPatient = clone $patient;
+        $validationPatient->setData($data);
+        
+        $validationErrors = $validationPatient->validationErrors();
         if (empty($validationErrors)) {
             if ($mode == 'patient') 
                 $patient->setData($data);
@@ -153,10 +156,10 @@ class PatientController extends Controller
 
             $em->flush();
 
-            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del usuario correctamente');
+            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente');
             $this->redirect('/patient/' . $this->getRouteParams()['id']);
         } else {
-            $this->render('Patients/patientProfile.html.twig', ['newErrors' => $validationErrors, 'patient' => $patient]);
+            $this->render('Patients/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => $mode]);
         }
     }
 
