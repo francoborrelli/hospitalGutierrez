@@ -123,7 +123,7 @@ class Patient
     {
         $this->firstName = $data['firstName'];
         $this->lastName = $data['lastName'];
-        $this->birthday = new \DateTime();
+        $this->birthday = new \DateTime($data['birthday']);
         $this->docNumber = $data['documentNumber'];
         $this->address = $data['address'];
         if (isset($data['phone']) && !empty($data['phone']))
@@ -519,5 +519,27 @@ class Patient
     public function getWaterType()
     {
         return $this->waterType;
+    }
+
+    public function validationErrors()
+    {
+        $validationErrors = [];
+
+        if (strlen($this->firstName) > 50 || strlen($this->firstName) == 0)
+            $validationErrors[] = 'firstName';
+
+        if (strlen($this->lastName) > 50 || strlen($this->lastName) == 0)
+            $validationErrors[] = 'lastName';
+
+        if (strlen($this->docNumber) == 0)
+            $validationErrors[] = 'docNumber';
+
+        if (strlen($this->address) == 0)
+            $validationErrors[] = 'address';
+
+        if ($this->birthday > \DateTime())
+            $validationUser[] = 'birthday';
+
+        return $validationErrors;
     }
 }
