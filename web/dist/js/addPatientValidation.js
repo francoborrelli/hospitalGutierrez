@@ -39,6 +39,26 @@ $('#addPatient').validate({
         address: {
             required: true,
         },
+        documentTypeId: {
+            required: true,
+            min: 0,
+        },
+        genderId: {
+            required: true,
+            min: 0,
+        },
+        houseTypeId: {
+            required: true,
+            min: 0,
+        },
+        heatingTypeId: {
+            required: true,
+            min: 0,
+        },
+        waterTypeId: {
+            required: true,
+            min: 0,
+        }
     },
     messages: {
         firstName: {
@@ -67,7 +87,22 @@ $('#addPatient').validate({
         },
         phone: {
             minlength: "Ingrese un teléfono válido"
-        }
+        },
+        documentTypeId: {
+            required: "Seleccione el tipo de documento",
+        },
+        genderId: {
+            required: "Seleccione el género",
+        },
+        heatingTypeId: {
+            required: "Seleccione el tipo de calefacción",
+        },        
+        houseTypeId: {
+            required: "Seleccione el tipo de casa",
+        },
+        waterTypeId: {
+            required: "Seleccione el tipo de Agua",
+        },
     },
     highlight: function (element) {
         $(element).addClass('is-invalid');
@@ -88,7 +123,7 @@ $("#goBack").click(function(){
 });
 
 $("#goNext").click(function(){
-    if ($('#firstName').valid() & $('#lastName').valid() & $('#dni').valid()& $('#birthday').valid() & $('#address').valid() & $('#phone').valid()) {
+    if ($('#firstName').valid() & $('#lastName').valid() & $('#documentNumber').valid() & $('#documentTypeId').valid()& $('#birthday').valid() & $('#address').valid() & $('#phone').valid()& $('#genderId').valid()) {
         $('#addPatient').trigger('next.m.2');
     }
 });

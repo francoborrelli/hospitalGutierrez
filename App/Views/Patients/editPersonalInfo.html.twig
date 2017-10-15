@@ -11,14 +11,14 @@
                 <div class="tab-content" id="myTabContent">
                         <div class="row">
                             <div class="form-group col">
-                                <label for="Nombre">Nombre*</label>
+                                <label for="Nombre">Nombre *</label>
                                 <input type="text" id="editFirstName" name="firstName" class="form-control {% if 'firstName' in editErrors %}is-invalid{% endif %}"
                                     placeholder="Nombre" {% if editErrors is defined %}value="{{patient.firstName}}" {% endif
                                     %}> {% if 'firstName' in editErrors %}<label id="firstName-error"
                                     class="error" for="firstName">Ingrese el nombre</label>{% endif %}
                             </div>
                             <div class="form-group col">
-                                <label for="Apellido">Apellido*</label>
+                                <label for="Apellido">Apellido *</label>
                                 <input type="text" id="editLastName" name="lastName" class="form-control {% if 'lastName' in editErrors %}is-invalid{% endif %}"
                                     placeholder="Apellido" {% if editErrors is defined %} value="{{patient.lastName}}" {% endif
                                     %}> {% if 'lastName' in editErrors %}<label id="lastName-error"
@@ -27,8 +27,9 @@
                         </div>
                         <div class="row">
                             <div class="form-group col">
-                                <label for="Nombre">Tipo Documento*</label>
+                                <label for="Nombre">Tipo Documento *</label>
                                 <select id="editTypeDni" name="typeDni" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                            <option value="">Seleccione el tipo de documento</option>
                             <option value="DNI">DNI</option>
                             <option value="Pasaporte">Pasaporte</option>
                             <option value="Partida">Partida de nacimiento</option>
@@ -37,7 +38,7 @@
                                     class="error" for="typeDni">Ingrese el tipo de documento</label>{% endif %}
                             </div>
                             <div class="form-group col">
-                                <label for="Nº documento">Nº documento*</label>
+                                <label for="Nº documento">Nº documento *</label>
                                 <input type="text" id="editDni" name="dni" class="form-control {% if 'dni' in editErrors %}is-invalid{% endif %}" placeholder="Numero de documento"
                                     {% if editErrors is defined %} value="{{patient.dni}}" {% endif %}>                                {% if 'dni' in editErrors %}<label id="dni-error" class="error" for="dni">Ingrese el nº de documento</label>{%
                                 endif %}
@@ -45,21 +46,22 @@
                         </div>
                         <div class="row">
                             <div class="form-group col">
-                                <label for="Nombre">Género*</label>
-                                <select id="editGender" name="gender" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                                <label for="Nombre">Género *</label>
+                            <select id="editGender" name="gender" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                            <option value="">Seleccione el género </option>
                             <option value="Masculino">Masculino</option>
                             <option value="Femenino">Femenino</option>
                             <option value="Otro">Otro</option>
                         </select>
                             </div>
                             <div class="form-group col">
-                                <label for="birthday">Fecha de Nacimiento*</label>
+                                <label for="birthday">Fecha de Nacimiento *</label>
                                 <input type="date" id="editBirthday" name="birthday" min="1900-01-01" max="{{ " now "|date("Y-m-d ") }}"class="form-control {% if 'lastName' in editErrors %}is-invalid{% endif %}"
                                     placeholder="Nacimiento">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="address">Domicilio*</label>
+                            <label for="address">Domicilio *</label>
                             <input type="text" id="editAddress" name="address" class="form-control {% if 'address' in editErrors %}is-invalid{% endif %}"
                                 {% if editErrors is defined %} value="{{patient.address}}" {% endif %} placeholder="Domicilio">                            {% if 'address' in editErrors %}<label id="address-error" class="error" for="address">Debe ingresar una dirección</label>{%
                             endif %}
@@ -74,6 +76,7 @@
                             <div class="form-group col">
                                 <label for="insurance">Obra Social</label>
                                 <select id="editInsurance" class="form-control form-control-chosen-required" data-placeholder="Obra Social">
+                                <option value="">Seleccione la obra social</option>
                                 <option value="Ninguna">Ninguna</option>
                                 <option value="IOMA">IOMA</option>
                                 <option value="OSDE">OSDE</option>
@@ -84,6 +87,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <small id="error" class="error">*Campos Obligatorios</small>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>
