@@ -199,4 +199,24 @@ class Site
     {
         return $this->enabled;
     }
+
+    public function validationErrors()
+    {
+        $validationErrors = [];
+
+        if (strlen($this->email) == 0 || filter_var($this->email, FILTER_VALIDATE_EMAIL) === false)
+            $validationErrors[] = 'email';
+
+        if (strlen($this->title) == 0)
+            $validationErrors[] = 'title';
+
+
+        if (strlen($this->title) > 50)
+            $validationErrors[] = 'titleLength';
+
+        if (strlen($this->listAmount) == 0)
+            $validationErrors[] = 'listAmount';
+
+        return $validationErrors;
+    }
 }
