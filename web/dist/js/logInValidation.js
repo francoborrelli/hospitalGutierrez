@@ -1,14 +1,4 @@
-$( window ).resize(function() {
-    if ($(window).width() < 875){
-    $('#_password').popover('hide')
-    $('#_email').popover('hide')
-    }else{
-        if (($(window).width() > 875)){
-            $('#_password').popover('show')
-            $('#_email').popover('show')
-        }
-    }
-  });
+//Inicializa la validacion del iniciar sesión
 
 $('#logInForm').validate({
     rules: {
@@ -56,3 +46,18 @@ $('#logInForm').validate({
         form.submit();
     },
 });
+
+
+// Saca los popovers cuando no entran en la pantalla
+
+$( window ).resize(function() {
+    if ($(window).width() < 875){
+    $('#_password').popover('hide')
+    $('#_email').popover('hide')
+    }else{
+        if (($(window).width() > 875)){
+            $('#_password').popover('show')
+            $('#_email').popover('show')
+        }
+    }
+  });

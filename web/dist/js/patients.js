@@ -1,10 +1,12 @@
+//Configuración de la tabla de pacientes
+
 var oTable =  $('#patients').DataTable({
     responsive: {
         details: {
             display: $.fn.dataTable.Responsive.display.modal( {
                 header: function ( row ) {
                     var data = row.data();
-                    return 'Paciente '+data[2]+' '+data[3];
+                    return 'Paciente '+data[0]+' '+data[1];
                 }
             } ),
 
@@ -16,10 +18,10 @@ var oTable =  $('#patients').DataTable({
         }
     },
     columns: [
-        { responsivePriority: 2 }, //Tipo doc
-        { responsivePriority: 2 }, // documento
-        { responsivePriority: 4 }, //nombre
-        { responsivePriority: 4 }, //apellido
+        { responsivePriority: 2 }, //nombre
+        { responsivePriority: 2 }, //apellido
+        { responsivePriority: 3 }, //Tipo doc
+        { responsivePriority: 3 }, //documento
         { responsivePriority: 1 }   //Opciones
     ],
     "order": [
@@ -32,6 +34,7 @@ var oTable =  $('#patients').DataTable({
     "bLengthChange": false,
     "info": false,
     "bFilter": false,
+    "bPaginate": false,
     "language": {
         "sProcessing": "Procesando...",
         "sLengthMenu": "Mostrar _MENU_ usuarios",
@@ -57,3 +60,26 @@ var oTable =  $('#patients').DataTable({
         },
     }
 });
+
+//evita submit de formulario al apretar enter 
+
+$(document).ready(function () {
+    $(window).keydown(function (event) {
+        if ((event.keyCode == 13)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+});
+
+//Habilita enter en el search
+
+$('.searchForm').find('input').each(function () {
+    $(this).on('keydown', function (e) {
+        if (e.which == 13) {
+            $('#searchForm').submit()
+            console.log("hola")
+        }
+    });
+
+})

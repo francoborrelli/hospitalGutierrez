@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light">
 
     <a class="navbar-brand" href="/">
     <img src="/web/dist/img/logo.png" width="30" height="36" class="d-inline-block align-top" alt="Logo del Hospital">Hospital Dr. Ricardo Gutiérrez</a>
@@ -18,7 +18,7 @@
 
         <ul class="navbar-nav">
             {% if currentUser %}
-                {% include 'utils/header/navbarAdmin.html.twig' %}
+                {% include 'utils/header/navbarUser.html.twig' %}
             {% else %}
                 {% include 'utils/header/navbarVisitor.html.twig' %}
             {% endif %}

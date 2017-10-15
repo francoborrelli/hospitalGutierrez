@@ -31,10 +31,10 @@
                     <hr>
                     <div class="row text-center m-t-10">
                         <div class="col-md-6 b-r"><strong>Teléfono</strong>
-                            <p>{% if patient.phone is defined %}{{patient.phone}}{% else %}-{% endif %}</p>
+                            <p>{% if patient.phone is not empty %}{{patient.phone}}{% else %}-{% endif %}</p>
                         </div>
                         <div class="col-md-6"><strong>Obra Social</strong>
-                            <p>{% if patient.insurance is defined %}{{ patient.insurance.name }}{% else %}-{% endif %}</p>
+                            <p>{% if patient.insurance is not empty %}{{ patient.insurance.name }}{% else %}-{% endif %}</p>
                         </div>
                     </div>
                     <hr>

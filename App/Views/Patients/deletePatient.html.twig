@@ -9,10 +9,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Esta a punto de eliminar al paciente <span class="modalText"></span>, ¿Está seguro que desea continuar?</p>
+                    <p>Esta a punto de eliminar al paciente {{ patient.firstName }} {{ patient.lastName }}, ¿Está seguro que desea continuar?</p>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" id="deletedId" name="deletedId">
+                    <input type="hidden" id="{{ patient.id }}" name="deletedId">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-secondary">Eliminar</button>
                 </div>

@@ -6,7 +6,7 @@ namespace App\Models;
  * Patient
  *
  * @Table(name="patients")
- * @Entity
+ * @Entity(repositoryClass="App\Repositories\PatientRepository")
  */
 class Patient
 {
@@ -132,12 +132,10 @@ class Patient
         $this->birthday = new \DateTime($data['birthday']);
         $this->docNumber = $data['documentNumber'];
         $this->address = $data['address'];
-        if (isset($data['phone']) && !empty($data['phone']))
-            $this->phone = $data['phone'];
+        $this->phone = $data['phone'];
         $this->gender = $data['gender'];
         $this->documentType = $data['documentType'];
-        if(isset($data['insurance']))
-            $this->insurance = $data['insurance'];
+        $this->insurance = $data['insurance'];
     }
 
     public function setDemographicData($data)
