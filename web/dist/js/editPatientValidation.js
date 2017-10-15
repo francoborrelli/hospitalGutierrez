@@ -133,10 +133,29 @@ $('#editDemographicInfo').validate({
 
 //Efecto en los botones
 $('.nav-link').click(function () {
-    $('#editbtn').attr('data-target', $(this).data("form"));
+    form = $(this).attr("data-form")
+    if ($(form).length == 0){
+        $("#editbtn").prop('disabled', true);
+    }else{
+        $("#editbtn").prop('disabled', false);
+        $('#editbtn').attr('data-target', $(this).data("form"));
+    }
 })
+
+$( document ).ready(function() {
+    form = $('.nav-link.active').attr("data-form")
+    if ($(form).length == 0){
+        $("#editbtn").prop('disabled', true);
+    }else{
+        $("#editbtn").prop('disabled', false);
+        $('#editbtn').attr('data-target', $(this).data("form"));
+    }  
+});
+
+
 
 $('#btnClose').click(function(){
     $(this).closest('form')[0].reset();
     $(this).closest('form').validate().resetForm()
 })
+

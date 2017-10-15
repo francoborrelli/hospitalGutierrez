@@ -72,6 +72,9 @@ small.error {
     right: 0;
 }
 
+button:disabled{
+    cursor:not-allowed
+}
 
 input[type="date"] {
     height: 38px;
