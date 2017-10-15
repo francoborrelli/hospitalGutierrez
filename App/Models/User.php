@@ -108,7 +108,7 @@ class User
         if (!is_null($roles))
             $this->roles = $roles;
 
-        if(isset($data['state']))
+        if(isset($data['status']))
             $this->active = true;
         else
             $this->active = false;
