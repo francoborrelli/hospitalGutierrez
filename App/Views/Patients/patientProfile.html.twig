@@ -25,25 +25,34 @@
     <div class="card-body">
       <!-- nav links -->
       <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="personal-tab" data-form="#editPersonalInfo" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i> Datos Personales</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="demographic-tab"  data-form="#editDemographicInfo"  data-toggle="tab" href="#demographic" role="tab" aria-controls="demographic"><i class="fa fa-id-card-o" aria-hidden="true"></i> Datos Demograficos</a>
-        </li>
+          {% if currentUser.hasPermission('paciente_show') %}
+            <li class="nav-item">
+              <a class="nav-link active" id="personal-tab" data-form="#editPersonalInfo" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i> Datos Personales</a>
+            </li>
+          {% endif %}
+          {% if currentUser.hasPermission('datosDemograficos_show') %}
+            <li class="nav-item">
+                <a class="nav-link {% if not currentUser.hasPermission('paciente_show') %}active{% endif %}" id="demographic-tab"  data-form="#editDemographicInfo"  data-toggle="tab" href="#demographic" role="tab" aria-controls="demographic"><i class="fa fa-id-card-o" aria-hidden="true"></i> Datos Demograficos</a>
+            </li>
+        {% endif %}
       </ul>
 
-      <!-- body -->
-      <div class="tab-content" id="myTabContent">
+    <!-- body -->
+    <div class="tab-content" id="myTabContent">
 
-        <!-- datos personales -->
-        <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
-          {% include 'Patients/personalProfile.html.twig' %}
-        </div>
+        {% if currentUser.hasPermission('paciente_show') %}
+            <!-- datos personales -->
+            <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+                {% include 'Patients/personalProfile.html.twig' %}
+            </div>
+        {% endif %}
 
         <!-- datos demograficos -->
-        <div class="tab-pane fade" id="demographic" role="tabpanel" aria-labelledby="demographic-tab">
-          {% include 'Patients/demographicProfile.html.twig' %}
+        {% if currentUser.hasPermission('datosDemograficos_show') %}
+            <div class="tab-pane fade" id="demographic" role="tabpanel" aria-labelledby="demographic-tab">
+            {% include 'Patients/demographicProfile.html.twig' %}
+        {% endif %}
+
         </div>
       </div>
     </div>

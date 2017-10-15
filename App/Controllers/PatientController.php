@@ -61,7 +61,7 @@ class PatientController extends Controller
 
     public function showAction()
     {
-        $this->denyAccessUnlessPermissionGranted('paciente_show');
+        $this->denyAccessUnlessOneGranted(array('paciente_show', 'datosDemograficos_show'));
 
         $em = $this->getEntityManager();
         $patient = $em->getRepository(Patient::class)->find($this->getRouteParams()['id']);
