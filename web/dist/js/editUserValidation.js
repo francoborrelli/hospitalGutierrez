@@ -17,6 +17,18 @@ $(".editbtn").click(function(){
     roles.forEach(function(element) {
             $('#edit' + element ).prop('checked', true);
     }, this);
+
+
+    status = $(tr).eq(5).text();
+
+    if (status == "Bloqueado"){
+        $('#blockedState').closest("label").addClass("active")
+        $('#blockedState').attr('checked', true);  
+    }
+    else{        
+        $('#activeState').closest("label").addClass("active")
+        $('#activeState').attr('checked', true);  
+    }
 });
 
 reset = function(){
@@ -25,10 +37,8 @@ reset = function(){
     $('#blockedState').closest("label").removeClass("active")
     $('#editPass').removeClass('is-invalid');
     $('#newPass').removeClass('is-invalid');
-    $('#confirmNewPass').removeClass('is-invalid');
-    $('#activeState').attr('checked', false);  
-    $('#blockedState').attr('checked', false);  
-    $('#editUser').validate().resetForm();    
+    $('#confirmNewPass').removeClass('is-invalid');  
+    $('#editUser').validate().resetForm();  
 }
 
 $('#editUser').validate({
