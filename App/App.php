@@ -36,8 +36,10 @@ class App
         $this->router->add('patient/{id:\d+}/{action}', ['controller' => 'Patient']);
 
         // Configuration
-        $this->router->add('admin/config', ['controller' => 'Config', 'action' => 'index']);
-        $this->router->add('admin/articles/update', ['controller' => 'ArticleController', 'action' => 'update']);
+        $this->router->add('config', ['controller' => 'Config', 'action' => 'index']);
+        $this->router->add('config/update', ['controller' => 'Config', 'action' => 'update']);
+        $this->router->add('config/articles', ['controller' => 'Article', 'action' => 'showEdit']);
+        $this->router->add('config/articles/update', ['controller' => 'Article', 'action' => 'update']);
 
         // Authentication
         $this->router->add('login', ['controller' => 'Login', 'action' => 'show']);

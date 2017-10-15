@@ -33,7 +33,7 @@
 
         <!-- Configuración -->
         {% if currentUser.hasPermission("config_index") %}
-            {{ navbar.dropdownItem("Configuración", "fa-cog", "/admin/config", "dropdown_config") }}    
+            {{ navbar.dropdownItem("Configuración", "fa-cog", "/config", "dropdown_config") }}    
             <div class="dropdown-divider"></div>
         {% endif %}
 

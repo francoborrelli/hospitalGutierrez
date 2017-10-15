@@ -3,13 +3,22 @@
 namespace App\Controllers;
 
 use Core\Controller;
+use App\Models\Article;
 
 class ArticleController extends Controller
 {
-    public function updateAction()
+    protected function before()
     {
         $this->denyAccessUnlessPermissionGranted('config_update');
+    }
 
+    public function showEditAction()
+    {
+        $this->render('Config/articlesPage.html.twig');
+    }
+
+    public function updateAction()
+    {
         $em = $this->getEntityManager();
         $articles = $em->getRepository(Article::class)->findAll();
 
@@ -19,5 +28,8 @@ class ArticleController extends Controller
         }
 
         $em->flush();
+
+        $this->addFlashMessage('success', '¡Felicitaciones!.', 'Los artículos fueron actualiados correctamente');
+        $this->redirect('/config/articles');
     }
 }
