@@ -32,7 +32,7 @@
           {% endif %}
           {% if currentUser.hasPermission('datosDemograficos_show') %}
             <li class="nav-item">
-                <a class="nav-link {% if not currentUser.hasPermission('paciente_show') %}active{% endif %}" id="demographic-tab"  data-form="#editDemographicInfo"  data-toggle="tab" href="#demographic" role="tab" aria-controls="demographic"><i class="fa fa-id-card-o" aria-hidden="true"></i> Datos Demograficos</a>
+                <a class="nav-link" id="demographic-tab"  data-form="#editDemographicInfo"  data-toggle="tab" href="#demographic" role="tab" aria-controls="demographic"><i class="fa fa-id-card-o" aria-hidden="true"></i> Datos Demograficos</a>
             </li>
         {% endif %}
       </ul>
@@ -64,4 +64,9 @@
 {% block javascripts %}
 <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
 <script src="/web/dist/js/editPatientValidation.js"></script>
+{% if not currentUser.hasPermission('paciente_show') %}
+<script>
+  $('#demographic-tab').trigger("click");
+</script>
+{% endif %}
 {% endblock %}
