@@ -137,20 +137,13 @@ $(".editbtn").click(function(){
 
     status = $(tr).eq(5).text();
 
-    if (status == "Bloqueado"){
-        $('#blockedState').closest("label").addClass("active")
-        $('#blockedState').attr('checked', true);  
-    }
-    else{        
-        $('#activeState').closest("label").addClass("active")
-        $('#activeState').attr('checked', true);  
+    if (status == "Activo"){
+        $('#status').attr('checked', true);  
     }
 });
 
 reset = function(){
     $('#editUser')[0].reset();
-    $('#activeState').closest("label").removeClass("active")
-    $('#blockedState').closest("label").removeClass("active")
     $('#editPass').removeClass('is-invalid');
     $('#newPass').removeClass('is-invalid');
     $('#confirmNewPass').removeClass('is-invalid');  
