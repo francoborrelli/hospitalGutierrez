@@ -1,3 +1,5 @@
+//Configuración de la tabla de pacientes
+
 var oTable =  $('#patients').DataTable({
     responsive: {
         details: {
@@ -58,3 +60,26 @@ var oTable =  $('#patients').DataTable({
         },
     }
 });
+
+//evita submit de formulario al apretar enter 
+
+$(document).ready(function () {
+    $(window).keydown(function (event) {
+        if ((event.keyCode == 13)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+});
+
+//Habilita enter en el search
+
+$('.searchForm').find('input').each(function () {
+    $(this).on('keydown', function (e) {
+        if (e.which == 13) {
+            $('#searchForm').submit()
+            console.log("hola")
+        }
+    });
+
+})
