@@ -1,0 +1,46 @@
+<div class="row" id="demographicData">
+        <div class="col-md-12">
+            <div class="white-box demo">
+                <div class="user-btm-box">
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-6 b-r"><strong>Tipo de Casa</strong>
+                            <p>{{ patient.houseType.name }}</p>
+                        </div>
+                        <div class="col-md-6 b-r"><strong>Tipo de Calefacción</strong>
+                            <p>{{ patient.heatingType.name }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-6 b-r"><strong>Tipo de Agua</strong>
+                            <p>{{ patient.waterType.name }}</p>
+                        </div>
+                        <div class="col-md-6 "><strong>¿Tiene Heladera?</strong>
+                            {% if patient.refrigerator %}
+                                <p>Si</p>
+                            {% else %}
+                                <p>No</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-6 b-r"><strong>¿Tiene Electricidad?</strong>
+                            {% if patient.electricity %}
+                                <p>Si</p>
+                            {% else %}
+                                <p>No</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6"><strong>¿Tiene Mascotas?</strong>
+                            {% if patient.pet %}
+                                <p>Si</p>
+                            {% else %}
+                                <p>No</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

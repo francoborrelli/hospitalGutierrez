@@ -1,0 +1,13 @@
+
+{% macro item(on, off, id, boolean) %}
+    <div class="text-center custom-switch custom-switch-label-io">
+        <input {% if boolean is defined and boolean %} checked {% endif %} class="custom-switch-input" id="{{id}}" name="{{ id }}"type="checkbox">
+        <label class="custom-switch-btn" for="{{id}}"></label>
+        <div class="custom-switch-content-checked">
+            {{on}}
+        </div>
+        <div class="custom-switch-content-unchecked">
+            {{off}}
+        </div>
+    </div>
+{% endmacro %}

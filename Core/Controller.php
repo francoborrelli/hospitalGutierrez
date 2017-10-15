@@ -37,6 +37,11 @@ abstract class Controller
     {
     }
 
+    protected function getRouteParams()
+    {
+        return $this->route_params;
+    }
+
     protected function render($template, $args = [])
     {
         View::renderTemplate($template, $args);
@@ -77,6 +82,18 @@ abstract class Controller
             $this->addFlashMessage('warning', 'Lo sentimos.', "Usted posee el permiso $permission");
             $this->redirect('/');
         }
+    }
+
+    protected function denyAccessUnlessOneGranted($permissions)
+    {
+        $this->requireLogin();
+        foreach ($permissions as $permission) {
+            if ($this->getUser()->hasPermission($permission)) {
+                return;
+            }
+        }
+        $this->addFlashMessage('warning', 'Lo sentimos.', "Usted posee el permiso");
+        $this->redirect('/');
     }
 
     protected function getUser()

@@ -1,0 +1,71 @@
+{% import 'utils/switch.html.twig' as switch %}
+
+<form method="post" action="/patient/{{ patient.id }}/editDemographic" class="modal fade" id="editDemographicInfo">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Datos Demograficos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content" id="myTabContent">
+                        <!-- tipo de vivienda -->
+                        <div class="form-group col">
+                            <label for="houseTypeId">¿Tipo de vivienda? *</label>
+                            <select id="houseTypeId" name="houseTypeId" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
+                                <option value="">Selecciona tipo de casa</option>
+                                {% for houseType in patientFields.houseType %}
+                                <option value="{{ houseType.id }}" {% if houseType.id == patient.houseType.id %}selected="selected"{% endif %}>{{ houseType.name }}</option>
+                                {% endfor %}
+                        </select>
+                        </div>
+
+                        <!-- tipo de calefaccion -->
+                        <div class="form-group col">
+                            <label for="heatingTypeId">¿Tipo de calefacción? *</label>
+                            <select id="heatingTypeId" name="heatingTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                                <option value="">Selecciona tipo de calefacción</option>
+                                {% for heatingType in patientFields.heatingType %}
+                                <option value="{{ heatingType.id }}" {% if heatingType.id == patient.heatingType.id %}selected="selected"{% endif %}>{{ heatingType.name }}</option>
+                                {% endfor %}
+                        </select>
+                        </div>
+
+                        <!-- tipo de agua -->
+                        <div class="form-group col">
+                            <label for="waterTypeId">¿Tipo de agua? *</label>
+                            <select id="waterTypeId" name="waterTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                                <option value="">Selecciona tipo de agua</option>
+                                {% for waterType in patientFields.waterType %}
+                                <option value="{{ waterType.id }}" {% if waterType.id == patient.waterType.id %}selected="selected"{% endif %}>{{ waterType.name }}</option>
+                                {% endfor %}
+                        </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- heladera? -->
+                        <div class="form-group col text-center">
+                            <label for="fridge">¿Tiene heladera? *</label> {{ switch.item('Tiene','No tiene', 'refrigerator', patient.refrigerator)}}
+                        </div>
+
+                        <!-- electricidad? -->
+                        <div class="form-group col text-center">
+                            <label for="electricity">¿Tiene electricidad? *</label> {{ switch.item('Tiene','No tiene', 'electricity', patient.electricity)}}
+                        </div>
+
+                        <!-- mascotas? -->
+                        <div class="form-group col text-center">
+                            <label for="pets">¿Tiene mascotas? *</label> {{ switch.item('Tiene','No tiene', 'pet', patient.pet) }}
+                        </div>
+                    </div>
+            </div>
+    <div class="modal-footer">
+        <small id="error" class="error">*Campos Obligatorios</small>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+    </div>
+    </div>
+    </div>
+</form>

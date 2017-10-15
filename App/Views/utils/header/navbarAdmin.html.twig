@@ -1,6 +1,6 @@
 {% import 'utils/header/navItem.html.twig' as navbar %}
         
-{{ navbar.item('Pacientes') }}
+{{ navbar.item('Pacientes', '/patients') }}
 
 {% embed "utils/header/dropdown.html.twig" %}
 
@@ -21,8 +21,6 @@
         {{ navbar.dropdownItem('Configuracion', '#', 'dropdown_config') }}
                 
         <div class="dropdown-divider"></div>
-
-        {{ navbar.dropdownItem('Cerrar Sesión', 'logout') }}
 
         {% endblock %}
 

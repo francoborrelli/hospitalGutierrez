@@ -14,7 +14,7 @@ class ORMConnection
 
         if ($entityManager === null) {
             $paths = array(dirname(__DIR__) . '/App/Models');
-            $isDevMode = false;
+            $isDevMode = true;
             
             $dbParams = array(
                 'driver'   => Config::DB_DRIVER,

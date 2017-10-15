@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Core\Controller;
 use App\Models\User;
 
-class Security extends Controller
+class SecurityController extends Controller
 {
     public function validateEmailAction()
     {

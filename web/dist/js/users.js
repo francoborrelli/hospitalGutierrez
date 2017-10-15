@@ -29,6 +29,7 @@ var oTable =  $('#usuarios').DataTable({
             "aTargets": [6]
         }],
         "bLengthChange": false,
+        "bFilter": false,
         "info": false,
         "language": {
             "sProcessing": "Procesando...",

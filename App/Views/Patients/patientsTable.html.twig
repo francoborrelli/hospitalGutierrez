@@ -1,0 +1,63 @@
+{% extends 'utils/base.html.twig' %} 
+    
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/web/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
+<link rel="stylesheet" href="/web/assets/dataTables/css/responsive.bootstrap4.min.css"> 
+{% endblock %} 
+
+{% block body %}
+
+   {% include 'Patients/addPatient.html.twig' %}
+
+    <div class="container userReport">
+        <div class="row">
+            {% include 'Patients/patientSearch.html.twig' %}
+            <div class ="col-lg-9">
+        <div class="card">
+            <div class="card-header text-left">
+                <a class="btn detalle" id="goBack" title="Volver al inicio" href="/"><i class="fa fa-reply" aria-hidden="true"></i></a>
+                <h3>Pacientes</h3>
+            </div>
+            <div class="card-block">
+                <div class="tablePage">
+                    <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addPatient">Agregar</button>  
+                    <table class="table table-striped" id="patients">
+                    <thead>
+                        <tr>
+                            <th>Tipo doc.</th>
+                            <th>Nº documento</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th> 
+                            <th>Ver detalle</th>
+                        </tr>
+                    </thead>
+                    </tbody>
+                        {% include 'Patients/patients.html.twig' %}
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+            </div>
+    </div>
+{% endblock %} 
+
+
+{% block javascripts %}
+    <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
+    <script src="/web/assets/dataTables/js/datatables.min.js"></script>
+    <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
+    <script src="/web/dist/js/patients.js"></script>
+    <script src="/web/dist/js/multi-step-modal.js"></script>
+    <script src="/web/dist/js/addPatientValidation.js"></script>
+   {% if newErrors is defined %}
+        <script>
+            $('#addPatient').modal('show')
+        </script>
+    {% endif %}
+
+{% endblock %}
+

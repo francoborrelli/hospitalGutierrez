@@ -1,0 +1,99 @@
+{% import 'utils/switch.html.twig' as switch %} 
+
+{% extends 'utils/base.html.twig' %} 
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/dist/css/config.css"> 
+{% endblock %} 
+
+
+{% block body %}
+<form class="container config userReport" id="configForm">
+
+    <div class="card">
+
+        <div class="card-header text-left">
+            <a class="btn detalle" id="goBack" title="Volver al inicio" href="/"><i class="fa fa-reply" aria-hidden="true"></i></a>
+            <h3>Configuración</h3>
+        </div>
+
+        <div class="card-block container">
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist" style="padding-top: 20px">
+                <li class="nav-item">
+                    <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-expanded="true">Sitio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pagination-tab" data-toggle="tab" href="#pagination" role="tab" aria-controls="pagination">Paginación</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="mantenimiento-tab" data-toggle="tab" href="#mantenimiento" role="tab" aria-controls="mantenimiento">Mantenimiento</a>
+                </li>
+            </ul>
+
+
+            <div class="tab-content" id="myTabContent">
+
+                <!-- Datos del sitio  -->
+                <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                    <div class="container">
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="title">Título</label>
+                                <input type="text" id="title" name="title" class="form-control" placeholder="Título">
+                            </div>
+                            <div class="form-group col">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <textarea id="descripcion" name="descripcion" class="form-control" placeholder="Descripción"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paginación  -->
+                <div class="tab-pane fade" id="pagination" role="tabpanel" aria-labelledby="pagination-tab">
+                    <div class="pageChange form">
+                        <div class="col-sm-12 input">
+                            <div class="col-xs-3 col-xs-offset-3">
+                                <label for="pageAmount">Elementos por página</label>
+                                <div class="input-group number-spinner">
+                                    <span class="input-group-btn data-dwn">
+                                        <button class="btn btn-default" id="dwn" type="button" data-dir="dwn"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                    </span>
+                                    <input type="number" id="pageAmount" name="pageAmount" class="form-control text-center" min="1" value="1" placeholder="Ingrese el nuevo numero de elementos por página" required>
+                                    <span class="input-group-btn data-up">
+                                        <button class="btn btn-default"  id="up"  type="button" data-dir="up"><i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mantenimiento  -->
+                <div class="tab-pane fade" id="mantenimiento" role="tabpanel" aria-labelledby="mantenimiento-tab">
+                    <div class="ChangeMantenimiento">
+                        {{ switch.item('Sitio activo','Sitio en mantenimiento', 'actived') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted text-right">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+</form>
+{% endblock %} 
+
+
+{% block javascripts %}
+    <script src="/assets/jquery-validate/jquery.validate.min.js"></script>
+    <script src="/assets/jquery-validate/autoresize.jquery.js"></script>
+    <script src="/dist/js/config.js"></script>
+    <script src="/dist/js/configValidation.js"></script>
+{% endblock %}

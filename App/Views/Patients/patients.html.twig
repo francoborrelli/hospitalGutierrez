@@ -1,0 +1,14 @@
+{% for patient in patients %}
+    <tr>
+        <td>{{ patient.documentType.name }}</td>
+        <td>{{ patient.docNumber }}</td>
+        <td>{{ patient.firstName }}</td>
+        <td>{{ patient.lastName }}</td>
+        <td class="text-center">
+            <div class="btn-group" role="group">
+                <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-primary" title="Ver en detalle"><i class="fa fa-user" aria-hidden="true"></i></a>
+            </div>
+        </td>
+    </tr>
+    
+{% endfor %}

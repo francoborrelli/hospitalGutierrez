@@ -303,6 +303,16 @@ class User
      *
      * @return boolean
      */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
     public function isActive()
     {
         return $this->active;
@@ -409,7 +419,4 @@ class User
 
         return $validationErrors;
     }
-
 }
-
-

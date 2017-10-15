@@ -1,5 +1,3 @@
-// custom validation methods
-
 $.validator.addMethod("nonNumeric", function (value, element) {
     return this.optional(element) || isNaN(Number(value));
 });
@@ -17,9 +15,7 @@ $.validator.addMethod("alphanumeric", function(value, element) {
 $.validator.messages.required = '';
 
 
-// validation definition
-
-$('#addUser').validate({
+$('#addPatient').validate({
     rules: {
         firstName: {
             alphanumeric: true,
@@ -33,65 +29,76 @@ $('#addUser').validate({
             nonNumeric: true,
             maxlength: 50,
         },
-        username: {
-            alphanumeric: true,
-            minlength: 6,
+        documentNumber: {
             required: true,
-            noSpace: true,
             maxlength: 50,
-            remote: '/admin/security/validateUserName'
         },
-        email: {
+        birthday: {
             required: true,
-            email: true,
-            maxlength: 255,
-            remote: '/admin/security/validateEmail'
         },
-        pass: {
+        address: {
             required: true,
-            minlength: 6,
-            maxlength: 255,
         },
-        confirmPass: {
+        documentTypeId: {
             required: true,
-            minlength: 6,
-            equalTo: '#pass',
         },
+        genderId: {
+            required: true,
+        },
+        houseTypeId: {
+            required: true,
+        },
+        heatingTypeId: {
+            required: true,
+        },
+        waterTypeId: {
+            required: true,
+        }
     },
     messages: {
         firstName: {
             required: "Ingrese el nombre",
             nonNumeric: "Debe contener solo letras",
             alphanumeric: "Debe contener solo letras",
-            maxlength: "No puede tener más de 50 caracteres"
-        },
-        username: {
-            required: "Ingrese el nombre de usuario",
-            minlength: "Debe tener al menos 6 caracteres",
-            noSpace: "No puede tener espacios en blanco",
-            alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres",
-            remote: "El nombre de usuario ya ha sido utilizado"
+            pattern:"Debe contener solo letras",
+        },
+        documentNumber: {
+            required: "Ingrese el documento",
+            maxlength: "Ingrese un documento valido",
         },
         lastName: {
             required: "Ingrese el apellido",
             nonNumeric: "Debe contener solo letras",
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres",
+            pattern:"Debe contener solo letras",
         },
-        pass: {
-            required: "Ingrese la contraseña",
-            minlength: "Debe tener al menos 6 caracteres"
+        birthday: {
+            required: "Ingrese la fecha",
+            max: "Ingrese una fecha valida",
+            min: "Ingrese una fecha valida",
         },
-        confirmPass: {
-            required: "Re-ingrese la contraseña",
-            minlength: "Debe tener al menos 6 caracteres",
-            equalTo: "La contraseña no coincide"
+        address: {
+            required: "Ingrese la dirección del domicilio",
         },
-        email: {
-            email: "Ingrese un email valido",
-            required: "Ingrese el email",
-            remote: "El correo ingresado ya ha sido utilizado"
+        phone: {
+            minlength: "Ingrese un teléfono válido"
+        },
+        documentTypeId: {
+            required: "Seleccione el tipo de documento",
+        },
+        genderId: {
+            required: "Seleccione el género",
+        },
+        heatingTypeId: {
+            required: "Seleccione el tipo de calefacción",
+        },        
+        houseTypeId: {
+            required: "Seleccione el tipo de casa",
+        },
+        waterTypeId: {
+            required: "Seleccione el tipo de Agua",
         },
     },
     highlight: function (element) {
@@ -116,32 +123,29 @@ $('#addUser').validate({
   });
   
 
-// Buttons Actions
-
 $("#goBack").click(function(){
-    $('#addUser').trigger('next.m.1'); 
+    $('#addPatient').trigger('next.m.1'); 
 });
 
 $("#goNext").click(function(){
-    if ($('#firstName').valid() & $('#lastName').valid() & $('#email').valid() & $('#username').valid() & $('#pass').valid() & $('#confirmPass').valid()) {
-        $('#addUser').trigger('next.m.2');
+    if ($('#firstName').valid() & $('#lastName').valid() & $('#documentNumber').valid() & $('#documentTypeId').valid()& $('#birthday').valid() & $('#address').valid() & $('#phone').valid()& $('#genderId').valid()) {
+        $('#addPatient').trigger('next.m.2');
     }
 });
 
 $("#cancelbtn").click(function(){
-    $('#addUser').modal('hide')
-    $('#addUser')[0].reset();
-    $('#addUser').validate().resetForm();  
-    $('#addUser').trigger('next.m.1');   
-    return true
+    $('#addPatient').modal('hide')
+    $('#addPatient')[0].reset();  
+    $('#addPatient').trigger('next.m.1');   
+    $('#addPatient').validate().resetForm()
 })
+
+
 
 $(".deletebtn").click(function(){
     $("#deletedId").val($(this).data("id"))
     tr = $(this).closest('tr')
-    name = $(tr).find("td").eq(1).text()
-    surname = $(tr).find("td").eq(2).text()
+    name = $(tr).find("td").eq(2).text()
+    surname = $(tr).find("td").eq(3).text()
     $(".modalText").text(name + ' ' + surname);
 });
-
-

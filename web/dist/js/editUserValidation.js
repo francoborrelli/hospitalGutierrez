@@ -1,3 +1,7 @@
+$( document ).ready(function() {
+    navValidate('#editUser');
+});
+    
 $(".editbtn").click(function(){
     reset();
     id = $(this).attr("data-id");
@@ -26,9 +30,6 @@ reset = function(){
     $('#blockedState').attr('checked', false);  
     $('#editUser').validate().resetForm();    
 }
-
-  
-
 
 $('#editUser').validate({
     rules: {
@@ -135,20 +136,13 @@ $('#editUser').validate({
 
 });
 
-$( document ).ready(function() {
-    $(window).keydown(function(event){
-        if(event.keyCode == 13) {
-          event.preventDefault();
-          return false;
-        }
-      });
+  //evita submit on enter
 
-    $('.nav-link').click(function(e){
-        if (!$('#editUser').valid()){
-        e.preventDefault();
-        e.stopPropagation();
-        }
-    })
+  $(window).keydown(function (event) {
+    if (event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+  
 
-});
-    

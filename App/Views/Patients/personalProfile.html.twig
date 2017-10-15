@@ -1,0 +1,49 @@
+<div class="row" id="personalData">
+        <div class="col-md-12">
+            <div class="white-box">
+                <div class="user-btm-box">
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-6 b-r"><strong>Nombre</strong>
+                            <p>{{ patient.firstName }}</p>
+                        </div>
+                        <div class="col-md-6"><strong>Apellido</strong>
+                            <p>{{ patient.lastName }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-6 b-r"><strong>Tipo de Doc.</strong>
+                            <p>{{ patient.documentType.name }}</p>
+                        </div>
+                        <div class="col-md-6"><strong>Documento</strong>
+                            <p>{{ patient.docNumber }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-6 b-r"><strong>Fecha nacimiento</strong>
+                            <p>{{ patient.birthday|date('d/m/Y') }}</p>
+                        </div>
+                        <div class="col-md-6"><strong>Genero</strong>
+                            <p>{{ patient.gender.name }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-6 b-r"><strong>Teléfono</strong>
+                            <p>{% if patient.phone is defined %}{{patient.phone}}{% else %}-{% endif %}</p>
+                        </div>
+                        <div class="col-md-6"><strong>Obra Social</strong>
+                            <p>{% if patient.insurance is defined %}{{ patient.insurance.name }}{% else %}-{% endif %}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-12"><strong>Domicilio</strong>
+                            <p>{{ patient.address }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

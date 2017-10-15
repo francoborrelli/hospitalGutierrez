@@ -1,13 +1,14 @@
 {% macro new_article(title, icon, text, route) %}
 
-    <div class="card">
-        <div class="card-header">
-            <i class="fa {{ icon }}" aria-hidden="true"></i>&nbsp {{ title }}
-        </div>
-        <div class="card-body">
-            <p class="card-text">{{ text }}</p>
-        </div>
-        <div class="card-footer bg-transparent text-right"><a href="{% if route %} {{ route }} {% else %} # {% endif %}" class="btn btn-primary">Más información</a></div>
+<div class="col-lg-4">
+    <div class="iconbox-4">
+        <i class="fa {{ icon }}"></i>
+        <br><br>
+        <h4 class="heading">{{ title }}</h4>
+        <p>{{text}}</p>
+        <br>
+        <a href="{% if route %} {{ route }} {% else %} # {% endif %}" class="btn btn-black btn-sm">Leer más</a>
     </div>
+</div>
 
 {% endmacro new_article %}
