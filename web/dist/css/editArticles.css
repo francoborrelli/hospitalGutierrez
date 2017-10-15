@@ -2,6 +2,14 @@
     margin-bottom: 0;
 }
 
+.btn-edit{
+    float: right;
+}
+
+.btn-edit:first-of-type{
+    margin-right: 10px;
+}
+
 .title {
     border: 1px transparent;
     text-align: center;
