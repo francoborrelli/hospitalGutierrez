@@ -7,8 +7,9 @@
 {% endblock %} 
 
 {% block body %}
-
+ {% if currentUser.hasPermission('paciente_new') %}
    {% include 'Patients/addPatient.html.twig' %}
+{% endif %}
 
     <div class="container userReport">
         <div class="row">
@@ -21,14 +22,16 @@
             </div>
             <div class="card-block">
                 <div class="tablePage">
-                    <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addPatient">Agregar</button>  
+                    {% if currentUser.hasPermission('paciente_new') %}
+                        <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addPatient">Agregar</button>  
+                    {% endif %}
                     <table class="table table-striped" id="patients">
                     <thead>
                         <tr>
-                            <th>Tipo doc.</th>
-                            <th>Nº documento</th>
                             <th>Nombre</th>
                             <th>Apellido</th> 
+                            <th>Tipo doc.</th>
+                            <th>Nº documento</th>
                             <th>Ver detalle</th>
                         </tr>
                     </thead>
@@ -36,6 +39,27 @@
                         {% include 'Patients/patients.html.twig' %}
                     </tbody>
                     </table>
+                        <!-- paginacion -->
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Anterior">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Anterior</span>
+                                </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Posterior">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Posterior</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
                 </div>
             </div>
 
@@ -52,10 +76,23 @@
     <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
     <script src="/web/dist/js/patients.js"></script>
     <script src="/web/dist/js/multi-step-modal.js"></script>
-    <script src="/web/dist/js/addPatientValidation.js"></script>
+
+    {% if currentUser.hasPermission('paciente_new') %}
+        <script src="/web/dist/js/addPatientValidation.js"></script>
+    {% endif %}
+
    {% if newErrors is defined %}
         <script>
             $('#addPatient').modal('show')
+        </script>
+    {% endif %}
+
+    
+   {% if not currentUser.hasPermission('paciente_show') %}
+        <script>
+            $(document).ready(function() {
+                oTable.column(4).visible(false)
+            } );
         </script>
     {% endif %}
 

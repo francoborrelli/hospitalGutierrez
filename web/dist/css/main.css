@@ -66,6 +66,17 @@ input[type="date"] {
   height: 38px;
 }
 
+/*  Para arreglar bug con los modales de boostrap 4 */
+.modal-open {
+  padding-right: 0 !important;
+}
+
+html {
+  overflow-y: scroll !important;
+}
+
+
+
 @font-face {
   font-family: 'Poppins';
   font-style: normal;

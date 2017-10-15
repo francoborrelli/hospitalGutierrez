@@ -31,6 +31,7 @@ var oTable =  $('#usuarios').DataTable({
         "bLengthChange": false,
         "bFilter": false,
         "info": false,
+        "bPaginate": false,
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ usuarios",

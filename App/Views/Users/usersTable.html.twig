@@ -6,16 +6,24 @@
 {% endblock %} 
 
 {% block body %}
-    {% include 'Users/addUser.html.twig' %}
-    {% include 'Users/deleteUser.html.twig' %}
-    {% include 'Users/editUser.html.twig' %}
 
+{% if currentUser.hasPermission('usuario_new') %}
+    {% include 'Users/addUser.html.twig' %}
+{% endif %}    
+
+{% if currentUser.hasPermission('usuario_destroy') %}
+    {% include 'Users/deleteUser.html.twig' %}
+{% endif %} 
+
+{% if currentUser.hasPermission('usuario_update') %}
+    {% include 'Users/editUser.html.twig' %}
+{% endif %} 
 
 
     <div class="container userReport">
         <div class="row">
             {% include 'Users/userSearch.html.twig' %}
-            <div class ="col-md-9">
+            <div class ="col-lg-9">
                 <div class="card">
                     <div class="card-header text-left">
                         <a class="btn detalle" id="goBack" title="Volver al inicio" href="/"><i class="fa fa-reply" aria-hidden="true"></i></a>
@@ -23,7 +31,9 @@
                     </div>
                     <div class="card-block">
                         <div class="tablePage">
-                            <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addUser">Agregar</button>
+                            {% if currentUser.hasPermission('usuario_new') %}
+                                <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addUser">Agregar</button>
+                            {% endif %} 
                             <table class="table table-striped" id="usuarios">
                             <thead>
                                 <tr>
@@ -40,6 +50,28 @@
                                 {% include 'Users/users.html.twig' %}
                             </tbody>
                             </table>
+
+                            <!-- paginacion -->
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Anterior">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Anterior</span>
+                                    </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Posterior">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Posterior</span>
+                                    </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            
                         </div>
                     </div>
                 </div>
@@ -55,20 +87,31 @@
     <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
     <script src="/web/dist/js/users.js"></script>
     <script src="/web/dist/js/multi-step-modal.js"></script>
-    <script src="/web/dist/js/addUserValidation.js"></script>
-    <script src="/web/dist/js/editUserValidation.js"></script>
+    
+    {% if currentUser.hasPermission('usuario_new') %}
+        <script src="/web/dist/js/addUserValidation.js"></script>
+    {% endif %}
+
+    {% if currentUser.hasPermission('usuario_update') %}  
+        <script src="/web/dist/js/editUserValidation.js"></script>
+    {% endif %}
+
+   {% if (not currentUser.hasPermission('usuario_update')) and (not currentUser.hasPermission('usuario_destroy')) %}  
+        <script>
+        $(document).ready(function() {
+                oTable.column(6).visible(false)
+        } );
+        </script>
+    {% endif %}
 
     {% if newErrors is defined %}
         <script>
             $('#addUser').modal('show')
         </script>
-
-
     {% elseif editErrors is defined %}
         <script>
             $('#editUser').modal('show')
         </script>
     {% endif %}
-
 
 {% endblock %}
