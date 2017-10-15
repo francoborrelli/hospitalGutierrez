@@ -62,15 +62,15 @@ class PatientController extends Controller
 
     public function editPatientAction()
     {
-        $this->edit($this->getParientData());
+        $this->edit($this->getPatientData($_POST), 'patient');
     }
 
     public function editDemographicAction()
     {
-        $this->edit($this->getDemographicData());
+        $this->edit($this->getDemographicData($_POST), 'demographic');
     }
 
-    private function edit($data)
+    private function edit($data, $mode)
     {
         $em = $this->getEntityManager();
         
@@ -79,7 +79,10 @@ class PatientController extends Controller
         $patient = $patientRepository->find($this->getRouteParams()['id']);
         $validationErrors = [];
         if (empty($validationErrors)) {
-            $patient->setData($data);
+            if ($mode == 'patient')
+                $patient->setData($data);
+            else
+                $patient->setDemographicData($data);
             $em->flush();
 
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del usuario correctamente');
