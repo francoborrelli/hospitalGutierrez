@@ -84,14 +84,14 @@ class PatientController extends Controller
         $patientRepository = $em->getRepository(Patient::class);
 
         $patient = $patientRepository->find($this->getRouteParams()['id']);
-        $data = $this->getPatientData($_POST);
 
         $validationErrors = $patient->validationErrors();
         if (empty($validationErrors)) {
-            if ($mode == 'patient')
+            if ($mode == 'patient') 
                 $patient->setData($data);
-            else
+            else 
                 $patient->setDemographicData($data);
+
             $em->flush();
 
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del usuario correctamente');
