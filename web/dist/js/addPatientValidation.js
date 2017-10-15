@@ -60,7 +60,8 @@ $('#addPatient').validate({
             required: "Ingrese el nombre",
             nonNumeric: "Debe contener solo letras",
             alphanumeric: "Debe contener solo letras",
-            maxlength: "No puede tener más de 50 caracteres"
+            maxlength: "No puede tener más de 50 caracteres",
+            pattern:"Debe contener solo letras",
         },
         documentNumber: {
             required: "Ingrese el documento",
@@ -71,6 +72,7 @@ $('#addPatient').validate({
             nonNumeric: "Debe contener solo letras",
             alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres",
+            pattern:"Debe contener solo letras",
         },
         birthday: {
             required: "Ingrese la fecha",

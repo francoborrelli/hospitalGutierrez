@@ -17,45 +17,47 @@
                 <div class="row">
                     <div class="form-group col">
                         <label for="Nombre">Nombre *</label>
-                        <input type="text" id="firstName" name="firstName" class="form-control {% if 'firstName' in newErrors %}is-invalid{% endif %}" placeholder="Nombre" {% if  newErrors is defined %}value="{{patient.firstName}}"{% endif %}>
+                        <input pattern="[a-zA-Z][a-zA-Z ]{2,}" type="text" id="firstName" name="firstName" class="form-control {% if 'firstName' in newErrors %}is-invalid{% endif %}" placeholder="Nombre" {% if  newErrors is defined %}value="{{patient.firstName}}"{% endif %}>
                         {% if 'firstName' in newErrors %}<label id="firstName-error" class="error" for="firstName">Ingrese el nombre</label>{% endif %}
                     </div>
                     <div class="form-group col">
                         <label for="Apellido">Apellido *</label>
-                        <input type="text" id="lastName" name="lastName" class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Apellido" {% if  newErrors is defined %} value="{{patient.lastName}}"{% endif %}>
+                        <input pattern="[a-zA-Z][a-zA-Z ]{2,}" type="text" id="lastName" name="lastName" class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Apellido" {% if  newErrors is defined %} value="{{patient.lastName}}"{% endif %}>
                         {% if 'lastName' in newErrors %}<label id="lastName-error" class="error" for="lastName">Ingrese el apellido</label>{% endif %}
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col">
                         <label for="Nombre">Tipo Documento *</label>
-                        <select id="documentTypeId" name="documentTypeId" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                        <select id="documentTypeId" name="documentTypeId" class="form-control form-control-chosen-required {% if 'documentTypeId' in newErrors %}is-invalid{% endif %}" data-placeholder="Tipo de documento">
                             <option value="">Seleccione el tipo de documento</option>
                             {% for documentType in patientFields.documentType %}
-                            <option value="{{ documentType.id }}">{{ documentType.name }}</option>
+                            <option value="{{ documentType.id }}" {% if newErrors is defined and documentType.id == patient.documentType.id %}selected="selected"{% endif %}>{{ documentType.name }}</option>
                             {% endfor %}
                         </select>
-                        {% if 'documentType' in newErrors %}<label id="documentTypeId-error" class="error" for="documentTypeId">Ingrese el tipo de documento</label>{% endif %}
+                        {% if 'documentTypeId' in newErrors %}<label id="documentTypeId-error" class="error" for="documentTypeId">Seleccione el tipo de documento</label>{% endif %}
                     </div>
                     <div class="form-group col">
                         <label for="documentNumber">Nº documento *</label>
-                        <input type="text" id="documentNumber" name="documentNumber" class="form-control {% if 'dni' in newErrors %}is-invalid{% endif %}" placeholder="Numero de documento" {% if  newErrors is defined %} value="{{patient.dni}}"{% endif %}>
-                        {% if 'documentNumber' in newErrors %}<label id="documentNumber-error" class="error" for="documentNumber">Ingrese el nº de documento</label>{% endif %}
+                        <input type="text" id="documentNumber" name="documentNumber" class="form-control {% if 'documentNumber' in newErrors %}is-invalid{% endif %}" placeholder="Numero de documento" {% if newErrors is defined %} value="{{patient.docNumber}}"{% endif %}>
+                        {% if 'documentNumber' in newErrors %}<label id="documentNumber-error" class="error" for="documentNumber">Ingrese el número de documento</label>{% endif %}
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col">
                         <label for="genderId">Género *</label>
-                        <select id="genderId" name="genderId" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
+                        <select id="genderId" name="genderId" class="form-control form-control-chosen-required {% if 'genderId' in newErrors %}is-invalid{% endif %}">
                             <option value="">Seleccione el género </option>
                             {% for gender in patientFields.gender %}
-                            <option value="{{ gender.id }}">{{ gender.name }}</option>
+                            <option value="{{ gender.id }}"{% if newErrors is defined and gender.id == patient.gender.id %}selected="selected"{% endif %}>{{ gender.name }}</option>
                             {% endfor %}
                         </select>
+                          {% if 'genderId' in newErrors %}<label id="genderId-error" class="error" for="genderId">Seleccione el género</label>{% endif %}
                     </div>
                     <div class="form-group col">
                         <label for="birthday">Fecha de Nacimiento *</label>
-                        <input type="date" id="birthday" name="birthday" min="1900-01-01" max="{{ "now"|date("Y-m-d") }}"class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Nacimiento">
+                        <input type="date" id="birthday" name="birthday" min="1900-01-01" max="{{ "now"|date("Y-m-d") }}"class="form-control {% if 'birthday' in newErrors %}is-invalid{% endif %}" placeholder="Nacimiento" {% if newErrors is defined %} value="{{patient.birthday | date("Y-m-d")}}"{% endif %} >
+                        {% if 'birthday' in newErrors %}<label id="birthday-error" class="error" for="birthday">Ingrese la fecha de nacimiento</label>{% endif %}
                     </div>
                 </div>
                 <div class="form-group">
@@ -66,15 +68,14 @@
                 <div class="row">
                     <div class="form-group col">
                         <label for="Nombre">Teléfono</label>
-                        <input type="number" minlength="5" id="phone" name="phone" class="form-control {% if 'phone' in newErrors %}is-invalid{% endif %}" placeholder="Teléfono" {% if  newErrors is defined %}value="{{patient.phone}}"{% endif %}>
-                        {% if 'phone' in newErrors %}<label id="phone-error" class="error" for="phone">Ingrese el nombre</label>{% endif %}
+                        <input type="number" minlength="5" id="phone" name="phone" class="form-control" placeholder="Teléfono" {% if  newErrors is defined %}value="{{patient.phone}}"{% endif %}>
                     </div>
                     <div class="form-group col">
                         <label for="insuranceId">Obra Social</label>
-                        <select id="insuranceId" name="insuranceId" class="form-control form-control-chosen-required" data-placeholder="Obra Social">
-                            <option value="-1"> Seleccione la obra social</option>
+                        <select id="insuranceId" name="insuranceId" class="form-control form-control-chosen-required">
+                            <option value=""> Seleccione la obra social</option>
                             {% for insurance in patientFields.insurance %}
-                            <option value="{{ insurance.id }}">{{ insurance.name }}</option>
+                                <option value="{{ insurance.id }}"{% if newErrors is defined and insurance.id == patient.insurance.id %}selected="selected"{% endif %}>{{ insurance.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -86,43 +87,58 @@
             <div class="modal-body step step-2">
                     <div class="form-group col">
                         <label for="insurance">¿Tipo de vivienda? *</label>
-                        <select id="houseTypeId" name="houseTypeId" class="form-control form-control-chosen-required" data-placeholder="Vivienda">
+                        <select id="houseTypeId" name="houseTypeId" class="form-control form-control-chosen-required {% if 'houseType' in newErrors %}is-invalid{% endif %}" data-placeholder="Vivienda">
                             <option value="">Seleccione tipo de casa</option>
                             {% for houseType in patientFields.houseType %}
-                            <option value="{{ houseType.id }}">{{ houseType.name }}</option>
+                            <option value="{{ houseType.id }}" {% if newErrors is defined and houseType.id == patient.houseType.id %}selected="selected"{% endif %}>{{ houseType.name }}</option>
                             {% endfor %}
                         </select>
+                        {% if 'houseType' in newErrors %}<label id="houseTypeId-error" class="error" for="houseTypeId">Selecciona un tipo de casa</label>{% endif %}
                     </div>
                     <div class="form-group col">
                         <label for="heatingTypeId">¿Tipo de calefacción? *</label>
-                        <select id="heatingTypeId" name="heatingTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                        <select id="heatingTypeId" name="heatingTypeId" class="form-control form-control-chosen-required {% if 'heatingType' in newErrors %}is-invalid{% endif %}" data-placeholder="Calefaccion">
                             <option value="">Seleccione tipo de calefaccion</option>
                             {% for heatingType in patientFields.heatingType %}
-                            <option value="{{ heatingType.id }}">{{ heatingType.name }}</option>
+                            <option value="{{ heatingType.id }}"{% if newErrors is defined and heatingType.id == patient.heatingType.id %}selected="selected"{% endif %}>{{ heatingType.name }}</option>
                             {% endfor %}
                         </select>
+                        {% if 'heatingType' in newErrors %}<label id="heatingTypeId-error" class="error" for="heatingTypeId">Selecciona un tipo de calefacción</label>{% endif %}
                     </div>
                     <div class="form-group col">
                         <label for="waterTypeId">¿Tipo de agua? *</label>
-                        <select id="waterTypeId" name="waterTypeId" class="form-control form-control-chosen-required" data-placeholder="Calefaccion">
+                        <select id="waterTypeId" name="waterTypeId" class="form-control form-control-chosen-required {% if 'waterType' in newErrors %}is-invalid{% endif %}" data-placeholder="Calefaccion">
                             <option value="">Seleccione tipo de agua</option>
                             {% for waterType in patientFields.waterType %}
-                            <option value="{{ waterType.id }}">{{ waterType.name }}</option>
+                            <option value="{{ waterType.id }}"{% if newErrors is defined and waterType.id == patient.waterType.id %}selected="selected"{% endif %}>{{ waterType.name }}</option>
                             {% endfor %}
                         </select>
+                        {% if 'waterType' in newErrors %}<label id="waterTypeId-error" class="error" for="waterTypeId">Selecciona un tipo de agua</label>{% endif %}
                     </div>
                 <div class="row">
                     <div class="form-group col text-center">
                         <label for="fridge">¿Tiene heladera?*</label>
-                        {{ switch.item('Tiene','No tiene', 'refrigerator') }}
+                        {% if newErrors is defined and patient.refrigerator %}
+                            {{ switch.item('Tiene','No tiene', 'refrigerator', true )}}
+                        {% else %}
+                            {{ switch.item('Tiene','No tiene', 'refrigerator', false )}}
+                        {% endif %}
                     </div>
                     <div class="form-group col text-center">
                         <label for="electricity">¿Tiene electricidad?*</label>
-                        {{ switch.item('Tiene','No tiene', 'electricity') }}
+                        {% if newErrors is defined and patient.electricity %}
+                            {{ switch.item('Tiene','No tiene', 'electricity', true )}}
+                        {% else %}
+                            {{ switch.item('Tiene','No tiene', 'electricity', false )}}
+                        {% endif %}
                     </div>
                     <div class="form-group col text-center">
                         <label for="pets">¿Tiene mascotas?*</label>
-                        {{ switch.item('Tiene','No tiene', 'pet') }}
+                        {% if newErrors is defined and patient.pet %}
+                            {{ switch.item('Tiene','No tiene', 'pet', true )}}
+                        {% else %}
+                            {{ switch.item('Tiene','No tiene', 'pet', false )}}
+                        {% endif %}
                     </div>
                 </div>           
             </div>

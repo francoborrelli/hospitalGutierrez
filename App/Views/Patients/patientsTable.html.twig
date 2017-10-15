@@ -53,4 +53,11 @@
     <script src="/web/dist/js/patients.js"></script>
     <script src="/web/dist/js/multi-step-modal.js"></script>
     <script src="/web/dist/js/addPatientValidation.js"></script>
+   {% if newErrors is defined %}
+        <script>
+            $('#addPatient').modal('show')
+        </script>
+    {% endif %}
+
 {% endblock %}
+

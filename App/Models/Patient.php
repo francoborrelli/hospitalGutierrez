@@ -544,13 +544,28 @@ class Patient
             $validationErrors[] = 'lastName';
 
         if (strlen($this->docNumber) == 0)
-            $validationErrors[] = 'docNumber';
+            $validationErrors[] = 'documentNumber';
 
         if (strlen($this->address) == 0)
             $validationErrors[] = 'address';
 
         if ($this->birthday > new \DateTime())
             $validationUser[] = 'birthday';
+
+        if ($this->gender == null)
+            $validationErrors[] = 'genderId';        
+            
+        if ($this->documentType == null)
+            $validationErrors[] = 'documentTypeId';        
+            
+        if ($this->heatingType == null)
+            $validationErrors[] = 'heatingType';        
+            
+        if ($this->houseType == null)
+            $validationErrors[] = 'houseType';
+
+        if ($this->waterType == null)
+            $validationErrors[] = 'waterType';
 
         return $validationErrors;
     }
