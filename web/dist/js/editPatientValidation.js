@@ -2,6 +2,23 @@ $('.nav-link').click(function () {
     $('#editbtn').attr('data-target', $(this).data("form"));
 })
 
+$('#btnClose').click(function(){
+    $(this).closest('form')[0].reset();
+    $(this).closest('form').validate().resetForm()
+})
+
+$.validator.addMethod("nonNumeric", function (value, element) {
+    return this.optional(element) || isNaN(Number(value));
+});
+
+$.validator.addMethod("noSpace", function(value, element) { 
+    return value.indexOf(" ") < 0 && value != ""; 
+  });
+
+
+$.validator.addMethod("alphanumeric", function(value, element) {
+    return this.optional(element) || /^[a-z0-9\-\s]+$/i.test(value);
+}, "Username must contain only letters, numbers, or dashes.");
 
 
 $('#editPersonalInfo').validate({
