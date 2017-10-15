@@ -34,6 +34,13 @@ class Article
      */
     private $body;
 
+    /**
+     * @var string
+     *
+     * @Column(type="string", length=25)
+     */
+    private $icon;
+
 
     /**
      * Get id
@@ -91,5 +98,29 @@ class Article
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Set icon
+     *
+     * @param string $icon
+     *
+     * @return Article
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Get icon
+     *
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
     }
 }

@@ -17,7 +17,7 @@
     <hr>
         <div class="row">
           {% for entry in site.articles %}
-              {{ article.edit_article(entry.title, loop.index0, 'fa-hospital-o', entry.body) }}
+              {{ article.edit_article(entry.title, loop.index0, entry.icon, entry.body) }}
           {% endfor %}
         </div>
     <hr>  
