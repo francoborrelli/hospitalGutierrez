@@ -34,7 +34,7 @@
                             <p>{% if patient.phone is defined %}{{patient.phone}}{% else %}-{% endif %}</p>
                         </div>
                         <div class="col-md-6"><strong>Obra Social</strong>
-                            <p>{% if patient.insurence is defined %}{{patient.injurence}}{% else %}-{% endif %}</p>
+                            <p>{% if patient.insurance is defined %}{{ patient.insurance.name }}{% else %}-{% endif %}</p>
                         </div>
                     </div>
                     <hr>
