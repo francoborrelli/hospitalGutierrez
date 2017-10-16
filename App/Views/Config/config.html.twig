@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="form-group col-sm-12">
                                     <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" value="{% if validationSite is defined %}{{validationSite.title}}{% else %}{{ site.email }}{% endif %}" class="form-control {% if 'email' in errors %}is-invalid{% endif %}" placeholder="Email">
+                                    <input type="email" id="email" name="email" value="{% if validationSite is defined %}{{validationSite.email}}{% else %}{{ site.email }}{% endif %}" class="form-control {% if 'email' in errors %}is-invalid{% endif %}" placeholder="Email">
                                     {% if 'email' in errors %}<label id="email-error" class="error" for="email">Ingrese el email</label>{% endif %}
                                 </div>
                             </div>
