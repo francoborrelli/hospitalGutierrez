@@ -20,13 +20,13 @@
             </form>
         </div>
 
-        <ul class="navbar-nav">
+        <div class="navbar-nav">
             {% if currentUser %}
                 {% include 'utils/header/navbarUser.html.twig' %}
             {% else %}
                 {% include 'utils/header/navbarVisitor.html.twig' %}
             {% endif %}
-        </ul>
+        </div>
 
     </div>
 </nav>
