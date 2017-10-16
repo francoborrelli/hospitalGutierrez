@@ -19,6 +19,8 @@ var oTable =  $('#usuarios').DataTable({
             { responsivePriority: 4 },
             { responsivePriority: 2 },
             { responsivePriority: 2 },
+            { responsivePriority: 6 },
+            { responsivePriority: 6 },
             { responsivePriority: 1 }
         ],
         "order": [
@@ -26,7 +28,7 @@ var oTable =  $('#usuarios').DataTable({
         ],
         "aoColumnDefs": [{
             "bSortable": false,
-            "aTargets": [6]
+            "aTargets": [8]
         }],
         "bLengthChange": false,
         "bFilter": false,

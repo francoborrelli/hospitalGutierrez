@@ -94,13 +94,13 @@ class User
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
         $this->setData($data, $roles);
         $this->active = true;
     }
 
     public function setData($data, $roles)
     {
+        $this->updatedAt = new \DateTime();
         $this->email = $data['email'];
         $this->firstName = $data['firstName'];
         $this->lastName = $data['lastName'];
