@@ -37,24 +37,24 @@
                         <input type="hidden" id="userId" name="userId" value="{{ user.id }}">
                         <div class="row">
                             <div class="form-group col">
-                                <label for="Nombre">Nombre</label>
+                                <label for="editName">Nombre</label>
                                 <input type="text" id="editName" name="firstName"  value="{{user.firstName}}" class="form-control {% if 'firstName' in editErrors %}is-invalid{% endif %}" placeholder="Nombre">
                                  {% if 'firstName' in editErrors %}<label id="firstName-error" class="error" for="firstName">Ingrese el nombre</label>{% endif %}
                             </div>
                             <div class="form-group col">
-                                <label for="Apellido">Apellido</label>
+                                <label for="editLastName">Apellido</label>
                                 <input type="text" value="{{user.lastName}}" id="editLastName" name="lastName" class="form-control" placeholder="Apellido">
                                 {% if 'lastName' in editErrors %}<label id="lastName-error" class="error" for="lastName">Ingrese el apellido</label>{% endif %}
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Direccion De Email">Dirección de Email</label>
+                            <label for="editEmail">Dirección de Email</label>
                             <input type="email"  value="{{user.email}}" id="editEmail" name="email" class="form-control {% if ('email' in editErrors) or ('emailExists' in editErrors) %}is-invalid{% endif %}" placeholder="Email">
                             {% if 'email' in editErrors %}<label id="email-error" class="error" for="email">Debe ingresar un email valido</label>{% endif %}
                             {% if 'emailExists' in editErrors %}<label id="email-error" class="error" for="email">El correo ingresado ya esta registrado</label>{% endif %}
                         </div>
                         <div class="form-group">
-                            <label for="nombre de usuario">Nombre de Usuario </label>
+                            <label for="editUsername">Nombre de Usuario </label>
                             <input type="text" value="{{user.username}}" id="editUsername" name="username" class="form-control  {% if ('usrLength' in editErrors) or ('usrExists' in editErrors) %}is-invalid{% endif %}" placeholder="Nombre de usuario">
                                 {% if 'usrLength' in editErrors %}<label id="username-error" class="error" for="username">Debe tener al menos 6 caracteres</label>{% endif %}
                                 {% if 'usrExists' in editErrors %}<label id="username-error" class="error" for="username">Nombre de usuario ya registrado</label>{% endif %}
@@ -65,11 +65,11 @@
                     <div class="container tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
                         <div class="row">
                             <div class="form-group col">
-                                <label for="Contraseña">Nueva <span class="hidden"> contraseña</span></label>
+                                <label for="newPass">Nueva <span class="hidden"> contraseña</span></label>
                                 <input type="password" id="newPass" name="pass" class="form-control" placeholder="Contraseña">
                             </div>
                             <div class="form-group col">
-                                <label for="Confirmar Contraseña">Confirmar<span class="hidden"> contraseña</span></label>
+                                <label for="confirmNewPass">Confirmar<span class="hidden"> contraseña</span></label>
                                 <input type="password" id="confirmNewPass" name="confirmPass" class="form-control" placeholder="Contraseña">
                             </div>
                         </div>
@@ -100,7 +100,7 @@
 
             <!-- card footer -->
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button class="btn btn-primary">Guardar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>

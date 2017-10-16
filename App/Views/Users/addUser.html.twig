@@ -11,36 +11,36 @@
             <div class="modal-body step step-1">
                 <div class="row">
                     <div class="form-group col">
-                        <label for="Nombre">Nombre *</label>
+                        <label for="firstName">Nombre *</label>
                         <input type="text" id="firstName" name="firstName" class="form-control {% if 'firstName' in newErrors %}is-invalid{% endif %}" placeholder="Nombre" {% if  newErrors is defined %}value="{{user.firstName}}"{% endif %}>
                         {% if 'firstName' in newErrors %}<label id="firstName-error" class="error" for="firstName">Ingrese el nombre</label>{% endif %}
                     </div>
                     <div class="form-group col">
-                        <label for="Apellido">Apellido *</label>
+                        <label for="lastName">Apellido *</label>
                         <input type="text" id="lastName" name="lastName" class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Apellido" {% if  newErrors is defined %} value="{{user.lastName}}"{% endif %}>
                         {% if 'lastName' in newErrors %}<label id="lastName-error" class="error" for="lastName">Ingrese el apellido</label>{% endif %}
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="Direccion De Email">Dirección de Email *</label>
+                    <label for="email">Dirección de Email *</label>
                     <input type="email" id="email" name="email" class="form-control {% if ('email' in newErrors) or ('emailExists' in newErrors) %}is-invalid{% endif %}"{% if  newErrors is defined %}  value="{{user.email}}"{% endif %} placeholder="Email">
                     {% if 'email' in newErrors %}<label id="email-error" class="error" for="email">Debe ingresar un email valido</label>{% endif %}
                     {% if 'emailExists' in newErrors %}<label id="email-error" class="error" for="email">El correo ingresado ya esta registrado</label>{% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="nombre de usuario">Nombre de Usuario *</label>
+                    <label for="username">Nombre de Usuario *</label>
                     <input type="text" id="username" name="username" class="form-control {% if ('usrLength' in newErrors) or ('usrExists' in newErrors) %}is-invalid{% endif %}"{% if  newErrors is defined %} value="{{user.username}}"{% endif %} placeholder="Nombre de usuario">
                     {% if 'usrLength' in newErrors %}<label id="username-error" class="error" for="username">Debe tener al menos 6 caracteres</label>{% endif %}
                     {% if 'usrExists' in newErrors %}<label id="username-error" class="error" for="username">Nombre de usuario ya registrado</label>{% endif %}
                 </div>
                 <div class="row">
                     <div class="form-group col">
-                        <label for="Contraseña">Contraseña *</label>
+                        <label for="pass">Contraseña *</label>
                         <input type="password" id="pass" name="pass" class="form-control {% if 'passwordLength' in newErrors %}is-invalid{% endif %}" placeholder="Contraseña">
                         {% if 'passwordLength' in newErrors %}<label id="pass-error" class="error" for="pass">Debe tener al menos 6 caracteres</label>{% endif %}
                     </div>
                     <div class="form-group col">
-                        <label for="Confirmar Contraseña">Confirmar <span class="hidden">contraseña </span>*</label>
+                        <label for="confirmPass">Confirmar <span class="hidden">contraseña </span>*</label>
                         <input type="password" id="confirmPass" name="confirmPass" class="form-control {% if 'passwordConfirm' in newErrors %}is-invalid{% endif %}" placeholder="Contraseña">
                         {% if 'passwordConfirm' in newErrors %}<label id="confirmPass-error" class="error" for="confirmPass">No coinciden</label>{% endif %}
                     </div>
