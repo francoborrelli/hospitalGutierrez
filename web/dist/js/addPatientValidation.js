@@ -42,6 +42,9 @@ $('#addPatient').validate({
         address: {
             required: true,
         },
+        phone: {
+            minlength: 5,
+        },
         documentTypeId: {
             required: true,
         },
