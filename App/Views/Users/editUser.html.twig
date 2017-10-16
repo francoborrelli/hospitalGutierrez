@@ -80,7 +80,7 @@
 
                         {% for role in data.roles %}
                             <div class="form-check">
-                                <label class="custom-control custom-checkbox">
+                                <label class="custom-control custom-checkbox" for="edit{{ role.name }}">
                                     <input type="checkbox" class="custom-control-input" id="edit{{ role.name }}" name="roles[]" value="{{ role.id }}" {% if editErrors is defined and user.hasRole(role.id)%}checked{% endif %}>
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">{{ role.name }}</span>

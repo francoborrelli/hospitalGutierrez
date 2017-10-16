@@ -34,16 +34,16 @@
                             {% if currentUser.hasPermission('usuario_new') %}
                                 <button type="button" id="agregar-btn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addUser">Agregar</button>
                             {% endif %} 
-                            <table class="table table-striped" id="usuarios">
+                            <table class="table table-striped" id="usuarios" summary="Tabla de usuarios">
                             <thead>
                                 <tr>
-                                    <th>Nombre de Usuario</th>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Email</th>
-                                    <th>Roles</th>
-                                    <th>Estado</th>
-                                    <th>Opciones</th>
+                                    <th id="nombreUsuario">Nombre de Usuario</th>
+                                    <th id="nombre">Nombre</th>
+                                    <th id="apellido">Apellido</th>
+                                    <th id="Email">Email</th>
+                                    <th id="roles">Roles</th>
+                                    <th id="estado">Estado</th>
+                                    <th id="opciones">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
