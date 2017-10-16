@@ -46,6 +46,9 @@ $('#editPersonalInfo').validate({
         genderId: {
             required: true,
         },
+        phone: {
+            minlength: 5,
+        }
     },
     messages: {
         firstName: {

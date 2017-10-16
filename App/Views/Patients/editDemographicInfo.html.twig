@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="tab-content" id="myTabContent">
+                <div class="tab-content">
                         <!-- tipo de vivienda -->
                         <div class="form-group col">
                             <label for="houseTypeId">¿Tipo de vivienda? *</label>
@@ -50,7 +50,7 @@
                     <div class="row">
                         <!-- heladera? -->
                         <div class="form-group col text-center">
-                            <label for="fridge">¿<span class="hidden">Tiene</span> heladera? *</label> {{ switch.item('Tiene','No tiene', 'refrigerator', patient.refrigerator)}}
+                            <label for="refrigerator">¿<span class="hidden">Tiene</span> heladera? *</label> {{ switch.item('Tiene','No tiene', 'refrigerator', patient.refrigerator)}}
                         </div>
 
                         <!-- electricidad? -->
@@ -60,7 +60,7 @@
 
                         <!-- mascotas? -->
                         <div class="form-group col text-center">
-                            <label for="pets">¿<span class="hidden">Tiene</span> mascotas? *</label> {{ switch.item('Tiene','No tiene', 'pet', patient.pet) }}
+                            <label for="pet">¿<span class="hidden">Tiene</span> mascotas? *</label> {{ switch.item('Tiene','No tiene', 'pet', patient.pet) }}
                         </div>
                     </div>
             </div>
