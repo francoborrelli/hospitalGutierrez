@@ -8,11 +8,6 @@ $.validator.addMethod("noSpace", function (value, element) {
     return value.indexOf(" ") < 0 && value != "";
 });
 
-
-$.validator.addMethod("alphanumeric", function (value, element) {
-    return this.optional(element) || /^[a-z0-9\-\s]+$/i.test(value);
-}, "Username must contain only letters, numbers, or dashes.");
-
 $.validator.addMethod("nombreReal", function(value, element) {
     return this.optional(element) || /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/i.test(value);
 }, "");
