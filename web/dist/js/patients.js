@@ -83,3 +83,30 @@ $('.searchForm').find('input').each(function () {
     });
 
 })
+
+$("#goBack").click(function(){
+    $('#addPatient').trigger('next.m.1'); 
+});
+
+$("#goNext").click(function(){
+    if ($('#firstName').valid() & $('#lastName').valid() & $('#documentNumber').valid() & $('#documentTypeId').valid()& $('#birthday').valid() & $('#address').valid() & $('#phone').valid()& $('#genderId').valid()) {
+        $('#addPatient').trigger('next.m.2');
+    }
+});
+
+$("#cancelbtn").click(function(){
+    $('#addPatient').modal('hide')
+    $('#addPatient')[0].reset();  
+    $('#addPatient').trigger('next.m.1');   
+    $('#addPatient').validate().resetForm()
+})
+
+
+
+$(".deletebtn").click(function(){
+    $("#deletedId").val($(this).data("id"))
+    tr = $(this).closest('tr')
+    name = $(tr).find("td").eq(2).text()
+    surname = $(tr).find("td").eq(3).text()
+    $(".modalText").text(name + ' ' + surname);
+});
