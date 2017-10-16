@@ -80,6 +80,9 @@ input[type="date"] {
     height: 38px;
 }
 
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
 
 /*  Para arreglar bug con los modales de boostrap 4 */
 
