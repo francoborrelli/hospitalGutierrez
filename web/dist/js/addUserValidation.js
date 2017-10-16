@@ -34,7 +34,6 @@ $('#addUser').validate({
             maxlength: 50,
         },
         username: {
-            alphanumeric: true,
             minlength: 6,
             required: true,
             noSpace: true,
@@ -69,7 +68,6 @@ $('#addUser').validate({
             required: "Ingrese el nombre de usuario",
             minlength: "Debe tener al menos 6 caracteres",
             noSpace: "No puede tener espacios en blanco",
-            alphanumeric: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres",
             remote: "El nombre de usuario ya ha sido utilizado"
         },
