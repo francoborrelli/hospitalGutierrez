@@ -7,6 +7,8 @@
     <td headers="Email">{{ user.email }}</td>
     <td headers="roles">{% for role in user.roles %}{{ role.name }}<br>{% endfor %}</td>
     <td headers="estado">{% if user.active %}Activo{% else %}Bloqueado{% endif %}</td>
+    <td headers="modification">{{user.updatedAt|date("d/m/Y")}}</td>
+    <td headers="creation">{{user.createdAt|date("d/m/Y")}}</td>
 
     <td  headers="opciones" class="text-center">
 
