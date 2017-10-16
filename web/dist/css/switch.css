@@ -22,16 +22,6 @@
     background: none;
 }
 
-.custom-switch .custom-switch-input::selection,
-.custom-switch .custom-switch-input:after::selection,
-.custom-switch .custom-switch-input:before::selection,
-.custom-switch .custom-switch-input *::selection,
-.custom-switch .custom-switch-input *:after::selection,
-.custom-switch .custom-switch-input *:before::selection,
-.custom-switch .custom-switch-input+.custom-switch-btn::selection {
-    background: none;
-}
-
 .custom-switch .custom-switch-input+.custom-switch-btn {
     outline: 0;
     display: inline-block;
@@ -39,7 +29,6 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
     cursor: pointer;
     width: 68px;
     height: 38px;
