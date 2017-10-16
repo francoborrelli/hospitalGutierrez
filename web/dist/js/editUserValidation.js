@@ -14,13 +14,13 @@ navValidate = function(form){
 $('#editUser').validate({
     rules: {
         firstName: {
-            alphanumeric: true,
+            nombreReal: true,
             required: true,
             nonNumeric: true,
             maxlength: 50,
         },
         lastName: {
-            alphanumeric: true,
+            nombreReal: true,
             required: true,
             nonNumeric: true,
             maxlength: 50,
@@ -71,7 +71,7 @@ $('#editUser').validate({
         firstName: {
             required: "Ingrese el nombre",
             nonNumeric: "Debe contener solo letras",
-            alphanumeric: "Debe contener solo letras",
+            nombreReal: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres"
         },
         username: {
@@ -84,7 +84,7 @@ $('#editUser').validate({
         lastName: {
             required: "Ingrese el apellido",
             nonNumeric: "Debe contener solo letras",
-            alphanumeric: "Debe contener solo letras",
+            nombreReal: "Debe contener solo letras",
             maxlength: "No puede tener más de 50 caracteres",
         },
         pass: {
