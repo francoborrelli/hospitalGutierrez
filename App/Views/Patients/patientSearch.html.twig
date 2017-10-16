@@ -4,19 +4,19 @@
 
         <!-- nombre -->
         <div class="form-group">
-            <label class="col-xs-3 control-label">Nombre:</label>
-            <input type="text" name="name" value="{{ data.firstName }}" class="form-control" placeholder="Nombre">
+            <label class="col-xs-3 control-label" for="searchName">Nombre:</label>
+            <input type="text" id="searchName" name="name" value="{{ data.firstName }}" class="form-control" placeholder="Nombre">
         </div>
 
        <!-- apellido -->
         <div class="form-group">
-            <label class="col-xs-3 control-label">Apellido:</label>
-            <input type="text" name="lastName" value="{{ data.lastName }}" class="form-control" placeholder="Apellido">
+            <label class="col-xs-3 control-label" for="searchlastName">Apellido:</label>
+            <input type="text" id="searchlastName" name="lastName" value="{{ data.lastName }}" class="form-control" placeholder="Apellido">
         </div>
 
        <!-- tipo -->
         <div class="form-group">
-            <label for="Nombre">Tipo:</label>
+            <label for="documentType">Tipo:</label>
             <select id="typeDni" name="documentType" class="form-control form-control-chosen-required" data-placeholder="Tipo de documento">
                 <option {% if data.documentType is empty %}selected{% endif %} value="">Tipo Documento</option>
                 
