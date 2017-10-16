@@ -122,6 +122,9 @@ h6 {
     .iconbox-4 {
         min-height: 460px;
     }
+    .iconbox-4 p{
+        text-align: justify;
+    }
     .btn-black {
         position: absolute;
         bottom: -30px;
