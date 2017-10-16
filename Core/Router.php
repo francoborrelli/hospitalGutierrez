@@ -74,7 +74,7 @@ class Router
         if (preg_match('/action$/i', $action) == 0)
             $controller_instance->$action();
         else
-            throw new \Exception("El método $action no puede ser llamado directamente, se debe remover el sufijo Action");
+            throw new \Exception("El método $action no puede ser llamado directamente, se debe remover el sufijo Action.");
     }
 
     private function convertToPascalCase($string)

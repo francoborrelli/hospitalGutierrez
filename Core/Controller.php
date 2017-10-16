@@ -79,7 +79,7 @@ abstract class Controller
     {
         $this->requireLogin();
         if (!$this->getUser()->hasPermission($permission)) {
-            $this->addFlashMessage('warning', 'Lo sentimos.', "Usted no posee los permisos necesarios para realizar la operacion");
+            $this->addFlashMessage('warning', 'Lo sentimos.', "Usted no posee los permisos necesarios para realizar la operacion.");
             $this->redirect('/');
         }
     }
@@ -92,7 +92,7 @@ abstract class Controller
                 return;
             }
         }
-        $this->addFlashMessage('warning', 'Lo sentimos.', "Usted no posee el permiso");
+        $this->addFlashMessage('warning', 'Lo sentimos.', "Usted no posee el permiso.");
         $this->redirect('/');
     }
 

@@ -82,7 +82,7 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al usuario correctamente');
+            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al usuario correctamente.');
             $this->redirect('/admin/users');
         } else {
             $this->render('Users/usersTable.html.twig', ['data' => $this->getIndexData(), 'newErrors' => $validationErrors, 'user' => $user]);
@@ -126,7 +126,7 @@ class UserController extends Controller
             $user->setData($_POST, $roles);
             $em->flush();
 
-            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del usuario correctamente');
+            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del usuario correctamente.');
             $this->redirect('/admin/users');
         } else {
             $this->render('Users/usersTable.html.twig', ['data' => $this->getData(), 'editErrors' => $validationErrors, 'user' => $validationUser]);
@@ -143,7 +143,7 @@ class UserController extends Controller
         $em->remove($user);
         $em->flush();
 
-        $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha eliminado al usuario correctamente');
+        $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha eliminado al usuario correctamente.');
         $this->redirect('/admin/users');
     }
 

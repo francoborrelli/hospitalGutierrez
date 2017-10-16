@@ -97,7 +97,7 @@ class PatientController extends Controller
             $em->persist($patient);
             $em->flush();
 
-            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al paciente correctamente');
+            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al paciente correctamente.');
             $this->redirect('/patients');
         } else {
             $this->render('Patients/patientsTable.html.twig', ['newErrors' => $validationErrors, 'patient' => $patient]);
@@ -114,7 +114,7 @@ class PatientController extends Controller
         $em->remove($patient);
         $em->flush();
 
-        $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha eliminado al paciente correctamente');
+        $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha eliminado al paciente correctamente.');
         $this->redirect('/patients');
     }
 
@@ -160,7 +160,7 @@ class PatientController extends Controller
 
             $em->flush();
 
-            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente');
+            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente.');
             $this->redirect('/patient/' . $this->getRouteParams()['id']);
         } else {
             $this->render('Patients/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => $mode]);

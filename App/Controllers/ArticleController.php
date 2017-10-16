@@ -29,7 +29,7 @@ class ArticleController extends Controller
 
         $em->flush();
 
-        $this->addFlashMessage('success', '¡Felicitaciones!.', 'Los artículos fueron actualiados correctamente');
+        $this->addFlashMessage('success', '¡Felicitaciones!.', 'Los artículos fueron actualizados correctamente.');
         $this->redirect('/config/articles');
     }
 }

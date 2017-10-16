@@ -25,9 +25,9 @@ class LoginController extends Controller
             $this->redirect(Authentication::returnPage());
         } else {
             if ($user && !$user->isActive())
-                $this->addFlashMessage('danger', 'Lo sentimos.', 'Su cuenta se encuentra bloqueada');
+                $this->addFlashMessage('danger', 'Lo sentimos.', 'Su cuenta se encuentra bloqueada.');
             else
-                $this->addFlashMessage('danger', 'Lo sentimos.', 'Los datos ingresados no son correntos, intente nuevamente');
+                $this->addFlashMessage('danger', 'Lo sentimos.', 'Los datos ingresados no son correntos, intente nuevamente.');
 
             $this->render('Login/login.html.twig', ['email' => $_POST['email']]);
         }
