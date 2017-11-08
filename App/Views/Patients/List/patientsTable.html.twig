@@ -8,12 +8,12 @@
 
 {% block body %}
  {% if currentUser.hasPermission('paciente_new') %}
-   {% include 'Patients/addPatient.html.twig' %}
+   {% include 'Patients/List/addPatient.html.twig' %}
 {% endif %}
 
     <div class="container userReport tableScreen">
         <div class="row">
-            {% include 'Patients/patientSearch.html.twig' %}
+            {% include 'Patients/List/patientSearch.html.twig' %}
             <div class ="col-md-9">
         <div class="card">
             <div class="card-header text-left">
@@ -36,7 +36,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% include 'Patients/patients.html.twig' %}
+                        {% include 'Patients/List/patients.html.twig' %}
                     </tbody>
                 </table>
 

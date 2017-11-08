@@ -48,7 +48,7 @@ class PatientController extends Controller
                  'documentType' => $documentType,
                  'docNumber' => $docNumber];
 
-        $this->render('Patients/patientsTable.html.twig', ['data' => $data]);
+        $this->render('Patients/List/patientsTable.html.twig', ['data' => $data]);
     }
 
     private function firstNameGiven()
@@ -100,7 +100,7 @@ class PatientController extends Controller
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al paciente correctamente.');
             $this->redirect('/patients');
         } else {
-            $this->render('Patients/patientsTable.html.twig', ['newErrors' => $validationErrors, 'patient' => $patient]);
+            $this->render('Patients/List/patientsTable.html.twig', ['newErrors' => $validationErrors, 'patient' => $patient]);
         }
     }
 
@@ -124,7 +124,7 @@ class PatientController extends Controller
 
         $em = $this->getEntityManager();
         $patient = $em->getRepository(Patient::class)->find($this->getRouteParams()['id']);
-        $this->render('Patients/patientProfile.html.twig', ['patient' => $patient, 'patientFields' => $this->getPatientFields()]);
+        $this->render('Patients/Profile/patientProfile.html.twig', ['patient' => $patient, 'patientFields' => $this->getPatientFields()]);
     }
 
     public function editPatientAction()
@@ -163,7 +163,7 @@ class PatientController extends Controller
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente.');
             $this->redirect('/patient/' . $this->getRouteParams()['id']);
         } else {
-            $this->render('Patients/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => $mode]);
+            $this->render('Patients/Profile/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => $mode]);
         }
     }
 
