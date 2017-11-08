@@ -10,11 +10,14 @@ class ConfigController extends Controller
 
     public function indexAction()
     {
+        $this->denyAccessUnlessPermissionGranted('config_index');
         $this->render('Config/config.html.twig');
     }
 
     public function updateAction()
     {
+        $this->denyAccessUnlessPermissionGranted('config_update');
+
         $site = $this->getSite();
  
         $validationSite = clone $site;
