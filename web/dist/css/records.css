@@ -15,13 +15,35 @@
     -webkit-box-shadow: 0 0 0 30px white inset;
 }
 
+select {
+    text-align: center;
+    text-align-last: center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select:hover,
+select:focus,
+select:active {
+    appearance: menulist;
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    padding-left: 24px;
+}
+
+select::-ms-expand {
+    display: block;
+}
+
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-
-select {
-    text-align: center;
-    text-align-last: center;
 }
