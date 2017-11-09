@@ -1,5 +1,14 @@
 $('textarea').autoResize();
 
+$('.datepicker').datepicker({
+    format: "dd/mm/yyyy",
+    todayBtn: true,
+    language: "es",
+    autoclose: true,
+    orientation: "bottom right",
+    endDate : 'now',
+});
+
 // métodos personalizados del validador
 
 $.validator.addMethod("nonNumeric", function (value, element) {
@@ -20,6 +29,9 @@ $.validator.messages.required = '';
 
 $('#addRecord').validate({
     rules: {
+        controlDate: {
+            required: true,
+        },
         weight: {
             required: true,
         },
@@ -43,6 +55,9 @@ $('#addRecord').validate({
         }
     },
     messages: {
+        controlDate: {
+            required: "Seleccione la fecha de la consulta",
+        },
         weight: {
             required: "Debe ingresar el peso",
             step: "Debe tener solo dos decimales",
