@@ -1,14 +1,22 @@
+{% for record in records %}
 <tr>
-    <td headers="fecha">{{ record.date }}</td>
-    <td headers="edad">{{ record.age }}</td>
-    <td headers="peso">{{ record.weight }}</td>
-    <td headers="pediatra">{{ patient.doctor }}</td>
+    <td headers="fecha" class="text-center">{{ record.date }}</td>
+    <td headers="pediatra" class="text-center">{{ patient.doctor }}</td>
 
     <td headers="opciones" class="text-center">
         {% if currentUser.hasPermission('historiaClinica_show') %}
         <div class="btn-group" role="group">
-            <a href="" class="btn btn-sm btn-primary" title="Ver detalle"><i class="fa fa-stethoscope" aria-hidden="true"></i></i></a>
+            <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-primary" title="Ver en detalle"><i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+        </div>
+        {% endif %} {% if currentUser.hasPermission('historiaClinica_update') %}
+        <div class="btn-group" role="group">
+            <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-orange" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+        </div>
+        {% endif %} {% if currentUser.hasPermission('historiaClinica_destroy') %}
+        <div class="btn-group" role="group">
+            <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </div>
         {% endif %}
     </td>
 </tr>
+{% endfor %}
