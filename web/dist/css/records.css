@@ -5,6 +5,12 @@
     border: 1px solid transparent;
 }
 
+#addRecord .form-control[readonly] {
+    background-color: transparent;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 #addRecord .form-control:hover,
 #addRecord .form-control:active,
 #addRecord .form-control:focus {
