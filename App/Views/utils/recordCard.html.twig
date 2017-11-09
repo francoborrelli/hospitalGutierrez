@@ -1,0 +1,33 @@
+{% extends 'utils/base.html.twig' %} 
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/web/dist/css/patientProfile.css"> 
+{% endblock %} 
+
+{% block body %} 
+<div class="container userReport">
+    <div class="card ">
+        <!-- header -->
+        <div class="card-header">
+            {{ patient.firstName }} {{ patient.lastName }}
+            <a title="Volver" class="btn btn-sm" id="backbtn" href="/patients"><i class="fa fa-reply" aria-hidden="true"></i></a>
+            {% block buttons %}
+       
+            {% endblock %}
+        </div>
+        <div class="card-body">
+            <!-- nav links -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                {% block navtabs %}
+
+                {% endblock %}
+            </ul>
+            <!-- body -->
+            <div class="tab-content">
+                {% block tabcontent %}
+                {% endblock %}
+            </div>
+        </div>  
+    </div>
+</div>
+{% endblock %} 

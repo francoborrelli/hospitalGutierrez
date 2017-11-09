@@ -1,47 +1,31 @@
-{% extends 'utils/base.html.twig' %} 
+{% extends 'utils/recordCard.html.twig' %} 
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="/web/dist/css/patientProfile.css"> 
-{% endblock %} 
-
-{% block body %} 
-
-<div class="container userReport">
-
-    <div class="card ">
-
-        <!-- header -->
-        <div class="card-header">
-            {{ patient.firstName }} {{ patient.lastName }}
-            <a title="Volver" class="btn btn-sm" id="backbtn" href="/patients"><i class="fa fa-reply" aria-hidden="true"></i></a>
-            <a title="Reportes" class="btn btn-sm btn-orange" id="editbtn" href="/patients">Reportes</a>
-            <a title="Agregar Consulta" class="btn btn-sm btn-primary " id="editbtn" href="/patients">Agregar</a>
-        </div>
-
-
-        <div class="card-body">
-            <!-- nav links -->
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="personal-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="tab" aria-controls="records"
-                        aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden"> Historia</span> Clínica</a>
-                </li>
-            </ul>
-            <!-- body -->
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
-                    <br>
-                    <div>
-                        {% include 'Patients/ClinicalRecords/recordsTable.html.twig' %}
-                    </div>
-                </div>
-            </div>
-        </div>  
-    </div>
-</div>
-
-{% endblock %} 
-
-{% block javascripts %}
-    <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
+{% block buttons %}
+    <a title="Agregar Consulta" class="btn btn-sm btn-primary " id="editbtn" href="/patients">Agregar</a>           
 {% endblock %}
+
+{% block navtabs %}
+    <li class="nav-item">
+        <a class="nav-link active" id="personal-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="tab" aria-controls="records" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden"> Historia</span> Clínica</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="reports-tab" data-form="#reports" data-toggle="tab" href="#reports" role="tab" aria-controls="records" aria-expanded="true"><i class="fa fa-bar-chart" aria-hidden="true"></i> Reportes</a>
+    </li>
+{% endblock %}
+
+{% block tabcontent %}
+    <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
+        <br>
+        <div>
+            {% include 'Patients/ClinicalRecords/recordsTable.html.twig' %}
+        </div>
+    </div>
+    <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="records-tab">
+        <br>
+        <div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
