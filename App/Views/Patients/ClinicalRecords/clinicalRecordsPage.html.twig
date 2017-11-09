@@ -1,5 +1,11 @@
 {% extends 'utils/recordCard.html.twig' %} 
 
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="/web/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
+    <link rel="stylesheet" href="/web/assets/dataTables/css/responsive.bootstrap4.min.css"> 
+{% endblock %} 
+
 {% block buttons %}
     <a title="Agregar Consulta" class="btn btn-sm btn-primary " id="editbtn" href="/patients">Agregar</a>
     {% if currentUser.hasPermission('paciente_show') %}
@@ -30,5 +36,12 @@
     </div>
 {% endblock %}
 
+{% block javascripts %}
+
+    <script src="/web/assets/dataTables/js/datatables.min.js"></script>
+    <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
+    <script src="/web/dist/js/recordsTable.js"></script>
+
+{% endblock %}
 
 
