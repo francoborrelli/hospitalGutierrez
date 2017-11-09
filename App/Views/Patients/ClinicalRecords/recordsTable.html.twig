@@ -1,14 +1,33 @@
 <table class="table table-striped" id="recordsTable" summary="Lista de controles del paciente">
     <thead>
         <tr>
-            <th id="fecha">Fecha</th>
-            <th id="pediatra">Pediatra</th>
-            <th id="opciones">Opciones</th>
+            <th id="fecha" class="text-center">Fecha</th>
+            <th id="pediatra" class="text-center">Pediatra</th>
+            <th id="opciones" class="text-center">Opciones</th>
         </tr>
     </thead>
     <tbody>
-        {% for record in records %}
-
-        {% endfor %}
+        <tr>
+            <td headers="fecha" class="text-center">{{ now|date("d/m/Y") }}</td>
+            <td headers="pediatra" class="text-center">{{ now|date("d/m/Y") }}</td>
+        
+            <td headers="opciones" class="text-center">
+            {% if currentUser.hasPermission('historiaClinica_show') %}
+                    <div class="btn-group" role="group">
+                        <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-primary" title="Ver en detalle"><i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+                    </div>
+                {% endif %}
+            {% if currentUser.hasPermission('historiaClinica_update') %}
+                    <div class="btn-group" role="group">
+                        <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-orange" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    </div>
+            {% endif %}
+            {% if currentUser.hasPermission('historiaClinica_destroy') %}
+                    <div class="btn-group" role="group">
+                        <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </div>
+            {% endif %}
+            </td>
+        </tr>
     </tbody>
 </table>
