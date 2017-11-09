@@ -1,3 +1,24 @@
+// Date correct Sorting
+
+jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+    "date-uk-pre": function ( a ) {
+        if (a == null || a == "") {
+            return 0;
+        }
+        var ukDatea = a.split('/');
+        return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+    },
+ 
+    "date-uk-asc": function ( a, b ) {
+        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+    },
+ 
+    "date-uk-desc": function ( a, b ) {
+        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+    }
+} );
+
+
 //Configuración de la tabla de pacientes
 
 var oTable =  $('#recordsTable').DataTable({
@@ -23,12 +44,14 @@ var oTable =  $('#recordsTable').DataTable({
         { responsivePriority: 1 }, //Opciones
     ],
     "order": [
-        [0, "asc"]
+        [0, "dsc"]
     ],
     "aoColumnDefs": [{
         "bSortable": false,
         "aTargets": [2]
-    }],
+    },
+    { type: 'date-uk', targets: 0 }
+    ],
     "bLengthChange": false,
     "info": false,
     "bFilter": false,
