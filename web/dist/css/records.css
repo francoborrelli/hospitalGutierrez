@@ -11,9 +11,16 @@
     border: 1px solid rgba(0, 0, 0, .15);
 }
 
+
 #addRecord input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 30px white inset;
 }
+
+
+#addRecord .is-invalid, #addRecord .is-invalid:hover, #addRecord .is-invalid:focus, #addRecord .is-invalid:active {
+    border: 1px solid #dc3545;
+}
+
 
 select {
     text-align: center;
@@ -42,8 +49,28 @@ select::-ms-expand {
     display: block;
 }
 
+textarea{
+    min-height: 60px;
+}
+
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+::-webkit-input-placeholder {
+    text-align: center;
+ }
+ 
+ :-moz-placeholder { /* Firefox 18- */
+    text-align: center;  
+ }
+ 
+ ::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;  
+ }
+ 
+ :-ms-input-placeholder {  
+    text-align: center; 
+ }
