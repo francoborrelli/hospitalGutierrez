@@ -56,7 +56,7 @@ $('#addRecord').validate({
     },
     messages: {
         controlDate: {
-            required: "Seleccione la fecha de la consulta",
+            required: "Debe seleccionar una fecha",
         },
         weight: {
             required: "Debe ingresar el peso",
