@@ -1,0 +1,14 @@
+<tr>
+    <td headers="fecha">{{ record.date }}</td>
+    <td headers="edad">{{ record.age }}</td>
+    <td headers="peso">{{ record.weight }}</td>
+    <td headers="pediatra">{{ patient.doctor }}</td>
+
+    <td headers="opciones" class="text-center">
+        {% if currentUser.hasPermission('historiaClinica_show') %}
+        <div class="btn-group" role="group">
+            <a href="" class="btn btn-sm btn-primary" title="Ver detalle"><i class="fa fa-stethoscope" aria-hidden="true"></i></i></a>
+        </div>
+        {% endif %}
+    </td>
+</tr>
