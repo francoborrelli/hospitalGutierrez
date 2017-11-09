@@ -23,11 +23,14 @@
     <div class="card-header">
         {{ patient.firstName }} {{ patient.lastName }}
       <a title="Volver" class="btn btn-sm" id="backbtn" href="/patients"><i class="fa fa-reply" aria-hidden="true"></i></a>
+      {% if currentUser.hasPermission('paciente_destroy') %}
+        <button data-toggle="modal" data-target="#deletePatient" title="Eliminar" class="btn btn-danger btn-sm" id="deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+      {% endif %}
       {% if currentUser.hasPermission('paciente_update') or currentUser.hasPermission('datosDemograficos_update') %}
         <button data-toggle="modal" data-target="#editPersonalInfo" title="Editar" class="btn btn-orange btn-sm" id="editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
       {% endif %}
-      {% if currentUser.hasPermission('paciente_destroy') %}
-        <button data-toggle="modal" data-target="#deletePatient" title="Eliminar" class="btn btn-danger btn-sm" id="deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+      {% if currentUser.hasPermission('historiaClinica_show') %}
+          <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-primary pull-right"  id="recordsbtn" title="Ver Historia Clínica"><i class="fa fa-stethoscope" aria-hidden="true"></i></i></a>
       {% endif %}
     </div>
 

@@ -132,7 +132,7 @@ hr {
 .white-box.demo {
     padding-top: 90px;
 }
-
+#recordsbtn,
 #deletebtn,
 #editbtn,
 #backbtn {
@@ -140,6 +140,7 @@ hr {
     color: white!important;
 }
 
+#recordsbtn,
 #deletebtn,
 #editbtn {
     margin-right: 5px;
