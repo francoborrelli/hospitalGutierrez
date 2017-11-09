@@ -1,5 +1,27 @@
-#addRecord .form-control{
+#addRecord .form-control {
     margin-top: 10px;
     display: initial;
     width: 92%;
+    border: 1px solid transparent;
+}
+
+#addRecord .form-control:hover,
+#addRecord .form-control:active,
+#addRecord .form-control:focus {
+    border: 1px solid rgba(0, 0, 0, .15);
+}
+
+#addRecord input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+select {
+    text-align: center;
+    text-align-last: center;
 }
