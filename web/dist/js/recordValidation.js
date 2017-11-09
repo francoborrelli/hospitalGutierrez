@@ -60,10 +60,13 @@ $('#addRecord').validate({
         maturation: {
             required: "Debe seleccionar una opción",
         },
-        maturationObservation: {
+        maturationObservations: {
             required: "Debe llenar este campo",
         },
-        vaccinationObservation: {
+        vaccinationObservations: {
+            required: "Debe llenar este campo",
+        },
+        fisicalObservations: {
             required: "Debe llenar este campo",
         },
     },
