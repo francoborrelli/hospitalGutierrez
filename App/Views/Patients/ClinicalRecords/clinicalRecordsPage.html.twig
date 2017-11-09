@@ -4,10 +4,10 @@
     {{parent()}}
     <link rel="stylesheet" href="/web/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
     <link rel="stylesheet" href="/web/assets/dataTables/css/responsive.bootstrap4.min.css"> 
+    <link rel="stylesheet" href="/web/dist/css/records.css"> 
 {% endblock %} 
 
 {% block buttons %}
-    <a title="Agregar Consulta" class="btn btn-sm btn-primary " id="editbtn" href="/patients">Agregar</a>
     {% if currentUser.hasPermission('paciente_show') %}
         <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-primary pull-right" id="recordsbtn" title="Ver perfil del Paciente"><i class="fa fa-user" aria-hidden="true"></i></a>
     {% endif %}           
@@ -26,6 +26,10 @@
     <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
         <br>
         <div>
+            {% if currentUser.hasPermission('historiaClinica_new') %}
+                <a id="agregar-btn" class="btn btn-primary btn-sm" href="">Agregar</a>
+                <br>  
+            {% endif %}
             {% include 'Patients/ClinicalRecords/recordsTable.html.twig' %}
         </div>
     </div>
