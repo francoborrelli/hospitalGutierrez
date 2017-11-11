@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Core\Controller;
 use App\Models\User;
+use App\Models\Patient;
 
 class SecurityController extends Controller
 {
@@ -37,6 +38,13 @@ class SecurityController extends Controller
 
         header('Content-Type: application/json');
         echo json_encode(!$userNameExists);
+    }
+
+    public function validatePatientDocumentAction()
+    {
+        $patientRepository = $this->getEntityManager()->getRepository(Patient::class);
+        header('Content-Type: application/json');
+        echo json_encode(!$patientRepository->patientExists($_GET['documentTypeId'], $_GET['documentNumber']));
     }
 
 }

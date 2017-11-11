@@ -33,6 +33,15 @@ $('#addPatient').validate({
         documentNumber: {
             required: true,
             maxlength: 50,
+            remote: {
+              url: "/admin/security/validatePatientDocument",
+              type: "get",
+              data: {
+                documentTypeId: function() {
+                return $("#documentTypeId").val();
+              }
+            }
+          }
         },
         birthday: {
             required: true,
@@ -45,6 +54,15 @@ $('#addPatient').validate({
         },
         documentTypeId: {
             required: true,
+            remote: {
+              url: "/admin/security/validatePatientDocument",
+              type: "get",
+              data: {
+                documentTypeId: function() {
+                return $("#documentTypeId").val();
+              }
+            }
+          }
         },
         genderId: {
             required: true,
@@ -70,6 +88,7 @@ $('#addPatient').validate({
         documentNumber: {
             required: "Ingrese el documento",
             maxlength: "Ingrese un documento valido",
+            remote: "Ya existe un paciente con este número de documento"
         },
         lastName: {
             required: "Ingrese el apellido",

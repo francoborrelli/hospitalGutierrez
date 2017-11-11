@@ -35,5 +35,13 @@ class PatientRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function patientExists($documentTypeId, $documentNumber)
+    {
+        if ((!is_null($patient = $this->findOneBy(['docNumber' => $documentNumber]))) &&
+            $patient->getDocumentType()->getId() == $documentTypeId)
+            return true;
+        return false;
+    }
+
 
 }
