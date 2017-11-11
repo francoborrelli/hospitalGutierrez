@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function createAction()
     {
         $userRepository = $this->getEntityManager()->getRepository(User::class);
-        $user = $userRepository->findOneBy(['email' => $_POST['email']]);
+        $user = $userRepository->findOneBy(['username' => $_POST['username']]);
         if (is_null($user) || !$user->validatePassword($_POST['pass']))
             $user = false;
 
@@ -29,7 +29,7 @@ class LoginController extends Controller
             else
                 $this->addFlashMessage('danger', 'Lo sentimos', 'Los datos ingresados no son correctos, intente nuevamente.');
 
-            $this->render('Login/login.html.twig', ['email' => $_POST['email']]);
+            $this->render('Login/login.html.twig', ['username' => $_POST['username']]);
         }
     }
 

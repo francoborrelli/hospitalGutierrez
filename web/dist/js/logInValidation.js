@@ -2,9 +2,8 @@
 
 $('#logInForm').validate({
     rules: {
-        email: {
+        username: {
             required: true,
-            email: true
         },
         pass: {
             minlength: 6,
@@ -16,9 +15,8 @@ $('#logInForm').validate({
             required: "Por favor ingrese su contraseña",
             minlength: "Su contraseña debe tener al menos 6 caracteres"
         },
-        email: {
-            email: "Por favor ingrese un email valido",
-            required: "Por favor ingrese su email"
+        username: {
+            required: "Por favor ingrese su nombre de usuario"
         },
     },
     errorPlacement: function (err, element) {
@@ -53,11 +51,11 @@ $('#logInForm').validate({
 $( window ).resize(function() {
     if ($(window).width() < 875){
     $('#_password').popover('hide')
-    $('#_email').popover('hide')
+    $('#_username').popover('hide')
     }else{
         if (($(window).width() > 875)){
             $('#_password').popover('show')
-            $('#_email').popover('show')
+            $('#_username').popover('show')
         }
     }
   });
