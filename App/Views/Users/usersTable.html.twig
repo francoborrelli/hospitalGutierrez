@@ -11,14 +11,9 @@
         {% include 'Users/addUser.html.twig' %}
     {% endif %}    
 
-    {% if currentUser.hasPermission('usuario_destroy') %}
-        {% include 'Users/deleteUser.html.twig' %}
-    {% endif %} 
-
     {% if currentUser.hasPermission('usuario_update') %}
         {% include 'Users/editUser.html.twig' %}
     {% endif %} 
-
 
     <div class="container userReport tableScreen">
         <div class="row">
