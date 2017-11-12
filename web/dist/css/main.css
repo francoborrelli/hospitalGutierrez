@@ -47,6 +47,15 @@ a.btn:hover {
     color: white;
 }
 
+a.btn-default,
+a.btn-default:active,
+a.btn-default:focus,
+a.btn-default:hover {
+    background-color: #dddddd;
+    color: #444;
+    border: 1px solid #dddddd;
+}
+
 .btn-orange {
     background-color: #FF5722;
     border-color: #FF5722;
