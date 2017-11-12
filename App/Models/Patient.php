@@ -531,6 +531,12 @@ class Patient
         return $this->waterType;
     }
 
+    public function validateDocumentChange($document, $type)
+    {
+        return (($this->docNumber == $document) && ($this->documentType == $type));
+    }
+
+
     public function validationErrors($patientExists)
     {
         $validationErrors = [];

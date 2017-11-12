@@ -145,14 +145,19 @@ class PatientController extends Controller
         $patientRepository = $em->getRepository(Patient::class);
 
         $patient = $patientRepository->find($this->getRouteParams()['id']);
-        
+
+        $documentChange = $patient->validateDocumentChange($_POST['documentTypeId'], $_POST['documentNumber']);
+
         $validationPatient = clone $patient;
         if ($mode == 'patient') 
             $validationPatient->setData($data);
         else 
             $validationPatient->setDemographicData($data);
 
-        $patientExists = $em->getRepository(Patient::class)->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);            
+        $patientExists = false;
+
+        if ($documentChange)
+            $patientExists = $em->getRepository(Patient::class)->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);            
         
         $validationErrors = $validationPatient->validationErrors($patientExists);
         if (empty($validationErrors)) {
