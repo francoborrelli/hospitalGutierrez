@@ -8,7 +8,7 @@
         <td headers="verDetalle" class="text-center">
            {% if currentUser.hasPermission('historiaClinica_show') %}
                 <div class="btn-group" role="group">
-                    <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-primary" title="Ver Historia Clínica"><i class="fa fa-stethoscope" aria-hidden="true"></i></i></a>
+                    <a href="/patient/{{ patient.id }}/records" class="btn btn-sm btn-primary" title="Ver Historia Clínica"><i class="fa fa-stethoscope" aria-hidden="true"></i></i></a>
                 </div>
             {% endif %}
            {% if currentUser.hasPermission('paciente_show') %}
