@@ -37,6 +37,17 @@ $('#editPersonalInfo').validate({
         documentNumber: {
             required: true,
             maxlength: 50,
+            remote: {
+                url: "/admin/security/validatePatientDocument",
+                data: {
+                  documentTypeId: function() {
+                  return $("#documentTypeId").val();
+                },
+                  modified: function () {
+                    return (($("#documentTypeId").val() !== $type) || ($("#documentNumber").val() !== $document));
+                },
+              }
+            }
         },
         birthday: {
             required: true,
@@ -46,17 +57,6 @@ $('#editPersonalInfo').validate({
         },
         documentTypeId: {
             required: true,
-            remote: {
-                url: "/admin/security/validatePatientDocument",
-                data: {
-                    documentTypeId: function () {
-                        return $("#documentTypeId").val();
-                    },
-                    modified: function () {
-                        return (($("#documentTypeId").val() !== $type) || ($("#documentNumber").val() !== $document));
-                    }
-                }
-            }
         },
         genderId: {
             required: true,
