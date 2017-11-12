@@ -29,8 +29,9 @@ class App
         $this->router->add('admin/{controller}/{action}');
 
         // Clinical Records
-        $this->router->add('patient/{id:\d+}/records', ['controller' => 'ClinicalRecords', 'action' => 'index']);
-        $this->router->add('patient/{id:\d+}/records/create', ['controller' => 'ClinicalRecords', 'action' => 'new']);
+        $this->router->add('patient/{patient:\d+}/records', ['controller' => 'ClinicalRecords', 'action' => 'index']);
+        $this->router->add('patient/{patient:\d+}/records/create', ['controller' => 'ClinicalRecords', 'action' => 'new']);
+        $this->router->add('patient/{patient:\d+}/record/{record:\d+}', ['controller' => 'ClinicalRecords', 'action' => 'show']);
 
         // Patients
         $this->router->add('patients', ['controller' => 'Patient', 'action' => 'index']);

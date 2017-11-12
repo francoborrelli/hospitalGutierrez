@@ -19,13 +19,21 @@ class ClinicalRecordsController extends Controller
 
     public function newAction()
     {
-        $this->denyAccessUnlessPermissionGranted('historiaClinica_new');            
+        $this->denyAccessUnlessPermissionGranted('historiaClinica_new'); 
+                   
         $this->render('/Patients/ClinicalRecords/addRecord.html.twig', ['patient' => $this->getPatient()]);
+    }
+
+    public function showAction()
+    {
+        $this->denyAccessUnlessPermissionGranted('historiaClinica_show'); 
+        
+        $this->render('/Patients/ClinicalRecords/recordPage.html.twig', ['patient' => $this->getPatient()]);
     }
 
     private function getPatient()
     {
-        $id = $this->getRouteParams()['id'];
+        $id = $this->getRouteParams()['patient'];
         
         $em = $this->getEntityManager();
         
