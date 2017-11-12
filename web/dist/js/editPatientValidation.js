@@ -134,7 +134,7 @@ $('#editDemographicInfo').validate({
 });
 
 //Efecto en los botones
-$('.nav-link').click(function () {
+$('.userReport .nav-link').click(function () {
     form = $(this).attr("data-form")
     if ($(form).length == 0){
         $("#editbtn").prop('disabled', true);
@@ -145,7 +145,7 @@ $('.nav-link').click(function () {
 })
 
 $( document ).ready(function() {
-    form = $('.nav-link.active').attr("data-form")
+    form = $('.userReport .nav-link.active').attr("data-form")
     if ($(form).length == 0){
         $("#editbtn").prop('disabled', true);
     }else{
