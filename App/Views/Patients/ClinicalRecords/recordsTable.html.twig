@@ -1,3 +1,8 @@
+{% if currentUser.hasPermission('historiaClinica_new') %}
+    <a id="agregar-btn" class="btn btn-primary btn-sm" href="/patient/{{patient.id}}/records/create">Agregar</a>
+    <br>  
+{% endif %}
+
 <table class="table table-striped" id="recordsTable" summary="Lista de controles del paciente">
     <thead>
         <tr>
