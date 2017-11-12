@@ -10,7 +10,7 @@
         <!-- header -->
         <div class="card-header">
             {{ patient.firstName }} {{ patient.lastName }}
-            <a title="Volver" class="btn btn-sm" id="backbtn" href="/patients"><i class="fa fa-reply" aria-hidden="true"></i></a>
+            <a title="Volver" class="btn btn-sm" id="backbtn" href="{{returnRoute}}"><i class="fa fa-reply" aria-hidden="true"></i></a>
             {% block buttons %}
        
             {% endblock %}
