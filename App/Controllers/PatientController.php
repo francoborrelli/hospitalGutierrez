@@ -152,7 +152,8 @@ class PatientController extends Controller
         else
             $validationPatient->setDemographicData($data);
 
-        $validationErrors = $validationPatient->validationErrors();
+        $patientExists = $em->getRepository(Patient::class)->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);            
+        $validationErrors = $validationPatient->validationErrors($patientExists);
         if (empty($validationErrors)) {
             if ($mode == 'patient')
                 $patient->setData($data);
@@ -164,7 +165,7 @@ class PatientController extends Controller
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente.');
             $this->redirect('/patient/' . $this->getRouteParams()['id']);
         } else {
-            $this->render('Patients/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => $mode]);
+            $this->render('Patients/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => $mode, 'patientFields' => $this->getPatientFields()]);
         }
     }
 

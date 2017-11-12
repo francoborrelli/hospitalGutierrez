@@ -35,7 +35,6 @@ $('#addPatient').validate({
             maxlength: 50,
             remote: {
               url: "/admin/security/validatePatientDocument",
-              type: "get",
               data: {
                 documentTypeId: function() {
                 return $("#documentTypeId").val();
@@ -54,15 +53,6 @@ $('#addPatient').validate({
         },
         documentTypeId: {
             required: true,
-            remote: {
-              url: "/admin/security/validatePatientDocument",
-              type: "get",
-              data: {
-                documentTypeId: function() {
-                return $("#documentTypeId").val();
-              }
-            }
-          }
         },
         genderId: {
             required: true,
