@@ -6,7 +6,7 @@
         <td headers="numeroDocumento">{{ patient.docNumber }}</td>
      
         <td headers="verDetalle" class="text-center">
-           {% if currentUser.hasPermission('historiaClinica_show') %}
+           {% if currentUser.hasPermission('historiaClinica_index') %}
                 <div class="btn-group" role="group">
                     <a href="/patient/{{ patient.id }}/records" class="btn btn-sm btn-primary" title="Ver Historia Clínica"><i class="fa fa-stethoscope" aria-hidden="true"></i></i></a>
                 </div>

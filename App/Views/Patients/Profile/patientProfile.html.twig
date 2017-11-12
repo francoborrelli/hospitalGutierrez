@@ -29,7 +29,7 @@
       {% if currentUser.hasPermission('paciente_update') or currentUser.hasPermission('datosDemograficos_update') %}
         <button data-toggle="modal" data-target="#editPersonalInfo" title="Editar" class="btn btn-orange btn-sm" id="editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
       {% endif %}
-      {% if currentUser.hasPermission('historiaClinica_show') %}
+      {% if currentUser.hasPermission('historiaClinica_index') %}
           <a href="/patient/{{ patient.id }}/records" class="btn btn-sm btn-primary pull-right"  id="recordsbtn" title="Ver Historia Clínica"><i class="fa fa-stethoscope" aria-hidden="true"></i></i></a>
       {% endif %}
     </div>
