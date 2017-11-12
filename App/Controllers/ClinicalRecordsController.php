@@ -11,12 +11,14 @@ class ClinicalRecordsController extends Controller
 {
 
     public function indexAction()
-    {      
+    {   
+        $this->denyAccessUnlessPermissionGranted('historiaClinica_show');   
         $this->render('/Patients/ClinicalRecords/clinicalRecordsPage.html.twig', ['patient' => $this->getPatient()]);
     }
 
     public function newAction()
-    {            
+    {
+        $this->denyAccessUnlessPermissionGranted('historiaClinica_new');            
         $this->render('/Patients/ClinicalRecords/addRecord.html.twig', ['patient' => $this->getPatient()]);
     }
 
