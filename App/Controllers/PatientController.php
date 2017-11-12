@@ -88,20 +88,26 @@ class PatientController extends Controller
         $this->denyAccessUnlessPermissionGranted('paciente_new');
 
         $em = $this->getEntityManager();
+        $patientRepository = $em->getRepository(Patient::class);
 
-        $data = $this->getPatientData($_POST);
-        $data = $this->getDemographicData($data);
-        $patient = new Patient($data);
-        $patientExists = $em->getRepository(Patient::class)->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);
-        $validationErrors = $patient->validationErrors($patientExists);
-        if (empty($validationErrors)){
-            $em->persist($patient);
-            $em->flush();
-
-            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al paciente correctamente.');
-            $this->redirect('/patients');
+        $patient = $patientRepository->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);
+        if (!is_null($patient) && $patient->isDeleted()) {
+            $this->editPatientAction($patient);
         } else {
-            $this->indexAction($validationErrors, $patient);
+            $data = $this->getPatientData($_POST);
+            $data = $this->getDemographicData($data);
+            $patient = new Patient($data);
+            $patientExists = $patientRepository->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);
+            $validationErrors = $patient->validationErrors($patientExists);
+            if (empty($validationErrors)){
+                $em->persist($patient);
+                $em->flush();
+
+                $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al paciente correctamente.');
+                $this->redirect('/patients');
+            } else {
+                $this->indexAction($validationErrors, $patient);
+            }
         }
     }
 
@@ -128,9 +134,9 @@ class PatientController extends Controller
         $this->render('Patients/patientProfile.html.twig', ['patient' => $patient, 'patientFields' => $this->getPatientFields()]);
     }
 
-    public function editPatientAction()
+    public function editPatientAction($patient = null)
     {
-        $this->edit($this->getPatientData($_POST), 'patient');
+        $this->edit($this->getPatientData($_POST), 'patient', $patient);
     }
 
     public function editDemographicAction()
@@ -138,14 +144,17 @@ class PatientController extends Controller
         $this->edit($this->getDemographicData($_POST), 'demographic');
     }
 
-    private function edit($data, $mode)
+    private function edit($data, $mode, $patient = null)
     {
         $em = $this->getEntityManager();
 
-        $patientRepository = $em->getRepository(Patient::class);
-
-        $patient = $patientRepository->find($this->getRouteParams()['id']);
-
+        if (is_null($patient)) {
+            $patientRepository = $em->getRepository(Patient::class);
+            $patient = $patientRepository->find($this->getRouteParams()['id']);
+            $update = false;
+        } else {
+            $update = true;
+        }
         $documentChange = $patient->validateDocumentChange($_POST['documentTypeId'], $_POST['documentNumber']);
 
         $validationPatient = clone $patient;
@@ -155,10 +164,9 @@ class PatientController extends Controller
             $validationPatient->setDemographicData($data);
 
         $patientExists = false;
-
         if ($documentChange)
-            $patientExists = $em->getRepository(Patient::class)->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);            
-        
+            $patientExists = $em->getRepository(Patient::class)->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);
+
         $validationErrors = $validationPatient->validationErrors($patientExists);
         if (empty($validationErrors)) {
             if ($mode == 'patient')
@@ -166,10 +174,16 @@ class PatientController extends Controller
             else
                 $patient->setDemographicData($data);
 
-            $em->flush();
-
-            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente.');
-            $this->redirect('/patient/' . $this->getRouteParams()['id']);
+            if ($update) {
+                $patient->activate();
+                $em->flush();
+                $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al paciente correctamente.');
+                $this->redirect('/patients');
+            } else {
+                $em->flush();
+                $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente.');
+                $this->redirect('/patient/' . $this->getRouteParams()['id']);
+            }
         } else {
             $this->render('Patients/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => $mode, 'patientFields' => $this->getPatientFields()]);
         }

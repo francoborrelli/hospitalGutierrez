@@ -44,12 +44,16 @@ class SecurityController extends Controller
     {
         $patientRepository = $this->getEntityManager()->getRepository(Patient::class);
         header('Content-Type: application/json');
-        
+
         if (isset($_GET['modified']) && $_GET['modified'] === 'false'){
             echo json_encode(true);
         }
         else{
-            echo json_encode(!$patientRepository->patientExists($_GET['documentTypeId'], $_GET['documentNumber']));
+            $patient = $patientRepository->patientExists($_GET['documentTypeId'], $_GET['documentNumber']);
+            if (!is_null($patient) && !$patient->isDeleted())
+              echo json_encode(false);
+            else
+              echo json_encode(true);
         };
     }
 }

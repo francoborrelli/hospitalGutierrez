@@ -531,12 +531,17 @@ class Patient
 
     public function delete()
     {
-      $this->deleted = true;
+        $this->deleted = true;
     }
 
     public function isDeleted()
     {
-      return $this->deleted;
+        return $this->deleted;
+    }
+
+    public function activate()
+    {
+        $this->deleted = false;
     }
 
     /**

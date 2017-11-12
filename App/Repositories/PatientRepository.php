@@ -38,10 +38,20 @@ class PatientRepository extends EntityRepository
 
     public function patientExists($documentTypeId, $documentNumber)
     {
-        if ((!is_null($patient = $this->findOneBy(['docNumber' => $documentNumber]))) &&
-            $patient->getDocumentType()->getId() == $documentTypeId && !$patient->isDeleted())
-            return true;
-        return false;
+        if ((!is_null($patient = $this->docNumberExists($documentNumber))) &&
+            $this->docTypeExists($patient, $documentTypeId))
+            return $patient;
+        return null;
+    }
+
+    private function docNumberExists($documentNumber)
+    {
+        return $this->findOneBy(['docNumber' => $documentNumber]);
+    }
+
+    private function docTypeExists($patient, $documentTypeId)
+    {
+        return $patient->getDocumentType()->getId() == $documentTypeId;
     }
 
 
