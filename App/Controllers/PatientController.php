@@ -122,8 +122,14 @@ class PatientController extends Controller
     {
         $this->denyAccessUnlessOneGranted(array('paciente_show', 'datosDemograficos_show'));
 
+        $id = $this->getRouteParams()['id'];
+
         $em = $this->getEntityManager();
-        $patient = $em->getRepository(Patient::class)->find($this->getRouteParams()['id']);
+        $patient = $em->getRepository(Patient::class)->find($id);
+
+        if(!isset($patient))
+            throw new \Exception("Paciente $id no encontrado.", '404');
+            
         $this->render('Patients/Profile/patientProfile.html.twig', ['patient' => $patient, 'patientFields' => $this->getPatientFields()]);
     }
 
