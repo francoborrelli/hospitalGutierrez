@@ -29,8 +29,8 @@ class PatientRepository extends EntityRepository
         }
 
         if (!empty($docNumber)) {
-            $qb->andwhere('p.docNumber = :docNumber')
-               ->setparameter('docNumber', $docNumber);
+            $qb->andwhere('p.docNumber LIKE :docNumber')
+               ->setparameter('docNumber', '%'.$docNumber.'%');
         }
 
         return $qb->getQuery()->getResult();
