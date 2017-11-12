@@ -11,16 +11,27 @@ class ClinicalRecordsController extends Controller
 {
 
     public function indexAction()
+    {      
+        $this->render('/Patients/ClinicalRecords/clinicalRecordsPage.html.twig', ['patient' => $this->getPatient()]);
+    }
+
+    public function newAction()
+    {            
+        $this->render('/Patients/ClinicalRecords/addRecord.html.twig', ['patient' => $this->getPatient()]);
+    }
+
+    private function getPatient()
     {
         $id = $this->getRouteParams()['id'];
-
+        
         $em = $this->getEntityManager();
+        
         $patient = $em->getRepository(Patient::class)->find($id);
-
+        
         if(!isset($patient))
             throw new \Exception("Paciente $id no encontrado.", '404');
-            
-        $this->render('/Patients/ClinicalRecords/clinicalRecordsPage.html.twig', ['patient' => $patient]);
+
+        return $patient;
     }
 
 }

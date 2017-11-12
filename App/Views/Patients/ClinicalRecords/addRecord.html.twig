@@ -1,4 +1,4 @@
-{% extends 'utils/recordCard.html.twig' %} 
+{% embed 'utils/recordCard.html.twig' with {'returnRoute': '/patient/' ~ patient.id ~ '/records'} %} 
 
 {% block stylesheets %}
     {{parent()}}
@@ -30,3 +30,5 @@
     <script src="/web/assets/datePicker/locales/bootstrap-datepicker.es.min.js"></script>
     <script src="/web/dist/js/recordValidation.js"></script>
 {% endblock %}
+
+{% endembed %}
