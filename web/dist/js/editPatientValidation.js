@@ -150,6 +150,11 @@ $('#editDemographicInfo').validate({
 
 });
 
+$('#documentTypeId').change(function(){
+    $('#documentNumber').valid();           
+});
+
+
 //Efecto en los botones
 $('.nav-link').click(function () {
     form = $(this).attr("data-form")
