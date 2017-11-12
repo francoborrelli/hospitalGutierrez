@@ -531,7 +531,7 @@ class Patient
         return $this->waterType;
     }
 
-    public function validationErrors()
+    public function validationErrors($patientExists)
     {
         $validationErrors = [];
 
@@ -564,6 +564,9 @@ class Patient
 
         if ($this->waterType == null)
             $validationErrors[] = 'waterType';
+
+        if ($patientExists)
+            $validationErrors[] = 'patientExists';
 
         return $validationErrors;
     }

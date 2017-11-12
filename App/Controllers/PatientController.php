@@ -16,7 +16,7 @@ use App\Models\Gender;
 class PatientController extends Controller
 {
 
-    public function indexAction()
+    public function indexAction($validationErrors = null, $patient = null)
     {
         $this->denyAccessUnlessPermissionGranted('paciente_index');
 
@@ -48,7 +48,7 @@ class PatientController extends Controller
                  'documentType' => $documentType,
                  'docNumber' => $docNumber];
 
-        $this->render('Patients/patientsTable.html.twig', ['data' => $data]);
+        $this->render('Patients/patientsTable.html.twig', ['data' => $data, 'newErrors' => $validationErrors, 'patient' => $patient]);
     }
 
     private function firstNameGiven()
@@ -92,7 +92,8 @@ class PatientController extends Controller
         $data = $this->getPatientData($_POST);
         $data = $this->getDemographicData($data);
         $patient = new Patient($data);
-        $validationErrors = $patient->validationErrors();
+        $patientExists = $em->getRepository(Patient::class)->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);
+        $validationErrors = $patient->validationErrors($patientExists);
         if (empty($validationErrors)){
             $em->persist($patient);
             $em->flush();
@@ -100,7 +101,7 @@ class PatientController extends Controller
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al paciente correctamente.');
             $this->redirect('/patients');
         } else {
-            $this->render('Patients/patientsTable.html.twig', ['newErrors' => $validationErrors, 'patient' => $patient]);
+            $this->indexAction($validationErrors, $patient);
         }
     }
 
