@@ -56,6 +56,16 @@ a.btn-default:hover {
     border: 1px solid #dddddd;
 }
 
+a.btn-outline-primary{
+    color: #007bff!important;
+}
+
+a.btn-outline-primary:active,
+a.btn-outline-primary:focus,
+a.btn-outline-primary:hover {
+    color: white!important;
+}
+
 .btn-orange {
     background-color: #FF5722;
     border-color: #FF5722;
@@ -94,6 +104,42 @@ button:disabled{
 input[type="date"] {
     height: 38px;
 }
+
+.container .no-results {
+    text-align: center;
+    padding-top: 75px;
+}
+
+.container .no-results .lead {
+    text-align: center;
+    font-size: 30px;
+}
+
+.container .no-results .fa {
+    font-size: 200px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.container .no-results .card {
+    width: 100%;
+    border: 0;
+    text-align: center;
+    margin: 20px 0
+}
+
+.container .no-results .card i {
+    font-size: 125px;
+    margin-top: 10px;
+    margin-bottom: 20px
+}
+
+.container .no-results .card a.btn {
+    width: 200px;
+    margin: 0 auto;
+    margin-bottom: 10px
+}
+
 
 /*  Para arreglar bug con los modales de boostrap 4 */
 

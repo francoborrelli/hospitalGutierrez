@@ -1,4 +1,7 @@
-{% embed 'utils/recordCard.html.twig' with {'returnRoute': '/patients'} %} 
+{% set noResults = records is empty %}
+{% set path = 'Patients/ClinicalRecords/NoResults.html.twig' %}
+
+{% embed 'utils/recordCard.html.twig' with {'returnRoute': '/patients', 'noResults': noResults, 'path': path} %} 
 
 {% block stylesheets %}
     {{parent()}}
@@ -13,6 +16,7 @@
     {% endif %}           
 {% endblock %}
 
+
 {% block navtabs %}
     <li class="nav-item">
         <a class="nav-link active" id="personal-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="tab" aria-controls="records" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden"> Historia</span> Clínica</a>
@@ -26,10 +30,6 @@
     <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
         <br>
         <div>
-            {% if currentUser.hasPermission('historiaClinica_new') %}
-                <a id="agregar-btn" class="btn btn-primary btn-sm" href="/patient/{{patient.id}}/records/create">Agregar</a>
-                <br>  
-            {% endif %}
             {% include 'Patients/ClinicalRecords/recordsTable.html.twig' %}
         </div>
     </div>
