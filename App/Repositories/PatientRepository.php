@@ -10,7 +10,8 @@ class PatientRepository extends EntityRepository
     public function findSearch($firstName, $lastName, $documentType, $docNumber)
     {
         $qb = $this->createQueryBuilder('p')
-            ->from('App\Models\Patient', 'l');
+            ->from('App\Models\Patient', 'l')
+            ->where('p.deleted = 0');
 
         if (!empty($firstName)) {
             $qb->andWhere('LOWER(p.firstName) LIKE :firstName')
@@ -38,7 +39,7 @@ class PatientRepository extends EntityRepository
     public function patientExists($documentTypeId, $documentNumber)
     {
         if ((!is_null($patient = $this->findOneBy(['docNumber' => $documentNumber]))) &&
-            $patient->getDocumentType()->getId() == $documentTypeId)
+            $patient->getDocumentType()->getId() == $documentTypeId && !$patient->isDeleted())
             return true;
         return false;
     }

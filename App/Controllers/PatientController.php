@@ -112,7 +112,7 @@ class PatientController extends Controller
         $em = $this->getEntityManager();
         $patientRepository = $em->getRepository(Patient::class);
         $patient = $patientRepository->find($this->getRouteParams()['id']);
-        $em->remove($patient);
+        $patient->delete();
         $em->flush();
 
         $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha eliminado al paciente correctamente.');
@@ -141,22 +141,22 @@ class PatientController extends Controller
     private function edit($data, $mode)
     {
         $em = $this->getEntityManager();
-        
+
         $patientRepository = $em->getRepository(Patient::class);
 
         $patient = $patientRepository->find($this->getRouteParams()['id']);
-        
+
         $validationPatient = clone $patient;
-        if ($mode == 'patient') 
+        if ($mode == 'patient')
             $validationPatient->setData($data);
-        else 
+        else
             $validationPatient->setDemographicData($data);
-        
+
         $validationErrors = $validationPatient->validationErrors();
         if (empty($validationErrors)) {
-            if ($mode == 'patient') 
+            if ($mode == 'patient')
                 $patient->setData($data);
-            else 
+            else
                 $patient->setDemographicData($data);
 
             $em->flush();
@@ -196,8 +196,8 @@ class PatientController extends Controller
         $patientFields['gender'] = $em->getRepository(Gender::class)->findAll();
         $patientFields['documentType'] = $em->getRepository(DocumentType::class)->findAll();
         $patientFields['insurance'] = $em->getRepository(Insurance::class)->findAll();
-        
+
         return $patientFields;
     }
-    
+
 }
