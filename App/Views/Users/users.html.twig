@@ -18,10 +18,6 @@
                 <button type="button" data-toggle="modal" data-target="#editUser" title="Editar" data-id="{{ user.id }}" class="btn btn-orange btn-sm editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             {% endif %} 
 
-            {% if currentUser.hasPermission('usuario_destroy') %}
-                <button type="button" data-toggle="modal" data-target="#deleteUser" title="Eliminar" data-id="{{ user.id }}" class="btn btn-danger btn-sm deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-            {% endif %}
-
         </div>
     </td>
 </tr>
