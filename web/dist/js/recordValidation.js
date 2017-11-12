@@ -61,7 +61,8 @@ $('#addRecord').validate({
         weight: {
             required: "Debe ingresar el peso",
             step: "Debe tener solo dos decimales",
-            min: "Debe ser mayor a cero"
+            min: "Debe ser mayor a cero",
+            number: "Debe ingresar un número válido"
         },
         fisicTest: {
             required: "Debe seleccionar una opción",
@@ -83,6 +84,21 @@ $('#addRecord').validate({
         },
         fisicalObservations: {
             required: "Debe llenar este campo",
+        },
+        pc: {
+            step: "Debe tener solo dos decimales",
+            min: "Debe ser mayor a cero",
+            number: "Debe ingresar un número válido"
+        },
+        ppc: {
+            step: "Debe tener solo dos decimales",
+            min: "Debe ser mayor a cero",
+            number: "Debe ingresar un número válido"
+        },
+        height: {
+            step: "Debe tener solo dos decimales",
+            min: "Debe ser mayor a cero",
+            number: "Debe ingresar un número válido"
         },
     },
     highlight: function (element) {
