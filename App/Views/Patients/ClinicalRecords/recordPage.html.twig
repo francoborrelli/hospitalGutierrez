@@ -1,8 +1,9 @@
-{% extends 'utils/recordCard.html.twig' %} 
+{% embed 'utils/recordCard.html.twig' with {'returnRoute': '/patient/' ~ patient.id ~ '/records'} %} 
 
 {% block buttons %}
     {% if currentUser.hasPermission('historiaClinica_update') %}
        <a title="Editar Consulta" class="btn btn-sm btn-orange" id="editbtn" href="/patients"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    {% endif %}  
     {% if currentUser.hasPermission('paciente_show') %}
         <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-primary pull-right" id="recordsbtn" title="Ver perfil del Paciente"><i class="fa fa-user" aria-hidden="true"></i></a>
     {% endif %}                  
@@ -22,3 +23,5 @@
         </div>
     </div>
 {% endblock %}
+
+{% endembed %}
