@@ -1,0 +1,3 @@
+{% import 'utils/modal.html.twig' as modal %}
+
+        {{ modal.delete("deleteRecord", "/patient/"  ~ patient.id  ~ "/records", 'control' ) }}
