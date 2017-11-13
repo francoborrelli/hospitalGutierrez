@@ -122,4 +122,5 @@ $('.datepicker').datepicker({
     autoclose: true,
     orientation: "bottom right",
     endDate : 'now',
+    todayBtn: 'linked',
 });
