@@ -137,7 +137,7 @@ class Patient
     {
         $this->firstName = $data['firstName'];
         $this->lastName = $data['lastName'];
-        $this->birthday = new \DateTime($data['birthday']);
+        $this->birthday = \DateTime::createFromFormat('d/m/Y',$data['birthday']);
         $this->docNumber = $data['documentNumber'];
         $this->address = $data['address'];
         $this->phone = $data['phone'];

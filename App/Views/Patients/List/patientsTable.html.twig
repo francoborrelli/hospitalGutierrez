@@ -4,6 +4,7 @@
 {% block stylesheets %}
 <link rel="stylesheet" href="/web/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
 <link rel="stylesheet" href="/web/assets/dataTables/css/responsive.bootstrap4.min.css"> 
+<link rel="stylesheet" href="/web/assets/datePicker/css/bootstrap-datepicker.min.css"> 
 {% endblock %} 
 
 {% block body %}
@@ -71,17 +72,21 @@
     </div>
 {% endblock %} 
 
-
 {% block javascripts %}
+
     <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
+
+    {% if currentUser.hasPermission('paciente_new') %}
+        <script src="/web/assets/datePicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="/web/assets/datePicker/locales/bootstrap-datepicker.es.min.js"></script>
+        <script src="/web/dist/js/addPatientValidation.js"></script>
+    {% endif %}
+
     <script src="/web/assets/dataTables/js/datatables.min.js"></script>
     <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
     <script src="/web/dist/js/patients.js"></script>
     <script src="/web/dist/js/multi-step-modal.js"></script>
 
-    {% if currentUser.hasPermission('paciente_new') %}
-        <script src="/web/dist/js/addPatientValidation.js"></script>
-    {% endif %}
 
    {% if newErrors is not null %}
         <script>
