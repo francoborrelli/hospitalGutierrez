@@ -69,6 +69,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before 
     top: inherit!important;
 }
 
+
 #patients_wrapper,
 #usuarios_wrapper {
     margin-top: 35px;
@@ -110,3 +111,9 @@ table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before 
         max-width: 1190px;
     }
 }
+
+@media(max-width: 812px){
+    #patients .btn-group .btn:first-of-type{
+        margin-bottom: 5px;
+    }
+    }
