@@ -182,13 +182,3 @@ $('#btnClose').click(function () {
     $(this).closest('form')[0].reset();
     $(this).closest('form').validate().resetForm()
 })
-
-$('.datepicker').datepicker({
-    format: "dd/mm/yyyy",
-    todayBtn: true,
-    language: "es",
-    autoclose: true,
-    orientation: "bottom right",
-    endDate : 'now',
-    todayBtn: 'linked',
-});

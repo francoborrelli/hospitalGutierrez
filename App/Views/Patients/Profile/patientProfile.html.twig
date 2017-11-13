@@ -76,13 +76,15 @@
 {% endblock %} 
 
 {% block javascripts %}
-  {% if currentUser.hasPermission('paciente_update') %}
-        <script src="/web/assets/datePicker/js/bootstrap-datepicker.min.js"></script>
-        <script src="/web/assets/datePicker/locales/bootstrap-datepicker.es.min.js"></script>
-    {% endif %}
 
   <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
   <script src="/web/dist/js/editPatientValidation.js"></script>
+
+  {% if currentUser.hasPermission('paciente_update') %}
+        <script src="/web/assets/datePicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="/web/assets/datePicker/locales/bootstrap-datepicker.es.min.js"></script>
+        <script src="/web/dist/js/datePickerConfig.js"></script>
+    {% endif %}
 
   {% if not currentUser.hasPermission('paciente_show') %}
     <script>
