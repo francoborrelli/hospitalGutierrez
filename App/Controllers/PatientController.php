@@ -12,6 +12,7 @@ use App\Models\HeatingType;
 use App\Models\Insurance;
 use App\Models\DocumentType;
 use App\Models\Gender;
+use App\Repositories\DocumentTypeRepository;
 
 class PatientController extends Controller
 {
@@ -195,7 +196,6 @@ class PatientController extends Controller
     {
         $em = $this->getEntityManager();
         $data['gender'] = $em->getRepository(Gender::class)->find($data['genderId']);
-        $data['documentType'] = $em->getRepository(DocumentType::class)->find($data['documentTypeId']);
         $data['insurance'] = $em->getRepository(Insurance::class)->find($data['insuranceId']);
         return $data;
     }
@@ -216,7 +216,7 @@ class PatientController extends Controller
         $patientFields['houseType'] = $em->getRepository(HouseType::class)->findAll();
         $patientFields['heatingType'] = $em->getRepository(HeatingType::class)->findAll();
         $patientFields['gender'] = $em->getRepository(Gender::class)->findAll();
-        $patientFields['documentType'] = $em->getRepository(DocumentType::class)->findAll();
+        $patientFields['documentType'] = DocumentTypeRepository::findAll();
         $patientFields['insurance'] = $em->getRepository(Insurance::class)->findAll();
 
         return $patientFields;

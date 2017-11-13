@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Repositories\DocumentTypeRepository;
+
 /**
  * Patient
  *
@@ -90,10 +92,11 @@ class Patient
     private $gender;
 
     /**
-     * @ManyToOne(targetEntity="DocumentType")
-     * @JoinColumn(name="documentType_id", referencedColumnName="id")
+     * @var int
+     *
+     * @Column(type="integer")
      */
-    private $documentType;
+    private $documentTypeId;
 
     /**
      * @ManyToOne(targetEntity="Insurance")
@@ -142,7 +145,7 @@ class Patient
         $this->address = $data['address'];
         $this->phone = $data['phone'];
         $this->gender = $data['gender'];
-        $this->documentType = $data['documentType'];
+        $this->documentTypeId = $data['documentTypeId'];
         $this->insurance = $data['insurance'];
     }
 
@@ -440,7 +443,12 @@ class Patient
      */
     public function getDocumentType()
     {
-        return $this->documentType;
+        return DocumentTypeRepository::find($this->documentTypeId);
+    }
+
+    public function getDocumentTypeId()
+    {
+        return $this->documentTypeId;
     }
 
     /**
@@ -582,7 +590,7 @@ class Patient
         if ($this->gender == null)
             $validationErrors[] = 'genderId';
 
-        if ($this->documentType == null)
+        if ($this->documentTypeId == null)
             $validationErrors[] = 'documentTypeId';
 
         if ($this->heatingType == null)
