@@ -54,5 +54,20 @@ class PatientRepository extends EntityRepository
         return $patient->getDocumentType()->getId() == $documentTypeId;
     }
 
+    public function deleteIfExists($documentTypeId, $documentNumber)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->from('App\Models\Patient', 'l')
+            ->where('p.deleted = 1')
+            ->andWhere('p.docNumber = :docNumber')
+            ->andWhere('p.documentType = :docType')
+            ->setParameter('docNumber', $documentNumber)
+            ->setParameter('docType', $documentTypeId);
+        $patients = $qb->getQuery()->getSingleResult();
+        $em = $this->getEntityManager();
+        $em->remove($patients);
+        $em->flush();
+    }
+
 
 }

@@ -152,6 +152,7 @@ class PatientController extends Controller
             $patientRepository = $em->getRepository(Patient::class);
             $patient = $patientRepository->find($this->getRouteParams()['id']);
             $update = false;
+            $patientRepository->deleteIfExists($_POST['documentTypeId'], $_POST['documentNumber']);
         } else {
             $update = true;
         }
