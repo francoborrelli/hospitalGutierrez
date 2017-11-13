@@ -115,9 +115,10 @@ hr {
 }
 
 .container.userReport {
-    margin-top: 81px;
-    margin-bottom: 10px;
+    margin-top: 65px;
+    margin-bottom: 5px;
     max-width: 860px;
+    min-height: 680px;
 }
 
 .card {
