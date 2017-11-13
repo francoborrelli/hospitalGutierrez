@@ -51,7 +51,7 @@ class PatientRepository extends EntityRepository
 
     private function docTypeExists($patient, $documentTypeId)
     {
-        return $patient->getDocumentType()->getId() == $documentTypeId;
+        return $patient->getDocumentTypeId() == $documentTypeId;
     }
 
     public function deleteIfExists($documentTypeId, $documentNumber)
