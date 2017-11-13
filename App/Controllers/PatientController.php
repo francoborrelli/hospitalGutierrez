@@ -135,6 +135,20 @@ class PatientController extends Controller
         $this->redirect('/patients');
     }
 
+    public function activateAction()
+    {
+        $this->denyAccessUnlessPermissionGranted('paciente_update');
+
+        $em = $this->getEntityManager();
+        $patientRepository = $em->getRepository(Patient::class);
+        $patient = $patientRepository->find($this->getRouteParams()['id']);
+        $patient->activate();
+        $em->flush();
+
+        $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha activado al paciente correctamente.');
+        $this->redirect('/patients');
+    }
+
     public function showAction()
     {
         $this->denyAccessUnlessOneGranted(array('paciente_show', 'datosDemograficos_show'));
