@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="/web/dist/css/patientProfile.css"> 
+<link rel="stylesheet" href="/web/assets/datePicker/css/bootstrap-datepicker.min.css"> 
 {% endblock %} 
 
 {% block body %} 
@@ -75,6 +76,11 @@
 {% endblock %} 
 
 {% block javascripts %}
+  {% if currentUser.hasPermission('paciente_update') %}
+        <script src="/web/assets/datePicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="/web/assets/datePicker/locales/bootstrap-datepicker.es.min.js"></script>
+    {% endif %}
+
   <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
   <script src="/web/dist/js/editPatientValidation.js"></script>
 
@@ -85,7 +91,6 @@
   {% endif %}
 
   {% if editErrors is defined %}
-
     {% if mode == 'patient' %}
       <script>
         $('#editPersonalInfo').modal('show')
@@ -95,6 +100,5 @@
         $('#editDemographicInfo').modal('show')
       </script>
     {% endif %}  
-
   {% endif %}
 {% endblock %}
