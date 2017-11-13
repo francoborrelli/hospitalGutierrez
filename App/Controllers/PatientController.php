@@ -28,7 +28,8 @@ class PatientController extends Controller
         $lastName = $this->lastNameGiven();
         $documentType = $this->documentTypeGiven();
         $docNumber = $this->docNumberGiven();
-        $patients = $patientRepository->findSearch($firstName, $lastName, $documentType, $docNumber);
+        $state = $this->stateGiven();
+        $patients = $patientRepository->findSearch($firstName, $lastName, $documentType, $docNumber, $state);
 
         $listAmount = $this->getSite()->getListAmount();
         $patients = new ArrayCollection($patients);
@@ -46,7 +47,8 @@ class PatientController extends Controller
                  'firstName' => $firstName,
                  'lastName' => $lastName,
                  'documentType' => $documentType,
-                 'docNumber' => $docNumber];
+                 'docNumber' => $docNumber,
+                 'state' => $state];
 
         $this->render('Patients/patientsTable.html.twig', ['data' => $data, 'newErrors' => $validationErrors, 'patient' => $patient]);
     }
@@ -79,6 +81,14 @@ class PatientController extends Controller
     {
         if (isset($_GET['documentType']) && !empty($_GET['documentType']))
             return $_GET['documentType'];
+        else
+            return null;
+    }
+
+    private function stateGiven()
+    {
+        if (isset($_GET['state']) && !empty($_GET['state']))
+            return $_GET['state'];
         else
             return null;
     }
