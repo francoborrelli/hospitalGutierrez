@@ -132,6 +132,8 @@ class PatientController extends Controller
         
         if(!isset($patient))
             throw new \Exception("Paciente $id no encontrado.", '404');
+        elseif ($patient->isDeleted())
+            throw new \Exception("Accion no permitida.", '500');
 
         $patient->delete();
         $em->flush();
