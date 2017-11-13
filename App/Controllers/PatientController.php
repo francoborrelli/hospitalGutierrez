@@ -48,7 +48,7 @@ class PatientController extends Controller
                  'documentType' => $documentType,
                  'docNumber' => $docNumber];
 
-        $this->render('Patients/patientsTable.html.twig', ['data' => $data, 'newErrors' => $validationErrors, 'patient' => $patient]);
+        $this->render('Patients/List/patientsTable.html.twig', ['data' => $data, 'newErrors' => $validationErrors, 'patient' => $patient]);
     }
 
     private function firstNameGiven()
