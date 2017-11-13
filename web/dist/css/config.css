@@ -2,6 +2,7 @@
 
 .config {
     max-width: 610px;
+    min-height: 547px;
 }
 
 .config .card-block.container {

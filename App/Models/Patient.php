@@ -10,7 +10,7 @@ namespace App\Models;
  */
 class Patient
 {
-    
+
     /**
      * @var int
      *
@@ -33,7 +33,7 @@ class Patient
      * @Column(type="string", length= 50)
      */
     private $lastName;
-    
+
     /**
      * @var \DateTime
      *
@@ -43,7 +43,7 @@ class Patient
 
     /**
      * @var string
-     * 
+     *
      * @Column(type="string")
      */
     private $docNumber;
@@ -119,10 +119,18 @@ class Patient
      */
     private $waterType;
 
+    /**
+     * @var boolean
+     *
+     * @Column(type="boolean")
+     */
+    private $deleted;
+
     public function __construct($data)
     {
         $this->setData($data);
         $this->setDemographicData($data);
+        $this->deleted = false;
     }
 
     public function setData($data)
@@ -521,6 +529,21 @@ class Patient
         return $this;
     }
 
+    public function delete()
+    {
+        $this->deleted = true;
+    }
+
+    public function isDeleted()
+    {
+        return $this->deleted;
+    }
+
+    public function activate()
+    {
+        $this->deleted = false;
+    }
+
     /**
      * Get waterType
      *
@@ -531,7 +554,13 @@ class Patient
         return $this->waterType;
     }
 
-    public function validationErrors()
+    public function validateDocumentChange($document, $type)
+    {
+        return (($this->docNumber == $document) && ($this->documentType == $type));
+    }
+
+
+    public function validationErrors($patientExists)
     {
         $validationErrors = [];
 
@@ -551,19 +580,22 @@ class Patient
             $validationUser[] = 'birthday';
 
         if ($this->gender == null)
-            $validationErrors[] = 'genderId';        
-            
+            $validationErrors[] = 'genderId';
+
         if ($this->documentType == null)
-            $validationErrors[] = 'documentTypeId';        
-            
+            $validationErrors[] = 'documentTypeId';
+
         if ($this->heatingType == null)
-            $validationErrors[] = 'heatingType';        
-            
+            $validationErrors[] = 'heatingType';
+
         if ($this->houseType == null)
             $validationErrors[] = 'houseType';
 
         if ($this->waterType == null)
             $validationErrors[] = 'waterType';
+
+        if ($patientExists)
+            $validationErrors[] = 'patientExists';
 
         return $validationErrors;
     }

@@ -83,7 +83,7 @@
         <script src="/web/dist/js/addPatientValidation.js"></script>
     {% endif %}
 
-   {% if newErrors is defined %}
+   {% if newErrors is not null %}
         <script>
             $('#addPatient').modal('show')
         </script>

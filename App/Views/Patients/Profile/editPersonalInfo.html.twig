@@ -44,9 +44,9 @@
                             <!-- numero de documento -->
                             <div class="form-group col">
                                 <label for="documentNumber">Nº documento *</label>
-                                <input type="text" id="documentNumber" name="documentNumber" class="form-control {% if 'documentNumber' in editErrors %}is-invalid{% endif %}" placeholder="Numero de documento"
+                                <input type="text" id="documentNumber" name="documentNumber" class="form-control {% if 'documentNumber' in editErrors or 'patientExists' in editErrors %}is-invalid{% endif %}" placeholder="Numero de documento"
                                     value="{{patient.docNumber}}">                                
-                                  {% if 'documentNumber' in editErrors %}<label id="documentNumber-error" class="error" for="documentNumber">Ingrese el número de documento</label>{% endif %}
+                                  {% if 'documentNumber' in editErrors %}<label id="documentNumber-error" class="error" for="documentNumber">Ingrese el número de documento</label>{% endif %}{% if 'patientExists' in editErrors %}<label id="documentNumber-error" class="error" for="documentNumber">Ya existe un paciente con este número de documento</label>{% endif %}
                             </div>
                         </div>
 

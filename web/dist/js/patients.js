@@ -84,6 +84,10 @@ $('.searchForm').find('input').each(function () {
 
 })
 
+$('#documentTypeId').change(function(){
+    $('#documentNumber').valid();           
+});
+
 $("#goBack").click(function(){
     $('#addPatient').trigger('next.m.1'); 
 });

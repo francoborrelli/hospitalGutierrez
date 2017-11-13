@@ -134,19 +134,6 @@ class UserController extends Controller
          
     }
 
-    public function removeAction()
-    {
-        $this->denyAccessUnlessPermissionGranted('usuario_destroy');
-
-        $em = $this->getEntityManager();
-        $user = $em->getRepository(User::class)->find($_POST['deletedId']);
-        $em->remove($user);
-        $em->flush();
-
-        $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha eliminado al usuario correctamente.');
-        $this->redirect('/admin/users');
-    }
-
     private function userValidation($user)
     {
         $userRepository = $this->getEntityManager()->getRepository(User::class);

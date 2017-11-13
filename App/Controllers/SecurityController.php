@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Core\Controller;
 use App\Models\User;
+use App\Models\Patient;
 
 class SecurityController extends Controller
 {
@@ -39,4 +40,20 @@ class SecurityController extends Controller
         echo json_encode(!$userNameExists);
     }
 
+    public function validatePatientDocumentAction()
+    {
+        $patientRepository = $this->getEntityManager()->getRepository(Patient::class);
+        header('Content-Type: application/json');
+
+        if (isset($_GET['modified']) && $_GET['modified'] === 'false'){
+            echo json_encode(true);
+        }
+        else{
+            $patient = $patientRepository->patientExists($_GET['documentTypeId'], $_GET['documentNumber']);
+            if (!is_null($patient) && !$patient->isDeleted())
+              echo json_encode(false);
+            else
+              echo json_encode(true);
+        };
+    }
 }
