@@ -2,36 +2,23 @@
 
 namespace App\Repositories;
 
-use Core\APIrepository;
+use Core\APIRepository;
 use App\Models\DocumentType;
+use App\APIConf;
 
-class DocumentTypeRepository extends APIrepository
+class DocumentTypeRepository extends APIRepository
 {
 
-    private static $docTypes = [];
+    const CLASS_NAME = 'DocumentType';
 
     public static function findAll()
     {
-        if (empty(self::$docTypes)) {
-            $array = json_decode(self::get('https://api-referencias.proyecto2017.linti.unlp.edu.ar/tipo-documento'), true);
-            foreach ($array as $docType) {
-                self::$docTypes[] = new DocumentType($docType['id'], $docType['nombre']);
-            }
-        }
-        return self::$docTypes;
+        return self::findAllResources(APIConf::DOCUMENT_TYPE, self::CLASS_NAME);
     }
 
     public static function find($id)
     {
-        foreach(self::$docTypes as $docType) {
-            if ($docType->getId() == $id) {
-                return $docType;
-            }
-        }
-        $docType = json_decode(self::get('https://api-referencias.proyecto2017.linti.unlp.edu.ar/tipo-documento/'.$id), true);
-        $docType =  new DocumentType($docType['id'], $docType['nombre']);
-        self::$docTypes[] = $docType;
-        return $docType;
+        return self::findResource(APIConf::DOCUMENT_TYPE, $id, self::CLASS_NAME);
     }
 
 }
