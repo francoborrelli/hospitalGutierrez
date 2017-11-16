@@ -10,6 +10,8 @@ class LoginController extends Controller
 {
     public function showAction()
     {
+        $this->checkLogin();
+
         $username = null;
         if (isset($_SESSION['username'])) {
             $username = $_SESSION['username'];
@@ -20,6 +22,9 @@ class LoginController extends Controller
 
     public function createAction()
     {
+
+        $this->checkLogin();
+
         $userRepository = $this->getEntityManager()->getRepository(User::class);
         $user = $userRepository->findOneBy(['username' => $_POST['username']]);
         if (is_null($user) || !$user->validatePassword($_POST['pass']))
@@ -36,6 +41,16 @@ class LoginController extends Controller
 
             $_SESSION['username'] = $_POST['username'];
             $this->redirect('/login');
+        }
+
+        
+    }
+
+    private function checklogin()
+    {
+        $user = $this->getUser();
+        if (isset($user)){
+            $this->redirect('/');
         }
     }
 
