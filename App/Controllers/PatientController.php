@@ -113,7 +113,7 @@ class PatientController extends Controller
         $patientRepository = $em->getRepository(Patient::class);
 
         $patient = $patientRepository->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);
-        
+
         if (!is_null($patient) && $patient->isDeleted()) {
             $this->redirect('/patient/' . $patient->getId() . '/exists');
         } else {
@@ -138,7 +138,11 @@ class PatientController extends Controller
         $id = $this->getRouteParams()['id'];
         $patient = $this->getPatientById($id);
 
-        $this->render('Patients/reactivate.html.twig');
+        if (! $patient->isDeleted())
+            throw new \Exception("Accion no permitida.", '403');
+
+        $this->addFlashMessage('warning', '¡Atención!', 'El paciente con el documento ingresado ya existe pero se encuentra desactivado.');
+        $this->redirect("/patient/$id");
     }
 
     public function removeAction()
@@ -146,12 +150,12 @@ class PatientController extends Controller
         $this->denyAccessUnlessPermissionGranted('paciente_destroy');
 
         $em = $this->getEntityManager();
-        $patientRepository = $em->getRepository(Patient::class);
+
         $id = $this->getRouteParams()['id'];
         $patient = $this->getPatientById($id);
         
         if ($patient->isDeleted())
-            throw new \Exception("Accion no permitida.", '500');
+            throw new \Exception("Accion no permitida.", '403');
 
         $patient->delete();
         $em->flush();
@@ -165,9 +169,8 @@ class PatientController extends Controller
         $this->denyAccessUnlessPermissionGranted('paciente_update');
 
         $em = $this->getEntityManager();
-        $patientRepository = $em->getRepository(Patient::class);
-        $id = $this->getRouteParams()['id'];
 
+        $id = $this->getRouteParams()['id'];
         $patient = $this->getPatientById($id);
 
         $patient->activate();
@@ -189,6 +192,7 @@ class PatientController extends Controller
 
     public function editPatientAction()
     {
+        $em = $this->getEntityManager();
         $id = $this->getRouteParams()['id'];
         $patient = $this->getPatientById($id);
 
@@ -214,6 +218,8 @@ class PatientController extends Controller
 
     public function editDemographicAction()
     {
+        $em = $this->getEntityManager();
+
         $id = $this->getRouteParams()['id'];
         $patient = $this->getPatientById($id);
 
