@@ -29,19 +29,19 @@ $('#addRecord').validate({
         fisicTest: {
             required: true,
         },
-        fisicalObservations: {
+        fisicTestObservation: {
             required: true,
         },
-        vacunation: {
+        vaccination: {
             required: true,
         },
         maturation: {
             required: true,
         },
-        maturationObservations: {
+        maturationObservation: {
             required: true,
         },
-        vaccinationObservations: {
+        vaccinationObservation: {
             required: true,
         }
     },
@@ -58,22 +58,22 @@ $('#addRecord').validate({
         fisicTest: {
             required: "Debe seleccionar una opción",
         },
-        fisicalObservation: {
+        fisicTestObservation: {
             required: "Debe llenar este campo",
         },
-        vacunation: {
+        vaccination: {
             required: "Debe seleccionar una opción",
         },
         maturation: {
             required: "Debe seleccionar una opción",
         },
-        maturationObservations: {
+        maturationObservation: {
             required: "Debe llenar este campo",
         },
-        vaccinationObservations: {
+        vaccinationObservation: {
             required: "Debe llenar este campo",
         },
-        fisicalObservations: {
+        fisicalObservation: {
             required: "Debe llenar este campo",
         },
         pc: {

@@ -1,4 +1,4 @@
-<form class="row" id="addRecord" method="POST" action="">
+<form class="row" id="addRecord" method="POST" action="/patient/{{patient.id}}/records/create">
     <div class="col-md-12">
         <div class="white-box">
             <div class="user-btm-box">
@@ -36,7 +36,7 @@
                     <div class="col-md-6">
                         <strong>Exámen físico observaciones*</strong>
                         <br>
-                        <textarea class="form-control" id="fisicalObservations" name="fisicalObservations" placeholder="Ingrese las observaciones físicas"></textarea>
+                        <textarea class="form-control" id="fisicTestObservation" name="fisicTestObservation" placeholder="Ingrese las observaciones físicas"></textarea>
                     </div>
                 </div>
                 <hr>
@@ -44,7 +44,7 @@
                     <div class="col-md-6 b-r">
                         <strong>¿Vacunas completas?*</strong>
                         <br>
-                        <select id="vacunation" name="vacunation" class="form-control">
+                        <select id="vaccination" name="vaccination" class="form-control">
                         <option value="">Elija una opción</option>
                         <option value="si">SI</option>
                         <option value="no">NO</option>
@@ -53,7 +53,7 @@
                     <div class="col-md-6">
                         <strong>Vacunas observaciones*</strong>
                         <br>
-                        <textarea class="form-control" id="vaccinationObservations" name="vaccinationObservations" placeholder="Ingrese las observaciones de vacunación"></textarea>
+                        <textarea class="form-control" id="vaccinationObservation" name="vaccinationObservation" placeholder="Ingrese las observaciones de vacunación"></textarea>
                     </div>
                 </div>
                 <hr>
@@ -70,7 +70,7 @@
                     <div class="col-md-6">
                         <strong>Maduración observaciones*</strong>
                         <br>
-                        <textarea class="form-control" id="maturationObservations" name="maturationObservations" placeholder="Ingrese las observaciones de maduración"></textarea>
+                        <textarea class="form-control" id="maturationObservation" name="maturationObservation" placeholder="Ingrese las observaciones de maduración"></textarea>
                     </div>
                 </div>
                 <hr>
@@ -101,7 +101,7 @@
                     <div class="col-md-12">
                         <strong>Observaciones Generales</strong>
                         <br>
-                        <textarea class="form-control" id="generalObservations" name="generalObservations" placeholder="Ingrese las observaciones generales"></textarea>
+                        <textarea class="form-control" id="generalObservation" name="generalObservation" placeholder="Ingrese las observaciones generales"></textarea>
                     </div>
                 </div>
                 <hr>
