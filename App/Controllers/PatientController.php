@@ -93,6 +93,18 @@ class PatientController extends Controller
             return null;
     }
 
+    private function getPatientById($id){
+        $em = $this->getEntityManager();
+        $patientRepository = $em->getRepository(Patient::class);
+
+        $patient = $patientRepository->find($id);
+        
+        if(!isset($patient))
+            throw new \Exception("Paciente $id no encontrado.", '404');
+
+        return $patient;
+    }
+
     public function newAction()
     {
         $this->denyAccessUnlessPermissionGranted('paciente_new');
@@ -101,6 +113,7 @@ class PatientController extends Controller
         $patientRepository = $em->getRepository(Patient::class);
 
         $patient = $patientRepository->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);
+        
         if (!is_null($patient) && $patient->isDeleted()) {
             $this->redirect('/patient/' . $patient->getId() . '/exists');
         } else {
@@ -122,6 +135,9 @@ class PatientController extends Controller
 
     public function reactivateAction()
     {
+        $id = $this->getRouteParams()['id'];
+        $patient = $this->getPatientById($id);
+
         $this->render('Patients/reactivate.html.twig');
     }
 
@@ -132,11 +148,9 @@ class PatientController extends Controller
         $em = $this->getEntityManager();
         $patientRepository = $em->getRepository(Patient::class);
         $id = $this->getRouteParams()['id'];
-        $patient = $patientRepository->find($id);
+        $patient = $this->getPatientById($id);
         
-        if(!isset($patient))
-            throw new \Exception("Paciente $id no encontrado.", '404');
-        elseif ($patient->isDeleted())
+        if ($patient->isDeleted())
             throw new \Exception("Accion no permitida.", '500');
 
         $patient->delete();
@@ -153,10 +167,8 @@ class PatientController extends Controller
         $em = $this->getEntityManager();
         $patientRepository = $em->getRepository(Patient::class);
         $id = $this->getRouteParams()['id'];
-        $patient = $patientRepository->find($id);
-        
-        if(!isset($patient))
-            throw new \Exception("Paciente $id no encontrado.", '404');
+
+        $patient = $this->getPatientById($id);
 
         $patient->activate();
         $em->flush();
@@ -169,21 +181,17 @@ class PatientController extends Controller
     {
         $this->denyAccessUnlessOneGranted(array('paciente_show', 'datosDemograficos_show'));
 
-        $em = $this->getEntityManager();
         $id = $this->getRouteParams()['id'];
-        $patient = $em->getRepository(Patient::class)->find($id);
-
-        if(!isset($patient))
-            throw new \Exception("Paciente $id no encontrado.", '404');
+        $patient = $this->getPatientById($id);
 
         $this->render('Patients/patientProfile.html.twig', ['patient' => $patient, 'patientFields' => $this->getPatientFields()]);
     }
 
     public function editPatientAction()
     {
-        $em = $this->getEntityManager();
-        $patientRepository = $em->getRepository(Patient::class);
-        $patient = $patientRepository->find($this->getRouteParams()['id']);
+        $id = $this->getRouteParams()['id'];
+        $patient = $this->getPatientById($id);
+
         $documentChange = $patient->validateDocumentChange($_POST['documentTypeId'], $_POST['documentNumber']);
 
         $validationPatient = clone $patient;
@@ -206,9 +214,9 @@ class PatientController extends Controller
 
     public function editDemographicAction()
     {
-        $em = $this->getEntityManager();
-        $patientRepository = $em->getRepository(Patient::class);
-        $patient = $patientRepository->find($this->getRouteParams()['id']);
+        $id = $this->getRouteParams()['id'];
+        $patient = $this->getPatientById($id);
+
         $validationPatient = clone $patient;
         $validationPatient->setDemographicData($_POST);
         $validationErrors = $validationPatient->validationErrors(false);
