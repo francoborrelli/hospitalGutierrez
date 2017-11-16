@@ -6,16 +6,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Core\Controller;
 use App\Models\Patient;
-use App\Models\WaterType;
-use App\Models\HouseType;
-use App\Models\HeatingType;
-use App\Models\Insurance;
-use App\Models\DocumentType;
 use App\Models\Gender;
 use App\Repositories\DocumentTypeRepository;
+use App\Repositories\HouseTypeRepository;
+use App\Repositories\WaterTypeRepository;
+use App\Repositories\HeatingTypeRepository;
+use App\Repositories\InsuranceRepository;
 
 class PatientController extends Controller
 {
+
+    protected function after()
+    {
+        \APIRepository::closeCurl();
+    }
 
     public function indexAction($validationErrors = null, $patient = null)
     {
@@ -149,13 +153,14 @@ class PatientController extends Controller
     {
         $em = $this->getEntityManager();
 
+        $patientRepository = $em->getRepository(Patient::class);
         if (is_null($patient)) {
-            $patientRepository = $em->getRepository(Patient::class);
             $patient = $patientRepository->find($this->getRouteParams()['id']);
             $update = false;
-            $patientRepository->deleteIfExists($_POST['documentTypeId'], $_POST['documentNumber']);
         } else {
             $update = true;
+            if (!$mode == 'patient')
+            $patientRepository->deleteIfExists($_POST['documentTypeId'], $_POST['documentNumber']);
         }
         $documentChange = $patient->validateDocumentChange($_POST['documentTypeId'], $_POST['documentNumber']);
 
@@ -196,29 +201,27 @@ class PatientController extends Controller
     {
         $em = $this->getEntityManager();
         $data['gender'] = $em->getRepository(Gender::class)->find($data['genderId']);
-        $data['insurance'] = $em->getRepository(Insurance::class)->find($data['insuranceId']);
         return $data;
     }
 
     private function getDemographicData($data)
     {
         $em = $this->getEntityManager();
-        $data['waterType'] = $em->getRepository(WaterType::class)->find($data['waterTypeId']);
-        $data['houseType'] = $em->getRepository(HouseType::class)->find($data['houseTypeId']);
-        $data['heatingType'] = $em->getRepository(HeatingType::class)->find($data['heatingTypeId']);
+        $data['waterType'] = WaterTypeRepository::find($data['waterTypeId']);
+        $data['houseType'] = HouseTypeRepository::find($data['houseTypeId']);
+        $data['heatingType'] = HeatingTypeRepository::find($data['heatingTypeId']);
         return $data;
     }
 
     public function getPatientFields()
     {
         $em = $this->getEntityManager();
-        $patientFields['waterType'] = $em->getRepository(WaterType::class)->findAll();
-        $patientFields['houseType'] = $em->getRepository(HouseType::class)->findAll();
-        $patientFields['heatingType'] = $em->getRepository(HeatingType::class)->findAll();
+        $patientFields['waterType'] = WaterTypeRepository::findAll();
+        $patientFields['houseType'] = HouseTypeRepository::findAll();
+        $patientFields['heatingType'] = HeatingTypeRepository::findAll();
         $patientFields['gender'] = $em->getRepository(Gender::class)->findAll();
         $patientFields['documentType'] = DocumentTypeRepository::findAll();
-        $patientFields['insurance'] = $em->getRepository(Insurance::class)->findAll();
-
+        $patientFields['insurance'] = InsuranceRepository::findAll();
         return $patientFields;
     }
 

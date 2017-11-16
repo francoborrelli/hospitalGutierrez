@@ -24,7 +24,7 @@ class PatientRepository extends EntityRepository
         }
 
         if (!empty($documentType)) {
-            $qb->andWhere('p.documentType = :documentType')
+            $qb->andWhere('p.documentTypeId = :documentType')
                ->setParameter('documentType', $documentType);
         }
 
@@ -60,7 +60,7 @@ class PatientRepository extends EntityRepository
             ->from('App\Models\Patient', 'l')
             ->where('p.deleted = 1')
             ->andWhere('p.docNumber = :docNumber')
-            ->andWhere('p.documentType = :docType')
+            ->andWhere('p.documentTypeId = :docType')
             ->setParameter('docNumber', $documentNumber)
             ->setParameter('docType', $documentTypeId);
         $patients = $qb->getQuery()->getSingleResult();

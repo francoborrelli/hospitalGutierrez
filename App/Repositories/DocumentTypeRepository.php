@@ -8,6 +8,7 @@ use App\APIConf;
 
 class DocumentTypeRepository extends APIRepository
 {
+    protected static $resources = [];
 
     const CLASS_NAME = 'DocumentType';
 

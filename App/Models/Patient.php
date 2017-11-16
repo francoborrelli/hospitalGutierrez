@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use App\Repositories\DocumentTypeRepository;
+use App\Repositories\HouseTypeRepository;
+use App\Repositories\HeatingTypeRepository;
+use App\Repositories\WaterTypeRepository;
+use App\Repositories\InsuranceRepository;
 
 /**
  * Patient
@@ -99,28 +103,32 @@ class Patient
     private $documentTypeId;
 
     /**
-     * @ManyToOne(targetEntity="Insurance")
-     * @JoinColumn(name="insurance_id", referencedColumnName="id", nullable=true)
+     * @var int
+     *
+     * @Column(type="integer")
      */
-    private $insurance;
+    private $insuranceId;
 
     /**
-     * @ManyToOne(targetEntity="HeatingType")
-     * @JoinColumn(name="heatingType_id", referencedColumnName="id")
+     * @var int
+     *
+     * @Column(type="integer")
      */
-    private $heatingType;
+    private $heatingTypeId;
 
     /**
-     * @ManyToOne(targetEntity="HouseType")
-     * @JoinColumn(name="houseType_id", referencedColumnName="id")
+     * @var int
+     *
+     * @Column(type="integer")
      */
-    private $houseType;
+    private $houseTypeId;
 
     /**
-     * @ManyToOne(targetEntity="WaterType")
-     * @JoinColumn(name="waterType_id", referencedColumnName="id")
+     * @var int
+     *
+     * @Column(type="integer")
      */
-    private $waterType;
+    private $waterTypeId;
 
     /**
      * @var boolean
@@ -146,7 +154,7 @@ class Patient
         $this->phone = $data['phone'];
         $this->gender = $data['gender'];
         $this->documentTypeId = $data['documentTypeId'];
-        $this->insurance = $data['insurance'];
+        $this->insuranceId = $data['insuranceId'];
     }
 
     public function setDemographicData($data)
@@ -166,9 +174,9 @@ class Patient
         else
             $this->pet = false;
 
-        $this->waterType = $data['waterType'];
-        $this->houseType = $data['houseType'];
-        $this->heatingType = $data['heatingType'];
+        $this->waterTypeId = $data['waterType'];
+        $this->houseTypeId = $data['houseType'];
+        $this->heatingTypeId = $data['heatingType'];
     }
 
 
@@ -431,7 +439,7 @@ class Patient
      */
     public function setDocumentType($documentType = null)
     {
-        $this->documentType = $documentType;
+        $this->documentTypeId = $documentType;
 
         return $this;
     }
@@ -460,7 +468,7 @@ class Patient
      */
     public function setInsurance($insurance = null)
     {
-        $this->insurance = $insurance;
+        $this->insuranceId = $insurance;
 
         return $this;
     }
@@ -472,7 +480,12 @@ class Patient
      */
     public function getInsurance()
     {
-        return $this->insurance;
+        return InsuranceRepository::find($this->insuranceId);
+    }
+
+    public function getInsuranceId()
+    {
+        return $this->insuranceId;
     }
 
     /**
@@ -484,7 +497,7 @@ class Patient
      */
     public function setHeatingType($heatingType = null)
     {
-        $this->heatingType = $heatingType;
+        $this->heatingTypeId = $heatingType;
 
         return $this;
     }
@@ -496,7 +509,12 @@ class Patient
      */
     public function getHeatingType()
     {
-        return $this->heatingType;
+        return HeatingTypeRepository::find($this->heatingTypeId);
+    }
+
+    public function getHeatingTypeId()
+    {
+        return $this->heatingTypeId;
     }
 
     /**
@@ -508,7 +526,7 @@ class Patient
      */
     public function setHouseType($houseType = null)
     {
-        $this->houseType = $houseType;
+        $this->houseTypeId = $houseType;
 
         return $this;
     }
@@ -520,7 +538,12 @@ class Patient
      */
     public function getHouseType()
     {
-        return $this->houseType;
+        return HouseTypeRepository::find($this->houseTypeId);
+    }
+
+    public function getHouseTypeId()
+    {
+        return $this->houseTypeId;
     }
 
     /**
@@ -532,7 +555,7 @@ class Patient
      */
     public function setWaterType($waterType = null)
     {
-        $this->waterType = $waterType;
+        $this->waterTypeId = $waterType;
 
         return $this;
     }
@@ -559,12 +582,17 @@ class Patient
      */
     public function getWaterType()
     {
-        return $this->waterType;
+        return WaterTypeRepository::find($this->waterTypeId);
+    }
+
+    public function getWaterTypeId()
+    {
+        return $this->waterTypeId;
     }
 
     public function validateDocumentChange($document, $type)
     {
-        return (($this->docNumber == $document) && ($this->documentType == $type));
+        return (($this->docNumber == $document) && ($this->documentTypeId == $type));
     }
 
 
@@ -593,13 +621,13 @@ class Patient
         if ($this->documentTypeId == null)
             $validationErrors[] = 'documentTypeId';
 
-        if ($this->heatingType == null)
+        if ($this->heatingTypeId == null)
             $validationErrors[] = 'heatingType';
 
-        if ($this->houseType == null)
+        if ($this->houseTypeId == null)
             $validationErrors[] = 'houseType';
 
-        if ($this->waterType == null)
+        if ($this->waterTypeId == null)
             $validationErrors[] = 'waterType';
 
         if ($patientExists)
