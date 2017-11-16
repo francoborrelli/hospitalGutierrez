@@ -10,7 +10,12 @@ class LoginController extends Controller
 {
     public function showAction()
     {
-        $this->render('Login/login.html.twig');
+        $username = null;
+        if (isset($_SESSION['username'])) {
+            $username = $_SESSION['username'];
+            unset($_SESSION['username']);
+        }
+        $this->render('Login/login.html.twig', ['username' => $username]);
     }
 
     public function createAction()
@@ -29,7 +34,8 @@ class LoginController extends Controller
             else
                 $this->addFlashMessage('danger', 'Lo sentimos', 'Los datos ingresados no son correctos, intente nuevamente.');
 
-            $this->render('Login/login.html.twig', ['username' => $_POST['username']]);
+            $_SESSION['username'] = $_POST['username'];
+            $this->redirect('/login');
         }
     }
 
