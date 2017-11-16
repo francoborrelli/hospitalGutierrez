@@ -16,11 +16,6 @@ use App\Repositories\InsuranceRepository;
 class PatientController extends Controller
 {
 
-    protected function after()
-    {
-        \APIRepository::closeCurl();
-    }
-
     public function indexAction($validationErrors = null, $patient = null)
     {
         $this->denyAccessUnlessPermissionGranted('paciente_index');
@@ -107,10 +102,9 @@ class PatientController extends Controller
 
         $patient = $patientRepository->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);
         if (!is_null($patient) && $patient->isDeleted()) {
-            $this->editPatientAction($patient);
+            $this->redirect('/patient/' . $patient->getId() . '/exists');
         } else {
             $data = $this->getPatientData($_POST);
-            $data = $this->getDemographicData($data);
             $patient = new Patient($data);
             $patientExists = $patientRepository->patientExists($_POST['documentTypeId'], $_POST['documentNumber']);
             $validationErrors = $patient->validationErrors($patientExists);
@@ -124,6 +118,11 @@ class PatientController extends Controller
                 $this->indexAction($validationErrors, $patient);
             }
         }
+    }
+
+    public function reactivateAction()
+    {
+        $this->render('Patients/reactivate.html.twig');
     }
 
     public function removeAction()
@@ -180,36 +179,15 @@ class PatientController extends Controller
         $this->render('Patients/patientProfile.html.twig', ['patient' => $patient, 'patientFields' => $this->getPatientFields()]);
     }
 
-    public function editPatientAction($patient = null)
-    {
-        $this->edit($this->getPatientData($_POST), 'patient', $patient);
-    }
-
-    public function editDemographicAction()
-    {
-        $this->edit($this->getDemographicData($_POST), 'demographic');
-    }
-
-    private function edit($data, $mode, $patient = null)
+    public function editPatientAction()
     {
         $em = $this->getEntityManager();
-
         $patientRepository = $em->getRepository(Patient::class);
-        if (is_null($patient)) {
-            $patient = $patientRepository->find($this->getRouteParams()['id']);
-            $update = false;
-        } else {
-            $update = true;
-            if (!$mode == 'patient')
-            $patientRepository->deleteIfExists($_POST['documentTypeId'], $_POST['documentNumber']);
-        }
+        $patient = $patientRepository->find($this->getRouteParams()['id']);
         $documentChange = $patient->validateDocumentChange($_POST['documentTypeId'], $_POST['documentNumber']);
 
         $validationPatient = clone $patient;
-        if ($mode == 'patient')
-            $validationPatient->setData($data);
-        else
-            $validationPatient->setDemographicData($data);
+        $validationPatient->setData($this->getPatientData($_POST));
 
         $patientExists = false;
         if ($documentChange)
@@ -217,40 +195,37 @@ class PatientController extends Controller
 
         $validationErrors = $validationPatient->validationErrors($patientExists);
         if (empty($validationErrors)) {
-            if ($mode == 'patient')
-                $patient->setData($data);
-            else
-                $patient->setDemographicData($data);
-
-            if ($update) {
-                $patient->activate();
-                $em->flush();
-                $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado al paciente correctamente.');
-                $this->redirect('/patients');
-            } else {
-                $em->flush();
-                $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente.');
-                $this->redirect('/patient/' . $this->getRouteParams()['id']);
-            }
+            $patient->setData($this->getPatientData($_POST));
+            $em->flush();
+            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente.');
+            $this->redirect('/patient/' . $this->getRouteParams()['id']);
         } else {
-            $this->render('Patients/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => $mode, 'patientFields' => $this->getPatientFields()]);
+            $this->render('Patients/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => 'patient', 'patientFields' => $this->getPatientFields()]);
         }
     }
 
+    public function editDemographicAction()
+    {
+        $em = $this->getEntityManager();
+        $patientRepository = $em->getRepository(Patient::class);
+        $patient = $patientRepository->find($this->getRouteParams()['id']);
+        $validationPatient = clone $patient;
+        $validationPatient->setDemographicData($_POST);
+        $validationErrors = $validationPatient->validationErrors(false);
+        if (empty($validationErrors)) {
+            $patient->setDemographicData($_POST);
+            $em->flush();
+            $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente.');
+            $this->redirect('/patient/' . $this->getRouteParams()['id']);
+        } else {
+            $this->render('Patients/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => 'demographic', 'patientFields' => $this->getPatientFields()]);
+        }
+    }
 
     private function getPatientData($data)
     {
         $em = $this->getEntityManager();
         $data['gender'] = $em->getRepository(Gender::class)->find($data['genderId']);
-        return $data;
-    }
-
-    private function getDemographicData($data)
-    {
-        $em = $this->getEntityManager();
-        $data['waterType'] = WaterTypeRepository::find($data['waterTypeId']);
-        $data['houseType'] = HouseTypeRepository::find($data['houseTypeId']);
-        $data['heatingType'] = HeatingTypeRepository::find($data['heatingTypeId']);
         return $data;
     }
 

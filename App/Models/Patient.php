@@ -174,9 +174,9 @@ class Patient
         else
             $this->pet = false;
 
-        $this->waterTypeId = $data['waterType'];
-        $this->houseTypeId = $data['houseType'];
-        $this->heatingTypeId = $data['heatingType'];
+        $this->waterTypeId = $data['waterTypeId'];
+        $this->houseTypeId = $data['houseTypeId'];
+        $this->heatingTypeId = $data['heatingTypeId'];
     }
 
 

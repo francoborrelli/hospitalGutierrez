@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
 class PatientRepository extends EntityRepository
 {
 
-    public function findSearch($firstName, $lastName, $documentType, $docNumber, $state)
+    public function findSearch($firstName, $lastName, $documentType, $docNumber, $state = 'active')
     {
         $qb = $this->createQueryBuilder('p')
             ->from('App\Models\Patient', 'l');
@@ -32,10 +32,8 @@ class PatientRepository extends EntityRepository
                ->setparameter('docNumber', '%'.$docNumber.'%');
         }
 
-        if (!empty($state)) {
-            $qb->andWhere('p.deleted = :deleted')
-               ->setParameter('deleted', $state == 'deleted');
-        }
+        $qb->andWhere('p.deleted = :deleted')
+           ->setParameter('deleted', $state == 'deleted');
 
         return $qb->getQuery()->getResult();
     }
