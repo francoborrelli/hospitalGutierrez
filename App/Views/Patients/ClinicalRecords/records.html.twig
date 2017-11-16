@@ -4,15 +4,15 @@
     <td headers="pediatra" class="text-center">{{ patient.doctor }}</td>
 
     <td headers="opciones" class="text-center">
-        {% if currentUser.hasPermission('historiaClinica_show') %}
+        {% if currentUser.hasPermission('control_show') %}
         <div class="btn-group" role="group">
             <a href="/patient/{{ patient.id }}/record/{{record.id}}" class="btn btn-sm btn-primary" title="Ver en detalle"><i class="fa fa-heartbeat" aria-hidden="true"></i></a>
         </div>
-        {% endif %} {% if currentUser.hasPermission('historiaClinica_update') and not patient.deleted %}
+        {% endif %} {% if currentUser.hasPermission('control_update') and not patient.deleted %}
         <div class="btn-group" role="group">
             <a href="/patient/{{ patient.id}}" class="btn btn-sm btn-orange" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
         </div>
-        {% endif %} {% if currentUser.hasPermission('historiaClinica_destroy') and not patient.deleted %}
+        {% endif %} {% if currentUser.hasPermission('control_destroy') and not patient.deleted %}
         <div class="btn-group" role="group">
             <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </div>

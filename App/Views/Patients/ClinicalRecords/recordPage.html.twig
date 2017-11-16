@@ -2,16 +2,16 @@
 
 
 {% block modals %}
-    {% if currentUser.hasPermission('historiaClinica_destroy') %}
+    {% if currentUser.hasPermission('control_destroy') %}
         {% include 'Patients/ClinicalRecords/deleteRecord.html.twig' %}
     {% endif %}            
 {% endblock %}
 
 {% block buttons %}
-    {% if currentUser.hasPermission('historiaClinica_destroy') %}
+    {% if currentUser.hasPermission('control_destroy') %}
        <button title="Eliminar Consulta" data-toggle="modal" data-target="#deleteRecord" class="btn btn-sm btn-danger" id="editbtn"><i class="fa fa-trash" aria-hidden="true"></i></button>
     {% endif %}  
-    {% if currentUser.hasPermission('historiaClinica_update') %}
+    {% if currentUser.hasPermission('control_update') %}
        <a title="Editar Consulta" class="btn btn-sm btn-orange" id="editbtn" href="/patients"><i class="fa fa-pencil" aria-hidden="true"></i></a>
     {% endif %}  
     {% if currentUser.hasPermission('paciente_show') %}
