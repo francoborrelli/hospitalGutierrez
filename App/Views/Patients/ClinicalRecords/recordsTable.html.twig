@@ -1,5 +1,5 @@
 {% if currentUser.hasPermission('historiaClinica_new') and not patient.deleted %}
-<a id="agregar-btn" class="btn btn-primary btn-sm" href="/patient/{{patient.id}}/records/create">Agregar</a>
+<a id="agregar-btn" class="btn btn-primary btn-sm" href="/patient/{{patient.id}}/records/new">Agregar</a>
 <br> 
 {% endif %}
 

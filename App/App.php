@@ -30,6 +30,7 @@ class App
 
         // Clinical Records
         $this->router->add('patient/{patient:\d+}/records', ['controller' => 'ClinicalRecords', 'action' => 'index']);
+        $this->router->add('patient/{patient:\d+}/records/new', ['controller' => 'ClinicalRecords', 'action' => 'showNew']);
         $this->router->add('patient/{patient:\d+}/records/create', ['controller' => 'ClinicalRecords', 'action' => 'new']);
         $this->router->add('patient/{patient:\d+}/record/{record:\d+}', ['controller' => 'ClinicalRecords', 'action' => 'show']);
 

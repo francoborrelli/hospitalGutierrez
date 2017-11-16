@@ -3,6 +3,6 @@
         <i class="fa fa-heartbeat" aria-hidden="true"></i>
         <br>
         {% if currentUser.hasPermission('control_new') and not patient.deleted %}
-                <a class="btn btn-outline-primary" href="/patient/{{patient.id}}/records/create">Agregar Control</a>
+                <a class="btn btn-outline-primary" href="/patient/{{patient.id}}/records/new">Agregar Control</a>
         {% endif %}
 </div>
