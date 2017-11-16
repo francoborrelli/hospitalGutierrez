@@ -10,11 +10,15 @@ class LoginController extends Controller
 {
     public function showAction()
     {
+        $this->checkLogin();
         $this->render('Login/login.html.twig');
     }
 
     public function createAction()
     {
+
+        $this->checkLogin();
+
         $userRepository = $this->getEntityManager()->getRepository(User::class);
         $user = $userRepository->findOneBy(['username' => $_POST['username']]);
         if (is_null($user) || !$user->validatePassword($_POST['pass']))
@@ -30,6 +34,16 @@ class LoginController extends Controller
                 $this->addFlashMessage('danger', 'Lo sentimos', 'Los datos ingresados no son correctos, intente nuevamente.');
 
             $this->render('Login/login.html.twig', ['username' => $_POST['username']]);
+        }
+
+        
+    }
+
+    private function checklogin()
+    {
+        $user = $this->getUser();
+        if (isset($user)){
+            $this->redirect('/');
         }
     }
 
