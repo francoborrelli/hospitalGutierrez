@@ -115,9 +115,8 @@ hr {
 }
 
 .container.userReport {
-    margin-top: 50px;
-    margin-bottom: 0px;
-    max-width: 860px;
+    margin-top: 80px;
+    margin-bottom: 5px;
     max-width: 860px;
     min-height: 680px;
 }

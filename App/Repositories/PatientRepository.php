@@ -7,11 +7,10 @@ use Doctrine\ORM\EntityRepository;
 class PatientRepository extends EntityRepository
 {
 
-    public function findSearch($firstName, $lastName, $documentType, $docNumber)
+    public function findSearch($firstName, $lastName, $documentType, $docNumber, $state = 'active')
     {
         $qb = $this->createQueryBuilder('p')
-            ->from('App\Models\Patient', 'l')
-            ->where('p.deleted = 0');
+            ->from('App\Models\Patient', 'l');
 
         if (!empty($firstName)) {
             $qb->andWhere('LOWER(p.firstName) LIKE :firstName')
@@ -24,7 +23,7 @@ class PatientRepository extends EntityRepository
         }
 
         if (!empty($documentType)) {
-            $qb->andWhere('p.documentType = :documentType')
+            $qb->andWhere('p.documentTypeId = :documentType')
                ->setParameter('documentType', $documentType);
         }
 
@@ -32,6 +31,9 @@ class PatientRepository extends EntityRepository
             $qb->andwhere('p.docNumber LIKE :docNumber')
                ->setparameter('docNumber', '%'.$docNumber.'%');
         }
+
+        $qb->andWhere('p.deleted = :deleted')
+           ->setParameter('deleted', $state == 'deleted');
 
         return $qb->getQuery()->getResult();
     }
@@ -51,7 +53,7 @@ class PatientRepository extends EntityRepository
 
     private function docTypeExists($patient, $documentTypeId)
     {
-        return $patient->getDocumentType()->getId() == $documentTypeId;
+        return $patient->getDocumentTypeId() == $documentTypeId;
     }
 
     public function deleteIfExists($documentTypeId, $documentNumber)
@@ -60,7 +62,7 @@ class PatientRepository extends EntityRepository
             ->from('App\Models\Patient', 'l')
             ->where('p.deleted = 1')
             ->andWhere('p.docNumber = :docNumber')
-            ->andWhere('p.documentType = :docType')
+            ->andWhere('p.documentTypeId = :docType')
             ->setParameter('docNumber', $documentNumber)
             ->setParameter('docType', $documentTypeId);
         $patients = $qb->getQuery()->getSingleResult();

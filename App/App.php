@@ -38,6 +38,7 @@ class App
         $this->router->add('patients/{page:\d+}', ['controller' => 'Patient', 'action' => 'index']);
         $this->router->add('patients/{action}', ['controller' => 'Patient']);
         $this->router->add('patient/{id:\d+}', ['controller' => 'Patient', 'action' => 'show']);
+        $this->router->add('patient/{id:\d+}/exists', ['controller' => 'Patient', 'action' => 'reactivate']);
         $this->router->add('patient/{id:\d+}/{action}', ['controller' => 'Patient']);
 
 

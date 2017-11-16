@@ -24,6 +24,7 @@
     <div class="card-header">
         {{ patient.firstName }} {{ patient.lastName }}
       <a title="Volver" class="btn btn-sm" id="backbtn" href="/patients"><i class="fa fa-reply" aria-hidden="true"></i></a>
+      {% if not patient.deleted %}
       {% if currentUser.hasPermission('paciente_destroy') %}
         <button data-toggle="modal" data-target="#deletePatient" title="Eliminar" class="btn btn-danger btn-sm" id="deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
       {% endif %}
@@ -33,8 +34,12 @@
       {% if currentUser.hasPermission('historiaClinica_index') %}
           <a href="/patient/{{ patient.id }}/records" class="btn btn-sm btn-primary pull-right"  id="recordsbtn" title="Ver Historia Clínica"><i class="fa fa-stethoscope" aria-hidden="true"></i></i></a>
       {% endif %}
+      {% else %}
+        {% if currentUser.hasPermission('paciente_update') or currentUser.hasPermission('datosDemograficos_update') %}
+           <a title="Reactivar Paciente" class="btn btn-sm btn-primary" id="editbtn" href="/patient/{{patient.id}}/activate">Reactivar Paciente</a>
+        {% endif %}
+      {% endif %}  
     </div>
-
 
     <div class="card-body">
       <!-- nav links -->

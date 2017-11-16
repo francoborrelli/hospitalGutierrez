@@ -93,7 +93,7 @@ small.error {
 
 .alertContainer {
     position: absolute;
-    width: 650px;
+    width: 760px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
@@ -157,7 +157,7 @@ html {
 
 /* @medias */
 
-@media (max-width: 650px) {
+@media (max-width: 780px) {
   .alertContainer {
       position: relative;
       width: auto;
