@@ -31,7 +31,15 @@
             <label for="dni">Documento: </label>
             <input type="text" id="dni" name="docNumber" value="{{ data.docNumber }}" class="form-control" placeholder="Documento">
         </div>
-        
+
+        <!-- Estado -->
+        <div class="form-group">
+            <label class="col-xs-3 control-label">Estado:</label>
+            <select class="form-control" name="state">
+            <option {% if data.state is empty or data.state == 'active' %}selected{% endif %} value="active">Activo</option>
+            <option {% if data.state == 'deleted' %}selected{% endif %} value="deleted">Eliminado</option>
+            </select>
+        </div>
     {% endblock %} 
     
 {% endembed %}
