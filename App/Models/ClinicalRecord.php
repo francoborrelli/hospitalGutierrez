@@ -24,7 +24,7 @@ class ClinicalRecord
     * 
     * @Column(type="datetime") 
     */ 
-    private $date; 
+    private $controlDate; 
  
     /** 
      * @var float 
@@ -135,13 +135,13 @@ class ClinicalRecord
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param \DateTime $controlDate
      *
      * @return ClinicalRecord
      */
-    public function setDate($date)
+    public function setDate($controlDate)
     {
-        $this->date = $date;
+        $this->controlDate = $controlDate;
 
         return $this;
     }
@@ -151,9 +151,9 @@ class ClinicalRecord
      *
      * @return \DateTime
      */
-    public function getDate()
+    public function getControlDate()
     {
-        return $this->date;
+        return $this->controlDate;
     }
 
     /**
@@ -492,4 +492,78 @@ class ClinicalRecord
         return $this->user;
     }
 
+    /**
+     * @var boolean
+     *
+     * @Column(type="boolean")
+     */
+     private $deleted;
+
+
+    public function __construct($data, $patient, $user)
+    {
+        $this->setData($data);
+        $this->setPatient($patient);
+        $this->setUser($user);
+        $this->deleted = false;
+    }
+
+    public function delete()
+    {
+        $this->deleted = true;
+    }
+
+    public function setData($data)
+    {
+        if (isset($data['controlDate']))
+        {
+            $this->controlDate = \DateTime::createFromFormat('d/m/Y',$data['controlDate']);
+        }    
+        else
+        {
+            $this->controlDate = null;
+        }    
+
+        $this->weight = $data['weight'];
+        $this->height = $data['height'];
+        $this->nutrition = $data['nutrition'];
+        $this->pc = $data['pc'];
+        $this->ppc = $data['ppc'];
+        $this->vaccination = $data['vaccination'];
+        $this->maturation = $data['maturation'];
+        $this->fisicTest = $data['fisicTest'];
+        $this->vaccinationObservation = $data['vaccinationObservation'];
+        $this->maturationObservation = $data['maturationObservation'];
+        $this->fisicTestObservation = $data['fisicTestObservation'];
+        $this->generalObservation = $data['generalObservation'];
+    }
+
+    public function validationErrors()
+    {
+        $validationErrors = [];
+
+        if ((strlen($this->weight) == 0) or !(is_numeric($this->weight)))
+            $validationErrors[] = 'weight';
+
+        if ((strlen($this->vaccination) == 0) or !(($this->vaccination == "si") or ($this->vaccination == "no")))
+            $validationErrors[] = 'vaccination';
+
+        if (strlen($this->maturation) == 0 or !(($this->maturation == "si") or ($this->maturation == "no")))
+            $validationErrors[] = 'maturation';
+
+        if (strlen($this->fisicTest) == 0 or !(($this->fisicTest == "si") or ($this->fisicTest == "no")))
+            $validationErrors[] = 'fisicTest';
+
+        if (strlen($this->vaccinationObservation) == 0)
+            $validationErrors[] = 'vaccinationObservation';
+
+        if (strlen($this->maturationObservation) == 0)
+            $validationErrors[] = 'maturationObservation';
+
+        if (strlen($this->fisicTestObservation) == 0)
+            $validationErrors[] = 'fisicTestObservation';
+
+
+        return $validationErrors;
+    }
 }
