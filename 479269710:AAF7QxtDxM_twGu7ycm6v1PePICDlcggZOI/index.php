@@ -23,14 +23,12 @@ $msg = array();
 $msg['chat_id'] = $response['message']['chat']['id'];
 $msg['text'] = null;
 $msg['disable_web_page_preview'] = true;
-$msg['reply_to_message_id'] = $response['message']['message_id'];
 $msg['reply_markup'] = null;
 
 switch ($cmd) {
 case '/start':
     $msg['text']  = 'Hola ' . $response['message']['from']['first_name'] . PHP_EOL;
     $msg['text'] .= '¿Como puedo ayudarte? /help';
-    $msg['reply_to_message_id'] = null;
     break;
 
 case '/help':
@@ -39,7 +37,6 @@ case '/help':
     $msg['text'] .= '/turnos dd-mm-aaaa Muestra los turnos disponibles del día' . PHP_EOL;
     $msg['text'] .= '/reservar dd-mm-aaaa hh:mm Realiza la reserva del turno' . PHP_EOL;
     $msg['text'] .= '/help Muestra esta ayuda flaca';
-    $msg['reply_to_message_id'] = null;
     break;
 
 case '/reservar':
@@ -57,7 +54,6 @@ case '/reservar':
     } else {
         $msg['text'] = 'Debe ingresar los datos con el formato dni dd-mm-aaaa hh-mm';
     }
-        $msg['reply_to_message_id'] = null;
     break;
 
 case '/turnos':
