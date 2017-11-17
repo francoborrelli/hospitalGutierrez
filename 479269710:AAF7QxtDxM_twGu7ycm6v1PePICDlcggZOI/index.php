@@ -62,7 +62,7 @@ case '/reservar':
 
 case '/turnos':
 
-    if (!($params[0] === "")) {
+    if ((!($params[0] === "") && (count($params) == 1))) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -83,7 +83,7 @@ case '/turnos':
             $msg['text']  = 'No hay turnos disponibles para esta fecha' . PHP_EOL;
         }
     } else {
-        $msg['text']  = 'Debe ingresar una fecha';
+        $msg['text']  = 'Debe ingresar una fecha con el formato dd-mm-aaaa';
     }
     
     break;
