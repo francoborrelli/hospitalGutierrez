@@ -513,6 +513,11 @@ class ClinicalRecord
         $this->deleted = true;
     }
 
+    public function isDeleted()
+    {
+        return $this->deleted;
+    }
+
     public function getAge(){
         $birthday = $this->patient->getBirthday();
 
