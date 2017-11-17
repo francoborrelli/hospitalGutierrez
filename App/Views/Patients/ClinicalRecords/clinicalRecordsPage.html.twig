@@ -1,7 +1,7 @@
 {% set noResults = data.clinicalRecords is empty %}
 {% set path = 'Patients/ClinicalRecords/NoResults.html.twig' %}
 
-{% embed 'utils/recordCard.html.twig' with {'returnRoute': '/patients', 'noResults': noResults, 'path': path} %} 
+{% embed 'utils/recordCard.html.twig' with {'patient': data.patient, 'returnRoute': '/patients', 'noResults': noResults, 'path': path} %} 
 
 {% block modals %}
     {% if currentUser.hasPermission('control_destroy') %}
