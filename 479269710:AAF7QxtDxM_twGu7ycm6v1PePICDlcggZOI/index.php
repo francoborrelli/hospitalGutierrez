@@ -55,14 +55,14 @@ case '/reservar':
         curl_close ($ch);
         $msg['text'] = $result['description'];
     } else {
-        $msg['text']  = 'Debe ingresar los datos con el formato dni dd-mm-aaaa hh-mm';
+        $msg['text'] = 'Debe ingresar los datos con el formato dni dd-mm-aaaa hh-mm';
     }
         $msg['reply_to_message_id'] = null;
     break;
 
 case '/turnos':
 
-    if (isset($cmd_params)) {
+    if ($cmd_params == '') {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
