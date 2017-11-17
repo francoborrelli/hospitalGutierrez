@@ -29,7 +29,7 @@ class ReserveCommand
             curl_close ($ch);
             $response->addText($result['description']);
         } else {
-            $response->addText('Debe ingresar los datos con el formato dni dd-mm-aaaa hh-mm');
+            $response->addText('Debe ingresar los datos con el formato dni dd-mm-aaaa hh:mm');
         }
 
         $response->send($request->getChatId());
