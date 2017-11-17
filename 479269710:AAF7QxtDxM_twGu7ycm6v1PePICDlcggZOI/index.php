@@ -54,8 +54,8 @@ case '/turnos':
     $result = json_decode(curl_exec($ch), true);
     curl_close($ch);
 
-    if (empty($result)) {
-            $msg['text'] = 'No hay turnos disponibles';
+    if (isset($result['error'])) {
+            $msg['text'] = $result['description'];
     } else {
         $msg['text']  = 'Los turnos disponibles son:' . PHP_EOL . PHP_EOL;
         foreach ($result as $turn) {
