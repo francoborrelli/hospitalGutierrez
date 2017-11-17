@@ -26,8 +26,7 @@ $msg['reply_markup'] = null;
 
 switch ($cmd) {
 case '/start':
-    $msg['text']  = 'Hola ' . $response['message']['from']['first_name'] .
-               " Usuario: " . $response['message']['from']['username'] . '!' . PHP_EOL;
+    $msg['text']  = 'Hola ' . $response['message']['from']['first_name'] . PHP_EOL;
     $msg['text'] .= '¿Como puedo ayudarte? /help';
     $msg['reply_to_message_id'] = null;
     break;
