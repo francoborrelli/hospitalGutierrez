@@ -51,6 +51,7 @@ class ComposerStaticInite912b685983839ea2df2e6a5f75c2833
         'A' => 
         array (
             'App\\' => 4,
+            'Api\\' => 4,
         ),
     );
 
@@ -118,6 +119,10 @@ class ComposerStaticInite912b685983839ea2df2e6a5f75c2833
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App',
+        ),
+        'Api\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/api',
         ),
     );
 
