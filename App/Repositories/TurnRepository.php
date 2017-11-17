@@ -13,7 +13,7 @@ class TurnRepository extends EntityRepository
         $dateFormated = \DateTime::createFromFormat('d-m-Y H:i', $data['date'] . ' ' . $data['hour']);
 
         if (!$dateFormated) {
-            return ['error' => 'Fecha inválida', 'description' => 'El fomrato de la fecha es inválido'];
+            return ['error' => 'Fecha inválida', 'description' => 'El formato de la fecha es inválido'];
         } elseif ($dateFormated < new \DateTime('now')) {
             return ['error' => 'Fecha inválida', 'description' => 'La fecha solicitada ya ha pasado'];
         } elseif (!($dateFormated->format('i') == '00' || $dateFormated->format('i') == '30')) 
@@ -41,7 +41,7 @@ class TurnRepository extends EntityRepository
     {
         $dateFormated = \DateTime::createFromFormat('d-m-Y', $date);
         if (!$dateFormated) {
-            return ['error' => 'Fecha inválida', 'description' => 'El fomrato de la fecha es inválido'];
+            return ['error' => 'Fecha inválida', 'description' => 'El formato de la fecha es inválido'];
         } elseif ($dateFormated < new \DateTime('now')) {
             return ['error' => 'Fecha inválida', 'description' => 'La fecha solicitada ya ha pasado'];
         }
