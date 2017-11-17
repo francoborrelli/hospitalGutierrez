@@ -10,11 +10,21 @@ class LoginController extends Controller
 {
     public function showAction()
     {
-        $this->render('Login/login.html.twig');
+        $this->checkLogin();
+
+        $username = null;
+        if (isset($_SESSION['username'])) {
+            $username = $_SESSION['username'];
+            unset($_SESSION['username']);
+        }
+        $this->render('Login/login.html.twig', ['username' => $username]);
     }
 
     public function createAction()
     {
+
+        $this->checkLogin();
+
         $userRepository = $this->getEntityManager()->getRepository(User::class);
         $user = $userRepository->findOneBy(['username' => $_POST['username']]);
         if (is_null($user) || !$user->validatePassword($_POST['pass']))
@@ -29,7 +39,18 @@ class LoginController extends Controller
             else
                 $this->addFlashMessage('danger', 'Lo sentimos', 'Los datos ingresados no son correctos, intente nuevamente.');
 
-            $this->render('Login/login.html.twig', ['username' => $_POST['username']]);
+            $_SESSION['username'] = $_POST['username'];
+            $this->redirect('/login');
+        }
+
+        
+    }
+
+    private function checklogin()
+    {
+        $user = $this->getUser();
+        if (isset($user)){
+            $this->redirect('/');
         }
     }
 
