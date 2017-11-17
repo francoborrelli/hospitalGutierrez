@@ -47,13 +47,21 @@ case '/reservar':
     break;
 
 case '/turnos':
-    $msg['text']  = 'Los turnos disponibles son:';
+    $msg['text']  = 'Los turnos disponibles son:' . PHP_EOL;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_URL, 'https://grupo2.proyecto2017.linti.unlp.edu.ar/api/index.php/turnos/11-11-2018');
     $result = json_decode(curl_exec($ch), true);
     curl_close($ch);
+
+    if (empty($result)) {
+            $msg['text'] .= 'No hay turnos disponibles';
+    } else {
+        foreach ($result as $turn) {
+            $msg['text'] .= $turn['date'] . PHP_EOL;
+        }
+    }
 
     $msg['text'] .= get_class($result);
     
