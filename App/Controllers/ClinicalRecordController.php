@@ -52,7 +52,7 @@ class ClinicalRecordController extends Controller
     {
         $this->denyAccessUnlessPermissionGranted('control_new'); 
 
-        $this->render('/Patients/ClinicalRecords/addRecord.html.twig', ['patient' => $this->getPatient()]);
+        $this->render('/Patients/ClinicalRecords/formPage.html.twig', ['patient' => $this->getPatient(), 'mode' => 'add']);
     }
 
     public function NewAction()
@@ -71,15 +71,17 @@ class ClinicalRecordController extends Controller
 
         $validationErrors = $record->validationErrors();
 
-        if (empty($validationErrors)){
+        if (empty($validationErrors))
+        {
             $em->persist($record);
             $em->flush();
 
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado el control correctamente.');
             $this->redirect("/patient/" . $patient->getId() . "/records");
-        } else {
-            var_dump($_POST['vaccination']);
-            $this->render('/Patients/ClinicalRecords/addRecord.html.twig', ['patient' => $this->getPatient(), 'newErrors' => $validationErrors, 'record' => $record, 'a' => $_POST['controlDate']]);
+        } 
+        else 
+        {
+            $this->render('/Patients/ClinicalRecords/formPage.html.twig', ['patient' => $this->getPatient(), 'errors' => $validationErrors, 'clinicalRecord' => $record, 'mode' => 'add']);
         }
 
     }
@@ -102,12 +104,47 @@ class ClinicalRecordController extends Controller
         $record->delete();
 
         $em = $this->getEntityManager();
-        $userRepository = $em->getRepository(ClinicalRecord::class);
         $em->persist($record);
         $em->flush();
 
         $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha borrado el control correctamente.');
         $this->redirect("/patient/" . $record->getPatient()->getId() . "/records");
+    }
+
+    public function editAction(){
+        
+            $this->denyAccessUnlessPermissionGranted('control_update'); 
+    
+            $record = $this->getRecord();
+
+            if ($record->getUser() != $this->getUser())
+                throw new \Exception("El usuario no tiene permiso para editar este control.", '403');
+    
+            $this->render('/Patients/ClinicalRecords/formPage.html.twig', ['patient' => $this->getPatient(), 'clinicalRecord' => $record, 'mode' => 'edit']);
+    }
+
+    public function modifyAction(){
+        
+            $this->denyAccessUnlessPermissionGranted('control_update'); 
+    
+            $em = $this->getEntityManager();
+
+            $record = $this->getRecord();
+            $record->setData($_POST);
+            $validationErrors = $record->validationErrors();
+            
+            if (empty($validationErrors))
+            {
+                $em->persist($record);
+                $em->flush();
+            
+                $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha editado el control correctamente.');
+                $this->redirect("/patient/" . $record->getPatient()->getId() . "/record/" . $record->getId());
+            } 
+            else 
+            {
+                $this->render('/Patients/ClinicalRecords/formPage.html.twig', ['patient' => $this->getPatient(), 'clinicalRecord' => $record, 'mode' => 'edit', 'errors' => $validationErrors]);
+            }
     }
 
     private function getPatient()

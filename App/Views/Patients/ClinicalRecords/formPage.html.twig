@@ -1,4 +1,12 @@
-{% embed 'utils/recordCard.html.twig' with {'returnRoute': '/patient/' ~ patient.id ~ '/records'} %} 
+{% if mode == 'add' %}
+    {% set action = "/patient/" ~ patient.id  ~ "/records/create" %}
+    {% set return = "/patient/" ~ patient.id  ~ "/records" %}
+{% else %}
+    {% set action = "/patient/" ~ patient.id  ~ "/record/" ~ clinicalRecord.id  ~ "/modify" %}
+    {% set return = "/patient/" ~ patient.id  ~ "/record/" ~ clinicalRecord.id %}
+{% endif %}
+
+{% embed 'utils/recordCard.html.twig' with {'returnRoute': return} %} 
 
 {% block stylesheets %}
     {{parent()}}
@@ -8,7 +16,13 @@
 
 {% block navtabs %}
     <li class="nav-item">
-            <a class="nav-link active" id="personal-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="tab" aria-controls="records" aria-expanded="true"><i class="fa fa-stethoscope" aria-hidden="true"></i> Nuevo Control </a>
+            <a class="nav-link active" id="personal-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="tab" aria-controls="records" aria-expanded="true"><i class="fa fa-stethoscope" aria-hidden="true"></i> 
+            {% if mode == 'add' %}
+                Nuevo Control
+            {% else %}
+                Editar Control
+            {% endif %} 
+            </a>
     </li>
 {% endblock %}
 
@@ -16,7 +30,7 @@
     <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
         <br>
         <div>
-            {% include 'Patients/ClinicalRecords/addForm.html.twig' %}
+            {% include 'Patients/ClinicalRecords/form.html.twig' %}
         </div>
     </div>
 
