@@ -47,7 +47,15 @@ case '/reservar':
     break;
 
 case '/turnos':
-    $msg['text']  = 'Los turnos disponibles son: 10:30 | 11:45 | 15:15';
+    $msg['text']  = 'Los turnos disponibles son:';
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    $result=curl_exec($ch);
+    curl_close($ch);
+
+    
     break;
 
 default:
