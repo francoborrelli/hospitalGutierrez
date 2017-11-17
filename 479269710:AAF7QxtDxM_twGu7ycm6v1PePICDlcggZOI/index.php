@@ -1,6 +1,6 @@
 <?php
 
-require './Bot.php';
+require_once './Bot.php';
 
 use Bot\Bot;
 

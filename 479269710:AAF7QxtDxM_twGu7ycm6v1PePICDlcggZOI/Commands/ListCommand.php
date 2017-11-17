@@ -2,7 +2,7 @@
 
 namespace Bot\Command;
 
-require(dirname(__FILE__).'/../Response.php');
+require_once(dirname(__FILE__).'/../Response.php');
 
 use Bot\Response;
 

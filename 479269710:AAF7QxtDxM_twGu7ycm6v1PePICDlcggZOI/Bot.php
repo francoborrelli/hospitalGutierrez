@@ -2,9 +2,9 @@
 
 namespace Bot;
 
-require './Commands/ListCommand.php';
-require './Commands/ReserveCommand.php';
-require './Request.php';
+require_once './Commands/ListCommand.php';
+require_once './Commands/ReserveCommand.php';
+require_once './Request.php';
 
 use Bot\Command\ListCommand;
 use Bot\Command\ReserveCommand;
