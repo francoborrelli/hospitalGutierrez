@@ -13,11 +13,15 @@ class ClinicalRecordRepository extends EntityRepository
         $qb = $this->createQueryBuilder('p');
         
         $qb->select('c')
-        ->from('App\Models\ClinicalRecord','c')
-        ->andWhere('c.deleted = :state')
-        ->setParameter('state', false)
-        ->andWhere('c.patient = :patient')
-        ->setParameter('patient', $patient->getId());  
+        ->from('App\Models\ClinicalRecord','c');
+
+        $qb->andWhere('c.deleted = :state')
+        ->setParameter('state', false);
+
+        $qb->andWhere('c.patient = :patient')
+        ->setParameter('patient', $patient->getId());
+
+        $qb->orderBy('c.controlDate', 'DESC');  
 
         return $qb->getQuery()->getResult();
     }
