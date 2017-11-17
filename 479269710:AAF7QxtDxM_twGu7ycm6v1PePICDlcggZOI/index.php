@@ -51,10 +51,17 @@ case '/turnos':
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_URL, $url);
-    $result=curl_exec($ch);
+    curl_setopt($ch, CURLOPT_URL, 'http://localhost/api/index.php/turnos/11-11-2018');
+    $result = json_decode(curl_exec($ch), true);
     curl_close($ch);
 
+    if (empty($result)) {
+        $msg['text'] .= 'No hay turnos disponibles';
+    } else {
+        foreach ($result as $turn) {
+            $msg['text'] .= $turn['date'];
+        }
+    }
     
     break;
 
