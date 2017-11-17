@@ -176,9 +176,9 @@ class ClinicalRecordController extends Controller
         $record = $em->getRepository(ClinicalRecord::class)->findOneBy(['patient' => $patient, 'id' => $id]);
         
         if(!isset($record))
-            throw new \Exception('Control ' . $id .' de ' . $patient->getFirstName() . ' ' . $patient->getLastName() . ' no encontrado.', 404);
+            throw new \Exception('Control ' . $id .' de ' . $patient->getFirstName() . ' ' . $patient->getLastName() . ' no encontrado.', '404');
         elseif ($record->isDeleted())
-            throw new \Exception('Control ' . $id . ' de ' . $patient->getFirstName() . ' ' . $patient->getLastName() . ' esta borrado.', 404);
+            throw new \Exception('Control ' . $id . ' de ' . $patient->getFirstName() . ' ' . $patient->getLastName() . ' esta borrado.', '404');
 
         return $record;
     }
