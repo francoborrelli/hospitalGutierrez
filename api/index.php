@@ -9,19 +9,9 @@ require '../vendor/autoload.php';
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 
-$app = new \Slim\App([
-    'settings' => [
-        'displayErrorDetails' => true
-    ]
-]);
-$app->get('/turnos/{date}', function (Request $request, Response $response) {
-    $date = $request->getAttribute('date');
+$app = new \Slim\App();
 
-    $em = \Core\ORMConnection::getEntityManager();
-    $turnsRepository = $em->getRepository(Turn::class);
+$app->get('/turnos/{date}', '\Api\Controllers\TurnController:getTurnsAction');
+$app->post('/turnos/{dni}/fecha/{date}/hora/{hour}', '\Api\Controllers\TurnController:reserveAction');
 
-    $turns = $turnsRepository->findAllDate($date);
-
-    return $response->withJson($turns, 200);
-});
 $app->run();
