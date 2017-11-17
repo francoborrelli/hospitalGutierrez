@@ -7,38 +7,38 @@ use Doctrine\ORM\EntityRepository;
 class TurnRepository extends EntityRepository
 {
 
-    public function findAllArray()
-    {
-        $qb = $this->createQueryBuilder('q')
-            ->from('App\Models\Turn', 't');
-
-        return $qb->getQuery()->getArrayResult();
-    }
-
     public function findAllDate($date)
     {
-        $format = 'd-m-Y';
-        $daten = \DateTime::createFromFormat($format, $date);
+        $dateFormated = \DateTime::createFromFormat('d-m-Y', $date);
+        if (!$dateFormated) {
+            return ['error' => 'Invalid date', 'description' => 'Invalid date format'];
+        } elseif ($dateFormated < new \DateTime('now')) {
+            return ['error' => 'Invalid date', 'description' => 'Expired date'];
+        }
 
         $qb = $this->createQueryBuilder('q')
             ->select('t')
             ->from('App\Models\Turn', 't')
             ->where('t.date LIKE :date')
-            ->setParameter('date', $daten->format('Y-m-d')." %");
+            ->setParameter('date', $dateFormated->format('Y-m-d')." %");
 
-        $all = $qb->getQuery()->getResult();
+        $reserved = $qb->getQuery()->getResult();
+        $dailyTurns = $this->generateTurns($date);
 
-        $turns = $this->generateTurns($date);
+        $availableTurns = $this->findAvailable($reserved, $dailyTurns);
+        return array_values($availableTurns);
+    }
 
-        foreach ($turns as $key => $turn) {
-            foreach ($all as $t) {
+    private function findAvailable($reserved, $dailyTurns)
+    {
+        foreach ($dailyTurns as $key => $turn) {
+            foreach ($reserved as $t) {
                 if ($t->getDate() == $turn) {
-                    unset($turns[$key]);
+                    unset($dailyTurns[$key]);
                 }
             }
         }
-
-        return array_values($turns);
+        return $dailyTurns;
     }
 
     private function generateTurns($date)
