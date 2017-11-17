@@ -51,7 +51,7 @@ case '/reservar':
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $result = curl_exec($ch);
+    $result = json_decode(curl_exec($ch), true);
     curl_close ($ch);
 
     $msg['text'] = $result['description'];
