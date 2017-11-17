@@ -42,42 +42,49 @@ case '/help':
 
 case '/reservar':
     $msg['text']  = 'Te confirmamos el turno para:' . PHP_EOL;
-    $msg['text'] .= '10:30' . PHP_EOL;
 
     $params = explode(' ', $cmd_params);
 
-    $ch = curl_init();
-    $url = 'https://grupo2.proyecto2017.linti.unlp.edu.ar/api/index.php/turnos/' . $params[0] . '/fecha/' . $params[1] . '/hora/' . $params[2];
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $result = json_decode(curl_exec($ch), true);
-    curl_close ($ch);
-
-    $msg['text'] = $result['description'];
-
-    $msg['reply_to_message_id'] = null;
+    if (count($params) == 3) {
+        $ch = curl_init();
+        $url = 'https://grupo2.proyecto2017.linti.unlp.edu.ar/api/index.php/turnos/' . $params[0] . '/fecha/' . $params[1] . '/hora/' . $params[2];
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = json_decode(curl_exec($ch), true);
+        curl_close ($ch);
+        $msg['text'] = $result['description'];
+    } else {
+        $msg['text']  = 'Debe ingresar los datos con el formato dni dd-mm-aaaa hh-mm';
+    }
+        $msg['reply_to_message_id'] = null;
     break;
 
 case '/turnos':
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_URL, 'https://grupo2.proyecto2017.linti.unlp.edu.ar/api/index.php/turnos/' . $cmd_params);
-    $result = json_decode(curl_exec($ch), true);
-    curl_close($ch);
 
-    if (isset($result['error'])) {
-            $msg['text'] = $result['description'];
-    } else {
-        $msg['text']  = 'Los turnos disponibles son:' . PHP_EOL . PHP_EOL;
-        foreach ($result as $turn) {
-            $date = new DateTime($turn['date']);
-            $msg['text'] .= '- ' . $date->format('H:i') . PHP_EOL;
+    if (isset($cmd_params)) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, 'https://grupo2.proyecto2017.linti.unlp.edu.ar/api/index.php/turnos/' . $cmd_params);
+        $result = json_decode(curl_exec($ch), true);
+        curl_close($ch);
+
+        if (isset($result['error'])) {
+                $msg['text'] = $result['description'];
+        } elseif(!empty($result)) {
+            $msg['text']  = 'Los turnos disponibles son:' . PHP_EOL . PHP_EOL;
+
+            foreach ($result as $turn) {
+                $date = new DateTime($turn['date']);
+                $msg['text'] .= '- ' . $date->format('H:i') . PHP_EOL;
+            }
+        } else{
+            $msg['text']  = 'No hay turnos disponibles para esta fecha' . PHP_EOL;
         }
+    } else {
+        $msg['text']  = 'Debe ingresar una fecha';
     }
-
-    $msg['text'] .= get_class($result);
     
     break;
 
