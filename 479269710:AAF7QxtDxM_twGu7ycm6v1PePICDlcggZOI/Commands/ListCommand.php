@@ -30,7 +30,7 @@ class ListCommand
             curl_close($ch);
 
             if (isset($result['error'])) {
-                    $response->addText($result['description']);
+                $response->addText($result['description']);
             } elseif(!empty($result)) {
                 $response->addText('Los turnos disponibles son:' . PHP_EOL . PHP_EOL);
 

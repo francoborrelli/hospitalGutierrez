@@ -3,9 +3,11 @@
 namespace Bot;
 
 require './Commands/ListCommand.php';
+require './Commands/ReserveCommand.php';
 require './Request.php';
 
 use Bot\Command\ListCommand;
+use Bot\Command\ReserveCommand;
 
 class Bot
 {
@@ -20,7 +22,7 @@ class Bot
     private function loadCommands()
     {
         $this->commands[] = new ListCommand();
-        //$this->commands[] = new ReserveCommand();
+        $this->commands[] = new ReserveCommand();
     }
 
     public function run()
