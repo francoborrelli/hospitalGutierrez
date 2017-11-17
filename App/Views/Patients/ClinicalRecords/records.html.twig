@@ -1,0 +1,25 @@
+{% for record in data.clinicalRecords %}
+<tr>
+    <td headers="fecha" class="text-center">{{ record.controlDate|date('d/m/Y') }}</td>
+    <td headers="pediatra" class="text-center">{{ record.user.firstName }} {{ record.user.lastName }}</td>
+
+    <td headers="opciones" class="text-center">
+        {% if currentUser.hasPermission('control_show') %}
+            <div class="btn-group" role="group">
+                <a href="/patient/{{ record.patient.id }}/record/{{record.id}}" class="btn-show btn btn-sm btn-primary" title="Ver en detalle"><i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+            </div>
+        {% endif %} 
+        {% if currentUser.hasPermission('control_update') and not record.patient.deleted and record.user == currentUser %}
+            <div class="btn-group" role="group">
+                <a href="/patient/{{ record.patient.id }}/record/{{record.id}}/edit" class="btn btn-sm btn-orange" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            </div>
+        {% endif %} 
+        {% if currentUser.hasPermission('control_destroy') and not record.patient.deleted %}
+            <div class="btn-group" role="group">
+                <button data-toggle="modal" data-target="#deleteRecord" class="btn-delete btn btn-sm btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </div>
+        {% endif %}
+    </td>
+</tr>
+
+{% endfor %}

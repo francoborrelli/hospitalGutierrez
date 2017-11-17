@@ -55,7 +55,7 @@ class Router
                 $controller_instance = new $controller($this->params);
                 $this->executeAction($controller_instance);
             } else
-                throw new \Exception("Controlador $controller no ecnontrado");
+                throw new \Exception("Controlador $controller no encontrado");
         } else 
             throw new \Exception('Ruta no encontrada', 404);
     } 

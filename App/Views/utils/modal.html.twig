@@ -1,7 +1,7 @@
 
-{% macro delete(id, action, type, person) %}
+{% macro delete(idModal, action, type, person, id) %}
 
-<div class="modal fade" id="{{id}}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="{{idModal}}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form method="post" action="{{action}}" class="{{id}}Form">
@@ -15,7 +15,7 @@
                     <p>Esta a punto de eliminar al {{type}} <span class="modalText">{% if person is defined %}{{ person.firstName }} {{ person.lastName }}{% endif %}</span>, ¿Está seguro que desea continuar?</p>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" id="deletedId" name="deletedId">
+                    <input type="hidden" id="deletedId" name="deletedId" {% if person is defined %}{{ person.firstName }} {{ person.lastName }}{% endif %}>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-secondary">Eliminar</button>
                 </div>

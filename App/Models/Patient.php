@@ -137,18 +137,26 @@ class Patient
      */
     private $deleted;
 
+     /**
+     * One Patient has Many ClinicalRecords.
+     * @OneToMany(targetEntity="ClinicalRecord", mappedBy="patient")
+     */
+     private $clinicalRecords;
+     //
+
     public function __construct($data)
     {
         $this->setData($data);
         $this->setDemographicData($data);
         $this->deleted = false;
+        $this->clinicalRecords = new ArrayCollection();
     }
 
     public function setData($data)
     {
         $this->firstName = $data['firstName'];
         $this->lastName = $data['lastName'];
-        $this->birthday = new \DateTime($data['birthday']);
+        $this->birthday = \DateTime::createFromFormat('d/m/Y',$data['birthday']);
         $this->docNumber = $data['documentNumber'];
         $this->address = $data['address'];
         $this->phone = $data['phone'];
@@ -189,6 +197,16 @@ class Patient
     {
         return $this->id;
     }
+
+    /**
+     * Get ClinicalRecords
+     *
+     * @return array
+     */
+     public function getClinicalRecords()
+     {
+         return $this->clinicalRecords;
+     }
 
     /**
      * Set firstName

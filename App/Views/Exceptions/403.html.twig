@@ -1,0 +1,7 @@
+{% extends 'Exceptions/errorBase.html.twig' %}
+
+{% import 'Exceptions/error.html.twig' as error %}
+
+{% block errorMessage %}
+            {{ error.item("h1", "403", "Acceso Prohibido" ) }}
+{% endblock %}

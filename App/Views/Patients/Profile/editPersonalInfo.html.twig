@@ -1,0 +1,113 @@
+<form method="post" action="/patient/{{ patient.id }}/editPatient" class="modal fade" id="editPersonalInfo">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Datos Personales</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                        <div class="row">
+
+                            <!-- nombre -->
+                            <div class="form-group col">
+                                <label for="firstName">Nombre *</label>
+                                <input type="text" id="firstName" name="firstName" class="form-control {% if 'firstName' in editErrors %}is-invalid{% endif %}"
+                                    placeholder="Nombre" value="{{patient.firstName}}"> {% if 'firstName' in editErrors %}<label id="firstName-error"
+                                    class="error" for="firstName">Ingrese el nombre</label>{% endif %}
+                            </div>
+
+                            <!-- apellido -->
+                            <div class="form-group col">
+                                <label for="lastName">Apellido *</label>
+                                <input type="text" id="lastName" name="lastName" class="form-control {% if 'lastName' in editErrors %}is-invalid{% endif %}"
+                                    placeholder="Apellido" value="{{patient.lastName}}"> 
+                                    {% if 'lastName' in editErrors %}<label id="lastName-error" class="error" for="lastName">Ingrese el apellido</label>{% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <!-- tipo de documento -->
+                            <div class="form-group col">
+                                <label for="documentTypeId">Tipo Documento *</label>
+                                <select id="documentTypeId" name="documentTypeId" class="form-control form-control-chosen-required {% if 'documentTypeId' in editErrors %}is-invalid{% endif %}" data-placeholder="Tipo de documento">
+                                    <option value="">Seleccione el tipo de documento</option>
+                                    {% for documentType in patientFields.documentType %}
+                                    <option value="{{ documentType.id }}"{% if patient.documentType.id == documentType.id %} selected="selected"{% endif %}>{{ documentType.name }}</option>
+                                    {% endfor %}
+                                </select> 
+                                {% if 'documentTypeId' in editErrors %}<label id="documentTypeId-error" class="error" for="documentTypeId">Seleccione el tipo de documento</label>{% endif %}
+                            </div>
+
+                            <!-- numero de documento -->
+                            <div class="form-group col">
+                                <label for="documentNumber">Nº documento *</label>
+                                <input type="text" id="documentNumber" name="documentNumber" class="form-control {% if 'documentNumber' in editErrors or 'patientExists' in editErrors %}is-invalid{% endif %}" placeholder="Numero de documento"
+                                    value="{{patient.docNumber}}">                                
+                                  {% if 'documentNumber' in editErrors %}<label id="documentNumber-error" class="error" for="documentNumber">Ingrese el número de documento</label>{% endif %}{% if 'patientExists' in editErrors %}<label id="documentNumber-error" class="error" for="documentNumber">Ya existe un paciente con este número de documento</label>{% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <!-- genero -->
+                            <div class="form-group col">
+                                <label for="genderId">Género *</label>
+                            <select id="genderId" name="genderId" class="form-control form-control-chosen-required {% if 'genderId' in editErrors %}is-invalid{% endif %}" data-placeholder="Tipo de documento">
+                                <option value="">Seleccione el género </option>
+                                {% for gender in patientFields.gender %}
+                                <option value="{{ gender.id }}" {% if patient.gender.id == gender.id %}selected="selected"{% endif %}>{{ gender.name }}</option>
+                                {% endfor %}
+                            </select>
+                            {% if 'genderId' in editErrors %}<label id="genderId-error" class="error" for="genderId">Seleccione el género</label>{% endif %}
+                            </div>
+
+                            <!-- fecha de nacimiento -->
+                            <div class="form-group col">
+                                <label for="birthday"><span class="hidden">Fecha de </span>Nacimiento *</label>
+                                <input value="{{patient.birthday|date("d/m/Y")}}" type="text" id="birthday" name="birthday" class="form-control datepicker {% if 'birthday' in editErrors %}is-invalid{% endif %}" readonly >
+                                {% if 'birthday' in editErrors %}<label id="birthday-error" class="error" for="birthday">Ingrese la fecha de nacimiento</label>{% endif %}
+                            </div>
+                        </div>
+
+                        <!-- domicilio -->
+                        <div class="form-group addressGroup">
+                            <label for="address">Domicilio *</label>
+                            <input type="text" id="address" name="address" class="form-control {% if 'address' in editErrors %}is-invalid{% endif %}"
+                                value="{{patient.address}}" placeholder="Domicilio">                            
+                                {% if 'address' in editErrors %}<label id="address-error" class="error" for="address">Debe ingresar una dirección</label>
+                                {% endif %}
+                        </div>
+                        <div class="row">
+
+                            <!-- telefono -->
+                            <div class="form-group col">
+                                <label for="editPhone">Teléfono</label>
+                                <input type="number" id="editPhone" name="phone" class="form-control {% if 'phone' in editErrors %}is-invalid{% endif %}"
+                                    placeholder="Teléfono" value="{{patient.phone}}">                                {% if 'phone' in editErrors %}<label id="phone-error" class="error" for="phone">Ingrese el nombre</label>{%
+                                endif %}
+                            </div>
+
+                            <!-- obra social -->
+                            <div class="form-group col">
+                                <label for="editInsurance">Obra Social</label>
+                                <select id="editInsurance" name="insuranceId" class="form-control form-control-chosen-required" data-placeholder="Obra Social">
+                                    <option value="">Seleccione la obra social</option>
+                                    {% for insurance in patientFields.insurance %}
+                                    <option value="{{ insurance.id }}" {% if patient.insurance.id == insurance.id %}selected="selected"{% endif %}>{{ insurance.name }}</option>
+                                    {% endfor %}
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <small id="error" class="error">*Campos Obligatorios</small>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="reset" class="btn btn-secondary" id="btnClose" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+</form>

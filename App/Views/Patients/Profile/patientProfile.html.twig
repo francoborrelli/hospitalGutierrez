@@ -1,0 +1,111 @@
+{% extends 'utils/base.html.twig' %} 
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/web/dist/css/patientProfile.css"> 
+<link rel="stylesheet" href="/web/assets/datePicker/css/bootstrap-datepicker.min.css"> 
+{% endblock %} 
+
+{% block body %} 
+  {% if currentUser.hasPermission('paciente_destroy') %}
+    {% include 'Patients/Profile/deletePatient.html.twig' %} 
+  {% endif %}
+
+  {% if currentUser.hasPermission('paciente_update') %}
+    {% include 'Patients/Profile/editPersonalInfo.html.twig'%}
+  {% endif %}
+
+  {% if currentUser.hasPermission('datosDemograficos_update') %}
+    {% include 'Patients/Profile/editDemographicInfo.html.twig'%}
+  {% endif %}
+
+<div class="container userReport">
+  <div class="card ">
+    <!-- header -->
+    <div class="card-header">
+        {{ patient.firstName }} {{ patient.lastName }}
+      <a title="Volver" class="btn btn-sm" id="backbtn" href="/patients"><i class="fa fa-reply" aria-hidden="true"></i></a>
+      {% if not patient.deleted %}
+        {% if currentUser.hasPermission('paciente_destroy') %}
+          <button data-toggle="modal" data-target="#deletePatient" title="Eliminar" class="btn btn-danger btn-sm" id="deletebtn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+        {% endif %}
+        {% if currentUser.hasPermission('paciente_update') or currentUser.hasPermission('datosDemograficos_update') %}
+          <button data-toggle="modal" data-target="#editPersonalInfo" title="Editar" class="btn btn-orange btn-sm" id="editbtn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+        {% endif %}
+        {% if currentUser.hasPermission('historiaClinica_index') %}
+            <a href="/patient/{{ patient.id }}/records" class="btn btn-sm btn-primary pull-right"  id="recordsbtn" title="Ver Historia Clínica"><i class="fa fa-stethoscope" aria-hidden="true"></i></i></a>
+        {% endif %}
+      {% else %}
+        {% if currentUser.hasPermission('paciente_update') or currentUser.hasPermission('datosDemograficos_update') or currentUser.hasPermission('control_update') %}
+           <a title="Reactivar Paciente" class="btn btn-sm btn-primary" id="editbtn" href="/patient/{{patient.id}}/activate">Reactivar Paciente</a>
+        {% endif %}
+      {% endif %}  
+    </div>
+
+    <div class="card-body">
+      <!-- nav links -->
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+          {% if currentUser.hasPermission('paciente_show') %}
+            <li class="nav-item">
+              <a class="nav-link active" id="personal-tab" data-form="#editPersonalInfo" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden"> Datos</span> Personales</a>
+            </li>
+          {% endif %}
+          {% if currentUser.hasPermission('datosDemograficos_show') %}
+            <li class="nav-item">
+                <a class="nav-link" id="demographic-tab"  data-form="#editDemographicInfo"  data-toggle="tab" href="#demographic" role="tab" aria-controls="demographic"><i class="fa fa-id-card-o" aria-hidden="true"></i><span class="hidden"> Datos</span> Demograficos</a>
+            </li>
+        {% endif %}
+      </ul>
+
+    <!-- body -->
+    <div class="tab-content">
+
+        {% if currentUser.hasPermission('paciente_show') %}
+            <!-- datos personales -->
+            <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+                {% include 'Patients/Profile/personalProfile.html.twig' %}
+            </div>
+        {% endif %}
+
+        <!-- datos demograficos -->
+        {% if currentUser.hasPermission('datosDemograficos_show') %}
+            <div class="tab-pane fade" id="demographic" role="tabpanel" aria-labelledby="demographic-tab">
+            {% include 'Patients/Profile/demographicProfile.html.twig' %}
+        {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %} 
+
+{% block javascripts %}
+
+  <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
+  <script src="/web/dist/js/editPatientValidation.js"></script>
+
+  {% if currentUser.hasPermission('paciente_update') %}
+        <script src="/web/assets/datePicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="/web/assets/datePicker/locales/bootstrap-datepicker.es.min.js"></script>
+        <script src="/web/dist/js/datePickerConfig.js"></script>
+    {% endif %}
+
+  {% if not currentUser.hasPermission('paciente_show') %}
+    <script>
+      $('#demographic-tab').trigger("click");
+    </script>
+  {% endif %}
+
+  {% if editErrors is defined %}
+    {% if mode == 'patient' %}
+      <script>
+        $('#editPersonalInfo').modal('show')
+      </script>
+    {% else %}
+      <script>
+        $('#editDemographicInfo').modal('show')
+      </script>
+    {% endif %}  
+  {% endif %}
+{% endblock %}

@@ -15,7 +15,7 @@ class Error
     public static function exceptionHandler($exception)
     {
         $code = $exception->getCode();
-        if ($code != 404) {
+        if ($code != 404 and $code != 403) {
             $code = 500;
         }
         http_response_code($code);

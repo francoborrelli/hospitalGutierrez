@@ -1,0 +1,186 @@
+{% import 'utils/switch.html.twig' as switch %} 
+
+<form method="post" action="/patients/new" class="modal fade multi-step" id="addPatient">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title step-1" data-step="1">Datos Personales</h4>
+                <h4 class="modal-title step-2" data-step="2">Datos Demograficos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Datos Personales -->
+
+            <div class="modal-body step step-1">
+                <div class="row">
+
+                    <!-- nombre -->
+                    <div class="form-group col">
+                        <label for="firstName">Nombre *</label>
+                        <input pattern="[a-zA-Z][a-zA-Z ]{2,}" type="text" id="firstName" name="firstName" class="form-control {% if 'firstName' in newErrors %}is-invalid{% endif %}" placeholder="Nombre" {% if  newErrors is defined %}value="{{patient.firstName}}"{% endif %}>
+                        {% if 'firstName' in newErrors %}<label id="firstName-error" class="error" for="firstName">Ingrese el nombre</label>{% endif %}
+                    </div>
+
+                    <!-- apellido -->
+                    <div class="form-group col">
+                        <label for="lastName">Apellido *</label>
+                        <input pattern="[a-zA-Z][a-zA-Z ]{2,}" type="text" id="lastName" name="lastName" class="form-control {% if 'lastName' in newErrors %}is-invalid{% endif %}" placeholder="Apellido" {% if  newErrors is defined %} value="{{patient.lastName}}"{% endif %}>
+                        {% if 'lastName' in newErrors %}<label id="lastName-error" class="error" for="lastName">Ingrese el apellido</label>{% endif %}
+                    </div>
+                </div>
+                <div class="row">
+
+                    <!-- tipo de documento -->
+                    <div class="form-group col">
+                        <label for="documentTypeId">Tipo Documento *</label>
+                        <select id="documentTypeId" name="documentTypeId" class="form-control form-control-chosen-required {% if 'documentTypeId' in newErrors %}is-invalid{% endif %}" data-placeholder="Tipo de documento">
+                            <option value="">Seleccione el tipo de documento</option>
+                            {% for documentType in data.patientFields.documentType %}
+                            <option value="{{ documentType.id }}" {% if newErrors is defined and documentType.id == patient.documentType.id %}selected="selected"{% endif %}>{{ documentType.name }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if 'documentTypeId' in newErrors %}<label id="documentTypeId-error" class="error" for="documentTypeId">Seleccione el tipo de documento</label>{% endif %}
+                    </div>
+
+                    <!-- numero de documento -->
+                    <div class="form-group col">
+                        <label for="documentNumber">Nº documento *</label>
+                        <input type="text" id="documentNumber" name="documentNumber" class="form-control {% if 'documentNumber' in newErrors %}is-invalid{% endif %}" placeholder="Numero de documento" {% if newErrors is not null  %} value="{{patient.docNumber}}"{% endif %}>
+                        {% if 'documentNumber' in newErrors %}<label id="documentNumber-error" class="error" for="documentNumber">Ingrese el número de documento</label>{% elseif 'patientExists' in newErrors %}<label id="documentNumber-error" class="error" for="documentNumber">Ya existe un paciente con este número de documento</label>{% endif %}
+                    </div>
+                </div>
+                <div class="row">
+
+                    <!-- genero -->
+                    <div class="form-group col">
+                        <label for="genderId">Género *</label>
+                        <select id="genderId" name="genderId" class="form-control form-control-chosen-required {% if 'genderId' in newErrors %}is-invalid{% endif %}">
+                            <option value="">Seleccione el género </option>
+                            {% for gender in data.patientFields.gender %}
+                            <option value="{{ gender.id }}"{% if newErrors is defined and gender.id == patient.gender.id %}selected="selected"{% endif %}>{{ gender.name }}</option>
+                            {% endfor %}
+                        </select>
+                          {% if 'genderId' in newErrors %}<label id="genderId-error" class="error" for="genderId">Seleccione el género</label>{% endif %}
+                    </div>
+
+                    <!-- fecha de nacimiento -->
+                    <div class="form-group col">
+                        <label for="birthday"><span class="hidden">Fecha de </span>Nacimiento *</label>
+                        <input type="text" id="birthday" name="birthday" class="form-control datepicker {% if 'birthday' in newErrors %}is-invalid{% endif %}" placeholder="Seleccione la fecha" readonly {% if newErrors is not null %} value="{{patient.birthday | date("d/m/Y")}}" {% endif %}>
+                        {% if 'birthday' in newErrors %}<label id="birthday-error" class="error" for="birthday">Seleccione la fecha de nacimiento</label>{% endif %}
+                    </div>
+                </div>
+
+                <!-- domicilio -->
+                <div class="form-group">
+                    <label for="address">Domicilio *</label>
+                    <input type="text" id="address" name="address" class="form-control {% if 'address' in newErrors %}is-invalid{% endif %}"{% if  newErrors is defined %}  value="{{patient.address}}"{% endif %} placeholder="Domicilio">
+                    {% if 'address' in newErrors %}<label id="address-error" class="error" for="address">Debe ingresar una dirección</label>{% endif %}
+                </div>
+                <div class="row">
+
+                    <!-- telefono -->
+                    <div class="form-group col">
+                        <label for="phone">Teléfono</label>
+                        <input type="number" id="phone" name="phone" class="form-control" placeholder="Teléfono" {% if  newErrors is defined %}value="{{patient.phone}}"{% endif %}>
+                    </div>
+
+                    <!-- obra social -->
+                    <div class="form-group col">
+                        <label for="insuranceId">Obra Social</label>
+                        <select id="insuranceId" name="insuranceId" class="form-control form-control-chosen-required">
+                            <option value=""> Seleccione la obra social</option>
+                            {% for insurance in data.patientFields.insurance %}
+                                <option value="{{ insurance.id }}"{% if newErrors is defined and insurance.id == patient.insurance.id %}selected="selected"{% endif %}>{{ insurance.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Datos Demograficos -->
+
+            <div class="modal-body step step-2">
+
+                    <!-- tipo vivienda -->
+                    <div class="form-group col">
+                        <label for="houseTypeId">¿Tipo de vivienda? *</label>
+                        <select id="houseTypeId" name="houseTypeId" class="form-control form-control-chosen-required {% if 'houseType' in newErrors %}is-invalid{% endif %}" data-placeholder="Vivienda">
+                            <option value="">Seleccione tipo de casa</option>
+                            {% for houseType in data.patientFields.houseType %}
+                            <option value="{{ houseType.id }}" {% if newErrors is defined and houseType.id == patient.houseType.id %}selected="selected"{% endif %}>{{ houseType.name }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if 'houseType' in newErrors %}<label id="houseTypeId-error" class="error" for="houseTypeId">Selecciona un tipo de casa</label>{% endif %}
+                    </div>
+
+                    <!-- tipo calefaccion -->
+                    <div class="form-group col">
+                        <label for="heatingTypeId">¿Tipo de calefacción? *</label>
+                        <select id="heatingTypeId" name="heatingTypeId" class="form-control form-control-chosen-required {% if 'heatingType' in newErrors %}is-invalid{% endif %}" data-placeholder="Calefaccion">
+                            <option value="">Seleccione tipo de calefaccion</option>
+                            {% for heatingType in data.patientFields.heatingType %}
+                            <option value="{{ heatingType.id }}"{% if newErrors is defined and heatingType.id == patient.heatingType.id %}selected="selected"{% endif %}>{{ heatingType.name }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if 'heatingType' in newErrors %}<label id="heatingTypeId-error" class="error" for="heatingTypeId">Selecciona un tipo de calefacción</label>{% endif %}
+                    </div>
+
+                    <!-- tipo de agua -->
+                    <div class="form-group col">
+                        <label for="waterTypeId">¿Tipo de agua? *</label>
+                        <select id="waterTypeId" name="waterTypeId" class="form-control form-control-chosen-required {% if 'waterType' in newErrors %}is-invalid{% endif %}" data-placeholder="Calefaccion">
+                            <option value="">Seleccione tipo de agua</option>
+                            {% for waterType in data.patientFields.waterType %}
+                            <option value="{{ waterType.id }}"{% if newErrors is defined and waterType.id == patient.waterType.id %}selected="selected"{% endif %}>{{ waterType.name }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if 'waterType' in newErrors %}<label id="waterTypeId-error" class="error" for="waterTypeId">Selecciona un tipo de agua</label>{% endif %}
+                    </div>
+                <div class="row">
+
+                    <!-- heladera -->
+                    <div class="form-group col text-center">
+                        <label for="refrigerator">¿Tiene heladera?*</label>
+                        {% if newErrors is defined and patient.refrigerator %}
+                            {{ switch.item('Tiene','No tiene', 'refrigerator', true )}}
+                        {% else %}
+                            {{ switch.item('Tiene','No tiene', 'refrigerator', false )}}
+                        {% endif %}
+                    </div>
+
+                    <!-- electricidad -->
+                    <div class="form-group col text-center">
+                        <label for="electricity">¿Tiene electricidad?*</label>
+                        {% if newErrors is defined and patient.electricity %}
+                            {{ switch.item('Tiene','No tiene', 'electricity', true )}}
+                        {% else %}
+                            {{ switch.item('Tiene','No tiene', 'electricity', false )}}
+                        {% endif %}
+                    </div>
+
+                    <!-- mascotas -->
+                    <div class="form-group col text-center">
+                        <label for="pet">¿Tiene mascotas?*</label>
+                        {% if newErrors is defined and patient.pet %}
+                            {{ switch.item('Tiene','No tiene', 'pet', true )}}
+                        {% else %}
+                            {{ switch.item('Tiene','No tiene', 'pet', false )}}
+                        {% endif %}
+                    </div>
+                </div>           
+            </div>
+
+            <!-- Botones -->
+            <div class="modal-footer">
+                <small id="error" class="error">*Campos Obligatorios</small>
+                <button type="button" class="btn btn-default cancel" id="cancelbtn">Cancelar</button>
+                <button type="button" class="btn btn-primary step step-1" id="goNext" data-step="1">Continuar</button>
+                <button type="button" class="btn btn-primary step step-2"  id="goBack" data-step="1">Volver</button>
+                <button type="submit" id="submitpatient" class="btn btn-primary step step-2" data-step="1">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</form>
