@@ -36,8 +36,8 @@
                         <br>
                         <select id="fisicTest" name="fisicTest" class="form-control {% if 'fisicTest' in newErrors %}is-invalid{% endif %}">
                         <option value="">Elija una opción</option>
-                        <option {% if newErrors is not empty and record.fisicTest == "si" %} selected="selected"{% endif %} value="si">SI</option>
-                        <option {% if newErrors is not empty and record.fisicTest == "no" %} selected="selected"{% endif %}  value="no">NO</option>
+                        <option {% if newErrors is not empty and record.fisicTest %} selected="selected"{% endif %} value="si">SI</option>
+                        <option {% if newErrors is not empty and not record.fisicTest %} selected="selected"{% endif %}  value="no">NO</option>
                         </select>
                         {% if 'fisicTest' in newErrors %}<label id="fisicTest-error" class="error" for="fisicTest">Debe seleccionar una opción</label>{% endif %}
                     </div>
@@ -57,8 +57,8 @@
                         <br>
                         <select id="vaccination" name="vaccination" class="form-control {% if 'vaccination' in newErrors %}is-invalid{% endif %}">
                         <option value="">Elija una opción</option>
-                        <option value="si" {% if newErrors is not empty and record.vaccination == "si" %} selected="selected"{% endif %}>SI</option>
-                        <option value="no" {% if newErrors is not empty and record.vaccination == "no" %} selected="selected"{% endif %}>NO</option>
+                        <option value="si" {% if newErrors is not empty and record.vaccination %} selected="selected"{% endif %}>SI</option>
+                        <option value="no" {% if newErrors is not empty and not record.vaccination %} selected="selected"{% endif %}>NO</option>
                         </select>
                         {% if 'vaccination' in newErrors %}<label id="vaccination-error" class="error" for="vaccination">Debe seleccionar una opción</label>{% endif %}
                     </div>
@@ -78,8 +78,8 @@
                         <br>
                         <select id="maturation" name="maturation" class="form-control {% if 'maturation' in newErrors %}is-invalid{% endif %}">
                         <option value="">Elija una opción</option>
-                        <option value="si" {% if newErrors is not empty and record.vaccination == "si" %} selected="selected"{% endif %}>SI</option>
-                        <option value="no" {% if newErrors is not empty and record.vaccination == "no" %} selected="selected"{% endif %}>NO</option>
+                        <option value="si" {% if newErrors is not empty and record.vaccination %} selected="selected"{% endif %}>SI</option>
+                        <option value="no" {% if newErrors is not empty and not record.vaccination %} selected="selected"{% endif %}>NO</option>
                         </select>
                         {% if 'maturation' in newErrors %}<label id="maturation-error" class="error" for="maturation">Debe seleccionar una opción</label>{% endif %}
                     </div>

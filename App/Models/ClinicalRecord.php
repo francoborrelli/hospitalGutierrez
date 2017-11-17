@@ -521,25 +521,6 @@ class ClinicalRecord
 
     public function setData($data)
     {
-        if (isset($data['controlDate']))
-        {
-            $this->controlDate = \DateTime::createFromFormat('d/m/Y',$data['controlDate']);
-        }    
-        else
-        {
-            $this->controlDate = null;
-        }    
-
-        if (isset ($data['vaccination']) & $data['vaccination'] == 'si')
-        {
-            $this->vaccination = true;
-        }else{
-            $this->vaccination = f
-        }
-
-        $this->maturation = $data['maturation'];
-        $this->fisicTest = $data['fisicTest'];
-
         $this->weight = $data['weight'];
         $this->height = $data['height'];
         $this->nutrition = $data['nutrition'];
@@ -549,6 +530,24 @@ class ClinicalRecord
         $this->maturationObservation = $data['maturationObservation'];
         $this->fisicTestObservation = $data['fisicTestObservation'];
         $this->generalObservation = $data['generalObservation'];
+
+         if(isset($data['maturation']) && $data['maturation'] == 'si')
+            $this->maturation = true;
+            elseif ($data['maturation'] == 'no')
+            $this->maturation = false;
+
+        if($data['fisicTest'] == 'si')
+            $this->fisicTest = true;
+            elseif ($data['fisicTest'] == 'no')
+            $this->fisicTest = false;
+
+        if($data['vaccination'] == 'si')
+            $this->vaccination = true;
+        elseif ($data['vaccination'] == 'no')
+            $this->vaccination = false;
+
+        if (isset($data['controlDate']))
+            $this->controlDate = \DateTime::createFromFormat('d/m/Y',$data['controlDate']);   
     }
 
     public function validationErrors()
@@ -557,15 +556,6 @@ class ClinicalRecord
 
         if ((strlen($this->weight) == 0) or !(is_numeric($this->weight)))
             $validationErrors[] = 'weight';
-
-        if ((strlen($this->vaccination) == 0) or !(($this->vaccination == "si") or ($this->vaccination == "no")))
-            $validationErrors[] = 'vaccination';
-
-        if (strlen($this->maturation) == 0 or !(($this->maturation == "si") or ($this->maturation == "no")))
-            $validationErrors[] = 'maturation';
-
-        if (strlen($this->fisicTest) == 0 or !(($this->fisicTest == "si") or ($this->fisicTest == "no")))
-            $validationErrors[] = 'fisicTest';
 
         if (strlen($this->vaccinationObservation) == 0)
             $validationErrors[] = 'vaccinationObservation';

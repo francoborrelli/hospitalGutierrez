@@ -1,4 +1,4 @@
-{% embed 'utils/recordCard.html.twig' with {'returnRoute': '/patient/' ~ patient.id ~ '/records'} %} 
+{% embed 'utils/recordCard.html.twig' with {'patient': clinicalRecord.patient,'returnRoute': '/patient/' ~ clinicalRecord.patient.id ~ '/records'} %} 
 
 
 {% block modals %}
