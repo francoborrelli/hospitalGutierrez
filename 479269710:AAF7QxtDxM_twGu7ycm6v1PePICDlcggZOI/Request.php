@@ -9,9 +9,13 @@ class Request
 
     private $params = [];
 
+    private $chatId;
+
     public function __construct($input)
     {
         $response = json_decode($input, true);
+
+        $this->chatId = $response['message']['chat']['id'];
 
         $regExp = '#^(\/[a-zA-Z0-9\/]+?)(\ .*?)$#i';
         preg_match($regExp, $response['message']['text'], $aResults);
@@ -30,6 +34,11 @@ class Request
     public function getCommandName()
     {
         return $this->commandName;
+    }
+
+    public function getChatId()
+    {
+        return $this->chatId;
     }
 
     public function getParams()

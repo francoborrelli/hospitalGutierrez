@@ -35,7 +35,7 @@ class ListCommand
                 $response->addText('Los turnos disponibles son:' . PHP_EOL . PHP_EOL);
 
                 foreach ($result as $turn) {
-                    $date = new DateTime($turn['date']);
+                    $date = new \DateTime($turn['date']);
                     $response->addText('- ' . $date->format('H:i') . PHP_EOL);
                 }
             } else{
@@ -45,7 +45,7 @@ class ListCommand
             $response->addText('Debe ingresar una fecha con el formato dd-mm-aaaa');
         }
 
-        $response->send();
+        $response->send($request->getChatId());
     }
 
     public function getName()

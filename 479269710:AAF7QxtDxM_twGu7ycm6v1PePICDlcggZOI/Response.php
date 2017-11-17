@@ -11,15 +11,21 @@ class Response
         $this->text .= $text;
     }
 
-    public function send()
+    public function send($chatId)
     {
         $url = 'https://api.telegram.org/bot479269710:AAF7QxtDxM_twGu7ycm6v1PePICDlcggZOI/sendMessage';
+
+        $msg = array();
+        $msg['chat_id'] = $chatId;
+        $msg['text'] = $this->text;
+        $msg['disable_web_page_preview'] = true;
+        $msg['reply_markup'] = null;
 
         $options = array(
         'http' => array(
             'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
             'method'  => 'POST',
-            'content' => http_build_query($this->text)
+            'content' => http_build_query($msg)
             )
         );
 
