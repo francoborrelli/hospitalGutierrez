@@ -51,7 +51,7 @@ case '/turnos':
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_URL, 'http://localhost/api/index.php/turnos/11-11-2018');
+    curl_setopt($ch, CURLOPT_URL, 'https://grupo2.proyecto2017.linti.unlp.edu.ar/api/index.php/turnos/11-11-2018');
     $result = json_decode(curl_exec($ch), true);
     curl_close($ch);
 
