@@ -43,6 +43,13 @@ case '/help':
 case '/reservar':
     $msg['text']  = 'Te confirmamos el turno para:' . PHP_EOL;
     $msg['text'] .= '10:30' . PHP_EOL;
+
+    $params = explode(' ', $cmd_params);
+
+    $msg['text'] .= 'dni: ' . $params[0] .PHP_EOL;
+    $msg['text'] .= 'date: ' . $params[1] .PHP_EOL;
+    $msg['text'] .= 'hour: ' . $params[2] .PHP_EOL;
+
     $msg['reply_to_message_id'] = null;
     break;
 
