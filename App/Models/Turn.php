@@ -5,8 +5,8 @@ namespace App\Models;
 /**
  * Gender
  *
- * @Table(name="gender")
- * @Entity
+ * @Table(name="turns")
+ * @Entity(repositoryClass="App\Repositories\TurnRepository")
  */
 class Turn
 {
@@ -46,6 +46,15 @@ class Turn
     public function getDate()
     {
         return $this->date;
+    }
+
+    public function toArray() {
+        $vars = get_object_vars ( $this );
+        $array = array ();
+        foreach ( $vars as $key => $value ) {
+            $array [ltrim ( $key, '_' )] = $value;
+        }
+        return $array;
     }
 
 }
