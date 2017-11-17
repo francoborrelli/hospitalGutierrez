@@ -1,4 +1,4 @@
-{% for record in clinicalRecords %}
+{% for record in data.clinicalRecords %}
 <tr>
     <td headers="fecha" class="text-center">{{ record.controlDate|date('d/m/Y') }}</td>
     <td headers="pediatra" class="text-center">{{ record.user.firstName }} {{ record.user.lastName }}</td>

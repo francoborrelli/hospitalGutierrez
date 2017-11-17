@@ -16,13 +16,36 @@ class ClinicalRecordController extends Controller
     {   
         $this->denyAccessUnlessPermissionGranted('historiaClinica_index'); 
         
-        $patient = $this->getPatient();
+        $data = $this->getIndexData();
+      
+        $this->render('/Patients/ClinicalRecords/clinicalRecordsPage.html.twig', ['data' => $data]);
+    }
+
+    private function getIndexData()
+    {
         $em = $this->getEntityManager();
         $clinicalRecordRepository = $em->getRepository(ClinicalRecord::class);
 
+        $page = isset($this->getRouteParams()['page']) ? $this->getRouteParams()['page'] : 1;
+        $patient = $this->getPatient();
+
         $records = $clinicalRecordRepository->patientClinicalRecords($patient);
-      
-        $this->render('/Patients/ClinicalRecords/clinicalRecordsPage.html.twig', ['patient' => $patient, 'clinicalRecords' => $records]);
+
+        $listAmount = $this->getSite()->getListAmount();
+        $records = new ArrayCollection($records);
+        $pages = ceil($records->count() / $listAmount);
+        $pages = ($pages == 0) ? 1 : $pages;
+        $records = $records->matching(Criteria::create()
+            ->setFirstResult(($page - 1) * $listAmount)
+            ->setMaxResults($listAmount)
+        );
+
+        $data = ['patient' => $patient,
+                 'clinicalRecords' => $records,
+                 'page' => $page,
+                 'pages' => $pages];
+
+        return $data;
     }
 
     public function showNewAction()

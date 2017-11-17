@@ -1,4 +1,4 @@
-{% set noResults = clinicalRecords is empty %}
+{% set noResults = data.clinicalRecords is empty %}
 {% set path = 'Patients/ClinicalRecords/NoResults.html.twig' %}
 
 {% embed 'utils/recordCard.html.twig' with {'returnRoute': '/patients', 'noResults': noResults, 'path': path} %} 
@@ -17,13 +17,13 @@
 {% endblock %} 
 
 {% block buttons %}
-    {% if not patient.deleted %}
+    {% if not data.patient.deleted %}
         {% if currentUser.hasPermission('paciente_show') %}
-            <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-primary pull-right" id="recordsbtn" title="Ver perfil del Paciente"><i class="fa fa-user" aria-hidden="true"></i></a>
+            <a href="/patient/{{ data.patient.id }}" class="btn btn-sm btn-primary pull-right" id="recordsbtn" title="Ver perfil del Paciente"><i class="fa fa-user" aria-hidden="true"></i></a>
         {% endif %}     
     {% else %}
         {% if currentUser.hasPermission('paciente_update') or currentUser.hasPermission('datosDemograficos_update') or currentUser.hasPermission('control_update')  %}
-           <a title="Reactivar Paciente" class="btn btn-sm btn-primary" id="editbtn" href="/patient/{{patient.id}}/activate">Reactivar Paciente</a>
+           <a title="Reactivar Paciente" class="btn btn-sm btn-primary" id="editbtn" href="/patient/{{data.patient.id}}/activate">Reactivar Paciente</a>
         {% endif %} 
     {% endif %}          
 {% endblock %}
