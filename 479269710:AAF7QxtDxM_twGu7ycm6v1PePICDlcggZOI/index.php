@@ -17,6 +17,8 @@ if (isset($aResults[1])) {
     $cmd_params = '';
 }
 
+$params = explode(' ', $cmd_params);
+
 $msg = array();
 $msg['chat_id'] = $response['message']['chat']['id'];
 $msg['text'] = null;
@@ -43,8 +45,6 @@ case '/help':
 case '/reservar':
     $msg['text']  = 'Te confirmamos el turno para:' . PHP_EOL;
 
-    $params = explode(' ', $cmd_params);
-
     if (count($params) == 3) {
         $ch = curl_init();
         $url = 'https://grupo2.proyecto2017.linti.unlp.edu.ar/api/index.php/turnos/' . $params[0] . '/fecha/' . $params[1] . '/hora/' . $params[2];
@@ -62,11 +62,11 @@ case '/reservar':
 
 case '/turnos':
 
-    if ($cmd_params == '') {
+    if (!($params[0] === "")) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_URL, 'https://grupo2.proyecto2017.linti.unlp.edu.ar/api/index.php/turnos/' . $cmd_params);
+        curl_setopt($ch, CURLOPT_URL, 'https://grupo2.proyecto2017.linti.unlp.edu.ar/api/index.php/turnos/' . $params[0]);
         $result = json_decode(curl_exec($ch), true);
         curl_close($ch);
 
