@@ -2,8 +2,6 @@
 
 namespace Bot\Command;
 
-require_once(dirname(__FILE__).'/../Response.php');
-
 use Bot\Response;
 
 class HelpCommand
