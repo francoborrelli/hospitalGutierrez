@@ -22,9 +22,23 @@ class Turn
     /**
      * @var \DateTime
      *
-     * @Column(type="datetime")
+     * @Column(type="datetime", unique = true)
      */
     private $date;
+
+    /**
+     * @var string
+     *
+     * @Column(type="string")
+     */
+    private $dni;
+
+
+    public function __construct($dni, $date)
+    {
+        $this->dni = $dni;
+        $this->date = $date;
+    }
 
     public function setId($id) 
     {

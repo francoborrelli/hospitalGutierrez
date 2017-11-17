@@ -3,9 +3,39 @@
 namespace App\Repositories;
 
 use Doctrine\ORM\EntityRepository;
+use App\Models\Turn;
 
 class TurnRepository extends EntityRepository
 {
+
+    public function reserve($data)
+    {
+        $dateFormated = \DateTime::createFromFormat('d-m-Y H:i', $data['date'] . ' ' . $data['hour']);
+
+        if (!$dateFormated) {
+            return ['error' => 'Invalid date', 'description' => 'Invalid date format'];
+        } elseif ($dateFormated < new \DateTime('now')) {
+            return ['error' => 'Invalid date', 'description' => 'Expired date'];
+        } elseif (!($dateFormated->format('i') == '00' || $dateFormated->format('i') == '30')) 
+            return ['error' => 'Invalid minutes', 'description' => 'Minutes must be 00 or 30'];
+
+        $qb = $this->createQueryBuilder('q')
+            ->select('t')
+            ->from('App\Models\Turn', 't')
+            ->where('t.date = :date')
+            ->setParameter('date', $dateFormated);
+
+        $reserved = $qb->getQuery()->getResult();
+
+        if (!empty($reserved))
+            return ['error' => 'Turn is not available', 'description' => 'Turn is already reserved'];
+
+        $turn  = new Turn($data['dni'], $dateFormated);
+        $em = $this->getEntityManager();
+        $em->persist($turn);
+        $em->flush();
+        return ['success' => 'Turn reserved', 'description' => 'Turn for dni ' . $data['dni'] . ' reserved'];
+    }
 
     public function findAllDate($date)
     {
