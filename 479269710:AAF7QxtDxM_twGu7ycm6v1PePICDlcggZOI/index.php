@@ -46,9 +46,15 @@ case '/reservar':
 
     $params = explode(' ', $cmd_params);
 
-    $msg['text'] .= 'dni: ' . $params[0] .PHP_EOL;
-    $msg['text'] .= 'date: ' . $params[1] .PHP_EOL;
-    $msg['text'] .= 'hour: ' . $params[2] .PHP_EOL;
+    $ch = curl_init();
+    $url = 'https://grupo2.proyecto2017.linti.unlp.edu.ar/api/index.php/turnos/' . $params[0] . '/fecha/' . $params[1] . '/hora/' . $params[2];
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $result = curl_exec($ch);
+    curl_close ($ch);
+
+    $msg['text'] = $result['description'];
 
     $msg['reply_to_message_id'] = null;
     break;
