@@ -130,6 +130,10 @@ class ClinicalRecordController extends Controller
             $em = $this->getEntityManager();
 
             $record = $this->getRecord();
+
+            if ($record->getUser() != $this->getUser())
+                throw new \Exception("El usuario no tiene permiso para editar este control.", '403');
+
             $record->setData($_POST);
             $validationErrors = $record->validationErrors();
             
