@@ -1,7 +1,7 @@
-{% for record in records %}
+{% for record in clinicalRecords %}
 <tr>
-    <td headers="fecha" class="text-center">{{ record.date }}</td>
-    <td headers="pediatra" class="text-center">{{ patient.doctor }}</td>
+    <td headers="fecha" class="text-center">{{ record.controlDate|date('d/m/Y') }}</td>
+    <td headers="pediatra" class="text-center">{{ record.user.firstName }} {{ record.user.lastName }}</td>
 
     <td headers="opciones" class="text-center">
         {% if currentUser.hasPermission('control_show') %}
@@ -19,4 +19,5 @@
         {% endif %}
     </td>
 </tr>
+
 {% endfor %}
