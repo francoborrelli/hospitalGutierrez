@@ -55,13 +55,7 @@ case '/turnos':
     $result = json_decode(curl_exec($ch), true);
     curl_close($ch);
 
-    if (empty($result)) {
-        $msg['text'] .= 'No hay turnos disponibles';
-    } else {
-        foreach ($result as $turn) {
-            $msg['text'] .= $turn['date'];
-        }
-    }
+    $msg['text'] .= get_class($result);
     
     break;
 
