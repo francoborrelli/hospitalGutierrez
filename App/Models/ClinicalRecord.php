@@ -15,10 +15,13 @@ class ClinicalRecord
      * 
      * @Column(type="integer") 
      * @Id 
-     * @GeneratedValue 
      */ 
-    private $id; 
- 
+     private $id;
+
+    /** @Id @ManyToOne(targetEntity="Patient", inversedBy="clinicalRecords") */
+    private $patient;
+
+    
     /** 
     * @var \DateTime 
     * 
@@ -110,12 +113,7 @@ class ClinicalRecord
     */ 
     private $nutrition; 
       
-    /** 
-    * @ManyToOne(targetEntity="Patient") 
-    * @JoinColumn(name="patient_id", referencedColumnName="id") 
-    */ 
-    private $patient; 
-      
+    
     /** 
     * @ManyToOne(targetEntity="User") 
     * @JoinColumn(name="user_id", referencedColumnName="id") 
@@ -500,17 +498,25 @@ class ClinicalRecord
      private $deleted;
 
 
-    public function __construct($data, $patient, $user)
+    public function __construct($data, $id, $patient, $user)
     {
         $this->setData($data);
         $this->setPatient($patient);
         $this->setUser($user);
+
+        $this->id = $id;
         $this->deleted = false;
     }
 
     public function delete()
     {
         $this->deleted = true;
+    }
+
+    public function getAge(){
+        $birthday = $this->patient->getBirthday();
+
+        return $this->controlDate->diff($birthday);
     }
 
     public function setData($data)
@@ -524,14 +530,21 @@ class ClinicalRecord
             $this->controlDate = null;
         }    
 
+        if (isset ($data['vaccination']) & $data['vaccination'] == 'si')
+        {
+            $this->vaccination = true;
+        }else{
+            $this->vaccination = f
+        }
+
+        $this->maturation = $data['maturation'];
+        $this->fisicTest = $data['fisicTest'];
+
         $this->weight = $data['weight'];
         $this->height = $data['height'];
         $this->nutrition = $data['nutrition'];
         $this->pc = $data['pc'];
         $this->ppc = $data['ppc'];
-        $this->vaccination = $data['vaccination'];
-        $this->maturation = $data['maturation'];
-        $this->fisicTest = $data['fisicTest'];
         $this->vaccinationObservation = $data['vaccinationObservation'];
         $this->maturationObservation = $data['maturationObservation'];
         $this->fisicTestObservation = $data['fisicTestObservation'];
