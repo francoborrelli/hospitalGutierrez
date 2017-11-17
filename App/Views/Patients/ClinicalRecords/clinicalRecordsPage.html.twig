@@ -3,6 +3,12 @@
 
 {% embed 'utils/recordCard.html.twig' with {'returnRoute': '/patients', 'noResults': noResults, 'path': path} %} 
 
+{% block modals %}
+    {% if currentUser.hasPermission('control_destroy') %}
+        {% include 'Patients/ClinicalRecords/deleteRecord.html.twig' %}
+    {% endif %}            
+{% endblock %}
+
 {% block stylesheets %}
     {{parent()}}
     <link rel="stylesheet" href="/web/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
@@ -51,7 +57,7 @@
     <script src="/web/assets/dataTables/js/datatables.min.js"></script>
     <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
     <script src="/web/dist/js/recordsTable.js"></script>
-
+    
 {% endblock %}
 
 {% endembed %}

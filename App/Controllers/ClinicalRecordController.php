@@ -73,6 +73,8 @@ class ClinicalRecordController extends Controller
 
     public function removeAction()
     {
+        $this->denyAccessUnlessPermissionGranted('control_destroy'); 
+
         $record = $this->getRecord(); 
         $record->delete();
 
@@ -80,7 +82,8 @@ class ClinicalRecordController extends Controller
         $userRepository = $em->getRepository(ClinicalRecord::class);
         $em->persist($record);
         $em->flush();
-        
+
+        $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha borrado el control correctamente.');
         $this->redirect("/patient/" . $record->getPatient()->getId() . "/records");
     }
 

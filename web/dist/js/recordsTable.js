@@ -81,3 +81,14 @@ var oTable =  $('#recordsTable').DataTable({
         },
     }
 });
+
+
+//buttons configuration
+
+$('.btn-delete').click(function() {
+    $action = $(this).closest("td").find(".btn-show").attr('href');
+    $date = $(this).closest("tr").find("td").first().text();
+    $('#modalDate').text($date);
+    $('#deleteRecordForm').attr('action', $action + '/remove');
+  });
+  

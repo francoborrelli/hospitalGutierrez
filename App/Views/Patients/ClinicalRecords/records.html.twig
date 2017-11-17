@@ -6,7 +6,7 @@
     <td headers="opciones" class="text-center">
         {% if currentUser.hasPermission('control_show') %}
         <div class="btn-group" role="group">
-            <a href="/patient/{{ patient.id }}/record/{{record.id}}" class="btn btn-sm btn-primary" title="Ver en detalle"><i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+            <a href="/patient/{{ patient.id }}/record/{{record.id}}" class="btn-show btn btn-sm btn-primary" title="Ver en detalle"><i class="fa fa-heartbeat" aria-hidden="true"></i></a>
         </div>
         {% endif %} {% if currentUser.hasPermission('control_update') and not patient.deleted %}
         <div class="btn-group" role="group">
@@ -14,7 +14,7 @@
         </div>
         {% endif %} {% if currentUser.hasPermission('control_destroy') and not patient.deleted %}
         <div class="btn-group" role="group">
-            <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            <button data-toggle="modal" data-target="#deleteRecord" class="btn-delete btn btn-sm btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>
         </div>
         {% endif %}
     </td>
