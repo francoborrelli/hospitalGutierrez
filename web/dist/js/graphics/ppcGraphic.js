@@ -1,5 +1,8 @@
+var patient = 'patientName'
+
 Highcharts.chart('ppcGraphic', {
     chart: {
+        backgroundColor: '#fafafa',
         type: 'line',
         renderTo: 'chart',
         spacingLeft: 40,
@@ -19,6 +22,9 @@ Highcharts.chart('ppcGraphic', {
         title: {
             text: 'Perímetro cefálico (cm)'
         }
+    },
+    exporting: {
+        filename: (patient + " - PPC")
     },
     plotOptions: {
         line: {

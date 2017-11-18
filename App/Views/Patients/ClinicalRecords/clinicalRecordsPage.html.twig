@@ -54,28 +54,27 @@
     <div class="tab-pane fade" id="weight" role="tabpanel" aria-labelledby="weight-tab">
         <br>
         <div class="container">
-          <div id="example"></div>
           <div id="weightGraphic"></div>
         </div>
     </div>  
-    <div class="tab-pane fade" id="weight" role="tabpanel" aria-labelledby="weight-tab">
     <div class="tab-pane fade" id="height" role="tabpanel" aria-labelledby="height-tab">
         <br>
         <div class="container">
-          <div id="example"></div>
           <div id="heightGraphic"></div>
         </div>
     </div>  
     <div class="tab-pane fade" id="ppc" role="tabpanel" aria-labelledby="ppc-tab">
         <br>
         <div class="container">
-          <div id="example"></div>
           <div id="ppcGraphic"></div>
         </div>
     </div>  
 {% endblock %}
 
 {% block javascripts %}
+    <script>
+        var patient = '{{patient.firstName}} {{patient.LastName}}';
+    </script>
     <script src="/web/assets/dataTables/js/datatables.min.js"></script>
     <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
     <script src="/web/dist/js/recordsTable.js"></script>
@@ -83,7 +82,6 @@
     <script src="/web/assets/highcharts/modules/exporting.js"></script>
     <script src="/web/assets/highcharts/themes/grid-light.js"></script>
     <script src="/web/dist/js/graphicsConfiguration.js"></script>
-    <script src="/web/dist/js/weightGraphic.js"></script>
     <script src="/web/dist/js/graphics/weightGraphic.js"></script>
     <script src="/web/dist/js/graphics/heightGraphic.js"></script>
     <script src="/web/dist/js/graphics/ppcGraphic.js"></script>
