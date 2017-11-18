@@ -1,0 +1,38 @@
+{% if currentUser.hasPermission('control_new') and not data.patient.deleted %}
+<a id="agregar-btn" class="btn btn-primary btn-sm" href="/patient/{{data.patient.id}}/records/new">Agregar</a>
+<br> 
+{% endif %}
+
+<table class="table table-striped" id="recordsTable" summary="Lista de controles del paciente">
+    <thead>
+        <tr>
+            <th id="fecha" class="text-center">Fecha</th>
+            <th id="pediatra" class="text-center">Pediatra</th>
+            <th id="opciones" class="text-center">Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% include 'Patients/ClinicalRecords/records.html.twig' %}
+    </tbody>
+</table>
+<br>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li class="page-item {% if data.page == 1 %} disabled {% endif %}">
+            <a class="page-link"
+            href="/patient/{{data.patient.id}}/records/{{ data.page - 1 }}"
+            tabindex="-1">Ant
+            </a>
+        </li>
+        {% for i in 1..data.pages %}
+            <li class="page-item {% if i == data.page %} active {% endif %}">
+                <a class="page-link"
+                    href="/patient/{{data.patient.id}}/records/{{ i }}">{{ i }}
+                </a>
+            </li>
+        {% endfor %}
+        <li class="page-item {% if data.page == data.pages %} disabled {% endif %}">
+            <a class="page-link" href="/patient/{{data.patient.id}}/records/{{ data.page + 1 }}">Sig</a>
+        </li>
+    </ul>
+</nav>

@@ -4,16 +4,17 @@
 {% block stylesheets %}
 <link rel="stylesheet" href="/web/assets/dataTables/css/dataTables.bootstrap4.min.css"> 
 <link rel="stylesheet" href="/web/assets/dataTables/css/responsive.bootstrap4.min.css"> 
+<link rel="stylesheet" href="/web/assets/datePicker/css/bootstrap-datepicker.min.css"> 
 {% endblock %} 
 
 {% block body %}
  {% if currentUser.hasPermission('paciente_new') %}
-   {% include 'Patients/addPatient.html.twig' %}
+   {% include 'Patients/List/addPatient.html.twig' %}
 {% endif %}
 
     <div class="container userReport tableScreen">
         <div class="row">
-            {% include 'Patients/patientSearch.html.twig' %}
+            {% include 'Patients/List/patientSearch.html.twig' %}
             <div class ="col-md-9">
         <div class="card">
             <div class="card-header text-left">
@@ -36,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% include 'Patients/patients.html.twig' %}
+                        {% include 'Patients/List/patients.html.twig' %}
                     </tbody>
                 </table>
 
@@ -71,8 +72,8 @@
     </div>
 {% endblock %} 
 
-
 {% block javascripts %}
+
     <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
     <script src="/web/assets/dataTables/js/datatables.min.js"></script>
     <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
@@ -80,6 +81,9 @@
     <script src="/web/dist/js/multi-step-modal.js"></script>
 
     {% if currentUser.hasPermission('paciente_new') %}
+        <script src="/web/assets/datePicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="/web/assets/datePicker/locales/bootstrap-datepicker.es.min.js"></script>
+        <script src="/web/dist/js/datePickerConfig.js"></script>
         <script src="/web/dist/js/addPatientValidation.js"></script>
     {% endif %}
 

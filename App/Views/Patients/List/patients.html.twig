@@ -6,9 +6,14 @@
         <td headers="numeroDocumento">{{ patient.docNumber }}</td>
      
         <td headers="verDetalle" class="text-center">
+           {% if currentUser.hasPermission('historiaClinica_index') %}
+                <div class="btn-group" role="group">
+                    <a href="/patient/{{ patient.id }}/records" class="btn btn-sm btn-primary" title="Ver Historia Clínica"><i class="fa fa-stethoscope" aria-hidden="true"></i></i></a>
+                </div>
+            {% endif %}
            {% if currentUser.hasPermission('paciente_show') %}
                 <div class="btn-group" role="group">
-                    <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-primary" title="Ver en detalle"><i class="fa fa-user" aria-hidden="true"></i></a>
+                    <a href="/patient/{{ patient.id }}" class="btn btn-sm btn-primary" title="Ver Perfil"><i class="fa fa-user" aria-hidden="true"></i></a>
                 </div>
             {% endif %}
         </td>

@@ -50,7 +50,7 @@ class PatientController extends Controller
                  'docNumber' => $docNumber,
                  'state' => $state];
 
-        $this->render('Patients/patientsTable.html.twig', ['data' => $data, 'newErrors' => $validationErrors, 'patient' => $patient]);
+        $this->render('Patients/List/patientsTable.html.twig', ['data' => $data, 'newErrors' => $validationErrors, 'patient' => $patient]);
     }
 
     private function firstNameGiven()
@@ -187,7 +187,7 @@ class PatientController extends Controller
         $id = $this->getRouteParams()['id'];
         $patient = $this->getPatientById($id);
 
-        $this->render('Patients/patientProfile.html.twig', ['patient' => $patient, 'patientFields' => $this->getPatientFields()]);
+        $this->render('Patients/Profile/patientProfile.html.twig', ['patient' => $patient, 'patientFields' => $this->getPatientFields()]);
     }
 
     public function editPatientAction()
@@ -212,7 +212,7 @@ class PatientController extends Controller
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente.');
             $this->redirect('/patient/' . $this->getRouteParams()['id']);
         } else {
-            $this->render('Patients/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => 'patient', 'patientFields' => $this->getPatientFields()]);
+            $this->render('Patients/Profile/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => 'patient', 'patientFields' => $this->getPatientFields()]);
         }
     }
 
@@ -232,7 +232,7 @@ class PatientController extends Controller
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se han modificado los datos del paciente correctamente.');
             $this->redirect('/patient/' . $this->getRouteParams()['id']);
         } else {
-            $this->render('Patients/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => 'demographic', 'patientFields' => $this->getPatientFields()]);
+            $this->render('Patients/Profile/patientProfile.html.twig', ['editErrors' => $validationErrors, 'patient' => $validationPatient, 'mode' => 'demographic', 'patientFields' => $this->getPatientFields()]);
         }
     }
 

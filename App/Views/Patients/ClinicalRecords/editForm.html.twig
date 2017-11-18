@@ -1,0 +1,136 @@
+<form class="row" id="editRecord" method="POST" action="/patient/{{patient.id}}/records/create">
+    <div class="col-md-12">
+        <div class="white-box">
+            <div class="user-btm-box">
+                <div class="row text-center m-t-10">
+                    <!--fecha control -->
+                    <div class="col-md-12">
+                        <strong>Fecha del control*</strong>
+                        <input type="text" id="controlDate" name="controlDate" class="form-control datepicker text-center {% if newErrors is not empty and record.controlDate is empty %}is-invalid{% endif %}" placeholder="Seleccione la fecha de la consulta" value="{{ record.controlDate is empty ? "" : record.controlDate|date("d/m/Y") }}" readonly>
+                        {% if newErrors is not empty and record.controlDate is empty %}<label id="controlDate-error" class="error" for="controlDate">Debe seleccionar una fecha</label>{% endif %}
+
+                    </div>
+                </div>
+                <hr>
+                <div class="row text-center m-t-10">
+                    <!--Peso -->
+                    <div class="col-md-6 b-r">
+                        <strong>Peso*</strong>
+                        <br>
+                        <input type="number" id="weight" name="weight" class="form-control text-center {% if 'weight' in newErrors %}is-invalid{% endif %}" placeholder="Ingrese el peso en kg" aria-invalid="false"
+                            min="0" step="0.01" value="{{record.weight}}">
+                        {% if 'weight' in newErrors %}<label id="weight-error" class="error" for="weight">Debe ingresar el peso</label>{% endif %}
+                    </div>
+                    <!-- Talla -->
+                    <div class="col-md-6">
+                        <strong>Talla</strong>
+                        <br>
+                        <input type="number" id="height" name="height" class="form-control text-center" placeholder="Ingrese el talle en cm" aria-invalid="false"
+                            min="0" step="0.01" value="{{record.height}}">
+                    </div>
+                </div>
+                <hr>
+                <div class="row text-center m-t-10">
+                    <!-- Examen Físico -->
+                    <div class="col-md-6 b-r"><strong>¿Exámen físico normal?*</strong>
+                        <br>
+                        <select id="fisicTest" name="fisicTest" class="form-control {% if 'fisicTest' in newErrors %}is-invalid{% endif %}">
+                        <option value="">Elija una opción</option>
+                        <option {% if newErrors is not empty and record.fisicTest %} selected="selected"{% endif %} value="si">SI</option>
+                        <option {% if newErrors is not empty and not record.fisicTest %} selected="selected"{% endif %}  value="no">NO</option>
+                        </select>
+                        {% if 'fisicTest' in newErrors %}<label id="fisicTest-error" class="error" for="fisicTest">Debe seleccionar una opción</label>{% endif %}
+                    </div>
+                    <!-- Observaciones Examen Físico -->
+                    <div class="col-md-6">
+                        <strong>Exámen físico observaciones*</strong>
+                        <br>
+                        <textarea class="form-control {% if 'fisicTestObservation' in newErrors %}is-invalid{% endif %}" id="fisicTestObservation" name="fisicTestObservation" placeholder="Ingrese las observaciones físicas">{{record.fisicTestObservation}}</textarea>
+                        {% if 'fisicTestObservation' in newErrors %}<label id="fisicTestObservation-error" class="error" for="fisicTestObservation">Debe llenar este campo</label>{% endif %}
+                    </div>
+                </div>
+                <hr>
+                <div class="row text-center m-t-10">
+                    <!-- Vacunas -->
+                    <div class="col-md-6 b-r">
+                        <strong>¿Vacunas completas?*</strong>
+                        <br>
+                        <select id="vaccination" name="vaccination" class="form-control {% if 'vaccination' in newErrors %}is-invalid{% endif %}">
+                        <option value="">Elija una opción</option>
+                        <option value="si" {% if newErrors is not empty and record.vaccination %} selected="selected"{% endif %}>SI</option>
+                        <option value="no" {% if newErrors is not empty and not record.vaccination %} selected="selected"{% endif %}>NO</option>
+                        </select>
+                        {% if 'vaccination' in newErrors %}<label id="vaccination-error" class="error" for="vaccination">Debe seleccionar una opción</label>{% endif %}
+                    </div>
+                    <!-- Observaciones Vacunación -->
+                    <div class="col-md-6">
+                        <strong>Vacunas observaciones*</strong>
+                        <br>
+                        <textarea class="form-control {% if 'vaccinationObservation' in newErrors %}is-invalid{% endif %}" id="vaccinationObservation" name="vaccinationObservation" placeholder="Ingrese las observaciones de vacunación">{{record.vaccinationObservation}}</textarea>
+                        {% if 'vaccinationObservation' in newErrors %}<label id="vaccinationObservation-error" class="error" for="vaccinationObservation">Debe llenar este campo</label>{% endif %}                    
+                    </div>
+                </div>
+                <hr>
+                <div class="row text-center m-t-10">
+                    <!-- Maduración -->
+                    <div class="col-md-6 b-r">
+                        <strong>¿Maduración acorde?*</strong>
+                        <br>
+                        <select id="maturation" name="maturation" class="form-control {% if 'maturation' in newErrors %}is-invalid{% endif %}">
+                        <option value="">Elija una opción</option>
+                        <option value="si" {% if newErrors is not empty and record.vaccination %} selected="selected"{% endif %}>SI</option>
+                        <option value="no" {% if newErrors is not empty and not record.vaccination %} selected="selected"{% endif %}>NO</option>
+                        </select>
+                        {% if 'maturation' in newErrors %}<label id="maturation-error" class="error" for="maturation">Debe seleccionar una opción</label>{% endif %}
+                    </div>
+                    <!-- Observaciones Examen de Maduración -->
+                    <div class="col-md-6">
+                        <strong>Maduración observaciones*</strong>
+                        <br>
+                        <textarea class="form-control {% if 'maturationObservation' in newErrors %}is-invalid{% endif %}" id="maturationObservation" name="maturationObservation" placeholder="Ingrese las observaciones de maduración">{{record.maturationObservation}}</textarea>
+                        {% if 'maturationObservation' in newErrors %}<label id="maturationObservation-error" class="error" for="maturationObservation">Debe llenar este campo</label>{% endif %}
+                    </div>
+                </div>
+                <hr>
+                <div class="row text-center m-t-10">
+                    <!-- PC -->
+                    <div class="col-md-6 b-r">
+                        <strong>Percentilo Cefálico (PC)</strong>
+                        <br>
+                        <input type="number" id="pc" name="pc" class="form-control text-center" placeholder="Ingrese el valor de PC" aria-invalid="false"
+                            min="0" step="0.01" value="{{record.pc}}">
+                    </div>
+                    <!-- PPC -->                    
+                    <div class="col-md-6">
+                        <strong>Percentilo Perímetro Cefálico (PPC)</strong>
+                        <br>
+                        <input type="number" id="ppc" name="ppc" class="form-control text-center" placeholder="Ingrese el valor de PPC" aria-invalid="false"
+                            min="0" step="0.01" value="{{record.ppc}}">
+                    </div>
+                </div>
+                <hr>
+                <div class="row text-center m-t-10">
+                    <!-- Alimentación -->
+                    <div class="col-md-12">
+                        <strong>Alimentación</strong>
+                        <br>
+                        <textarea class="form-control" id="nutrition" name="nutrition" placeholder="Ingrese descripción de alimentación">{{record.nutrition}}</textarea>
+                    </div>
+                </div>
+                <hr>
+                <div class="row text-center m-t-10">
+                    <!-- Observaciones Generales -->
+                    <div class="col-md-12">
+                        <strong>Observaciones Generales</strong>
+                        <br>
+                        <textarea class="form-control" id="generalObservation" name="generalObservation" placeholder="Ingrese las observaciones generales">{{record.generalObservation}}</textarea>
+                    </div>
+                </div>
+                <hr>
+                <small>*Campos obligatorios</small>
+                <button class="btn btn-primary pull-right confirm">Confirmar</button>
+                <a class="btn btn-default pull-right" href="/patient/{{ patient.id }}/records">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</form>

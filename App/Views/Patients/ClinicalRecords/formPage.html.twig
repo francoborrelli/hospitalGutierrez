@@ -1,0 +1,49 @@
+{% if mode == 'add' %}
+    {% set action = "/patient/" ~ patient.id  ~ "/records/create" %}
+    {% set return = "/patient/" ~ patient.id  ~ "/records" %}
+{% else %}
+    {% set action = "/patient/" ~ patient.id  ~ "/record/" ~ clinicalRecord.controlNumber  ~ "/modify" %}
+    {% set return = "/patient/" ~ patient.id  ~ "/record/" ~ clinicalRecord.controlNumber %}
+{% endif %}
+
+{% embed 'utils/recordCard.html.twig' with {'returnRoute': return} %} 
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="/web/dist/css/records.css">  
+    <link rel="stylesheet" href="/web/assets/datePicker/css/bootstrap-datepicker.min.css"> 
+{% endblock %} 
+
+{% block navtabs %}
+    <li class="nav-item">
+            <a class="nav-link active" id="personal-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="tab" aria-controls="records" aria-expanded="true"><i class="fa fa-stethoscope" aria-hidden="true"></i> 
+            {% if mode == 'add' %}
+                Nuevo Control
+            {% else %}
+                Editar Control
+            {% endif %} 
+            </a>
+    </li>
+{% endblock %}
+
+{% block tabcontent %}
+    <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
+        <br>
+        <div>
+            {% include 'Patients/ClinicalRecords/form.html.twig' %}
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
+    <script src="/web/assets/jquery-validate/autoresize.jquery.js"></script>
+    <script src="/web/assets/datePicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="/web/assets/datePicker/locales/bootstrap-datepicker.es.min.js"></script>
+    <script src="/web/dist/js/recordValidation.js"></script>
+    <script src="/web/dist/js/datePickerConfig.js"></script>
+{% endblock %}
+
+{% endembed %}
