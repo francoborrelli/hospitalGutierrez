@@ -53,10 +53,14 @@ class ClinicalRecordController extends Controller
 
     private function getGraphsData($patient)
     {
+        $em = $this->getEntityManager();
+        $repository = $em->getRepository(ClinicalRecord::class);
+
         $graphsData = [];
-        $graphsData['weight'] = [2.5, 2.6, 2.8, 3.1, 3.4, 3.6, 3.8, 4.1, 4.3, 4.4, null, null, null, null];
-        $graphsData['height'] = [2.5, 2.6, 2.8, 3.1, 3.4, 3.6, 3.8, 4.1, 4.3, 4.4, 4.6, 4.8, 4.9, 5.1];
-        $graphsData['ppc'] = [2.5, 2.6, 2.8, 3.1, 3.4, 3.6, 3.8, 4.1, 4.3, 4.4, 4.6, 4.8, 4.9, 5.1];
+        $graphsData['weight'] = $repository->findWeightData($patient);
+        $graphsData['ppc'] = $repository->findPpcData($patient);
+        $graphsData['height'] = $repository->findHeightData($patient);
+
         return $graphsData;
     }
 
