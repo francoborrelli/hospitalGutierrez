@@ -73,6 +73,7 @@
 
 {% block javascripts %}
     <script>
+        var graphsData = {{ data.graphsData|json_encode|raw }};
         var patient = '{{patient.firstName}} {{patient.LastName}}';
         var gender = '{{ patient.gender.name }}';
     </script>
