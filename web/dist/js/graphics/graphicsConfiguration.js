@@ -42,6 +42,7 @@ Highcharts.setOptions({
     plotOptions: {
         series:{
             connectNulls: true,
+            lineWidth: 1,
         },
         line: {
             dataLabels: {
