@@ -12,7 +12,7 @@ Highcharts.setOptions({
         loading:'Cargando...',
         noData:'No hay datos para mostrar',
         printChart: 'Imprimir Gráfico',
-        resetZoom: 'Resetear zoom'
+        resetZoom: 'Sacar Zoom'
     }
 });
 

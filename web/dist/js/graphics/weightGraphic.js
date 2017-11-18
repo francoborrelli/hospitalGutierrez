@@ -1,40 +1,7 @@
-Highcharts.chart('weightGraphic', {
-    chart: {
-        backgroundColor: '#fafafa',
-        type: 'line',
-        renderTo: 'chart',
-        spacingLeft: 40,
-        width: 700,
-        defaultSeriesType: 'areaspline',
-        zoomType: 'x',
-    },
-    title: {
-        text: 'Curva de Crecimiento'
-    },
-    xAxis: {
-        min: 0,
-        categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13],
-        title: {
-            text: 'Edad (semanas)'
-        }
-    },
-    yAxis: {
-        title: {
-            text: 'Peso (kg)'
-        }
-    },
-    exporting: {
-        filename:(patient + ' - Curva de Crecimiento') 
-    },
-    plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: false
-        }
-    },
-    series: [{
+if (gender == "Masculino"){
+    var dataWeight = []
+}else{
+    var dataWeight = [{
         name: 'SD3neg',
         data: [2.0, 2.1, 2.3, 2.5, 2.7, 2.9, 3.0, 3.2, 3.3, 3.5, 3.6, 3.8, 3.9, 4.0 ],
         visible: false
@@ -62,6 +29,45 @@ Highcharts.chart('weightGraphic', {
         data: [4.8, 5.1, 5.4, 5.7, 6.1, 6.5, 6.8, 7.1, 7.3, 7.6, 7.8, 8.1, 8.3, 8.5 ],
         visible: false
     }]
+}
+
+Highcharts.chart('weightGraphic', {
+    chart: {
+        backgroundColor: '#fafafa',
+        type: 'line',
+        renderTo: 'chart',
+        spacingLeft: 40,
+        width: 700,
+        defaultSeriesType: 'areaspline',
+        zoomType: 'x',
+    },
+    title: {
+        text: ('Curva de Crecimiento ' + gender)
+    },
+    xAxis: {
+        min: 0,
+        categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13],
+        title: {
+            text: 'Edad (semanas)'
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Peso (kg)'
+        }
+    },
+    exporting: {
+        filename:(patient + ' - Curva de Crecimiento') 
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: dataWeight,
 });
 
 

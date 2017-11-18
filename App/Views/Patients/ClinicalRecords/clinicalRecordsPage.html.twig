@@ -74,6 +74,7 @@
 {% block javascripts %}
     <script>
         var patient = '{{patient.firstName}} {{patient.LastName}}';
+        var gender = '{{ patient.gender.name }}';
     </script>
     <script src="/web/assets/dataTables/js/datatables.min.js"></script>
     <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
