@@ -48,14 +48,14 @@ class ClinicalRecordController extends Controller
         return $data;
     }
 
-    public function showNewAction()
+    public function newAction()
     {
         $this->denyAccessUnlessPermissionGranted('control_new'); 
 
         $this->render('/Patients/ClinicalRecords/formPage.html.twig', ['patient' => $this->getPatient(), 'mode' => 'add']);
     }
 
-    public function NewAction()
+    public function createAction()
     {
         $this->denyAccessUnlessPermissionGranted('control_new'); 
         
