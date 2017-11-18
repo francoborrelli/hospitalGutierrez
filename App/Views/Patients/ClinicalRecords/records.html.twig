@@ -6,12 +6,12 @@
     <td headers="opciones" class="text-center">
         {% if currentUser.hasPermission('control_show') %}
             <div class="btn-group" role="group">
-                <a href="/patient/{{ record.patient.id }}/record/{{record.id}}" class="btn-show btn btn-sm btn-primary" title="Ver en detalle"><i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+                <a href="/patient/{{ record.patient.id }}/record/{{record.controlNumber}}" class="btn-show btn btn-sm btn-primary" title="Ver en detalle"><i class="fa fa-heartbeat" aria-hidden="true"></i></a>
             </div>
         {% endif %} 
         {% if currentUser.hasPermission('control_update') and not record.patient.deleted and record.user == currentUser %}
             <div class="btn-group" role="group">
-                <a href="/patient/{{ record.patient.id }}/record/{{record.id}}/edit" class="btn btn-sm btn-orange" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="/patient/{{ record.patient.id }}/record/{{record.controlNumber}}/edit" class="btn btn-sm btn-orange" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
             </div>
         {% endif %} 
         {% if currentUser.hasPermission('control_destroy') and not record.patient.deleted %}
