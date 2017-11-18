@@ -13,7 +13,8 @@ Highcharts.setOptions({
         noData:'No hay datos para mostrar',
         printChart: 'Imprimir Gráfico',
         resetZoom: 'Sacar Zoom',
-        resetZoomTitle: 'Sacar Zoom'
+        resetZoomTitle: 'Sacar Zoom',
+        contextButtonTitle: 'Menú de opciones de descarga'
     },
     chart: {
         backgroundColor: '#fafafa',
