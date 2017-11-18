@@ -48,14 +48,14 @@ class ClinicalRecordController extends Controller
         return $data;
     }
 
-    public function showNewAction()
+    public function newAction()
     {
         $this->denyAccessUnlessPermissionGranted('control_new'); 
 
         $this->render('/Patients/ClinicalRecords/formPage.html.twig', ['patient' => $this->getPatient(), 'mode' => 'add']);
     }
 
-    public function NewAction()
+    public function createAction()
     {
         $this->denyAccessUnlessPermissionGranted('control_new'); 
         
@@ -65,22 +65,19 @@ class ClinicalRecordController extends Controller
         $clinicalRecordRepository = $em->getRepository(ClinicalRecord::class);
 
 
-        $id = intval($clinicalRecordRepository->PatientCount($patient)) +1;
+        $controlNumber = intval($clinicalRecordRepository->PatientCount($patient)) +1;
 
-        $record = new ClinicalRecord($_POST, $id, $patient, $this->getUser());
+        $record = new ClinicalRecord($_POST, $controlNumber, $patient, $this->getUser());
 
         $validationErrors = $record->validationErrors();
 
-        if (empty($validationErrors))
-        {
+        if (empty($validationErrors)){
             $em->persist($record);
             $em->flush();
 
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado el control correctamente.');
             $this->redirect("/patient/" . $patient->getId() . "/records");
-        } 
-        else 
-        {
+        }else{
             $this->render('/Patients/ClinicalRecords/formPage.html.twig', ['patient' => $this->getPatient(), 'errors' => $validationErrors, 'clinicalRecord' => $record, 'mode' => 'add']);
         }
 
@@ -104,7 +101,6 @@ class ClinicalRecordController extends Controller
         $record->delete();
 
         $em = $this->getEntityManager();
-        $em->persist($record);
         $em->flush();
 
         $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha borrado el control correctamente.');
@@ -137,16 +133,12 @@ class ClinicalRecordController extends Controller
             $record->setData($_POST);
             $validationErrors = $record->validationErrors();
             
-            if (empty($validationErrors))
-            {
-                $em->persist($record);
+            if (empty($validationErrors)){
                 $em->flush();
             
                 $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha editado el control correctamente.');
-                $this->redirect("/patient/" . $record->getPatient()->getId() . "/record/" . $record->getId());
-            } 
-            else 
-            {
+                $this->redirect("/patient/" . $record->getPatient()->getId() . "/record/" . $record->getControlNumber());
+            }else{
                 $this->render('/Patients/ClinicalRecords/formPage.html.twig', ['patient' => $this->getPatient(), 'clinicalRecord' => $record, 'mode' => 'edit', 'errors' => $validationErrors]);
             }
     }
@@ -167,13 +159,13 @@ class ClinicalRecordController extends Controller
 
     private function getRecord()
     {
-        $id = $this->getRouteParams()['record'];
+        $controlNumber = $this->getRouteParams()['record'];
         
         $em = $this->getEntityManager();
 
         $patient = $this->getPatient();
 
-        $record = $em->getRepository(ClinicalRecord::class)->findOneBy(['patient' => $patient, 'id' => $id]);
+        $record = $em->getRepository(ClinicalRecord::class)->findOneBy(['patient' => $patient, 'controlNumber' => $controlNumber]);
         
         if(!isset($record))
             throw new \Exception('Control ' . $id .' de ' . $patient->getFirstName() . ' ' . $patient->getLastName() . ' no encontrado.', '404');

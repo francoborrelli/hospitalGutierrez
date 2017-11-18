@@ -30,7 +30,7 @@ class ClinicalRecordRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('p');
         
-        $qb->select('Max(c.id)')
+        $qb->select('Max(c.controlNumber)')
         ->from('App\Models\ClinicalRecord','c')
         ->where('c.patient = :patient')
         ->setParameter('patient', $patient->getId());  

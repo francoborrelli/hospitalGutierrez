@@ -2,8 +2,8 @@
     {% set action = "/patient/" ~ patient.id  ~ "/records/create" %}
     {% set return = "/patient/" ~ patient.id  ~ "/records" %}
 {% else %}
-    {% set action = "/patient/" ~ patient.id  ~ "/record/" ~ clinicalRecord.id  ~ "/modify" %}
-    {% set return = "/patient/" ~ patient.id  ~ "/record/" ~ clinicalRecord.id %}
+    {% set action = "/patient/" ~ patient.id  ~ "/record/" ~ clinicalRecord.controlNumber  ~ "/modify" %}
+    {% set return = "/patient/" ~ patient.id  ~ "/record/" ~ clinicalRecord.controlNumber %}
 {% endif %}
 
 {% embed 'utils/recordCard.html.twig' with {'returnRoute': return} %} 

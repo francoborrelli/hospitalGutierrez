@@ -12,12 +12,16 @@ class TurnRepository extends EntityRepository
     {
         $dateFormated = \DateTime::createFromFormat('d-m-Y H:i', $data['date'] . ' ' . $data['hour']);
 
-        if (!$dateFormated) {
-            return ['error' => 'Invalid date', 'description' => 'Invalid date format'];
+        if (!$dateFormated || $dateFormated->format('d-m-Y') !== $data['date']) {
+            return ['error' => 'Fecha inválida', 'description' => 'Fecha inválida, debe ingresar los datos con el formato dni dd-mm-aaaa hh:mm'];
         } elseif ($dateFormated < new \DateTime('now')) {
-            return ['error' => 'Invalid date', 'description' => 'Expired date'];
-        } elseif (!($dateFormated->format('i') == '00' || $dateFormated->format('i') == '30')) 
-            return ['error' => 'Invalid minutes', 'description' => 'Minutes must be 00 or 30'];
+            return ['error' => 'Fecha inválida', 'description' => 'La fecha solicitada ya ha pasado'];
+        } elseif (!($dateFormated->format('i') == '00' || $dateFormated->format('i') == '30')) {
+            return ['error' => 'Minutos inválidos', 'description' => 'Los turnos son únicamente en punto o y media'];
+        } elseif (!preg_match("/^[0-9]{7,10}$/", $data['dni'])) {
+            return ['error' => 'DNI inválido', 'description' => 'El número de DNI es inválido'];
+        }
+
 
         $qb = $this->createQueryBuilder('q')
             ->select('t')
@@ -28,22 +32,22 @@ class TurnRepository extends EntityRepository
         $reserved = $qb->getQuery()->getResult();
 
         if (!empty($reserved))
-            return ['error' => 'Turn is not available', 'description' => 'Turn is already reserved'];
+            return ['error' => 'El turno no está disponible', 'description' => 'El turno elegido ya fue reservado'];
 
         $turn  = new Turn($data['dni'], $dateFormated);
         $em = $this->getEntityManager();
         $em->persist($turn);
         $em->flush();
-        return ['success' => 'Turn reserved', 'description' => 'Turn for dni ' . $data['dni'] . ' reserved'];
+        return ['success' => 'Turno reservado', 'description' => 'Turno reservado exitosamente. Nº de turno: ' . $turn->getId()];
     }
 
     public function findAllDate($date)
     {
         $dateFormated = \DateTime::createFromFormat('d-m-Y', $date);
-        if (!$dateFormated) {
-            return ['error' => 'Invalid date', 'description' => 'Invalid date format'];
+        if (!$dateFormated || $dateFormated->format('d-m-Y') !== $date) {
+            return ['error' => 'Fecha inválida', 'description' => 'Fecha inválida, debe ingresar los datos con el formato dni dd-mm-aaaa hh:mm'];
         } elseif ($dateFormated < new \DateTime('now')) {
-            return ['error' => 'Invalid date', 'description' => 'Expired date'];
+            return ['error' => 'Fecha inválida', 'description' => 'La fecha solicitada ya ha pasado'];
         }
 
         $qb = $this->createQueryBuilder('q')
@@ -80,7 +84,9 @@ class TurnRepository extends EntityRepository
                 $min = 30 * $j;
                 if ($min == 0)
                     $min = '00';
-                $turns[] = \DateTime::createFromFormat($format, $date . "$i:$min" .':00');
+                $newDate = \DateTime::createFromFormat($format, $date . "$i:$min" . ':00');
+                if ($newDate >= new \DateTime('now'))
+                    $turns[] = $newDate;
             }
         }
         return $turns;
