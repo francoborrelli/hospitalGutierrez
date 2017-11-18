@@ -40,7 +40,7 @@ class TurnRepository extends EntityRepository
     public function findAllDate($date)
     {
         $dateFormated = \DateTime::createFromFormat('d-m-Y', $date);
-        if (!$dateFormated || $dateFormated->format('d-m-Y') === $date) {
+        if (!$dateFormated || $dateFormated->format('d-m-Y') !== $date) {
             return ['error' => 'Fecha inválida', 'description' => 'Debe ingresar los datos con el formato dni dd-mm-aaaa hh:mm'];
         } elseif ($dateFormated < new \DateTime('now')) {
             return ['error' => 'Fecha inválida', 'description' => 'La fecha solicitada ya ha pasado'];
