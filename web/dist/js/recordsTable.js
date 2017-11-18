@@ -39,8 +39,8 @@ var oTable =  $('#recordsTable').DataTable({
         }
     },
     columns: [
-        { responsivePriority: 1 }, //fecha
-        { responsivePriority: 2 }, //Pediatra
+        { responsivePriority: 2 }, //fecha
+        { responsivePriority: 3 }, //Pediatra
         { responsivePriority: 1 }, //Opciones
     ],
     "order": [
