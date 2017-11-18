@@ -6,16 +6,18 @@ Highcharts.chart('heightGraphic', {
         spacingRight: 10,
         spacingLeft: 40,
         width: 700,
-        defaultSeriesType: 'areaspline'
+        defaultSeriesType: 'areaspline',
+        zoomType: 'x',
     },
     title: {
         text: 'Curva de Talla'
     },
     xAxis: {
+        min: 0,
         categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13, 14, 15,16,17,18,19,20,21,22,23,24],
         title: {
             text: 'Edad (meses)'
-        }
+        },
     },
     yAxis: {
         title: {
@@ -36,7 +38,7 @@ Highcharts.chart('heightGraphic', {
     series: [{
         name: 'P3',
         data: [45.6, 50.0, 53.2, 55.8, 58.0, 59.9, 61.5, 62.9, 64.3, 65.6, 66.8, 68.0, 69.2, 70.3, 71.3, 72.4, 73.3, 74.3, 75.2, 76.2, 77.0, 77.9, 78.7, 79.6, 80.3],
-        visible: false
+        visible: false,
     }, {
         name: 'P15',
         data: [47.2, 51.7, 55.0, 57.6, 59.8, 61.7, 63.4, 64.9, 66.3, 67.6, 68.9, 70.2, 71.3, 72.5, 73.6, 74.7, 75.7, 76.7, 77.7, 78.7, 79.6, 80.5, 81.4, 82.2, 83.1],

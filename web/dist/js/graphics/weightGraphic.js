@@ -5,12 +5,14 @@ Highcharts.chart('weightGraphic', {
         renderTo: 'chart',
         spacingLeft: 40,
         width: 700,
-        defaultSeriesType: 'areaspline'
+        defaultSeriesType: 'areaspline',
+        zoomType: 'x',
     },
     title: {
         text: 'Curva de Crecimiento'
     },
     xAxis: {
+        min: 0,
         categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13],
         title: {
             text: 'Edad (semanas)'
