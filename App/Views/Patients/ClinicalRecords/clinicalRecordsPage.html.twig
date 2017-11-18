@@ -47,13 +47,19 @@
     </div>
     <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="records-tab">
         <br>
-        <div>
+
+
+<div id="container" style="text-align: center; margin: 0 auto; width: 100%"></div>
         </div>
     </div>
 {% endblock %}
 
 {% block javascripts %}
-
+    <script src="/web/assets/highcharts/js/highcharts.js"></script>
+    <script src="/web/assets/highcharts/modules/exporting.js"></script>
+    <script src="/web/assets/highcharts/themes/grid-light.js"></script>
+    <script src="/web/dist/js/graphicsConfiguration.js"></script>
+    <script src="/web/dist/js/weightGraphic.js"></script>
     <script src="/web/assets/dataTables/js/datatables.min.js"></script>
     <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
     <script src="/web/dist/js/recordsTable.js"></script>
