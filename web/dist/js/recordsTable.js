@@ -19,7 +19,7 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
 } );
 
 
-//Configuración de la tabla de pacientes
+//Configuración de la tabla de controles
 
 var oTable =  $('#recordsTable').DataTable({
     responsive: {
@@ -27,11 +27,11 @@ var oTable =  $('#recordsTable').DataTable({
             display: $.fn.dataTable.Responsive.display.modal( {
                 header: function ( row ) {
                     var data = row.data();
-                    return 'Paciente '+data[0]+' '+data[1];
+                    return 'Control '+data[0];
                 }
             } ),
 
-            //Renderiza la tabla de datos del usuario en el modal de detalles.
+            //Renderiza la tabla de datos del controles en el modal de detalles.
 
             renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
                 tableClass: 'table'
@@ -92,3 +92,15 @@ $('.btn-delete').click(function() {
     $('#deleteRecordForm').attr('action', $action + '/remove');
   });
   
+
+$('a.nav-link').click(function(){
+    $('a.nav-link').each(function(){
+        $(this).removeClass('active');
+    })
+    $(this).addClass('active');
+    href = $(this).attr('href');
+    $('.tab-pane').each(function(){
+        $(this).removeClass('show active');
+    })
+    $(href).addClass('show active');
+})
