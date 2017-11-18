@@ -40,12 +40,24 @@ class ClinicalRecordController extends Controller
             ->setMaxResults($listAmount)
         );
 
+        $graphsData = $this->getGraphsData($patient);
+
         $data = ['patient' => $patient,
                  'clinicalRecords' => $records,
+                 'graphsData' => $graphsData,
                  'page' => $page,
                  'pages' => $pages];
 
         return $data;
+    }
+
+    private function getGraphsData($patient)
+    {
+        $graphsData = [];
+        $graphsData['weight'] = [2.5, 2.6, 2.8, 3.1, 3.4, 3.6, 3.8, 4.1, 4.3, 4.4, 4.6, 4.8, 4.9, 5.1];
+        $graphsData['height'] = [2.5, 2.6, 2.8, 3.1, 3.4, 3.6, 3.8, 4.1, 4.3, 4.4, 4.6, 4.8, 4.9, 5.1];
+        $graphsData['ppc'] = [2.5, 2.6, 2.8, 3.1, 3.4, 3.6, 3.8, 4.1, 4.3, 4.4, 4.6, 4.8, 4.9, 5.1];
+        return $graphsData;
     }
 
     public function newAction()

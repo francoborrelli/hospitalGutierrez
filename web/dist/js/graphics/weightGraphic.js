@@ -19,6 +19,10 @@ if (gender == "Masculino"){
         name: 'P97',
         data: [4.3, 4.5, 4.9, 5.2, 5.6, 5.9, 6.3, 6.5, 6.8, 7.1, 7.3, 7.5, 7.7, 7.9],
         visible: false
+    }, {
+        name: 'Patient',
+        data: graphsData['weight'],
+        visible: true
     }]
 }else{
     //Femenino
@@ -41,6 +45,10 @@ if (gender == "Masculino"){
         name: 'P97',
         data: [4.2, 4.4, 4.6, 5.0, 5.3, 5.6, 5.9, 6.1, 6.4, 6.6, 6.8, 7.0, 7.2, 7.4],
         visible: false
+    }, {
+        name: 'Patient',
+        data: graphsData['weight'],
+        visible: true
     }]
 }
 

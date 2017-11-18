@@ -18,6 +18,10 @@ if (gender == "Masculino"){
         name: 'P97',
         data: [36.6, 37.5, 38.1, 38.7, 39.3, 39.8, 40.3, 40.7, 41.7, 41.4, 41.8, 42.1, 42.4, 42.7],
         visible: false
+    }, {
+        name: 'Patient',
+        data: graphsData['ppc'],
+        visible: true
     }]
 }else{
     var dataPPC = [{
@@ -39,6 +43,10 @@ if (gender == "Masculino"){
         name: 'P97',
         data: [36.1, 36.7, 37.4, 38.0, 38.6, 39.1, 39.5, 39.9, 40.3, 40.6, 41.0, 41.3, 41.6, 41.9],
         visible: false
+    }, {
+        name: 'Patient',
+        data: graphsData['ppc'],
+        visible: true
     }]
 }
 
