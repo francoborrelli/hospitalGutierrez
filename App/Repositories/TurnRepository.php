@@ -12,12 +12,16 @@ class TurnRepository extends EntityRepository
     {
         $dateFormated = \DateTime::createFromFormat('d-m-Y H:i', $data['date'] . ' ' . $data['hour']);
 
-        if (!$dateFormated) {
+        if (!$dateFormated || $dateFormated->format('d-m-Y') !== $date) {
             return ['error' => 'Fecha inválida', 'description' => 'Fecha inválida, debe ingresar los datos con el formato dni dd-mm-aaaa hh:mm'];
         } elseif ($dateFormated < new \DateTime('now')) {
             return ['error' => 'Fecha inválida', 'description' => 'La fecha solicitada ya ha pasado'];
-        } elseif (!($dateFormated->format('i') == '00' || $dateFormated->format('i') == '30')) 
+        } elseif (!($dateFormated->format('i') == '00' || $dateFormated->format('i') == '30')) {
             return ['error' => 'Minutos inválidos', 'description' => 'Los turnos son únicamente en punto o y media'];
+        } elseif (preg_match("/^[0-9]{7,10}$/",$data['dni'])) {
+            return ['error' => 'DNI inválido', 'description' => 'El número de DNI es inválido'];
+        }
+
 
         $qb = $this->createQueryBuilder('q')
             ->select('t')
