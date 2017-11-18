@@ -15,13 +15,10 @@ class ClinicalRecord
      * 
      * @Column(type="integer") 
      * @Id 
+     * @GeneratedValue 
      */ 
-     private $id;
-
-    /** @Id @ManyToOne(targetEntity="Patient", inversedBy="clinicalRecords") */
-    private $patient;
-
-    
+     private $id; 
+        
     /** 
     * @var \DateTime 
     * 
@@ -29,6 +26,13 @@ class ClinicalRecord
     */ 
     private $controlDate; 
  
+    /** 
+    * @var int
+    * 
+    * @Column(type="integer") 
+    */ 
+    private $controlNumber; 
+
     /** 
      * @var float 
      * 
@@ -113,7 +117,12 @@ class ClinicalRecord
     */ 
     private $nutrition; 
       
-    
+    /** 
+    * @ManyToOne(targetEntity="Patient") 
+    * @JoinColumn(name="patient_id", referencedColumnName="id") 
+    */ 
+    private $patient; 
+
     /** 
     * @ManyToOne(targetEntity="User") 
     * @JoinColumn(name="user_id", referencedColumnName="id") 
@@ -437,9 +446,19 @@ class ClinicalRecord
      *
      * @return string
      */
-    public function getNutrition()
+     public function getNutrition()
+     {
+         return $this->nutrition;
+     }
+
+    /**
+     * Get ControlNumber
+     *
+     * @return int
+     */
+    public function getControlNumber()
     {
-        return $this->nutrition;
+        return $this->controlNumber;
     }
 
     /**
@@ -498,13 +517,13 @@ class ClinicalRecord
      private $deleted;
 
 
-    public function __construct($data, $id, $patient, $user)
+    public function __construct($data, $controlNumber, $patient, $user)
     {
         $this->setData($data);
         $this->setPatient($patient);
         $this->setUser($user);
 
-        $this->id = $id;
+        $this->controlNumber = $controlNumber;
         $this->deleted = false;
     }
 
