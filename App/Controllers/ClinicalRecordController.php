@@ -65,9 +65,9 @@ class ClinicalRecordController extends Controller
         $clinicalRecordRepository = $em->getRepository(ClinicalRecord::class);
 
 
-        $id = intval($clinicalRecordRepository->PatientCount($patient)) +1;
+        $controlNumber = intval($clinicalRecordRepository->PatientCount($patient)) +1;
 
-        $record = new ClinicalRecord($_POST, $id, $patient, $this->getUser());
+        $record = new ClinicalRecord($_POST, $controlNumber, $patient, $this->getUser());
 
         $validationErrors = $record->validationErrors();
 
@@ -104,7 +104,6 @@ class ClinicalRecordController extends Controller
         $record->delete();
 
         $em = $this->getEntityManager();
-        $em->persist($record);
         $em->flush();
 
         $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha borrado el control correctamente.');
@@ -139,11 +138,10 @@ class ClinicalRecordController extends Controller
             
             if (empty($validationErrors))
             {
-                $em->persist($record);
                 $em->flush();
             
                 $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha editado el control correctamente.');
-                $this->redirect("/patient/" . $record->getPatient()->getId() . "/record/" . $record->getId());
+                $this->redirect("/patient/" . $record->getPatient()->getId() . "/record/" . $record->getControlNumber());
             } 
             else 
             {
@@ -167,13 +165,13 @@ class ClinicalRecordController extends Controller
 
     private function getRecord()
     {
-        $id = $this->getRouteParams()['record'];
+        $controlNumber = $this->getRouteParams()['record'];
         
         $em = $this->getEntityManager();
 
         $patient = $this->getPatient();
 
-        $record = $em->getRepository(ClinicalRecord::class)->findOneBy(['patient' => $patient, 'id' => $id]);
+        $record = $em->getRepository(ClinicalRecord::class)->findOneBy(['patient' => $patient, 'controlNumber' => $controlNumber]);
         
         if(!isset($record))
             throw new \Exception('Control ' . $id .' de ' . $patient->getFirstName() . ' ' . $patient->getLastName() . ' no encontrado.', '404');
