@@ -80,9 +80,9 @@ class TurnRepository extends EntityRepository
                 $min = 30 * $j;
                 if ($min == 0)
                     $min = '00';
-                $date = \DateTime::createFromFormat($format, $date . "$i:$min" .':00');
-                if ($date >= (new \DateTime('now')))
-                    $turns[] = $date;
+                $newDate = \DateTime::createFromFormat($format, $date . "$i:$min" . ':00');
+                if ($newDate >= new \DateTime('now'))
+                    $turns[] = $newDate;
             }
         }
         return $turns;
