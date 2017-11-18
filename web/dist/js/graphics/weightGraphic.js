@@ -1,50 +1,24 @@
-var chart = Highcharts.chart('container', {
+Highcharts.chart('weightGraphic', {
     chart: {
         type: 'line',
         renderTo: 'chart',
-        spacingLeft: 25,
+        spacingLeft: 40,
+        width: 700,
         defaultSeriesType: 'areaspline'
     },
     title: {
         text: 'Curva de Crecimiento'
     },
     xAxis: {
-        categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
+        categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13],
+        title: {
+            text: 'Semana'
+        }
     },
     yAxis: {
         title: {
             text: 'Peso (kg)'
         }
-    },
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
-            },
-            chartOptions: {
-                legend: {
-                    align: 'center',
-                    verticalAlign: 'bottom',
-                    layout: 'horizontal'
-                },
-                yAxis: {
-                    labels: {
-                        align: 'left',
-                        x: 0,
-                        y: -5
-                    },
-                    title: {
-                        text: null
-                    }
-                },
-                subtitle: {
-                    text: null
-                },
-                credits: {
-                    enabled: false
-                }
-            }
-        }]
     },
     plotOptions: {
         line: {
@@ -83,3 +57,5 @@ var chart = Highcharts.chart('container', {
         visible: false
     }]
 });
+
+
