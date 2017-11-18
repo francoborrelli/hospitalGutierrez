@@ -71,16 +71,13 @@ class ClinicalRecordController extends Controller
 
         $validationErrors = $record->validationErrors();
 
-        if (empty($validationErrors))
-        {
+        if (empty($validationErrors)){
             $em->persist($record);
             $em->flush();
 
             $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha agregado el control correctamente.');
             $this->redirect("/patient/" . $patient->getId() . "/records");
-        } 
-        else 
-        {
+        }else{
             $this->render('/Patients/ClinicalRecords/formPage.html.twig', ['patient' => $this->getPatient(), 'errors' => $validationErrors, 'clinicalRecord' => $record, 'mode' => 'add']);
         }
 
@@ -136,15 +133,12 @@ class ClinicalRecordController extends Controller
             $record->setData($_POST);
             $validationErrors = $record->validationErrors();
             
-            if (empty($validationErrors))
-            {
+            if (empty($validationErrors)){
                 $em->flush();
             
                 $this->addFlashMessage('success', '¡Felicitaciones!', 'Se ha editado el control correctamente.');
                 $this->redirect("/patient/" . $record->getPatient()->getId() . "/record/" . $record->getControlNumber());
-            } 
-            else 
-            {
+            }else{
                 $this->render('/Patients/ClinicalRecords/formPage.html.twig', ['patient' => $this->getPatient(), 'clinicalRecord' => $record, 'mode' => 'edit', 'errors' => $validationErrors]);
             }
     }
