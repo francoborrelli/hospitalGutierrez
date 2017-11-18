@@ -11,5 +11,5 @@ $('.datepicker').datepicker({
 
 $('.datepicker-days').find("td").each(
     $(this).click(function(){
-    $("#controlDate").valid();
+    $("input.datepicker").valid();
 }));
