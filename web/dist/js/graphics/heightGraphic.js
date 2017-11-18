@@ -20,10 +20,6 @@ if (gender == "Masculino"){
         name: 'P97',
         data: [53.4, 58.4, 62.2, 65.3, 67.8, 69.9, 71.6, 73.2, 74.7, 76.2, 77.6, 78.9, 80.2, 81.5, 82.7, 83.9, 85.1, 86.2, 87.3, 88.4, 89.5, 90.5, 91.6, 92.6, 93.6],
         visible: false
-    }, {
-        name: 'Patient',
-        data: graphsData['height'],
-        visible: true
     }]
 }else{
     var dataHeight = [{
@@ -45,12 +41,15 @@ if (gender == "Masculino"){
         name: 'P97',
         data: [52.7, 57.4, 60.9, 63.8, 66.2, 68.2, 70.0, 71.6, 73.2, 74.7, 76.1, 77.5, 78.9, 80.2, 81.4, 82.7, 83.9, 85.0, 86.2, 87.3, 88.4, 89.4, 90.5, 91.5, 92.5],
         visible: false
-    }, {
-        name: 'Patient',
-        data: graphsData['height'],
-        visible: true
     }]
 }
+
+dataHeight.unshift({
+    name: 'Patiente',
+    data: graphsData['height'],
+});
+
+// Set chart configuration
 
 Highcharts.chart('heightGraphic', {
     title: {
