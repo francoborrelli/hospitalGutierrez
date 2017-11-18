@@ -32,15 +32,6 @@ if (gender == "Masculino"){
 }
 
 Highcharts.chart('weightGraphic', {
-    chart: {
-        backgroundColor: '#fafafa',
-        type: 'line',
-        renderTo: 'chart',
-        spacingLeft: 40,
-        width: 700,
-        defaultSeriesType: 'areaspline',
-        zoomType: 'x',
-    },
     title: {
         text: ('Curva de Crecimiento ' + gender)
     },
@@ -58,14 +49,6 @@ Highcharts.chart('weightGraphic', {
     },
     exporting: {
         filename:(patient + ' - Curva de Crecimiento') 
-    },
-    plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: false
-        }
     },
     series: dataWeight,
 });

@@ -24,22 +24,12 @@ if (gender == "Masculino"){
 }
 
 Highcharts.chart('heightGraphic', {
-    chart: {
-        backgroundColor: '#fafafa',
-        type: 'line',
-        renderTo: 'chart',
-        spacingRight: 10,
-        spacingLeft: 40,
-        width: 700,
-        defaultSeriesType: 'areaspline',
-        zoomType: 'x',
-    },
     title: {
         text: ('Curva de Talla ' + gender)
     },
     xAxis: {
         min: 0,
-        categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13, 14, 15,16,17,18,19,20,21,22,23,24],
+        categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
         title: {
             text: 'Edad (meses)'
         },
@@ -51,14 +41,6 @@ Highcharts.chart('heightGraphic', {
     },
     exporting: {
         filename:(patient + ' - Curva de Talla') 
-    },
-    plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: false
-        }
     },
     series: dataHeight,
 });

@@ -24,15 +24,6 @@ if (gender == "Masculino"){
 }
 
 Highcharts.chart('ppcGraphic', {
-    chart: {
-        backgroundColor: '#fafafa',
-        type: 'line',
-        renderTo: 'chart',
-        spacingLeft: 40,
-        width: 700,
-        defaultSeriesType: 'areaspline',
-        zoomType: 'x',
-    },
     title: {
         text: ('Curva de percentil perímetro cefálico ' + gender)
     },
@@ -50,14 +41,6 @@ Highcharts.chart('ppcGraphic', {
     },
     exporting: {
         filename: (patient + " - PPC")
-    },
-    plotOptions: {
-        line: {
-            dataLabels: {
-                enabled: true
-            },
-            enableMouseTracking: false
-        }
     },
     series: dataPPC,
 });

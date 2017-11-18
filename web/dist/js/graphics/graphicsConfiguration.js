@@ -12,8 +12,29 @@ Highcharts.setOptions({
         loading:'Cargando...',
         noData:'No hay datos para mostrar',
         printChart: 'Imprimir Gráfico',
-        resetZoom: 'Sacar Zoom'
-    }
+        resetZoom: 'Sacar Zoom',
+        resetZoomTitle: 'Sacar Zoom'
+    },
+    chart: {
+        backgroundColor: '#fafafa',
+        type: 'line',
+        renderTo: 'chart',
+        spacingLeft: 40,
+        width: 700,
+        defaultSeriesType: 'areaspline',
+        zoomType: 'x',
+    },
+    plotOptions: {
+        series:{
+            connectNulls: true,
+        },
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
 });
 
 // Deshabilita la opción print
