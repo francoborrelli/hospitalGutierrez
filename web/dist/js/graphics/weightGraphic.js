@@ -1,5 +1,6 @@
 Highcharts.chart('weightGraphic', {
     chart: {
+        backgroundColor: '#fafafa',
         type: 'line',
         renderTo: 'chart',
         spacingLeft: 40,
@@ -12,13 +13,16 @@ Highcharts.chart('weightGraphic', {
     xAxis: {
         categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13],
         title: {
-            text: 'Semana'
+            text: 'Edad (semanas)'
         }
     },
     yAxis: {
         title: {
             text: 'Peso (kg)'
         }
+    },
+    exporting: {
+        filename:(patient + ' - Curva de Crecimiento') 
     },
     plotOptions: {
         line: {
