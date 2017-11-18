@@ -16,14 +16,28 @@ Highcharts.setOptions({
         resetZoomTitle: 'Sacar Zoom',
         contextButtonTitle: 'Menú de opciones de descarga'
     },
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 550
+            },
+            chartOptions:{
+            chart: {
+                spacingLeft: 0,
+                spacingRight: 10,
+                height: 300,
+            },              
+        }}]
+    },
     chart: {
         backgroundColor: '#fafafa',
         type: 'line',
         renderTo: 'chart',
-        spacingLeft: 40,
-        width: 700,
+        spacingLeft: 50,
+        spacingRight: 50,
         defaultSeriesType: 'areaspline',
         zoomType: 'x',
+        height: 400,
     },
     plotOptions: {
         series:{

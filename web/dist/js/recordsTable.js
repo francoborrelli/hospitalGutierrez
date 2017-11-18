@@ -93,6 +93,8 @@ $('.btn-delete').click(function() {
   });
   
 
+// Reports responsiveness
+
 $('a.nav-link').click(function(){
     $('a.nav-link').each(function(){
         $(this).removeClass('active');
@@ -103,4 +105,6 @@ $('a.nav-link').click(function(){
         $(this).removeClass('show active');
     })
     $(href).addClass('show active');
+    window.dispatchEvent(new Event('resize'));
+    oTable.columns.adjust().draw();
 })
