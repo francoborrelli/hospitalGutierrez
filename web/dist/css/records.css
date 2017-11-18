@@ -71,6 +71,9 @@ textarea {
     margin-bottom: 5px;
 }
 
+.dataTable{
+    width: inherit!important;
+}
 
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
