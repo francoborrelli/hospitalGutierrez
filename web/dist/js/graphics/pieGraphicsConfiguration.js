@@ -20,6 +20,9 @@ Highcharts.setOptions({
         plotShadow: false,
         type: 'pie'
     },
+    tooltip: {
+        valueDecimals: 2,
+     },
     credits: false,
     plotOptions: {
         pie: {
@@ -30,6 +33,24 @@ Highcharts.setOptions({
                 enabled: false
             },
             showInLegend: true
+        }
+    },
+    exporting: {
+        chartOptions: {
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
+                        distance: -50,
+                        filter: {
+                            property: 'percentage',
+                            operator: '>',
+                            value: 4
+                        }
+                    }
+                }
+            },
         }
     }
 });
