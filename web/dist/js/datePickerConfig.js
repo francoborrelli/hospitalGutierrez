@@ -9,7 +9,12 @@ $('.datepicker').datepicker({
     todayBtn: 'linked',
 });
 
-$('.datepicker-days').find("td").each(
-    $(this).click(function(){
+$('.datepicker').datepicker().on('changeDate', function (ev) {
     $("#controlDate").valid();
-}));
+});
+
+if (typeof birthday !== 'undefined') {
+
+    $('.datepicker').datepicker("setStartDate", birthday);
+    
+}

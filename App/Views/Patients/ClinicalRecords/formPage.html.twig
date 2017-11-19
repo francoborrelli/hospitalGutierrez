@@ -38,6 +38,9 @@
 
 
 {% block javascripts %}
+    <script>
+        var birthday = "{{patient.birthday|date('d/m/Y')}}";
+    </script>
     <script src="/web/assets/jquery-validate/jquery.validate.min.js"></script>
     <script src="/web/assets/jquery-validate/autoresize.jquery.js"></script>
     <script src="/web/assets/datePicker/js/bootstrap-datepicker.min.js"></script>
