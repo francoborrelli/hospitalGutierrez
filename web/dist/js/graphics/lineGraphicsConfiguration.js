@@ -1,10 +1,13 @@
 Highcharts.setOptions({
     chart: {
         type: 'line',
-        zoomType: 'x',
+        zoomType: 'xy',
     },
     plotOptions: {
         series:{
+            marker: {
+                symbol:'circle',
+            },
             connectNulls: true,
             lineWidth: 1,
             events: {
@@ -20,15 +23,25 @@ Highcharts.setOptions({
         },
         line: {
             dataLabels: {
-                enabled: true
+                enabled: false,
             },
-            enableMouseTracking: false
+            enableMouseTracking: true
         }
     },
     exporting: {
         chartOptions: {
             subtitle: {
                 text: patient,
+            },
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        style: {
+                            fontSize: '5px',
+                        },
+                        enabled: true
+                    }
+                }
             }
         }
     }
