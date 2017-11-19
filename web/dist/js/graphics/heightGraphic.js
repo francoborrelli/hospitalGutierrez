@@ -67,10 +67,19 @@ Highcharts.chart('heightGraphic', {
     },
     xAxis: {
         min: 0,
-        categories: [0,1,2,3,4,5,6,7,8,9,10,11,'Año',13,14,15,16,17,18,19,20,21,22,23,'2 años'],
+        categories: [0,1,2,3,4,5,6,7,8,9,10,11,'12',13,14,15,16,17,18,19,20,21,22,23,'24'],
         title: {
             text: 'Edad (meses)'
         },
+    },
+    tooltip: {
+        formatter: function() {
+            return 'Mes: <b>' + this.x + '<br/><span style="color:' 
+            + this.series.color
+            + '">\u25CF</span> '
+            + this.series.name + ': '
+            + this.y;
+        }
     },
     yAxis: {
         title: {

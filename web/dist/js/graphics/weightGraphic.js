@@ -67,6 +67,15 @@ Highcharts.chart('weightGraphic', {
     title: {
         text: ('Curva de Crecimiento ' + gender)
     },
+    tooltip: {
+        formatter: function() {
+            return 'Semana: <b>' + this.x + '<br/><span style="color:' 
+            + this.series.color
+            + '">\u25CF</span> '
+            + this.series.name + ': '
+            + this.y;
+        }
+    },
     xAxis: {
         min: 0,
         categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13],
