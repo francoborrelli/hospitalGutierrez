@@ -43,3 +43,22 @@ Highcharts.setOptions({
 
 var theExportOptions = Highcharts.getOptions().exporting.buttons.contextButton.menuItems;
 theExportOptions.splice(0, 2);
+
+
+// Fix responsiveness
+
+// Reports responsiveness
+
+$('a.nav-link').click(function(){
+    $('a.nav-link').each(function(){
+        $(this).removeClass('active');
+    })
+    $(this).addClass('active');
+    href = $(this).attr('href');
+    $('.tab-pane').each(function(){
+        $(this).removeClass('show active');
+    })
+    $(href).addClass('show active');
+    window.dispatchEvent(new Event('resize'));
+    oTable.columns.adjust().draw();
+})
