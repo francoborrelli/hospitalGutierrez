@@ -41,6 +41,7 @@ if (gender == "Masculino"){
         visible: false
     }, {
         name: 'P50',
+        color: '#BFFF00',
         data: [3.2, 3.3, 3.6, 3.8, 4.1, 4.3, 4.6, 4.8, 5.0, 5.2, 5.4, 5.5, 5.7, 5.8],
     }, {
         name: 'P85',
