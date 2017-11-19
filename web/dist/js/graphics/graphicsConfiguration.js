@@ -64,6 +64,13 @@ Highcharts.setOptions({
             enableMouseTracking: false
         }
     },
+    exporting: {
+        chartOptions: {
+            subtitle: {
+                text: patient,
+            }
+        }
+    }
 });
 
 // Deshabilita la opción print
