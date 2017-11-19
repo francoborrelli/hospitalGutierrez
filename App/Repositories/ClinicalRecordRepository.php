@@ -90,6 +90,7 @@ class ClinicalRecordRepository extends EntityRepository
             ->select('c')
             ->from('App\Models\ClinicalRecord', 'c');
         $date = clone $patient->getBirthday();
+        $date->setTime(23, 59, 59);
         $qb->andWhere('c.patient = :patient')
             ->andWhere('c.deleted = false')
             ->setParameter('patient', $patient)
