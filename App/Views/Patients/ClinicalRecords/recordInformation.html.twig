@@ -1,3 +1,5 @@
+{% set days = clinicalRecord.age.format('%d') %}
+
 <div class="row" id="personalData">
    <div class="col-md-12">
         <div class="white-box">
@@ -6,11 +8,11 @@
                     <div class="col-md-12">
                         <strong>Edad</strong>
                         {% if clinicalRecord.age.format('%y') == 0 and clinicalRecord.format('%m') == 0 %}
-                            <p>{{ clinicalRecord.age.format('%d días') }}</p>
+                            <p>{% if days == "1" %} 1 día {% else %} {{days}} dias {% endif %}</p>
                         {% elseif clinicalRecord.age.format('%y') == 0 %}
-                            <p>{{ clinicalRecord.age.format('%m meses y %d días') }}</p>
+                            <p>{{ clinicalRecord.age.format('%m meses y ') }}{% if days == "1" %} 1 día {% else %} {{days}} dias {% endif %}</p>
                         {% else %}
-                            <p>{{ clinicalRecord.age.format('%y años, %m meses y %d días') }}</p>
+                            <p>{{ clinicalRecord.age.format('%y años, %m meses y') }} {% if days == "1" %} 1 día {% else %} {{days}} dias {% endif %}</p>
                         {% endif %}
                     </div>
                 </div>
@@ -127,7 +129,7 @@
                 </div>
                 <hr>
                 <div class="row text-center m-t-10">
-                    <div class="col-md-12"><strong>Control Por</strong>
+                    <div class="col-md-12"><strong>Pediatra</strong>
                         <p>{{clinicalRecord.user.firstName}} {{clinicalRecord.user.lastName}}</p>
                     </div>
                 </div>
