@@ -30,7 +30,7 @@ Highcharts.setOptions({
         }}]
     },
     chart: {
-        backgroundColor: '#fafafa',
+        backgroundColor: '#FFFFFF',
         type: 'line',
         renderTo: 'chart',
         spacingLeft: 50,
