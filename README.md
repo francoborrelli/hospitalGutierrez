@@ -2,22 +2,18 @@
 
 ## Bot
 
-@HospitalGutierrez_Bot
+[@HospitalGutierrez_Bot](https://telegram.me/HospitalGutierrez_Bot)
 
 ## Cuentas
 
 * Cuenta Administrador
-  * Email: admin@admin.com
+  * Email: administrador
   * Contraseña: 12admin34
 
 * Cuenta Pediatra
-  * Email: pediatra@pediatra.com
+  * Nombre de Usuario: pediatra
   * Contraseña: 12pediatra34
 
 * Cuenta Recepcionista
-  * Email: recepcionista@gmail.com
+  * Email: recepcionista
   * Contraseña: proyecto789
-
-* Cuenta Bloqueado
-  * Email: bloqueado@gmail.com
-  * Contraseña: bloqueado1
