@@ -9,7 +9,7 @@
 
 {% block buttons %}
     {% if currentUser.hasPermission('control_destroy') %}
-       <button title="Eliminar Consulta" data-toggle="modal" data-target="#deleteRecord" class="btn btn-sm btn-danger" id="editbtn"><i class="fa fa-trash" aria-hidden="true"></i></button>
+       <button title="Eliminar Consulta" data-toggle="modal" data-target="#deleteRecord" class="btn btn-sm btn-danger" id="deletebtn"><i class="fa fa-trash" aria-hidden="true"></i></button>
     {% endif %}  
     {% if currentUser.hasPermission('control_update') and clinicalRecord.user == currentUser %}
        <a title="Editar Consulta" class="btn btn-sm btn-orange" id="editbtn" href="/patient/{{ patient.id }}/record/{{clinicalRecord.controlNumber}}/edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
@@ -21,7 +21,7 @@
 
 {% block navtabs %}
     <li class="nav-item">
-        <a class="nav-link active" id="personal-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="tab" aria-controls="records" aria-expanded="true"><i class="fa fa-calendar" aria-hidden="true"></i> {{now|date("d/m/Y")}}</a>
+        <a class="nav-link active" id="records-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="tab" aria-controls="records" aria-expanded="true"><i class="fa fa-calendar" aria-hidden="true"></i> {{now|date("d/m/Y")}}</a>
     </li>
 {% endblock %}
 
