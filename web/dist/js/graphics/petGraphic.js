@@ -8,6 +8,9 @@ Highcharts.chart('petGraphic', {
     exporting: {
         filename: ('Reporte Mascotas  ' + today)
     },
+    legend: {
+        enabled: false
+    },
     series: [{
         name: 'Porcentaje',
         colorByPoint: true,

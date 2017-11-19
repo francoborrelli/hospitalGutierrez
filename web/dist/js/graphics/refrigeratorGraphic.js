@@ -8,6 +8,9 @@ Highcharts.chart('refrigeratorGraphic', {
     exporting: {
         filename: ('Reporte Heladera  ' + today)
     },
+    legend: {
+        enabled: false
+    },
     series: [{
         name: 'Porcentaje',
         colorByPoint: true,

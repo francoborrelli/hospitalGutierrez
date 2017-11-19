@@ -8,6 +8,9 @@ Highcharts.chart('electricityGraphic', {
     exporting: {
         filename: ('Reporte Electricidad  ' + today)
     },
+    legend: {
+        enabled: false
+    },
     series: [{
         name: 'Porcentaje',
         colorByPoint: true,
