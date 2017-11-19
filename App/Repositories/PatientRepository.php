@@ -80,31 +80,66 @@ class PatientRepository extends EntityRepository
         return $qb;
     }
 
-    public function patientsAmount(){
+    private function getMultipleAmountsOf($type){
+        $qb = $this->createQueryBuilder('p')
+        ->select("count(Distinct l.id) as amount, l.$type")
+        ->from('App\Models\Patient', 'l')
+        ->andWhere('l.deleted = false')
+        ->groupBy("l.$type");
+
+        $result = $qb->getQuery()->getResult();
+
+        return $this->transformArray($result, $type);
+    }
+
+    public function getPatientsAmount(){
 
         $qb = $this->queryBuilderAmount();
 
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function refrigeratorAmount(){
+    public function getRefrigeratorAmount(){
         $qb = $this->queryBuilderAmount();
         $qb->andWhere('l.refrigerator = true');
         
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function petAmount(){
+    public function getPetAmount(){
         $qb = $this->queryBuilderAmount();
         $qb->andWhere('l.pet = true');
         
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function electricityAmount(){
+    public function getElectricityAmount(){
         $qb = $this->queryBuilderAmount();
         $qb->andWhere('l.electricity = true');
         
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getHouseTypeAmounts(){
+        return $this->getMultipleAmountsOf('houseTypeId');
+
+    }
+
+    public function getWaterTypeAmounts(){
+        return $this->getMultipleAmountsOf('waterTypeId');
+    }
+
+    public function getHeatingTypeAmounts(){
+        return $this->getMultipleAmountsOf('heatingTypeId');
+    }
+
+    private function transformArray($array, $type){
+        $result = [];
+
+        foreach($array as $item) {
+            $result[$item[$type]] = (int)$item['amount'];
+        }
+
+        return $result;
     }
 }
