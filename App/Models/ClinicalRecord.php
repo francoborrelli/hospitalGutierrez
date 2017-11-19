@@ -547,7 +547,7 @@ class ClinicalRecord
     {
         $this->weight = $data['weight'];
         $this->nutrition = $data['nutrition'];
-        if (!isset($data['pc'])) 
+        if ($data['pc'] === "") 
             $this->pc = null;
         else
             $this->pc = $data['pc'];
