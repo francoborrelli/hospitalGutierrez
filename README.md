@@ -2,7 +2,7 @@
 
 ## Bot
 
-@HospitalGutierrez_Bot
+[@HospitalGutierrez_Bot](https://telegram.me/HospitalGutierrez_Bot)
 
 ## Cuentas
 
