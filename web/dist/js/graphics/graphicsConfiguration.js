@@ -16,6 +16,9 @@ Highcharts.setOptions({
         resetZoomTitle: 'Sacar Zoom',
         contextButtonTitle: 'Menú de opciones de descarga'
     },
+    credits: {
+        enabled: false
+    },
     responsive: {
         rules: [{
             condition: {
