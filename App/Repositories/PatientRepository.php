@@ -71,5 +71,40 @@ class PatientRepository extends EntityRepository
         $em->flush();
     }
 
+    private function queryBuilderAmount(){
+        $qb = $this->createQueryBuilder('p')
+        ->select('count(Distinct l.id)')
+        ->from('App\Models\Patient', 'l')
+        ->andWhere('l.deleted = false');
 
+        return $qb;
+    }
+
+    public function patientsAmount(){
+
+        $qb = $this->queryBuilderAmount();
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function refrigeratorAmount(){
+        $qb = $this->queryBuilderAmount();
+        $qb->andWhere('l.refrigerator = true');
+        
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function petAmount(){
+        $qb = $this->queryBuilderAmount();
+        $qb->andWhere('l.pet = true');
+        
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function electricityAmount(){
+        $qb = $this->queryBuilderAmount();
+        $qb->andWhere('l.electricity = true');
+        
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

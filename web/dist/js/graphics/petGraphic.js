@@ -1,3 +1,5 @@
+yesPet = (pet * 100) / total;
+
 // Build the chart
 Highcharts.chart('petGraphic', {
     title: {
@@ -10,23 +12,11 @@ Highcharts.chart('petGraphic', {
         name: 'Porcentaje',
         colorByPoint: true,
         data: [{
-            name: 'Microsoft Internet Explorer',
-            y: 56.33
+            name: 'Si',
+            y: yesPet
         }, {
-            name: 'Chrome',
-            y: 24.03,
-        }, {
-            name: 'Firefox',
-            y: 10.38
-        }, {
-            name: 'Safari',
-            y: 4.77
-        }, {
-            name: 'Opera',
-            y: 0.91
-        }, {
-            name: 'Proprietary or Undetectable',
-            y: 0.2
+            name: 'No',
+            y: (100 - yesPet),
         }]
     }]
 });
