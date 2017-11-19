@@ -25,7 +25,7 @@ Highcharts.setOptions({
             chart: {
                 spacingLeft: 0,
                 spacingRight: 10,
-                height: 300,
+                height: 500,
             },              
         }}]
     },
@@ -35,7 +35,7 @@ Highcharts.setOptions({
         spacingLeft: 50,
         spacingRight: 50,
         defaultSeriesType: 'areaspline',
-        height: 400,
+        height: 500,
     },
 });
 

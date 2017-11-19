@@ -13,7 +13,7 @@ Highcharts.setOptions({
             events: {
                 legendItemClick: function(event) {
                     var seriesIndex = this.index;
-                    if (seriesIndex == 0){
+                    if (seriesIndex == 5){
                         event.preventDefault();
                     }else{
                         return
