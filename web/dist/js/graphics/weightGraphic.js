@@ -56,7 +56,7 @@ if (gender == "Masculino"){
 }
 
 dataWeight.unshift({
-    name: 'Patiente',
+    name: 'Paciente',
     data: graphsData['weight'],
 });
 

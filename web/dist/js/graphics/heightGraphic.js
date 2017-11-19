@@ -55,7 +55,7 @@ if (gender == "Masculino"){
 }
 
 dataHeight.unshift({
-    name: 'Patiente',
+    name: 'Paciente',
     data: graphsData['height'],
 });
 

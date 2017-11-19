@@ -54,7 +54,7 @@ if (gender == "Masculino"){
 }
 
 dataPPC.unshift({
-    name: 'Patiente',
+    name: 'Paciente',
     data: graphsData['ppc'],
 });
 
