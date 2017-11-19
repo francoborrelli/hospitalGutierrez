@@ -50,7 +50,7 @@
                 {% for role in data.roles %}
                     <div class="form-check">
                         <label class="custom-control custom-checkbox" for="{{role.id}}">
-                            <input type="checkbox" id="{{role.id}}"class="custom-control-input" name="roles[]" value="{{ role.id }}" {% if newErrors is defined and user.hasRole(role.id)%}checked{% endif %}>
+                            <input type="checkbox" id="{{role.id}}" class="custom-control-input" name="roles[]" value="{{ role.id }}" {% if newErrors is defined and user.hasRole(role.id)%}checked{% endif %}>
                             <span class="custom-control-indicator"></span>
                             <span class="custom-control-description">{{ role.name }}</span>
                         </label>

@@ -15,7 +15,7 @@
                     <p>Esta a punto de eliminar al {{type}} <span class="modalText">{% if person is defined %}{{ person.firstName }} {{ person.lastName }}{% endif %}</span>, ¿Está seguro que desea continuar?</p>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" id="deletedId" name="deletedId" {% if person is defined %}{{ person.firstName }} {{ person.lastName }}{% endif %}>
+                    <input type="hidden" id="deletedId" name="deletedId" {% if person is defined %} value="{{ person.id }}"{% endif %}>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-secondary">Eliminar</button>
                 </div>
