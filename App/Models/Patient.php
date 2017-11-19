@@ -137,19 +137,11 @@ class Patient
      */
     private $deleted;
 
-     /**
-     * One Patient has Many ClinicalRecords.
-     * @OneToMany(targetEntity="ClinicalRecord", mappedBy="patient")
-     */
-     private $clinicalRecords;
-     //
-
     public function __construct($data)
     {
         $this->setData($data);
         $this->setDemographicData($data);
         $this->deleted = false;
-        $this->clinicalRecords = new ArrayCollection();
     }
 
     public function setData($data)
