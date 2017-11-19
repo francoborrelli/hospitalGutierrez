@@ -60,5 +60,7 @@ $('.card a.nav-link').click(function(){
     })
     $(href).addClass('show active');
     window.dispatchEvent(new Event('resize'));
-    oTable.columns.adjust().draw();
+    if (typeof oTable !== 'undefined'){
+        oTable.columns.adjust().draw();
+    }
 })
