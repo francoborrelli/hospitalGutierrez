@@ -1,5 +1,9 @@
 # Proyecto de Software 2017 - Grupo 2
 
+## Bot
+
+@HospitalGutierrez_Bot
+
 ## Cuentas
 
 * Cuenta Administrador
