@@ -35,9 +35,18 @@ class ReportController extends Controller
 
         $houseAmount = $repository->getHouseTypeAmounts();
         $houseType = HouseTypeRepository::findAll();
+
         $graphicData['house'] = $this->setDataArray($houseType,$houseAmount);
 
+        $waterAmount = $repository->getWaterTypeAmounts();
+        $waterType = WaterTypeRepository::findAll();
+        
+        $graphicData['water'] = $this->setDataArray($waterType,$waterAmount);
 
+        $heatingAmount = $repository->getHeatingTypeAmounts();
+        $heatingType = HeatingTypeRepository::findAll();
+        
+        $graphicData['heat'] = $this->setDataArray($heatingType,$heatingAmount);
 
         return $graphicData;
     }

@@ -31,7 +31,7 @@ Highcharts.setOptions({
             colors: pieColors,
             dataLabels: {
                 enabled: true,
-                format: '{point.percentage:.1f} %',
+                format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
                 distance: -50,
                 filter: {
                     property: 'percentage',

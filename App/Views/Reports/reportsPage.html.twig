@@ -70,12 +70,14 @@
 
 {% block javascripts %}
     <script>
-    
+
         var total = {{data.total}};
         var refrigerator = {{data.refrigerator}};
         var electricity = {{data.electricity}};
         var pet = {{data.pet}};
-
+        var house = {{ data.house|json_encode|raw }};
+        var heat = {{ data.heat|json_encode|raw }};
+        var water = {{ data.water|json_encode|raw }};
     </script>
     <script src="/web/assets/highcharts/js/highcharts.js"></script>
     <script src="/web/assets/highcharts/modules/exporting.js"></script>
