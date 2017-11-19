@@ -34,7 +34,13 @@
         <a class="nav-link active" id="personal-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="tab" aria-controls="records" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden"> Historia</span> Clínica</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="reports-tab" data-form="#reports" data-toggle="tab" href="#reports" role="tab" aria-controls="records" aria-expanded="true"><i class="fa fa-bar-chart" aria-hidden="true"></i> Reportes</a>
+        <a class="nav-link" id="weight-tab" data-form="#weight" data-toggle="tab" href="#weight" role="tab" aria-controls="weight" aria-expanded="true"><i class="fa fa-line-chart" aria-hidden="true"></i> Crecimiento</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="height-tab" data-form="#height" data-toggle="tab" href="#height" role="tab" aria-controls="height" aria-expanded="true"><i class="fa fa-bar-chart" aria-hidden="true"></i> Talla</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ppc-tab" data-form="#ppc" data-toggle="tab" href="#ppc" role="tab" aria-controls="ppc" aria-expanded="true"><i class="fa fa-area-chart" aria-hidden="true"></i> PPC</a>
     </li>
 {% endblock %}
 
@@ -45,17 +51,43 @@
             {% include 'Patients/ClinicalRecords/recordsTable.html.twig' %}
         </div>
     </div>
-    <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="records-tab">
+    <div class="tab-pane fade" id="weight" role="tabpanel" aria-labelledby="weight-tab">
         <br>
-        <div>
+        <div class="container">
+          <div id="weightGraphic"></div>
         </div>
-    </div>
+    </div>  
+    <div class="tab-pane fade" id="height" role="tabpanel" aria-labelledby="height-tab">
+        <br>
+        <div class="container">
+          <div id="heightGraphic"></div>
+        </div>
+    </div>  
+    <div class="tab-pane fade" id="ppc" role="tabpanel" aria-labelledby="ppc-tab">
+        <br>
+        <div class="container">
+          <div id="ppcGraphic"></div>
+        </div>
+    </div>  
 {% endblock %}
 
 {% block javascripts %}
+    <script>
+        var graphsData = {{ data.graphsData|json_encode|raw }};
+        var patient = '{{patient.firstName}} {{patient.LastName}}';
+        var gender = '{{ patient.gender.name }}';
+    </script>
     <script src="/web/assets/dataTables/js/datatables.min.js"></script>
     <script src="/web/assets/dataTables/js/responsive.bootstrap4.min.js"></script>
     <script src="/web/dist/js/recordsTable.js"></script>
+    <script src="/web/assets/highcharts/js/highcharts.js"></script>
+    <script src="/web/assets/highcharts/modules/exporting.js"></script>
+    <script src="/web/assets/highcharts/themes/grid-light.js"></script>
+    <script src="/web/dist/js/graphics/graphicsConfiguration.js"></script>
+    <script src="/web/dist/js/graphics/lineGraphicsConfiguration.js"></script>
+    <script src="/web/dist/js/graphics/weightGraphic.js"></script>
+    <script src="/web/dist/js/graphics/heightGraphic.js"></script>
+    <script src="/web/dist/js/graphics/ppcGraphic.js"></script>
 {% endblock %}
 
 {% endembed %}

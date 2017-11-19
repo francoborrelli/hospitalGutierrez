@@ -25,6 +25,11 @@
             <div class="dropdown-divider"></div>
         {% endif %}
 
+        {% if currentUser.hasPermission("reportes_index") %}
+            {{ navbar.dropdownItem("Reportes", "fa-pie-chart", "/reports", "dropdown_report") }}    
+            <div class="dropdown-divider"></div>
+        {% endif %}
+
         <!-- Cerrar Sesión -->
         {{ navbar.dropdownItem('Cerrar Sesión','fa-sign-out', '/logout') }} 
 

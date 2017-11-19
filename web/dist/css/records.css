@@ -71,6 +71,9 @@ textarea {
     margin-bottom: 5px;
 }
 
+.dataTable{
+    width: inherit!important;
+}
 
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
@@ -107,6 +110,10 @@ input[type=number]::-webkit-inner-spin-button {
 
 .container.userReport .card {
     min-height: 500px;
+}
+
+.highcharts-credits{
+    display: none;
 }
 
 @media(max-width: 852px) {

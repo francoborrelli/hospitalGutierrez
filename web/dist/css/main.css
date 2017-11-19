@@ -165,6 +165,9 @@ html {
       margin-right: 15px;
       margin-bottom: -65px;
   }
+  .graphics .hidden{
+      display: none;
+  }
 }
 
 @media (max-width: 525px) {

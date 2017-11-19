@@ -40,12 +40,28 @@ class ClinicalRecordController extends Controller
             ->setMaxResults($listAmount)
         );
 
+        $graphsData = $this->getGraphsData($patient);
+
         $data = ['patient' => $patient,
                  'clinicalRecords' => $records,
+                 'graphsData' => $graphsData,
                  'page' => $page,
                  'pages' => $pages];
 
         return $data;
+    }
+
+    private function getGraphsData($patient)
+    {
+        $em = $this->getEntityManager();
+        $repository = $em->getRepository(ClinicalRecord::class);
+
+        $graphsData = [];
+        $graphsData['weight'] = $repository->findWeightData($patient);
+        $graphsData['ppc'] = $repository->findPpcData($patient);
+        $graphsData['height'] = $repository->findHeightData($patient);
+
+        return $graphsData;
     }
 
     public function newAction()
