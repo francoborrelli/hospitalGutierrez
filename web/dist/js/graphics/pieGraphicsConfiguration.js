@@ -24,6 +24,24 @@ Highcharts.setOptions({
         valueDecimals: 2,
      },
     credits: false,
+    subtitle: {
+        text: ('Total de Pacientes: ' + total),
+    },    
+    tooltip: {
+        formatter: function() {
+            return '<br><span style="color:' 
+            + this.series.color
+            + '">\u25CF</span> '
+            + this.series.name + ': '
+            + this.y.toFixed(2) 
+            + '<br><span style="color:' 
+            + this.series.color
+            + '">\u25CF</span> Cantidad: '
+            + (this.percentage * total) / 100
+            + ' de '
+            +  total; 
+        }
+    },
     plotOptions: {
         pie: {
             allowPointSelect: true,
