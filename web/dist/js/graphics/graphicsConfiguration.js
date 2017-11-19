@@ -49,7 +49,7 @@ theExportOptions.splice(0, 2);
 
 // Reports responsiveness
 
-$('a.nav-link').click(function(){
+$('.card a.nav-link').click(function(){
     $('a.nav-link').each(function(){
         $(this).removeClass('active');
     })
