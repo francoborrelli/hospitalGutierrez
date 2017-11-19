@@ -37,7 +37,7 @@ Highcharts.setOptions({
             + '<br><span style="color:' 
             + this.series.color
             + '">\u25CF</span> Cantidad: '
-            + (this.percentage * total) / 100
+            + ((this.percentage * total) / 100).toFixed(0)
             + ' de '
             +  total; 
         }
