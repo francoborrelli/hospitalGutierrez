@@ -13,8 +13,8 @@ $('.datepicker').datepicker().on('changeDate', function (ev) {
     $("#controlDate").valid();
 });
 
-if (typeof birthday !== 'undefined') {
+if ((typeof dataBirthday) !== 'undefined') {
 
-    $('.datepicker').datepicker("setStartDate", birthday);
+    $('.datepicker').datepicker("setStartDate", dataBirthday);
     
 }
