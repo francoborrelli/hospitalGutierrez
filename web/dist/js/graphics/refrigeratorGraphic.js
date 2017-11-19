@@ -12,10 +12,10 @@ Highcharts.chart('refrigeratorGraphic', {
         name: 'Porcentaje',
         colorByPoint: true,
         data: [{
-            name: 'Si',
+            name: 'SI',
             y: yesRefrigerator
         }, {
-            name: 'No',
+            name: 'NO',
             y: (100 - yesRefrigerator),
         }]
     }]

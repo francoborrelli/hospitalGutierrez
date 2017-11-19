@@ -30,25 +30,23 @@ Highcharts.setOptions({
             cursor: 'pointer',
             colors: pieColors,
             dataLabels: {
-                enabled: false
+                enabled: true,
+                format: '{point.percentage:.1f} %',
+                distance: -50,
+                filter: {
+                    property: 'percentage',
+                    operator: '>',
+                    value: 4
+                }
             },
-            showInLegend: true
+            showInLegend: true,
         }
     },
     exporting: {
         chartOptions: {
             plotOptions: {
                 pie: {
-                    dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
-                        distance: -50,
-                        filter: {
-                            property: 'percentage',
-                            operator: '>',
-                            value: 4
-                        }
-                    }
+
                 }
             },
         }

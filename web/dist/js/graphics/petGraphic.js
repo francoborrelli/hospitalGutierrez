@@ -12,10 +12,10 @@ Highcharts.chart('petGraphic', {
         name: 'Porcentaje',
         colorByPoint: true,
         data: [{
-            name: 'Si',
+            name: 'SI',
             y: yesPet
         }, {
-            name: 'No',
+            name: 'NO',
             y: (100 - yesPet),
         }]
     }]
