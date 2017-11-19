@@ -19,6 +19,9 @@ $('#logInForm').validate({
             required: ""
         },
     },
+    errorPlacement: function(error,element) {
+        return false;
+    },
     highlight: function (element) {
         $(element).addClass('is-invalid');
     },
