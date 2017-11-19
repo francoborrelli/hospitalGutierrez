@@ -14,52 +14,58 @@
         </div>
         <div class="card-body">
             <!-- nav links -->
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="house-tab" data-form="#house" data-toggle="tab" href="#house" role="tab" aria-controls="house" aria-expanded="true"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden"> Vivienda</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="heat-tab" data-form="#heat" data-toggle="tab" href="#heat" role="tab" aria-controls="heat" aria-expanded="true"><i class="fa fa-fire" aria-hidden="true"></i><span class="hidden"> Calefacción</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="water-tab" data-form="#water" data-toggle="tab" href="#water" role="tab" aria-controls="water" aria-expanded="true"><i class="fa fa-tint" aria-hidden="true"></i><span class="hidden"> Agua</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="refrigerator-tab" data-form="#refrigerator" data-toggle="tab" href="#refrigerator" role="tab" aria-controls="refrigerator" aria-expanded="true"><i class="fa fa-thermometer-three-quarters" aria-hidden="true"></i><span class="hidden"> Heladera</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="electricity-tab" data-form="#electricity" data-toggle="tab" href="#electricity" role="tab" aria-controls="electricity" aria-expanded="true"><i class="fa fa-bolt" aria-hidden="true"></i><span class="hidden"> Electricidad</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pet-tab" data-form="#pet" data-toggle="tab" href="#pet" role="tab" aria-controls="pet" aria-expanded="true"><i class="fa fa-paw" aria-hidden="true"></i><span class="hidden"> Mascota</span></a>
-                </li>
-            </ul>
+            {% if data.total != 0  %}
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="house-tab" data-form="#house" data-toggle="tab" href="#house" role="tab" aria-controls="house" aria-expanded="true"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden"> Vivienda</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="heat-tab" data-form="#heat" data-toggle="tab" href="#heat" role="tab" aria-controls="heat" aria-expanded="true"><i class="fa fa-fire" aria-hidden="true"></i><span class="hidden"> Calefacción</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="water-tab" data-form="#water" data-toggle="tab" href="#water" role="tab" aria-controls="water" aria-expanded="true"><i class="fa fa-tint" aria-hidden="true"></i><span class="hidden"> Agua</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="refrigerator-tab" data-form="#refrigerator" data-toggle="tab" href="#refrigerator" role="tab" aria-controls="refrigerator" aria-expanded="true"><i class="fa fa-thermometer-three-quarters" aria-hidden="true"></i><span class="hidden"> Heladera</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="electricity-tab" data-form="#electricity" data-toggle="tab" href="#electricity" role="tab" aria-controls="electricity" aria-expanded="true"><i class="fa fa-bolt" aria-hidden="true"></i><span class="hidden"> Electricidad</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pet-tab" data-form="#pet" data-toggle="tab" href="#pet" role="tab" aria-controls="pet" aria-expanded="true"><i class="fa fa-paw" aria-hidden="true"></i><span class="hidden"> Mascota</span></a>
+                    </li>
+                </ul>
+            {% endif %}
             <!-- body -->
             <div class="tab-content">
-                <div class="tab-pane fade show active" id="house" role="tabpanel" aria-labelledby="house-tab">
-                    <br>
-                    <div id="houseGraphic"></div>
-                </div>
-                <div class="tab-pane fade" id="heat" role="tabpanel" aria-labelledby="heat-tab">
-                    <br>
-                    <div id="heatGraphic"></div>
-                </div>  
-                <div class="tab-pane fade" id="water" role="tabpanel" aria-labelledby="water-tab">
-                    <br>
-                    <div id="waterGraphic"></div>
-                </div>  
-                <div class="tab-pane fade" id="refrigerator" role="tabpanel" aria-labelledby="refrigerator-tab">
-                    <br>
-                    <div id="refrigeratorGraphic"></div>
-                </div> 
-                <div class="tab-pane fade" id="electricity" role="tabpanel" aria-labelledby="electricity-tab">
-                    <br>
-                    <div id="electricityGraphic"></div>
-                </div>  
-                <div class="tab-pane fade" id="pet" role="tabpanel" aria-labelledby="pet-tab">
-                    <br>
-                    <div id="petGraphic"></div>
-                </div>   
+                {% if data.total != 0  %}
+                    <div class="tab-pane fade show active" id="house" role="tabpanel" aria-labelledby="house-tab">
+                        <br>
+                        <div id="houseGraphic"></div>
+                    </div>
+                    <div class="tab-pane fade" id="heat" role="tabpanel" aria-labelledby="heat-tab">
+                        <br>
+                        <div id="heatGraphic"></div>
+                    </div>  
+                    <div class="tab-pane fade" id="water" role="tabpanel" aria-labelledby="water-tab">
+                        <br>
+                        <div id="waterGraphic"></div>
+                    </div>  
+                    <div class="tab-pane fade" id="refrigerator" role="tabpanel" aria-labelledby="refrigerator-tab">
+                        <br>
+                        <div id="refrigeratorGraphic"></div>
+                    </div> 
+                    <div class="tab-pane fade" id="electricity" role="tabpanel" aria-labelledby="electricity-tab">
+                        <br>
+                        <div id="electricityGraphic"></div>
+                    </div>  
+                    <div class="tab-pane fade" id="pet" role="tabpanel" aria-labelledby="pet-tab">
+                        <br>
+                        <div id="petGraphic"></div>
+                    </div> 
+                {% else %}
+                    {% include 'Reports/noResults.html.twig' %}        
+                {% endif %}  
             </div>
         </div>
     </div>
@@ -69,26 +75,28 @@
 
 
 {% block javascripts %}
-    <script>
-
-        var total = {{data.total}};
-        var refrigerator = {{data.refrigerator}};
-        var electricity = {{data.electricity}};
-        var pet = {{data.pet}};
-        var house = {{ data.house|json_encode|raw }};
-        var heat = {{ data.heat|json_encode|raw }};
-        var water = {{ data.water|json_encode|raw }};
-    </script>
-    <script src="/web/assets/highcharts/js/highcharts.js"></script>
-    <script src="/web/assets/highcharts/modules/exporting.js"></script>
-    <script src="/web/assets/highcharts/themes/grid-light.js"></script>
-    <script src="/web/dist/js/graphics/graphicsConfiguration.js"></script>
-    <script src="/web/dist/js/graphics/pieGraphicsConfiguration.js"></script>
-    <script src="/web/dist/js/graphics/houseGraphic.js"></script>
-    <script src="/web/dist/js/graphics/heatGraphic.js"></script>
-    <script src="/web/dist/js/graphics/waterGraphic.js"></script>
-    <script src="/web/dist/js/graphics/refrigeratorGraphic.js"></script>
-    <script src="/web/dist/js/graphics/electricityGraphic.js"></script>
-    <script src="/web/dist/js/graphics/petGraphic.js"></script>
+    {% if data.total != 0  %}
+        <script>
+            var total = {{data.total}};
+            var refrigerator = {{data.refrigerator}};
+            var electricity = {{data.electricity}};
+            var pet = {{data.pet}};
+            var house = {{ data.house|json_encode|raw }};
+            var heat = {{ data.heat|json_encode|raw }};
+            var water = {{ data.water|json_encode|raw }};
+        </script>
+        <script src="/web/assets/highcharts/js/highcharts.js"></script>
+        <script src="/web/assets/highcharts/modules/exporting.js"></script>
+        <script src="/web/assets/highcharts/themes/grid-light.js"></script>
+        <script src="/web/dist/js/graphics/graphicsConfiguration.js"></script>
+        <script src="/web/dist/js/graphics/pieGraphicsConfiguration.js"></script>
+        <script src="/web/dist/js/graphics/houseGraphic.js"></script>
+        <script src="/web/dist/js/graphics/heatGraphic.js"></script>
+        <script src="/web/dist/js/graphics/waterGraphic.js"></script>
+        <script src="/web/dist/js/graphics/refrigeratorGraphic.js"></script>
+        <script src="/web/dist/js/graphics/electricityGraphic.js"></script>
+        <script src="/web/dist/js/graphics/petGraphic.js"></script>
+    {% endif %}
+    
 {% endblock %}
 

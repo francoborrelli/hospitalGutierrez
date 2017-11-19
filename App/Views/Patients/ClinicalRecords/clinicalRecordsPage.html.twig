@@ -1,5 +1,5 @@
 {% set noResults = data.clinicalRecords is empty %}
-{% set path = 'Patients/ClinicalRecords/NoResults.html.twig' %}
+{% set path = 'Patients/ClinicalRecords/noResults.html.twig' %}
 
 {% embed 'utils/recordCard.html.twig' with {'patient': data.patient, 'returnRoute': '/patients', 'noResults': noResults, 'path': path} %} 
 

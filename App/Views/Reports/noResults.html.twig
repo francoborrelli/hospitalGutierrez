@@ -1,0 +1,9 @@
+
+<div class="no-results card-block">
+        <h2 class="lead">No hay datos para mostrar</h2>
+        <i class="fa fa-pie-chart" aria-hidden="true"></i>
+        <br>
+        {% if currentUser.hasPermission('paciente_new') %}
+                <a class="btn btn-outline-primary" href="/patients">Agregar Paciente</a>
+        {% endif %}
+</div>
