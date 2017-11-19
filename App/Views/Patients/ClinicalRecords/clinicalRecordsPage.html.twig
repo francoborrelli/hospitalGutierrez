@@ -31,39 +31,39 @@
 
 {% block navtabs %}
     <li class="nav-item">
-        <a class="nav-link active" id="records-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="tab" aria-controls="records" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden"> Historia</span> Clínica</a>
+        <a class="nav-link active" id="records-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="button" aria-controls="records" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden"> Historia</span> Clínica</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="weight-tab" data-form="#weight" data-toggle="tab" href="#weight" role="tab" aria-controls="weight" aria-expanded="true"><i class="fa fa-line-chart" aria-hidden="true"></i> Crecimiento</a>
+        <a class="nav-link" id="weight-tab" data-form="#weight" data-toggle="tab" href="#weight" role="button" aria-controls="weight" aria-expanded="true"><i class="fa fa-line-chart" aria-hidden="true"></i> Crecimiento</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="height-tab" data-form="#height" data-toggle="tab" href="#height" role="tab" aria-controls="height" aria-expanded="true"><i class="fa fa-bar-chart" aria-hidden="true"></i> Talla</a>
+        <a class="nav-link" id="height-tab" data-form="#height" data-toggle="tab" href="#height" role="button" aria-controls="height" aria-expanded="true"><i class="fa fa-bar-chart" aria-hidden="true"></i> Talla</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="ppc-tab" data-form="#ppc" data-toggle="tab" href="#ppc" role="tab" aria-controls="ppc" aria-expanded="true"><i class="fa fa-area-chart" aria-hidden="true"></i> PPC</a>
+        <a class="nav-link" id="ppc-tab" data-form="#ppc" data-toggle="tab" href="#ppc" role="button" aria-controls="ppc" aria-expanded="true"><i class="fa fa-area-chart" aria-hidden="true"></i> PPC</a>
     </li>
 {% endblock %}
 
 {% block tabcontent %}
-    <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
+    <div class="tab-pane fade show active" id="records" aria-labelledby="records-tab">
         <br>
         <div>
             {% include 'Patients/ClinicalRecords/recordsTable.html.twig' %}
         </div>
     </div>
-    <div class="tab-pane fade" id="weight" role="tabpanel" aria-labelledby="weight-tab">
+    <div class="tab-pane fade" id="weight" aria-labelledby="weight-tab">
         <br>
         <div class="container">
           <div id="weightGraphic"></div>
         </div>
     </div>  
-    <div class="tab-pane fade" id="height" role="tabpanel" aria-labelledby="height-tab">
+    <div class="tab-pane fade" id="height" aria-labelledby="height-tab">
         <br>
         <div class="container">
           <div id="heightGraphic"></div>
         </div>
     </div>  
-    <div class="tab-pane fade" id="ppc" role="tabpanel" aria-labelledby="ppc-tab">
+    <div class="tab-pane fade" id="ppc" aria-labelledby="ppc-tab">
         <br>
         <div class="container">
           <div id="ppcGraphic"></div>

@@ -21,12 +21,12 @@
 
 {% block navtabs %}
     <li class="nav-item">
-        <a class="nav-link active" id="records-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="tab" aria-controls="records" aria-expanded="true"><i class="fa fa-calendar" aria-hidden="true"></i> {{now|date("d/m/Y")}}</a>
+        <a class="nav-link active" id="records-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="button" aria-controls="records" aria-expanded="true"><i class="fa fa-calendar" aria-hidden="true"></i> {{now|date("d/m/Y")}}</a>
     </li>
 {% endblock %}
 
 {% block tabcontent %}
-    <div class="tab-pane fade show active" id="records" role="tabpanel" aria-labelledby="records-tab">
+    <div class="tab-pane fade show active" id="records" aria-labelledby="records-tab">
         <br>
         <div>
             {% include 'Patients/ClinicalRecords/recordInformation.html.twig' %}
