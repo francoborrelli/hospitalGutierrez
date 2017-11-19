@@ -21,7 +21,7 @@
 
 {% block navtabs %}
     <li class="nav-item">
-        <a class="nav-link active" id="records-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="button" aria-controls="records" aria-expanded="true"><i class="fa fa-calendar" aria-hidden="true"></i> {{now|date("d/m/Y")}}</a>
+        <a class="nav-link active" id="records-tab" data-form="#ClinicalRecords" data-toggle="tab" href="#records" role="button" aria-controls="records" aria-expanded="true"><i class="fa fa-calendar" aria-hidden="true"></i> {{clinicalRecord.controlDate|date("d/m/Y")}}</a>
     </li>
 {% endblock %}
 
