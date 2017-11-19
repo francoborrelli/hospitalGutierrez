@@ -33,8 +33,8 @@ nav a {
 }
 
 nav a.dropdown-item {
-    padding-top: 3px!important;
-    padding-bottom: 3px!important;
+    padding-top: 6px!important;
+    padding-bottom: 6px!important;
 }
 
 nav .dropdown-item:active {
@@ -53,6 +53,15 @@ nav .dropdown-item:active {
 #btn-search-navbar {
     min-width: 55px;
 }
+
+.dropdown-divider{
+    margin: 0.2rem 0;
+}
+
+.dropdown-menu {
+    padding: 3px 0;
+}
+
 
 @media (max-width: 767px) {
     .navbar-brand {
