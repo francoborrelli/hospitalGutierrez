@@ -546,10 +546,22 @@ class ClinicalRecord
     public function setData($data)
     {
         $this->weight = $data['weight'];
-        $this->height = $data['height'];
         $this->nutrition = $data['nutrition'];
-        $this->pc = $data['pc'];
-        $this->ppc = $data['ppc'];
+        if ($data['pc'] === "") 
+            $this->pc = null;
+        else
+            $this->pc = $data['pc'];
+
+        if ($data['ppc'] === "") 
+            $this->ppc = null;
+        else
+            $this->ppc = $data['ppc'];
+
+        if ($data['height'] === "") 
+            $this->height = null;
+        else
+            $this->height = $data['height'];
+
         $this->vaccinationObservation = $data['vaccinationObservation'];
         $this->maturationObservation = $data['maturationObservation'];
         $this->fisicTestObservation = $data['fisicTestObservation'];

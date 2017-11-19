@@ -105,7 +105,7 @@ class Patient
     /**
      * @var int
      *
-     * @Column(type="integer")
+     * @Column(type="integer", nullable = true)
      */
     private $insuranceId;
 
@@ -154,7 +154,11 @@ class Patient
         $this->phone = $data['phone'];
         $this->gender = $data['gender'];
         $this->documentTypeId = $data['documentTypeId'];
-        $this->insuranceId = $data['insuranceId'];
+        if ($data['insuranceId'] === "")
+            $this->insuranceId = null;
+        else {
+            $this->insuranceId = $data['insuranceId'];
+        }
     }
 
     public function setDemographicData($data)
