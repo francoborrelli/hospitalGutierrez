@@ -12,11 +12,11 @@ $('#logInForm').validate({
     },
     messages: {
         pass: {
-            required: "Por favor ingrese su contraseña",
-            minlength: "Su contraseña debe tener al menos 6 caracteres"
+            required: "",
+            minlength: ""
         },
         username: {
-            required: "Por favor ingrese su nombre de usuario"
+            required: ""
         },
     },
     highlight: function (element) {
