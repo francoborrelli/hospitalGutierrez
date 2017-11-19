@@ -7,13 +7,13 @@
 ## Cuentas
 
 * Cuenta Administrador
-  * Email: administrador
+  * Nombre de usuario: administrador
   * Contraseña: 12admin34
 
 * Cuenta Pediatra
-  * Nombre de Usuario: pediatra
+  * Nombre de usuario: pediatra
   * Contraseña: 12pediatra34
 
 * Cuenta Recepcionista
-  * Email: recepcionista
+  * Nombre de usuario: recepcionista
   * Contraseña: proyecto789
