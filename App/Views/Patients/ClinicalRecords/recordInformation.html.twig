@@ -10,15 +10,15 @@
                     <div class="col-md-12">
                         <strong>Edad</strong>
                             <p>{% if years != "0" %} 
-                                    {% if years == "1" %} 1 año 
+                                    {% if years == "1" %} 1 año, 
                                     {% else %} 
                                         {{year}} años, 
                                     {% endif %}
                                 {% endif %}
                                 {% if months != "0" %} 
-                                    {% if months == "1" %} 1 mes 
+                                    {% if months == "1" %} 1 mes y 
                                     {% else %} 
-                                        {{months}} meses, 
+                                        {{months}} meses y 
                                     {% endif %}
                                 {% endif %}
                                 {% if days == "1" %} 
@@ -34,13 +34,13 @@
                     <div class="col-md-6">
                         <strong>Peso</strong>
                         <br>
-                        <p>{{clinicalRecord.weight}}</p>
+                        <p>{{clinicalRecord.weight}} kg</p>
                     </div>
                     <div class="col-md-6 b-r">
                         <strong>Talla</strong>
                         <br>
                         {% if clinicalRecord.height %}
-                            <p>{{clinicalRecord.height}}</p>
+                            <p>{{clinicalRecord.height}} {% if clinicalRecord.height is not null %} cm {% endif %}</p>
                         {% else %}
                             <p>-</p>
                         {% endif %}
@@ -98,7 +98,7 @@
                 <hr>
                 <div class="row text-center m-t-10">
                     <div class="col-md-6 b-r">
-                        <strong>Percentilo Cefálico (PC)</strong>
+                        <strong>Percentil Cefálico (PC)</strong>
                         <br>
                         {% if clinicalRecord.pc %}
                             <p>{{clinicalRecord.pc}}</p>
@@ -107,10 +107,10 @@
                         {% endif %}
                     </div>
                     <div class="col-md-6">
-                        <strong>Percentilo Perímetro Cefálico (PPC)</strong>
+                        <strong>Percentil Perímetro Cefálico (PPC)</strong>
                         <br>
                         {% if clinicalRecord.ppc %}
-                            <p>{{clinicalRecord.ppc}}</p>
+                            <p>{{clinicalRecord.ppc}} cm</p>
                         {% else %}
                             <p>-</p>
                         {% endif %}
