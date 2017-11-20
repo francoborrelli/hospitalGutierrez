@@ -1,33 +1,53 @@
 {% set days = clinicalRecord.age.format('%d') %}
+{% set months = clinicalRecord.age.format('%m') %}
+{% set years = clinicalRecord.age.format('%y') %}
 
 <div class="row" id="personalData">
    <div class="col-md-12">
         <div class="white-box">
             <div class="user-btm-box">
                 <div class="row text-center m-t-10">
-                    <div class="col-md-12">
+                    <!-- Pediatra -->
+                    <div class="col-md-6 b-r"><strong>Pediatra</strong>
+                        <p>{{clinicalRecord.user.firstName}} {{clinicalRecord.user.lastName}}</p>
+                    </div>
+                    <!-- edad -->
+                    <div class="col-md-6 b-r">
                         <strong>Edad</strong>
-                        {% if clinicalRecord.age.format('%y') == 0 and clinicalRecord.format('%m') == 0 %}
-                            <p>{% if days == "1" %} 1 día {% else %} {{days}} dias {% endif %}</p>
-                        {% elseif clinicalRecord.age.format('%y') == 0 %}
-                            <p>{{ clinicalRecord.age.format('%m meses y ') }}{% if days == "1" %} 1 día {% else %} {{days}} dias {% endif %}</p>
-                        {% else %}
-                            <p>{{ clinicalRecord.age.format('%y años, %m meses y') }} {% if days == "1" %} 1 día {% else %} {{days}} dias {% endif %}</p>
-                        {% endif %}
+                            <p>{% if years != "0" %} 
+                                    {% if years == "1" %} 1 año, 
+                                    {% else %} 
+                                        {{year}} años, 
+                                    {% endif %}
+                                {% endif %}
+                                {% if months != "0" %} 
+                                    {% if months == "1" %} 1 mes y 
+                                    {% else %} 
+                                        {{months}} meses y 
+                                    {% endif %}
+                                {% endif %}
+                                {% if days == "1" %} 
+                                    1 día 
+                                {% else %} 
+                                    {{days}} días 
+                                {% endif %}
+                            </p>
                     </div>
                 </div>
                 <hr>
                 <div class="row text-center m-t-10">
-                    <div class="col-md-6">
+                    <!-- Peso -->
+                    <div class="col-md-6 b-r">
                         <strong>Peso</strong>
                         <br>
-                        <p>{{clinicalRecord.weight}}</p>
+                        <p>{{clinicalRecord.weight}} kg</p>
                     </div>
+                    <!-- Talla -->
                     <div class="col-md-6 b-r">
                         <strong>Talla</strong>
                         <br>
                         {% if clinicalRecord.height %}
-                            <p>{{clinicalRecord.height}}</p>
+                            <p>{{clinicalRecord.height}} {% if clinicalRecord.height is not null %} cm {% endif %}</p>
                         {% else %}
                             <p>-</p>
                         {% endif %}
@@ -35,6 +55,7 @@
                 </div>
                 <hr>
                 <div class="row text-center m-t-10">
+                    <!-- Examen físico -->
                     <div class="col-md-6 b-r"><strong>¿Exámen físico normal?</strong>
                         <br>
                         {% if clinicalRecord.fisicTest == true %}
@@ -43,6 +64,7 @@
                             <p>No</p>
                         {% endif %}
                     </div>
+                    <!-- Observaciones del examen físico  -->
                     <div class="col-md-6 b-r">
                         <strong>Exámen físico observaciones</strong>
                         <br>
@@ -51,6 +73,7 @@
                 </div>
                 <hr>
                 <div class="row text-center m-t-10">
+                    <!-- Vacunas -->
                     <div class="col-md-6 b-r">
                         <strong>¿Vacunas completas?</strong>
                         {% if clinicalRecord.vaccination  %}
@@ -59,6 +82,7 @@
                             <p>No</p>
                         {% endif %}
                     </div>
+                    <!-- Observaciones Vacunas -->
                     <div class="col-md-6 b-r">
                         <strong>Vacunas observaciones</strong>
                         <br>
@@ -66,8 +90,9 @@
                     </div>
                 </div>
                 <hr>
+                <!-- Maduración  -->
                 <div class="row text-center m-t-10">
-                    <div class="col-md-6">
+                    <div class="col-md-6 b-r">
                         <strong>¿Maduración acorde?</strong>
                         <br>
                         {% if clinicalRecord.maturation %}
@@ -76,7 +101,8 @@
                             <p>No</p>
                         {% endif %}
                     </div>
-                    <div class="col-md-6">
+                    <!-- Observaciones de maduración  -->
+                    <div class="col-md-6 b-r">
                         <strong>Maduración observaciones</strong>
                         <br>
                         <p>{{clinicalRecord.maturationObservation}}</p>
@@ -84,20 +110,22 @@
                 </div>
                 <hr>
                 <div class="row text-center m-t-10">
+                    <!-- PC  -->
                     <div class="col-md-6 b-r">
-                        <strong>Percentilo Cefálico (PC)</strong>
+                        <strong>Percentil Cefálico (PC)</strong>
                         <br>
                         {% if clinicalRecord.pc %}
-                            <p>{{clinicalRecord.pc}}</p>
+                            <p>{{clinicalRecord.pc}} cm</p>
                         {% else %}
                             <p>-</p>
                         {% endif %}
                     </div>
-                    <div class="col-md-6">
-                        <strong>Percentilo Perímetro Cefálico (PPC)</strong>
+                    <div class="col-md-6 b-r">
+                        <!-- PPC  -->
+                        <strong>Percentil Perímetro Cefálico (PPC)</strong>
                         <br>
                         {% if clinicalRecord.ppc %}
-                            <p>{{clinicalRecord.ppc}}</p>
+                            <p>{{clinicalRecord.ppc}} cm</p>
                         {% else %}
                             <p>-</p>
                         {% endif %}
@@ -105,6 +133,7 @@
                 </div>
                 <hr>
                 <div class="row text-center m-t-10">
+                    <!-- Alimentación  -->
                     <div class="col-md-12">
                         <strong>Alimentación</strong>
                         <br>
@@ -117,6 +146,7 @@
                 </div>
                 <hr>
                 <div class="row text-center m-t-10">
+                <!-- Observaciones generales  -->
                     <div class="col-md-12">
                         <strong>Observaciones Generales</strong>
                         <br>
@@ -125,12 +155,6 @@
                         {% else %}
                             <p>-</p>
                         {% endif %}
-                    </div>
-                </div>
-                <hr>
-                <div class="row text-center m-t-10">
-                    <div class="col-md-12"><strong>Pediatra</strong>
-                        <p>{{clinicalRecord.user.firstName}} {{clinicalRecord.user.lastName}}</p>
                     </div>
                 </div>
             </div>
