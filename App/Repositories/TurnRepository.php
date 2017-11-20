@@ -45,7 +45,7 @@ class TurnRepository extends EntityRepository
     {
         $dateFormated = \DateTime::createFromFormat('d-m-Y', $date);
         if (!$dateFormated || $dateFormated->format('d-m-Y') !== $date) {
-            return ['error' => 'Fecha inválida', 'description' => 'Fecha inválida, debe ingresar los datos con el formato dni dd-mm-aaaa hh:mm'];
+            return ['error' => 'Fecha inválida', 'description' => 'Fecha inválida, debe ingresar los datos con el formato dd-mm-aaaa'];
         } elseif ($dateFormated < new \DateTime('now')) {
             return ['error' => 'Fecha inválida', 'description' => 'La fecha solicitada ya ha pasado'];
         }
