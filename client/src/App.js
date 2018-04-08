@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import {Route, Switch} from 'react-router-dom'
+
+import Layout from './containers/Layout/visitorLayout';
+import HomePage from './scenes/Home/Home';
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-      </div>
+      <Layout>
+          <Route path="/" exact component={HomePage}></Route>
+      </Layout>
     );
   }
 }
