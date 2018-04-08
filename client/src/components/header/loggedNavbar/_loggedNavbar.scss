@@ -1,0 +1,60 @@
+#navbar {
+    .sider{
+        background-color: white;
+
+    }
+    .ant-layout-header{
+        background: #fff;
+        padding: 0;
+        border-bottom: 1px solid #e8e8e8;
+    }
+    .ant-layout-sider, .ant-menu-inline-collapsed{
+        border-right: 1px solid #e8e8e8;
+    }
+    .ant-menu-inline, .ant-menu-horizontal{
+        border-right: 0px;
+    }
+
+    .ant-layout-sider-children{
+      position: fixed;
+      width: 199px;
+    }
+    .ant-layout-sider-collapsed{
+      .ant-layout-sider-children{
+        .logonb{
+          padding-right: 118px;
+        }
+      }
+    }
+
+    .userSection{
+        float: right;
+    }
+
+    .trigger {
+        font-size: 18px;
+        line-height: 64px;
+        padding: 0 24px;
+        cursor: pointer;
+        transition: color .3s;
+        &:hover {
+            color: #1890ff;
+        }
+    }
+    .logonb {
+        height: 30px;
+        margin: 15px;
+        text-align: center;
+        background-color: transparent;
+        img {
+            height: 40px;
+        }
+    }
+
+    @media(max-width: 500px){
+        .addPatient, .addUser{
+            display: none;
+            }
+        }
+}
+

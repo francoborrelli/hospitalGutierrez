@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import BaseLayout from './baseLayout';
-import VisitorNavbar from '../../components/header/VisitorNavbar/visitorNavbar';
+import VisitorNavbar from '../../components/header/visitorNavbar/visitorNavbar';
 
 const { Content } = Layout;
 

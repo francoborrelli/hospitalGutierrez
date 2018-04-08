@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom'
 
-import Layout from './containers/Layout/visitorLayout';
+import Layout from './containers/Layout/LoggedLayout';
 import HomePage from './scenes/Home/Home';
 
 
