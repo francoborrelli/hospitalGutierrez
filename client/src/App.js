@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom"
 
 import Layout from "./containers/Layout/LoggedLayout"
 import HomePage from "./scenes/Home/Home"
-import Error404 from "./scenes/Errors/maintenance"
+import Error404 from "./scenes/Errors/404"
 
 class App extends Component {
   render() {
