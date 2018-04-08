@@ -1,0 +1,133 @@
+.heading {
+    font-weight: 400;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #1a1a1a;
+    text-transform: capitalize;
+    margin-top: 0em;
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+}
+
+.br-radius-zero {
+    border-radius: 0px;
+}
+
+.pb-60 {
+    padding-bottom: 60px;
+}
+
+.pt-60 {
+    padding-top: 30px;
+}
+
+.bgcolor1 {
+    background-color: #fff;
+}
+
+.iconbox-4 {
+    position: relative;
+    text-align: center;
+    background-color: #fff;
+    margin: 20px 0px;
+    padding-left: 40px;
+    padding-right: 40px;
+    
+    .fa {
+        color: #1696e7;
+        display: inline-block;
+        font-size: 60px;
+        -webkit-transition: 350ms ease all;
+        transition: 350ms ease all;
+    }
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    font-family: 'webfont-medical-icons';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container{
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    max-width: 90%;
+}
+
+.heading {
+    font-weight: 400;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #1a1a1a;
+    text-transform: capitalize;
+    margin-top: 0em;
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+}
+
+.iconbox-4 p, textarea {
+    color: #777;
+    margin: 0px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-black {
+    background-color: #303b41;
+    color: #f9f9f9;
+    border: 0px;
+}
+
+.btn-black:hover,
+.btn-black:active {
+    color: #706d6d;
+}
+
+.card-header {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* @medias  */
+
+@media (min-width: 990px) {
+    .container {
+        max-width: 990px;
+    }
+    .iconbox-4 p{
+        text-align: justify;
+    }
+    .btn-black {
+        position: absolute;
+        bottom: -30px;
+        right: 80px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+    .btn-black {
+        bottom: -25px;
+        right: 107px;
+    }
+}
