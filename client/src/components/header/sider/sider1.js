@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import logo from '../images/logo.png';
-import Menu from './components/menu';
+import Menu from './containers/SiderMenu';
 
 const { Header, Content, Footer, Sider } = Layout;
 

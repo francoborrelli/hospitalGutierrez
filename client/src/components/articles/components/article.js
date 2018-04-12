@@ -1,18 +1,17 @@
-import React from 'react';
-import { Col } from 'antd';
-import {Icon} from 'react-fa';
+import React from "react"
+import { Col } from "antd"
+import { Icon } from "react-fa"
 
-const article = (props) => 
-    <Col lg={8}>
-        <div className="iconbox-4">
-            <Icon name={props.icon}/>
-            <br/><br/>
-            <h2 className="heading">{ props.title }</h2>
-            <p>{props.text}</p>
-        </div>
-    </Col>
+const article = props => (
+  <Col lg={8}>
+    <div className="iconbox-4">
+      <Icon name={props.icon} />
+      <br />
+      <br />
+      <h2 className="heading">{props.title}</h2>
+      <p>{props.text}</p>
+    </div>
+  </Col>
+)
 
-
-export default article;
-
-
+export default article

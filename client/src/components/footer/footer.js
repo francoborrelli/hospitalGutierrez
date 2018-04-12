@@ -1,7 +1,6 @@
 import React from "react"
 import { Row, Col } from "antd"
-import { Icon } from "react-fa"
-import { Tooltip } from "antd"
+import Item from "./components/footerItem"
 
 const footer = props => (
   <footer>
@@ -9,26 +8,14 @@ const footer = props => (
       <Row>
         <Col xs={12}>
           <p>
-            <i className="fa fa-at" /> {props.footer}
+            {props.text}
           </p>
         </Col>
         <Col xs={11}>
           <ul className="socials">
-            <li>
-              <Tooltip placement="left" title={props.email}>
-                <Icon name="envelope" />
-              </Tooltip>
-            </li>
-            <li>
-              <Tooltip placement="left" title="Diagonal 114 99, La Plata">
-                <Icon name="map-marker" />
-              </Tooltip>
-            </li>
-            <li>
-              <Tooltip placement="left" title="(0221) 483-0171">
-                <Icon name="phone" />
-              </Tooltip>
-            </li>
+            <Item title={props.email} icon="envelope" />
+            <Item title="Diagonal 114 99, La Plata" icon="map-marker" />
+            <Item title="(0221) 483-0171" icon="phone" />
           </ul>
         </Col>
       </Row>
