@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu from './components/menu';
+import Menu from './containers/SiderMenu';
 import logo from '../images/logo.png';
 import { Layout } from 'antd';
 
