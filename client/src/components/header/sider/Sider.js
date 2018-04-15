@@ -6,8 +6,12 @@ import { Layout } from 'antd';
 const { Sider } = Layout;
 
 const sider= props => {
+    const width = props.responsive ? 0 : 80
     return (
-      <Sider className="sider" trigger={null} collapsible collapsed={props.collapsed} >
+      <Sider className="sider" trigger={null} collapsible collapsed={props.collapsed}
+      breakpoint="md"
+      collapsedWidth={width}
+      onCollapse={(collapsed, type) => {props.responsiveHandler}}>
         <div className="logonb">
           <img src={logo} alt="banner"/>
         </div>
