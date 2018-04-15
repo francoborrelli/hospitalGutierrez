@@ -5,10 +5,10 @@ body {
     cursor: default;
     color: #444;
     background-color: #1c1c1c !important;
-    .content {
+    .ant-layout-content {
         min-height: 350px;
+        min-width: 310px;
         padding-top: 64px;
-        background-color: #fafafa;
     }
 }
 

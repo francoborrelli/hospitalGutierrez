@@ -1,0 +1,69 @@
+import React, { Component } from "react"
+import { Layout, Card, Row, Col, message } from "antd"
+import axios from "../../../axios-apiReferences"
+
+import SearchForm from "./components/searchForm"
+import Table from "./components/table"
+
+const { Header, Content } = Layout
+
+class PatientsList extends Component {
+  state = {
+    loading: true,
+    searching: false,
+    documentTypes: [],
+    data: []
+  }
+
+  componentDidMount = () => {
+    axios
+      .get(
+        "tipo-documento"
+      )
+      .then(response => {
+        this.setState({
+          loading: false,
+          documentTypes: response.data
+        })
+      })
+  }
+
+  searchHandler = (data) => {
+    this.setState({...this.state, searching: true})
+  }
+
+  deletePatientHandler = (patient) => {
+    this.setState({loading: true})
+    const name = patient.name + ' ' + patient.lastname
+    message.success("Se eliminó a " + name + " correctamente.")
+    this.setState({loading: false})
+  }
+
+  render() {
+    return (
+      <Content>
+        <Header style={{ padding: "24px" }}>
+          <h1>Pacientes</h1>
+        </Header>
+        <Row>
+          <Col xl={7}>
+            <Card style={{ margin: "24px" }} title="Busqueda">
+              <SearchForm
+                loading={this.state.searching}
+                documentTypes={this.state.documentTypes}
+                submitted={this.searchHandler}
+              />
+            </Card>
+          </Col>
+          <Col xl={17}>
+            <Card style={{ margin: "24px" }}>
+              <Table loading={this.state.loading} deleted={this.deletePatientHandler} documentTypes={this.state.documentTypes} />
+            </Card>
+          </Col>
+        </Row>
+      </Content>
+    )
+  }
+}
+
+export default PatientsList
