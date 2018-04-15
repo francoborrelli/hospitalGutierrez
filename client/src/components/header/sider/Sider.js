@@ -10,8 +10,7 @@ const sider= props => {
     return (
       <Sider className="sider" trigger={null} collapsible collapsed={props.collapsed}
       breakpoint="md"
-      collapsedWidth={width}
-      onCollapse={(collapsed, type) => {props.responsiveHandler}}>
+      collapsedWidth={width}>
         <div className="logonb">
           <img src={logo} alt="banner"/>
         </div>
