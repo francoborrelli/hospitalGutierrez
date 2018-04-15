@@ -33,7 +33,7 @@ class Item extends Component {
         result = this.getSelect(item)
         break
       case "select-input":
-        const select = this.wrapItem(item, this.getSelect(item.select))
+        const select = this.wrapItem(item.select, this.getSelect(item.select))
         result = this.getInput(item, select)
         break
       case "checkbox":
