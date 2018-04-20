@@ -1,5 +1,5 @@
 import React from "react"
-import { Table, Button, Icon, Divider, Popconfirm } from "antd"
+import { Table, Button, Icon, Divider, Modal } from "antd"
 
 const data = [
   {
@@ -32,14 +32,29 @@ const data = [
   }
 ]
 
-
 const tablePatients = props => {
+
+  const showConfirm = record =>
+    Modal.confirm({
+      title: "¿Estás Seguro?",
+      okText: "Confirmar",
+      cancelText: "Cancelar",
+      content:
+        "Estas a punto de eliminar al paciente " +
+        record.name +
+        " " +
+        record.lastname +
+        ".",
+      maskClosable: true,
+      onOk: () => props.deleted(record)
+    })
+
   const columns = [
     {
       title: "Nombre",
       dataIndex: "name",
       key: "name",
-      sorter: (a, b) => a.name - b.name,
+      sorter: (a, b) => a.name - b.name
     },
     {
       title: "Apellido",
@@ -66,9 +81,7 @@ const tablePatients = props => {
         <span>
           <a href="">Ver</a>
           <Divider type="vertical" />
-          <Popconfirm title="¿Estas Seguro?" okText="Si" cancelText="No" onConfirm={() => props.deleted(record)}>
-            <a>Eliminar</a>
-          </Popconfirm>
+          <a onClick={() => showConfirm(record)}>Eliminar</a>
         </span>
       )
     }
@@ -77,7 +90,7 @@ const tablePatients = props => {
     <div>
       <div className="table-operations">
         <Button type="primary" style={{ marginBottom: 15 }}>
-          <Icon type="user-add" />
+          <Icon type="user-add" />Agregar
         </Button>
       </div>
       <Table
@@ -85,7 +98,7 @@ const tablePatients = props => {
         dataSource={data}
         loading={props.loading}
         locale={{ emptyText: "No hay datos" }}
-        scroll={{x: 600}}
+        scroll={{ x: 600 }}
       />
     </div>
   )
