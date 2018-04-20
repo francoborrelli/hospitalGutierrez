@@ -42,7 +42,7 @@ class PatientsList extends Component {
   render() {
     return (
       <Content>
-        <Header style={{ padding: "24px" }}>
+        <Header style={{ padding: "17px", paddingLeft: "25px" }}>
           <h1>Pacientes</h1>
         </Header>
         <Row>
