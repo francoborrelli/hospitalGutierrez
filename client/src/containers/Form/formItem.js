@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Input, Select, Checkbox } from "antd"
+import DatePicker from "../../components/datePicker/datePicker"
 
 class Item extends Component {
 
@@ -12,13 +13,17 @@ class Item extends Component {
 
   getSelect = item => {
     const Option = Select.Option
-    const options = item.options.map((d, index) => (<Option key={index} value={d.id}>{d.nombre}</Option>))
+    const options = item.options.map((d) => (<Option key={d.id} value={d.id}>{d.nombre}</Option>))
     return <Select {...item.props}>{options}</Select>
+  }
+
+  getDatePicker = item => {
+    return <DatePicker {...item.props}/>
   }
 
   getCheckbox = item => <Checkbox> {item.text} </Checkbox>
 
-  wrapItem = (item, field ) => this.props.decorator(item.name, {rules: item.rules})(field)
+  wrapItem = (item, field ) => this.props.decorator(item.name, {initialValue: item.defaultValue, rules: item.rules})(field)
 
   render() {
     const item = this.props.item
@@ -38,6 +43,9 @@ class Item extends Component {
         break
       case "checkbox":
         result = this.getCheckbox(item)
+        break
+      case "datePicker":
+        result = this.getDatePicker(item)
         break
       default:
         return null
