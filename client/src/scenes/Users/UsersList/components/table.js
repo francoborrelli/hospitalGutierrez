@@ -1,40 +1,44 @@
 import React from "react"
 import { Table, Button, Icon } from "antd"
-import { Link } from "react-router-dom"
 import Dropdown from "./dropdown"
+import { Link } from "react-router-dom"
 
 const data = [
   {
     key: "1",
     name: "Franco",
     lastname: "Borrelli",
-    documentType: "1",
-    documentNumber: 32
+    username: "fborrelli",
+    email: "FrancoBorrelli@gmai.com",
+    role: "Administrador"
   },
   {
     key: "2",
     name: "Pedro",
     lastname: "Brost",
-    documentType: "2",
-    documentNumber: 3223423432
+    username: "2",
+    email: "pedrobrost@gmail.com",
+    role: ""
   },
   {
     key: "3",
     name: "Juan",
     lastname: "Perez",
     documentType: "1",
-    documentNumber: 397872
+    email: 397872,
+    role: ""
   },
   {
     key: "4",
     name: "John",
     lastname: "Garcia",
-    documentType: "3",
-    documentNumber: 41243
+    username: "3",
+    email: 41243,
+    role: ""
   }
 ]
 
-const tablePatients = props => {
+const tableUsers = props => {
   const columns = [
     {
       title: "Nombre",
@@ -49,28 +53,36 @@ const tablePatients = props => {
       sorter: (a, b) => a.lastname < b.lastname
     },
     {
-      title: "Tipo Doc.",
-      dataIndex: "documentType",
-      key: "documentType",
-      sorter: (a, b) => a.documentType < b.documentType
+      title: "Nombre de Usuario",
+      dataIndex: "username",
+      key: "username",
+      sorter: (a, b) => a.username < b.username
     },
     {
-      title: "Nº Doc.",
-      dataIndex: "documentNumber",
-      key: "documentNumber"
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      sorter: (a, b) => a.email < b.email
+    },
+    {
+      title: "Roles",
+      dataIndex: "role",
+      key: "role"
     },
     {
       title: "Acciones",
       key: "action",
       align: "center",
       fixed: "right",
-      width: 110,
+      width: 120,
       render: (text, record) => (
-        <Dropdown onDelete={props.onDelete} record={record} />
+        <Dropdown
+          record={record}
+          onDelete={props.onDelete}
+        />
       )
     }
   ]
-
   return (
     <div>
       <div className="table-operations">
@@ -89,10 +101,10 @@ const tablePatients = props => {
         dataSource={data}
         loading={props.loading}
         locale={{ emptyText: "No hay datos" }}
-        scroll={{ x: 600 }}
+        scroll={{ x: 850 }}
       />
     </div>
   )
 }
 
-export default tablePatients
+export default tableUsers

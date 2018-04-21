@@ -10,11 +10,11 @@ const menu = (record, onOk) => {
   return (
     <Menu>
       <Item key="0">
-        <a>Ver Perfil</a>
+        <a>Editar</a>
       </Item>
       <Divider />
       <Item key="1">
-        <a onClick={() => Modal("paciente", record, () => onOk(record))}>
+        <a onClick={() => Modal("usuario", record, () => onOk(record))}>
           Eliminar
         </a>
       </Item>
