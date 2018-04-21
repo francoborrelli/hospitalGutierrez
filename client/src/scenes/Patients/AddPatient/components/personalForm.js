@@ -8,14 +8,14 @@ const personalDataForm = props => {
 
     //request
 
-    if (documentNumber == 4) {
+    if (documentNumber === 4) {
       callback("El documento ya se encuentra registrado en el sistema")
     }
     callback()
   }
 
   const revalidate = (form, rule, documentNumber, callback) => {
-    form.validateFields
+    form.validateFields(["documentNumber"])
     callback()
   }
 
