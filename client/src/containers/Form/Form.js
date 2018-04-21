@@ -73,7 +73,7 @@ class BaseForm extends Component {
     let backButton = this.props.onBack ? (
       <Button
         style={{ float: "right", marginLeft: 10 }}
-        onClick={this.props.onBack}
+        onClick={() =>this.props.onBack(this.props.form.getFieldsValue())}
       >
         Volver
       </Button>

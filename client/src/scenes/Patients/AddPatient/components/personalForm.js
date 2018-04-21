@@ -138,7 +138,6 @@ const personalDataForm = props => {
   return (
     <Form
       fields={fields}
-      setFieldsValue={{ documentType: 1 }}
       {...props}
       buttonText="Continuar"
       track="documentType"

@@ -15,7 +15,7 @@ const geographicForm = props => {
         {
           required: true,
           message: "Seleccione una opción"
-        },
+        }
       ]
     },
     heatingTypes: {
@@ -30,7 +30,7 @@ const geographicForm = props => {
         {
           required: true,
           message: "Seleccione una opción"
-        },
+        }
       ]
     },
     waterTypes: {
@@ -45,7 +45,7 @@ const geographicForm = props => {
         {
           required: true,
           message: "Seleccione una opción"
-        },
+        }
       ]
     },
     fridge: {
@@ -55,12 +55,12 @@ const geographicForm = props => {
       props: {
         placeholder: "¿Tiene Heladera?"
       },
-      options: [{id: 0, nombre: "Si"},{id: 1, nombre: "No"}],
+      options: [{ id: 0, nombre: "Si" }, { id: 1, nombre: "No" }],
       rules: [
         {
           required: true,
           message: "Seleccione una opción"
-        },
+        }
       ]
     },
     electricity: {
@@ -70,12 +70,12 @@ const geographicForm = props => {
       props: {
         placeholder: "¿Tiene Electricidad?"
       },
-      options: [{id: 0, nombre: "Si"},{id: 1, nombre: "No"}],
+      options: [{ id: 0, nombre: "Si" }, { id: 1, nombre: "No" }],
       rules: [
         {
           required: true,
           message: "Seleccione una opción"
-        },
+        }
       ]
     },
     pets: {
@@ -85,17 +85,25 @@ const geographicForm = props => {
       props: {
         placeholder: "¿Tiene Mascotas?"
       },
-      options: [{id: 0, nombre: "Si"},{id: 1, nombre: "No"}],
+      options: [{ id: 0, nombre: "Si" }, { id: 1, nombre: "No" }],
       rules: [
         {
           required: true,
           message: "Seleccione una opción"
-        },
+        }
       ]
     }
   }
 
-  return <Form fields={fields} {...props} buttonText="Continuar" loading={props.loading} onBack={props.prevStep} />
+  return (
+    <Form
+      fields={fields}
+      {...props}
+      buttonText="Continuar"
+      loading={props.loading}
+      onBack={props.prevStep}
+    />
+  )
 }
 
 export default geographicForm
