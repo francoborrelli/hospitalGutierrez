@@ -5,41 +5,35 @@ import Section from "../../../components/header/sectionHeader/sectionHeader"
 import SearchForm from "./components/searchForm"
 import Table from "./components/table"
 
-import axios from "../../../axios-apiReferences"
-
-class PatientsList extends Component {
+class UserList extends Component {
   state = {
     loading: true,
     searching: false,
-    documentTypes: [],
     data: []
   }
 
   componentDidMount = () => {
-    axios.get("tipo-documento").then(response => {
-      this.setState({
-        loading: false,
-        documentTypes: response.data
-      })
-    })
+    //Get table data
+
+    this.setState({ loading: false })
   }
 
   searchHandler = data => {
     this.setState({ searching: true })
 
-    //Search Request
+    //Search request
 
-    this.setState({ searching: true })
+    this.setState({ searching: false })
   }
 
-  deletePatientHandler = patient => {
+  deleteUserHandler = user => {
     return new Promise((resolve, reject) => {
       //Change Timeout for delelte request
       setTimeout(Math.random() > 0.3 ? resolve : reject, 1000)
     })
       .then(() => {
         this.setState({ loading: true })
-        const name = patient.name + " " + patient.lastname
+        const name = user.name + " " + user.lastname
         message.success("Se eliminó a " + name + " correctamente.")
         this.setState({ loading: false })
       })
@@ -48,7 +42,7 @@ class PatientsList extends Component {
 
   render() {
     return (
-      <Section title="pacientes">
+      <Section title="usuarios">
         <Row>
           <Col xl={7}>
             <Card style={{ margin: "24px" }} title="Busqueda">
@@ -63,9 +57,8 @@ class PatientsList extends Component {
             <Card style={{ margin: "24px" }}>
               <Table
                 loading={this.state.loading}
-                onDelete={this.deletePatientHandler}
-                addPath="/patients/add"
-                documentTypes={this.state.documentTypes}
+                onDelete={this.deleteUserHandler}
+                addPath="/users/add"
               />
             </Card>
           </Col>
@@ -75,4 +68,4 @@ class PatientsList extends Component {
   }
 }
 
-export default PatientsList
+export default UserList
