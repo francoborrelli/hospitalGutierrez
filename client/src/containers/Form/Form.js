@@ -12,15 +12,15 @@ class BaseForm extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    if ((prevProps.fields !== this.props.fields) && (this.props.track)){
+    if (prevProps.fields !== this.props.fields && this.props.track) {
       const key = this.props.track
-      this.props.form.setFieldsValue({[key]: "1" })
+      this.props.form.setFieldsValue({ [key]: "1" })
     }
   }
 
   submitHandler = e => {
     e.preventDefault()
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         this.props.submitted(values)
       }
@@ -39,10 +39,16 @@ class BaseForm extends Component {
       })
     }
     const inputs = items.map((item, key) => {
+      const rules = this.getRules(item.config)
       return (
         <Wrapper key={key} label={item.config.label}>
-          {getFieldDecorator(item.config.name, { rules: item.config.rules })(
-            <Input key={key} item={item.config} decorator={getFieldDecorator} />
+          {getFieldDecorator(item.config.name, { rules: rules })(
+            <Input
+              key={key}
+              item={item.config}
+              decorator={getFieldDecorator}
+              form={this.props.form}
+            />
           )}
         </Wrapper>
       )
@@ -51,9 +57,24 @@ class BaseForm extends Component {
     return inputs
   }
 
+  getRules = item => {
+    return item.customValidator
+      ? [
+          {
+            validator: (rule, value, callback) =>
+              item.customValidator(this.props.form, rule, value, callback)
+          },
+          ...item.rules
+        ]
+      : item.rules
+  }
+
   render() {
     let backButton = this.props.onBack ? (
-      <Button style={{ float: "right", marginLeft: 10 }} onClick={this.props.onBack}>
+      <Button
+        style={{ float: "right", marginLeft: 10 }}
+        onClick={this.props.onBack}
+      >
         Volver
       </Button>
     ) : null

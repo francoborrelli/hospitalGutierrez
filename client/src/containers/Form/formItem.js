@@ -3,27 +3,49 @@ import { Input, Select, Checkbox } from "antd"
 import DatePicker from "../../components/datePicker/datePicker"
 
 class Item extends Component {
-
-  getInput = (item, added) => <Input
+  getInput = (item, added) => (
+    <Input
       placeholder={item.label}
       addonBefore={added}
       autoComplete="true"
       {...item.props}
     />
+  )
 
   getSelect = item => {
     const Option = Select.Option
-    const options = item.options.map((d) => (<Option key={d.id} value={d.id}>{d.nombre}</Option>))
+    const options = item.options.map(d => (
+      <Option key={d.id} value={d.id}>
+        {d.nombre}
+      </Option>
+    ))
     return <Select {...item.props}>{options}</Select>
   }
 
   getDatePicker = item => {
-    return <DatePicker {...item.props}/>
+    return <DatePicker {...item.props} />
   }
 
   getCheckbox = item => <Checkbox> {item.text} </Checkbox>
 
-  wrapItem = (item, field ) => this.props.decorator(item.name, {initialValue: item.defaultValue, rules: item.rules})(field)
+  getRules = item => {
+    const rules = item.rules ? item.rules : []
+    return item.customValidator
+      ? [
+          {
+            validator: (rule, value, callback) =>
+              item.customValidator(this.props.form, rule, value, callback)
+          },
+          ...rules
+        ]
+      : rules
+  }
+
+  wrapItem = (item, field) =>
+    this.props.decorator(item.name, {
+      initialValue: item.defaultValue,
+      rules: this.getRules(item)
+    })(field)
 
   render() {
     const item = this.props.item
