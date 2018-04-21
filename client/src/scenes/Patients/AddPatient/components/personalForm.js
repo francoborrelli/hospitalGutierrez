@@ -2,6 +2,23 @@ import React from "react"
 import Form from "../../../../containers/Form/Form"
 
 const personalDataForm = props => {
+
+  const documentValidator = (form, rule, documentNumber, callback) => {
+    const documentType = form.getFieldValue("documentType")
+
+    //request
+
+    if (documentNumber == 4) {
+      callback("El documento ya se encuentra registrado en el sistema")
+    }
+    callback()
+  }
+
+  const revalidate = (form, rule, documentNumber, callback) => {
+    form.validateFields
+    callback()
+  }
+
   const fields = {
     lastname: {
       name: "lastname",
@@ -46,14 +63,16 @@ const personalDataForm = props => {
           message: "Ingrese el documento"
         }
       ],
+      customValidator: documentValidator,
       select: {
         type: "select",
         name: "documentType",
         props: {
           style: { width: 70 },
           placeholder: "Tipo",
-          required: true,
+          required: true
         },
+        customValidator: revalidate,
         options: props.data.documentTypes
       },
       input: {
@@ -116,7 +135,15 @@ const personalDataForm = props => {
     }
   }
 
-  return <Form fields={fields} setFieldsValue={{documentType: 1}} {...props} buttonText="Continuar" track="documentType"/>
+  return (
+    <Form
+      fields={fields}
+      setFieldsValue={{ documentType: 1 }}
+      {...props}
+      buttonText="Continuar"
+      track="documentType"
+    />
+  )
 }
 
 export default personalDataForm
