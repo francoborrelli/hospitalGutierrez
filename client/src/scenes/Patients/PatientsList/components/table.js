@@ -1,6 +1,7 @@
 import React from "react"
 import { Table, Button, Icon, Divider, Modal } from "antd"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import Dropdown from "./dropdown"
 
 const data = [
   {
@@ -34,40 +35,24 @@ const data = [
 ]
 
 const tablePatients = props => {
-
-  const showConfirm = record =>
-    Modal.confirm({
-      title: "¿Estás Seguro?",
-      okText: "Confirmar",
-      cancelText: "Cancelar",
-      content:
-        "Estas a punto de eliminar al paciente " +
-        record.name +
-        " " +
-        record.lastname +
-        ".",
-      maskClosable: true,
-      onOk: () => props.onDelete(record)
-    })
-
   const columns = [
     {
       title: "Nombre",
       dataIndex: "name",
       key: "name",
-      sorter: (a, b) => a.name - b.name
+      sorter: (a, b) => a.name < b.name
     },
     {
       title: "Apellido",
       dataIndex: "lastname",
       key: "lastname",
-      sorter: (a, b) => a.lastname - b.lastname
+      sorter: (a, b) => a.lastname < b.lastname
     },
     {
       title: "Tipo Doc.",
       dataIndex: "documentType",
       key: "documentType",
-      sorter: (a, b) => a.documentType - b.documentType
+      sorter: (a, b) => a.documentType < b.documentType
     },
     {
       title: "Nº Doc.",
@@ -78,23 +63,26 @@ const tablePatients = props => {
       title: "Acciones",
       key: "action",
       align: "center",
+      fixed: "right",
+      width: 110,
       render: (text, record) => (
-        <span>
-          <a href="">Ver</a>
-          <Divider type="vertical" />
-          <a onClick={() => showConfirm(record)}>Eliminar</a>
-        </span>
+        <Dropdown onDelete={props.onDelete} record={record} />
       )
     }
   ]
+
   return (
     <div>
       <div className="table-operations">
-      <Link to={props.addPath}>
-        <Button onClick={props.onAdd} type="primary" style={{ marginBottom: 15 }}>
-          <Icon type="user-add" />Agregar
-        </Button>
-      </Link>
+        <Link to={props.addPath}>
+          <Button
+            onClick={props.onAdd}
+            type="primary"
+            style={{ marginBottom: 15 }}
+          >
+            <Icon type="user-add" />Agregar
+          </Button>
+        </Link>
       </div>
       <Table
         columns={columns}

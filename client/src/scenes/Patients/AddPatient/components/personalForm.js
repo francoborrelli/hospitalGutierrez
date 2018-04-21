@@ -4,7 +4,7 @@ import Form from "../../../../containers/Form/Form"
 const personalDataForm = props => {
 
   const documentValidator = (form, rule, documentNumber, callback) => {
-    const documentType = form.getFieldValue("documentType")
+    //const documentType = form.getFieldValue("documentType")
 
     //request
 

@@ -2,34 +2,39 @@ import React from "react"
 import Form from "../../../../containers/Form/Form"
 
 const searchForm = props => {
-
   const fields = {
     lastname: {
       name: "lastname",
-      label: "Apellido",
       type: "input",
       rules: [
         {
           message: "Debe tener solo letras",
-          pattern: "^[a-zA-Z ]+$",
+          pattern: "^[a-zA-Z ]+$"
         }
-      ]
+      ],
+      props: {
+        placeholder: "Apellido"
+      }
     },
     name: {
       name: "name",
-      label: "Nombre",
       type: "input",
       rules: [
         {
           message: "Debe tener solo letras",
-          pattern: "^[a-zA-Z ]+$",
+          pattern: "^[a-zA-Z ]+$"
         }
-      ]
+      ],
+      props: {
+        placeholder: "Nombre"
+      }
     },
     document: {
       name: "documentNumber",
       type: "select-input",
-      label: "Documento",
+      props: {
+        placeholder: "Número de Documento"
+      },
       select: {
         type: "select",
         name: "documentType",
@@ -47,7 +52,6 @@ const searchForm = props => {
     },
     state: {
       name: "state",
-      label: "Estado",
       type: "select",
       props: {
         placeholder: "Estado",
@@ -60,7 +64,15 @@ const searchForm = props => {
     }
   }
 
-  return <Form className="ant-advanced-search-form" fields={fields} {...props} inline buttonText="Buscar"/>
+  return (
+    <Form
+      className="ant-advanced-search-form"
+      fields={fields}
+      {...props}
+      inline
+      buttonText="Buscar"
+    />
+  )
 }
 
 export default searchForm

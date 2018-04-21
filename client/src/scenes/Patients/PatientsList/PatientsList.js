@@ -16,29 +16,35 @@ class PatientsList extends Component {
   }
 
   componentDidMount = () => {
-    axios
-      .get(
-        "tipo-documento"
-      )
-      .then(response => {
-        this.setState({
-          loading: false,
-          documentTypes: response.data
-        })
+    axios.get("tipo-documento").then(response => {
+      this.setState({
+        loading: false,
+        documentTypes: response.data
       })
+    })
   }
 
-  searchHandler = (data) => {
-    this.setState({...this.state, searching: true})
+  searchHandler = data => {
+    this.setState({ searching: true })
+
+    //Search Request
+
+    this.setState({ searching: true })
   }
 
-  deletePatientHandler = (patient) => {
-    this.setState({loading: true})
-    const name = patient.name + ' ' + patient.lastname
-    message.success("Se eliminó a " + name + " correctamente.")
-    this.setState({loading: false})
+  deletePatientHandler = patient => {
+    return new Promise((resolve, reject) => {
+      //Change Timeout for delelte request
+      setTimeout(Math.random() > 0.3 ? resolve : reject, 1000)
+    })
+      .then(() => {
+        this.setState({ loading: true })
+        const name = patient.name + " " + patient.lastname
+        message.success("Se eliminó a " + name + " correctamente.")
+        this.setState({ loading: false })
+      })
+      .catch(() => message.error("Algo falló. Intentá nuevamente."))
   }
-
 
   render() {
     return (
@@ -55,7 +61,12 @@ class PatientsList extends Component {
           </Col>
           <Col xl={17}>
             <Card style={{ margin: "24px" }}>
-              <Table loading={this.state.loading} onDelete={this.deletePatientHandler} addPath="/patients/add" documentTypes={this.state.documentTypes} />
+              <Table
+                loading={this.state.loading}
+                onDelete={this.deletePatientHandler}
+                addPath="/patients/add"
+                documentTypes={this.state.documentTypes}
+              />
             </Card>
           </Col>
         </Row>
