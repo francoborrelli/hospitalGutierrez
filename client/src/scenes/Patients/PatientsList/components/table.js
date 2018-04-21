@@ -1,5 +1,6 @@
 import React from "react"
 import { Table, Button, Icon, Divider, Modal } from "antd"
+import {Link} from "react-router-dom"
 
 const data = [
   {
@@ -46,7 +47,7 @@ const tablePatients = props => {
         record.lastname +
         ".",
       maskClosable: true,
-      onOk: () => props.deleted(record)
+      onOk: () => props.onDelete(record)
     })
 
   const columns = [
@@ -89,9 +90,11 @@ const tablePatients = props => {
   return (
     <div>
       <div className="table-operations">
-        <Button type="primary" style={{ marginBottom: 15 }}>
+      <Link to={props.addPath}>
+        <Button onClick={props.onAdd} type="primary" style={{ marginBottom: 15 }}>
           <Icon type="user-add" />Agregar
         </Button>
+      </Link>
       </div>
       <Table
         columns={columns}

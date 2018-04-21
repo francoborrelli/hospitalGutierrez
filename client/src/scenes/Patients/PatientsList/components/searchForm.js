@@ -35,6 +35,8 @@ const searchForm = props => {
         name: "documentType",
         props: {
           style: { width: 70 },
+          placeholder: "Tipo",
+          allowClear: true
         },
         options: props.documentTypes
       },
@@ -47,6 +49,10 @@ const searchForm = props => {
       name: "state",
       label: "Estado",
       type: "select",
+      props: {
+        placeholder: "Estado",
+        allowClear: true
+      },
       options: [
         { id: "active", nombre: "Activo" },
         { id: "deleted", nombre: "Eliminado" }
@@ -54,7 +60,7 @@ const searchForm = props => {
     }
   }
 
-  return <Form fields={fields} {...props} inline buttonText="Buscar"/>
+  return <Form className="ant-advanced-search-form" fields={fields} {...props} inline buttonText="Buscar"/>
 }
 
 export default searchForm

@@ -43,7 +43,7 @@ const loginForm = props => {
       text: "Recordarme",
     }
   }
-  return <Form fields={fields} buttonText="Iniciar Sesión" {...props} />
+  return <Form fields={fields} inline buttonText="Iniciar Sesión" {...props} />
 }
 
 export default loginForm

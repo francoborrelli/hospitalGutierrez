@@ -1,11 +1,11 @@
 import React, { Component } from "react"
-import { Layout, Card, Row, Col, message } from "antd"
-import axios from "../../../axios-apiReferences"
+import { Card, Row, Col, message } from "antd"
 
+import Section from "../../../components/header/sectionHeader/sectionHeader"
 import SearchForm from "./components/searchForm"
 import Table from "./components/table"
 
-const { Header, Content } = Layout
+import axios from "../../../axios-apiReferences"
 
 class PatientsList extends Component {
   state = {
@@ -39,12 +39,10 @@ class PatientsList extends Component {
     this.setState({loading: false})
   }
 
+
   render() {
     return (
-      <Content>
-        <Header style={{ padding: "17px", paddingLeft: "25px" }}>
-          <h1>Pacientes</h1>
-        </Header>
+      <Section title="pacientes">
         <Row>
           <Col xl={7}>
             <Card style={{ margin: "24px" }} title="Busqueda">
@@ -57,11 +55,11 @@ class PatientsList extends Component {
           </Col>
           <Col xl={17}>
             <Card style={{ margin: "24px" }}>
-              <Table loading={this.state.loading} deleted={this.deletePatientHandler} documentTypes={this.state.documentTypes} />
+              <Table loading={this.state.loading} onDelete={this.deletePatientHandler} addPath="/patients/add" documentTypes={this.state.documentTypes} />
             </Card>
           </Col>
         </Row>
-      </Content>
+      </Section>
     )
   }
 }
