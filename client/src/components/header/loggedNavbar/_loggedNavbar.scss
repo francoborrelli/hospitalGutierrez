@@ -1,36 +1,61 @@
-#navbar {
-    .sider{
-        background-color: white;
-
+@mixin dark-overlay {
+    &:after {
+        content: "";
+        width: 100%;
+        height: auto;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
     }
-    .ant-layout-header{
+}
+
+.full-overlay {
+    position: relative;
+    @media (max-width: 576px) {
+      @include dark-overlay;
+    }
+}
+
+.full-overlay:after {
+    background: rgba(0, 0, 0, 0.60);
+}
+
+#navbar {
+    .sider {
+        background-color: white;
+    }
+    .ant-layout-sider-children {
+        position: fixed;
+        width: 199px;
+    }
+    .ant-layout-sider-collapsed {
+        .ant-layout-sider-children {
+            width: 0;
+            .logonb {
+                padding-right: 118px;
+                margin-left: 23px;
+            }
+        }
+    }
+    .ant-layout-header {
         background: #fff;
         padding: 0;
         border-bottom: 1px solid #e8e8e8;
     }
-    .ant-layout-sider, .ant-menu-inline-collapsed{
+    .ant-layout-sider,
+    .ant-menu-inline-collapsed {
         border-right: 1px solid #e8e8e8;
     }
-    .ant-menu-inline, .ant-menu-horizontal{
+    .ant-menu-inline,
+    .ant-menu-horizontal {
         border-right: 0px;
     }
-
-    .ant-layout-sider-children{
-      position: fixed;
-      width: 199px;
-    }
-    .ant-layout-sider-collapsed{
-      .ant-layout-sider-children{
-        .logonb{
-          padding-right: 118px;
-        }
-      }
-    }
-
-    .userSection{
+    .userSection {
         float: right;
     }
-
     .trigger {
         font-size: 18px;
         line-height: 64px;
@@ -50,11 +75,10 @@
             height: 40px;
         }
     }
-
-    @media(max-width: 500px){
-        .addPatient, .addUser{
+    @media(max-width: 500px) {
+        .addPatient,
+        .addUser {
             display: none;
-            }
         }
+    }
 }
-

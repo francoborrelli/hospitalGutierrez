@@ -10,7 +10,7 @@ const sider = props => {
   return (
     <Sider
       className="sider"
-      style={{ zIndex: 2 }}
+      style={{ zIndex: 1 }}
       trigger={null}
       collapsible
       collapsed={props.collapsed}

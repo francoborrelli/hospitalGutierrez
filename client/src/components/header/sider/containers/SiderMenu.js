@@ -15,27 +15,33 @@ class SiderMenu extends Component {
     return pathname.startsWith(path) ? "ant-menu-item-selected" : ""
   }
 
+  getNavItems = items =>
+    items.map((item, index) => (
+      <Item key={index} className={this.getNavLinkClass(item.path)}>
+        <NavLink
+          path={item.path}
+          icon={item.icon}
+          text={item.text}
+        />
+      </Item>
+    ))
+
   render() {
+    const items = [
+      { text: "Inicio", path: "/", icon: "home" },
+      {
+        text: "Pacientes",
+        path: "/patients",
+        icon: "medicine-box"
+      },
+      { text: "Usuarios", path: "/users", icon: "team" },
+      { text: "Reportes", path: "/reports", icon: "pie-chart" },
+      { text: "Cerrar Sesión", path: "/logout", icon: "logout" }
+    ]
+
     return (
       <Menu theme="light" mode="inline">
-        <Item key="home" className={this.getNavLinkClass("/")}>
-          <NavLink path="/" icon="home" text="Inicio" />
-        </Item>
-        <Item key="patients" className={this.getNavLinkClass("/patients")}>
-          <NavLink path="/patients" icon="medicine-box" text="Pacientes" />
-        </Item>
-        <Item key="users" className={this.getNavLinkClass("/users")}>
-          <NavLink path="/users" icon="team" text="Usuarios" />
-        </Item>
-        <Item key="reports" className={this.getNavLinkClass("/reports")}>
-          <NavLink path="/reports" icon="pie-chart" text="Reportes" />
-        </Item>
-        <Item key="settings" className={this.getNavLinkClass("/settings")}>
-          <NavLink path="/settings" icon="setting" text="Configuración" />
-        </Item>
-        <Item key="logout">
-          <NavLink path="/logout" icon="logout" text="Cerrar Sesión" />
-        </Item>
+        {this.getNavItems(items)}
       </Menu>
     )
   }

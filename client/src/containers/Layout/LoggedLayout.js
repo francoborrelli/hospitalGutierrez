@@ -36,8 +36,8 @@ class LoggedLayout extends Component {
   render() {
     const drawer =
       this.state.responsive && !this.state.collapsed ? (
-        <Drawer clicked={this.toggleHandler} />
-      ) : null
+        {clicked: this.toggleHandler, className:"full-overlay" }
+      ) : {}
 
     return (
       <BaseLayout id="navbar">
@@ -45,14 +45,14 @@ class LoggedLayout extends Component {
           responsive={this.state.responsive}
           collapsed={this.state.collapsed}
         />
-        {drawer}
         <Layout>
           <Navbar
             responsive={this.state.responsive}
             clicked={this.toggleHandler}
             collapsed={this.state.collapsed}
           />
-          {this.props.children}
+
+          <Drawer {...drawer}>{this.props.children}</Drawer>
         </Layout>
       </BaseLayout>
     )
