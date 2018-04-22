@@ -43,6 +43,7 @@ class LoggedLayout extends Component {
       <BaseLayout id="navbar">
         <Sider
           responsive={this.state.responsive}
+          clicked={this.toggleHandler}
           collapsed={this.state.collapsed}
         />
         <Layout>

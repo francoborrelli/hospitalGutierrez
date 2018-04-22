@@ -6,13 +6,19 @@ import { withRouter } from "react-router-dom"
 const { Item } = Menu
 
 class SiderMenu extends Component {
-
   getNavLinkClass = path => {
     let pathname = this.props.location.pathname
     if (path === "/") {
       return pathname === path ? "ant-menu-item-selected" : ""
     }
     return pathname.startsWith(path) ? "ant-menu-item-selected" : ""
+  }
+
+  clickHandler = () => {
+    console.log(this.props.action)
+    if (this.props.action) {
+      this.props.clicked()
+    }
   }
 
   getNavItems = items =>
@@ -22,6 +28,7 @@ class SiderMenu extends Component {
           path={item.path}
           icon={item.icon}
           text={item.text}
+          clicked={this.clickHandler}
         />
       </Item>
     ))
