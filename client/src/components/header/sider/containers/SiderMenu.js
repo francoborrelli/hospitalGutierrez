@@ -36,6 +36,7 @@ class SiderMenu extends Component {
       },
       { text: "Usuarios", path: "/users", icon: "team" },
       { text: "Reportes", path: "/reports", icon: "pie-chart" },
+      { text: "Configuración", path: "/settings", icon: "setting" },
       { text: "Cerrar Sesión", path: "/logout", icon: "logout" }
     ]
 
