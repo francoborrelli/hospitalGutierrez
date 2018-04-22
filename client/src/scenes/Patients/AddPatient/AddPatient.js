@@ -16,13 +16,7 @@ class AddPatient extends Component {
     current: 0,
     personalData: [],
     demographicData: [],
-    apiData: {
-      documentTypes: [],
-      insurances: [],
-      houseTypes: [],
-      waterTypes: [],
-      heatingTypes: []
-    }
+    apiData: {}
   }
 
   componentDidMount = () => {

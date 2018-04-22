@@ -73,7 +73,7 @@ const personalDataForm = props => {
           required: true
         },
         customValidator: revalidate,
-        options: props.data.documentTypes
+        options: props.data.documentTypes || []
       },
       input: {
         type: "input",
@@ -120,7 +120,7 @@ const personalDataForm = props => {
       props: {
         placeholder: "Obra Social"
       },
-      options: props.data.insurances
+      options: props.data.insurances || []
     },
     phone: {
       name: "phone",
