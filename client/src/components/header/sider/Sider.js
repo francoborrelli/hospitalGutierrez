@@ -1,22 +1,28 @@
-import React from 'react';
-import Menu from './containers/SiderMenu';
-import logo from '../images/logo.png';
-import { Layout } from 'antd';
+import React from "react"
+import Menu from "./containers/SiderMenu"
+import logo from "../images/logo.png"
+import { Layout } from "antd"
 
-const { Sider } = Layout;
+const { Sider } = Layout
 
-const sider= props => {
-    const width = props.responsive ? 0 : 80
-    return (
-      <Sider className="sider" trigger={null} collapsible collapsed={props.collapsed}
+const sider = props => {
+  const width = props.responsive ? 0 : 80
+  return (
+    <Sider
+      className="sider"
+      style={{ zIndex: 2 }}
+      trigger={null}
+      collapsible
+      collapsed={props.collapsed}
       breakpoint="md"
-      collapsedWidth={width}>
-        <div className="logonb">
-          <img src={logo} alt="banner"/>
-        </div>
-        <Menu/>
-      </Sider>
-    );
-  }
+      collapsedWidth={width}
+    >
+      <div className="logonb">
+        <img src={logo} alt="banner" />
+      </div>
+      <Menu />
+    </Sider>
+  )
+}
 
-export default sider;
+export default sider

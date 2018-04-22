@@ -4,6 +4,7 @@ import BaseLayout from "./baseLayout"
 
 import Sider from "../../components/header/sider/Sider"
 import Navbar from "../../components/header/loggedNavbar/loggedNavbar"
+import Drawer from "../../components/header/drawer/drawer"
 
 class LoggedLayout extends Component {
   state = {
@@ -12,7 +13,10 @@ class LoggedLayout extends Component {
   }
 
   handleResize = e => {
-    this.setState({ responsive: window.innerWidth < 576 })
+    const result = window.innerWidth < 576
+    if (result !== this.state.responsive) {
+      this.setState({ responsive: result, collapsed: true })
+    }
   }
 
   componentDidMount = () => {
@@ -23,21 +27,31 @@ class LoggedLayout extends Component {
     window.addEventListener("resize", this.handleResize)
   }
 
-  toggle = () => {
+  toggleHandler = () => {
     this.setState(prevState => ({
       collapsed: !prevState.collapsed
     }))
   }
 
   render() {
+    const drawer =
+      this.state.responsive && !this.state.collapsed ? (
+        <Drawer clicked={this.toggleHandler} />
+      ) : null
+
     return (
       <BaseLayout id="navbar">
         <Sider
           responsive={this.state.responsive}
           collapsed={this.state.collapsed}
         />
+        {drawer}
         <Layout>
-          <Navbar responsive={this.state.responsive} clicked={this.toggle} collapsed={this.state.collapsed} />
+          <Navbar
+            responsive={this.state.responsive}
+            clicked={this.toggleHandler}
+            collapsed={this.state.collapsed}
+          />
           {this.props.children}
         </Layout>
       </BaseLayout>

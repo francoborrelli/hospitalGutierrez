@@ -6,7 +6,7 @@ const { Header } = Layout;
 
 const loggedNavbar = (props) => {
     return (
-      <Header className="navbar">
+      <Header className="navbar" style={{zIndex: 2}}>
         <Icon
         className="trigger"
         type={props.collapsed ? 'menu-unfold' : 'menu-fold'}
