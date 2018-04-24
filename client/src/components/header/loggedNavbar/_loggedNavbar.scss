@@ -9,6 +9,7 @@
         right: 0;
         left: 0;
         bottom: 0;
+        transition: all 0.2
     }
 }
 
@@ -20,7 +21,7 @@
 }
 
 .full-overlay:after {
-    background: rgba(0, 0, 0, 0.60);
+    background: rgba(0, 0, 0, 0.40);
 }
 
 #navbar {
@@ -35,7 +36,6 @@
         .ant-layout-sider-children {
             width: 0;
             .logonb {
-                padding-right: 118px;
                 margin-left: 23px;
             }
         }

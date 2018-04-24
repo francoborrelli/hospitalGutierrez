@@ -20,7 +20,10 @@ const sider = props => {
       <div className="logonb">
         <img src={logo} alt="banner" />
       </div>
-      <Menu />
+      <Menu
+        action={!props.collapsed && props.responsive}
+        clicked={props.clicked}
+      />
     </Sider>
   )
 }
