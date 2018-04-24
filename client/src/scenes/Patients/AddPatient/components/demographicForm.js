@@ -10,7 +10,7 @@ const geographicForm = props => {
       props: {
         placeholder: "Tipo de Vivienda"
       },
-      options: props.data.houseTypes,
+      options: props.data.houseTypes || [],
       rules: [
         {
           required: true,
@@ -25,7 +25,7 @@ const geographicForm = props => {
       props: {
         placeholder: "Tipo de Calefacción"
       },
-      options: props.data.heatingTypes,
+      options: props.data.heatingTypes || [],
       rules: [
         {
           required: true,
@@ -40,7 +40,7 @@ const geographicForm = props => {
       props: {
         placeholder: "Tipo de Agua"
       },
-      options: props.data.waterTypes,
+      options: props.data.waterTypes || [],
       rules: [
         {
           required: true,
