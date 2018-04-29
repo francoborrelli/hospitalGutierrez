@@ -1,11 +1,10 @@
 import React from "react"
-import {Icon} from "antd"
+import Icon from "../../../components/icon/icon"
 import Form from "../../../containers/Form/Form"
 
 const loginForm = props => {
-  const style = { color: "rgba(0,0,0,.25)" }
-  const userIcon = <Icon type="user" style={style} />
-  const passIcon = <Icon type="lock" style={style} />
+  const userIcon = <Icon type="user" />
+  const passIcon = <Icon type="lock" />
 
   const fields = {
     username: {
@@ -40,7 +39,7 @@ const loginForm = props => {
     checkbox: {
       name: "remember",
       type: "checkbox",
-      text: "Recordarme",
+      text: "Recordarme"
     }
   }
   return <Form fields={fields} inline buttonText="Iniciar Sesión" {...props} />
