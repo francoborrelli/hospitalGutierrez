@@ -15,7 +15,6 @@ class SiderMenu extends Component {
   }
 
   clickHandler = () => {
-    console.log(this.props.action)
     if (this.props.action) {
       this.props.clicked()
     }

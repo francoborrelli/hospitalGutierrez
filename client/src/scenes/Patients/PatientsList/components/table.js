@@ -35,6 +35,12 @@ const data = [
 ]
 
 const tablePatients = props => {
+
+  const documentTypes = []
+    Object.values(props.documentTypes).forEach(value => {
+      documentTypes[value.id] = value.nombre
+    })
+
   const columns = [
     {
       title: "Nombre",
@@ -51,8 +57,7 @@ const tablePatients = props => {
     {
       title: "Tipo Doc.",
       dataIndex: "documentType",
-      key: "documentType",
-      sorter: (a, b) => a.documentType < b.documentType
+      render: (text, row, col) => <span>{documentTypes[text]}</span>
     },
     {
       title: "Nº Doc.",
