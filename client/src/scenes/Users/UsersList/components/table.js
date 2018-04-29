@@ -10,7 +10,8 @@ const data = [
     lastname: "Borrelli",
     username: "fborrelli",
     email: "FrancoBorrelli@gmai.com",
-    role: "Administrador"
+    role: "Administrador",
+    status: "Activo"
   },
   {
     key: "2",
@@ -18,7 +19,8 @@ const data = [
     lastname: "Brost",
     username: "2",
     email: "pedrobrost@gmail.com",
-    role: ""
+    role: "",
+    status: "Activo"
   },
   {
     key: "3",
@@ -26,7 +28,8 @@ const data = [
     lastname: "Perez",
     documentType: "1",
     email: 397872,
-    role: ""
+    role: "",
+    status: "Bloqueado"
   },
   {
     key: "4",
@@ -34,7 +37,8 @@ const data = [
     lastname: "Garcia",
     username: "3",
     email: 41243,
-    role: ""
+    role: "",
+    status: "Activo"
   }
 ]
 
@@ -68,6 +72,11 @@ const tableUsers = props => {
       title: "Roles",
       dataIndex: "role",
       key: "role"
+    },
+    {
+      title: "Estado",
+      dataIndex: "status",
+      key: "status"
     },
     {
       title: "Acciones",
