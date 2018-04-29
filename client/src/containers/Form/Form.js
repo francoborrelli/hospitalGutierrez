@@ -73,14 +73,18 @@ class BaseForm extends Component {
     let backButton = this.props.onBack ? (
       <Button
         style={{ float: "right", marginLeft: 10 }}
-        onClick={() =>this.props.onBack(this.props.form.getFieldsValue())}
+        onClick={() => this.props.onBack(this.props.form.getFieldsValue())}
       >
         Volver
       </Button>
     ) : null
 
     return (
-      <Form className={this.props.className} onSubmit={this.submitHandler}>
+      <Form
+        className={this.props.className}
+        onSubmit={this.submitHandler}
+        style={this.props.style}
+      >
         <Row>{this.getFields(this.props.fields)}</Row>
         <FormItem>
           {backButton}
