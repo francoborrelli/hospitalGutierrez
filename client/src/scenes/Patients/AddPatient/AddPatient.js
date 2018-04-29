@@ -1,6 +1,7 @@
 import React, { Component } from "react"
-import { Card, message } from "antd"
+import { message } from "antd"
 
+import Card from "../../../components/card/card"
 import Section from "../../../components/header/sectionHeader/sectionHeader"
 import Steps from "../../../components/steps/steps"
 
@@ -107,7 +108,7 @@ class AddPatient extends Component {
 
     return (
       <Section title="Agregar Paciente">
-        <Card style={{ margin: "24px" }}>
+        <Card>
           <div className="container" style={{ maxWidth: 700 }}>
             <Steps current={this.state.current} steps={steps} />
           </div>
