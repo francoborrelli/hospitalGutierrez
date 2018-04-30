@@ -32,7 +32,7 @@ const locale = {
     yearSelect: "Elegir un año",
     decadeSelect: "Elegir una década",
     yearFormat: "YYYY",
-    dateFormat: "D/M/YYYY",
+    dateFormat: "DD/MM/YYYY",
     dayFormat: "D",
     dateTimeFormat: "D/M/YYYY HH:mm:ss",
     monthBeforeYear: true,
@@ -50,7 +50,14 @@ const locale = {
 class CustomDatePicker extends Component {
   render() {
     return (
-      <DatePicker showToday={false} disabledDate={date => date > moment()} {...this.props} locale={locale} style={{ width: "100%" }} />
+      <DatePicker
+        showToday={false}
+        disabledDate={date => date > moment()}
+        {...this.props}
+        format={"DD/MM/YYYY"}
+        locale={locale}
+        style={{ width: "100%" }}
+      />
     )
   }
 }
