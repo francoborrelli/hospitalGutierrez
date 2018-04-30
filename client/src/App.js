@@ -7,6 +7,7 @@ import LoginPage from "./scenes/Login/Login"
 import PatientsListPage from "./scenes/Patients/PatientsList/PatientsList"
 import UsersListPage from "./scenes/Users/UsersList/UsersList"
 import AddPatientPage from "./scenes/Patients/AddPatient/AddPatient"
+import AddUserPage from "./scenes/Users/AddUser/AddUser"
 import Error404 from "./scenes/Errors/404"
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
           <Route path="/login" component={LoginPage} />
           <Route path="/patients/add" exact component={AddPatientPage} />
           <Route path="/patients" component={PatientsListPage} />
+          <Route path="/users/add" component={AddUserPage} />
           <Route path="/users" component={UsersListPage} />
           <Route path="/" exact component={HomePage} />
           <Route component={Error404} />
