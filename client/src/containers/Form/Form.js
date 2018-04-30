@@ -8,7 +8,7 @@ const FormItem = Form.Item
 
 class BaseForm extends Component {
   componentDidMount = () => {
-    this.props.form.setFieldsValue(this.props.values)
+    this.props.form.setFieldsValue(this.props.defaultValues)
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -73,7 +73,7 @@ class BaseForm extends Component {
     let backButton = this.props.onBack ? (
       <Button
         style={{ float: "right", marginLeft: 10 }}
-        onClick={() =>this.props.onBack(this.props.form.getFieldsValue())}
+        onClick={() => this.props.onBack(this.props.form.getFieldsValue())}
       >
         Volver
       </Button>
