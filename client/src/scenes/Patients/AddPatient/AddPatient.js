@@ -3,9 +3,9 @@ import { Card, message } from "antd"
 
 import Section from "../../../components/header/sectionHeader/sectionHeader"
 import Steps from "../../../components/steps/steps"
+import DemographicForm from "../components/demographicForm"
+import PersonalForm from "../components/personalForm"
 
-import DemographicForm from "./components/demographicForm"
-import PersonalForm from "./components/personalForm"
 
 import axios from "axios"
 import { path } from "../../../axios-apiReferences"
@@ -88,6 +88,7 @@ class AddPatient extends Component {
             submitted={this.personalDataSubmitHandler}
             values={this.state.personalData}
             data={this.state.apiData}
+            btnText="Continuar"
           />
         )
       },

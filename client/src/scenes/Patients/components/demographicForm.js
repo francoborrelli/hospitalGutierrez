@@ -1,5 +1,5 @@
 import React from "react"
-import Form from "../../../../containers/Form/Form"
+import Form from "../../../containers/Form/Form"
 
 const geographicForm = props => {
   const fields = {
@@ -99,7 +99,7 @@ const geographicForm = props => {
     <Form
       fields={fields}
       {...props}
-      buttonText="Continuar"
+      buttonText={props.btnText ? props.btnText : "Confirmar"}
       loading={props.loading}
       onBack={props.prevStep}
     />
