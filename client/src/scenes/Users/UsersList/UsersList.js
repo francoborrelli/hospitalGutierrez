@@ -1,6 +1,7 @@
 import React, { Component } from "react"
-import { Card, Row, Col, message } from "antd"
+import { Row, Col, message } from "antd"
 
+import Card from "../../../components/card/card"
 import Section from "../../../components/header/sectionHeader/sectionHeader"
 import SearchForm from "./components/searchForm"
 import Table from "./components/table"
@@ -45,7 +46,7 @@ class UserList extends Component {
       <Section title="usuarios">
         <Row>
           <Col xl={7}>
-            <Card style={{ margin: "24px" }} title="Busqueda">
+            <Card title="Busqueda">
               <SearchForm
                 loading={this.state.searching}
                 documentTypes={this.state.documentTypes}
@@ -54,7 +55,7 @@ class UserList extends Component {
             </Card>
           </Col>
           <Col xl={17}>
-            <Card style={{ margin: "24px" }}>
+            <Card >
               <Table
                 loading={this.state.loading}
                 onDelete={this.deleteUserHandler}

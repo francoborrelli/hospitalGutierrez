@@ -81,7 +81,11 @@ class BaseForm extends Component {
     ) : null
 
     return (
-      <Form className={this.props.className} onSubmit={this.submitHandler}>
+      <Form
+        className={this.props.className}
+        onSubmit={this.submitHandler}
+        style={this.props.style}
+      >
         <Row>{this.getFields(this.props.fields)}</Row>
         <FormItem>
           {backButton}
