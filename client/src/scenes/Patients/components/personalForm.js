@@ -1,5 +1,5 @@
 import React from "react"
-import Form from "../../../../containers/Form/Form"
+import Form from "../../../containers/Form/Form"
 
 const personalDataForm = props => {
 
@@ -139,7 +139,7 @@ const personalDataForm = props => {
     <Form
       fields={fields}
       {...props}
-      buttonText="Continuar"
+      buttonText={props.btnText ? props.btnText : "Confirmar"}
       track="documentType"
     />
   )

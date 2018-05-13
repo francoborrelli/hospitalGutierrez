@@ -3,12 +3,10 @@ import { Card, message } from "antd"
 
 import Section from "../../../components/header/sectionHeader/sectionHeader"
 import Steps from "../../../components/steps/steps"
+import DemographicForm from "../components/demographicForm"
+import PersonalForm from "../components/personalForm"
 
-import DemographicForm from "./components/demographicForm"
-import PersonalForm from "./components/personalForm"
-
-import axios from "axios"
-import { path } from "../../../axios-apiReferences"
+import withApiRefData from "../../../hoc/withApiRefData"
 
 class AddPatient extends Component {
   state = {
@@ -16,33 +14,6 @@ class AddPatient extends Component {
     current: 0,
     personalData: [],
     demographicData: [],
-    apiData: {}
-  }
-
-  componentDidMount = () => {
-    axios
-      .all([
-        axios.get(path + "tipo-documento"),
-        axios.get(path + "obra-social"),
-        axios.get(path + "tipo-vivienda"),
-        axios.get(path + "tipo-agua"),
-        axios.get(path + "tipo-calefaccion")
-      ])
-      .then(
-        axios.spread(
-          (documentTypes, insurance, houseTypes, waterTypes, heatingTypes) => {
-            this.setState({
-              apiData: {
-                documentTypes: documentTypes.data,
-                insurances: insurance.data,
-                houseTypes: houseTypes.data,
-                waterTypes: waterTypes.data,
-                heatingTypes: heatingTypes.data
-              }
-            })
-          }
-        )
-      )
   }
 
   nextStep = () => {
@@ -70,15 +41,14 @@ class AddPatient extends Component {
 
   addHandler = data => {
     this.setState({ loading: true })
-
     //request
-
     this.setState({ loading: false })
     this.props.history.push("/patients")
     message.success(
       "Se agregó a " + data.name + " " + data.lastname + " correctamente."
     )
   }
+
   render() {
     const steps = [
       {
@@ -86,8 +56,9 @@ class AddPatient extends Component {
         content: (
           <PersonalForm
             submitted={this.personalDataSubmitHandler}
-            values={this.state.personalData}
-            data={this.state.apiData}
+            data={this.props.apiData}
+            defaultValues={this.state.personalData}
+            btnText="Continuar"
           />
         )
       },
@@ -95,9 +66,9 @@ class AddPatient extends Component {
         title: "Datos Demográficos",
         content: (
           <DemographicForm
-            data={this.state.apiData}
-            values={this.state.demographicData}
             submitted={this.demographicDataSubmitHandler}
+            data={this.props.apiData}
+            defaultValues={this.state.demographicData}
             prevStep={this.prevStepHandler}
             loading={this.state.loading}
           />
@@ -117,4 +88,4 @@ class AddPatient extends Component {
   }
 }
 
-export default AddPatient
+export default withApiRefData()(AddPatient)

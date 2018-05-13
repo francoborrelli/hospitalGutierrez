@@ -3,12 +3,13 @@ import { Form, Button, Row } from "antd"
 import Input from "./formItem"
 import SearchItem from "./searchItem"
 import NormalItem from "./normalItem"
+import VerticalItem from "./verticalItem"
 
 const FormItem = Form.Item
 
 class BaseForm extends Component {
   componentDidMount = () => {
-    this.props.form.setFieldsValue(this.props.values)
+    this.props.form.setFieldsValue(this.props.defaultValues)
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -29,8 +30,8 @@ class BaseForm extends Component {
 
   getFields = fields => {
     const { getFieldDecorator } = this.props.form
-    const Wrapper = this.props.inline ? SearchItem : NormalItem
-
+    let Wrapper = this.props.inline ? SearchItem : NormalItem
+    Wrapper = this.props.vertical ? VerticalItem : Wrapper
     const items = []
     for (let key in fields) {
       items.push({
@@ -73,7 +74,7 @@ class BaseForm extends Component {
     let backButton = this.props.onBack ? (
       <Button
         style={{ float: "right", marginLeft: 10 }}
-        onClick={() =>this.props.onBack(this.props.form.getFieldsValue())}
+        onClick={() => this.props.onBack(this.props.form.getFieldsValue())}
       >
         Volver
       </Button>
