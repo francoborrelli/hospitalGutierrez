@@ -6,19 +6,13 @@ const FormItem = Form.Item
 
 const formItemLayout = {
   labelCol: {
-    lg: {
-      span: 24
-    },
     xl: {
-      span: 6
+      span: 24
     }
   },
   wrapperCol: {
-    lg: {
-      span: 24
-    },
     xl: {
-      span: 18
+      span: 24
     }
   }
 }

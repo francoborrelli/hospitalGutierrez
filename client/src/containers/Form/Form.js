@@ -3,6 +3,7 @@ import { Form, Button, Row } from "antd"
 import Input from "./formItem"
 import SearchItem from "./searchItem"
 import NormalItem from "./normalItem"
+import VerticalItem from "./verticalItem"
 
 const FormItem = Form.Item
 
@@ -29,8 +30,8 @@ class BaseForm extends Component {
 
   getFields = fields => {
     const { getFieldDecorator } = this.props.form
-    const Wrapper = this.props.inline ? SearchItem : NormalItem
-
+    let Wrapper = this.props.inline ? SearchItem : NormalItem
+    Wrapper = this.props.vertical ? VerticalItem : Wrapper
     const items = []
     for (let key in fields) {
       items.push({
