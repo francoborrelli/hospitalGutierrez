@@ -7,22 +7,36 @@ import MantainmentConfiguration from "./components/mantainmentConfiguration"
 import ElementsConfiguration from "./components/elementsConfiguration"
 
 class Configuration extends Component {
-  state = {}
+  state = {
+  }
 
   componentDidMount = () => {
-    //Get table data
+    //Get data
+  }
+
+  updatePageInfoHandler = () => {
+
+  }
+
+  updateElementsNumberHandler = () => {
+
+  }
+
+  mantaintmentHandler = () => {
+
   }
 
   render() {
     return (
       <Section title="Configuración">
-        <Row>
-          <Col xs={24} xl={14}>
-            <PageConfiguration/>
+        <Row gutter={16} style={{padding: 25}}>
+          <Col xs={24} xl={14} style={{marginBottom: 20}}>
+            <PageConfiguration
+            />
           </Col>
           <Col xs={24} xl={10}>
-            <Row>
-              <Col md={12} xl={24} xxl={12}>
+            <Row gutter={16}>
+              <Col md={12} xl={24} xxl={12} style={{marginBottom: 20}}>
                 <ElementsConfiguration/>
               </Col>
               <Col md={12} xl={24} xxl={12}>

@@ -1,7 +1,6 @@
 import React from "react"
-
+import {Card} from "antd"
 import Icon from "../../../components/icon/icon"
-import Card from "../../../components/card/card"
 import Form from "../../../containers/Form/Form"
 
 //Mock data
@@ -16,7 +15,7 @@ const emailIcon = <Icon type="mail" />
 const descriptionIcon = <Icon type="idcard" />
 
 const fields = {
-  lastname: {
+  title: {
     name: "title",
     type: "input",
     rules: [
@@ -54,7 +53,7 @@ const fields = {
 }
 
 const pageConfiguration = props => (
-  <Card title="Sitio">
+  <Card title="Datos del Sitio">
     <Form
       className="ant-advanced-search-form"
       fields={fields}
