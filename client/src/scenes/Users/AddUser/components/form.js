@@ -1,53 +1,6 @@
 import React from "react"
 import Form from "../../../../containers/Form/Form"
-
-//Custom Validators
-
-const emailValidator = (form, rule, email, callback) => {
-  return new Promise((resolve, reject) => {
-    //Change Timeout for request
-    setTimeout(resolve, 1000)
-  })
-    .then(() => {
-      if (email === 4) {
-        callback("El email ya se encuentra registrado en el sistema")
-      }
-      callback()
-    })
-    .catch()
-}
-
-const usernameValidator = (form, rule, username, callback) => {
-  return new Promise((resolve, reject) => {
-    //Change Timeout for request
-    setTimeout(resolve, 1000)
-  })
-    .then(() => {
-      if (username === "franco") {
-        callback(
-          "El nombre de usuario ya se encuentra registrado en el sistema"
-        )
-      }
-      callback()
-    })
-    .catch()
-}
-
-const compareToFirstPassword = (form, rule, value, callback) => {
-  if (value && value.length > 6 && value !== form.getFieldValue("password")) {
-    callback("Las contraseñas no son iguales")
-  } else {
-    callback()
-  }
-}
-
-const revalidate = (form, rule, value, callback) => {
-  const field = form.getFieldValue("confirmPass")
-  if (field) {
-    form.validateFields(["confirmPass"], { force: true })
-  }
-  callback()
-}
+import withValidations from "../../hoc/withValidators"
 
 const addUserForm = props => {
   const fields = {
@@ -98,7 +51,7 @@ const addUserForm = props => {
           message: "Ingrese un nombre de usuario válido"
         }
       ],
-      customValidator: usernameValidator
+      customValidator: props.usernameValidator
     },
     email: {
       name: "email",
@@ -112,7 +65,7 @@ const addUserForm = props => {
         },
         { type: "email", message: "Ingrese un email válido" }
       ],
-      customValidator: emailValidator
+      customValidator: props.emailValidator
     },
     password: {
       name: "password",
@@ -129,7 +82,7 @@ const addUserForm = props => {
         },
         { min: 6, message: "Debe tener al menos 6 caracteres" }
       ],
-      customValidator: revalidate
+      customValidator: props.revalidate
     },
     confirmPassword: {
       name: "confirmPass",
@@ -146,7 +99,7 @@ const addUserForm = props => {
         },
         { min: 6, message: "Debe tener al menos 6 caracteres" }
       ],
-      customValidator: compareToFirstPassword
+      customValidator: props.compareToFirstPassword
     },
     roles: {
       name: "roles",
@@ -163,4 +116,4 @@ const addUserForm = props => {
   return <Form fields={fields} {...props} buttonText="Confirmar" />
 }
 
-export default addUserForm
+export default withValidations(addUserForm)
