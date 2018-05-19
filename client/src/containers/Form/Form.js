@@ -89,7 +89,7 @@ class BaseForm extends Component {
         style={this.props.style}
       >
         <Row>{this.getFields(this.props.fields)}</Row>
-        <FormItem>
+        <FormItem style={{margin: 0}}>
           {backButton}
           <Button
             type="primary"
@@ -106,7 +106,6 @@ class BaseForm extends Component {
 }
 
 BaseForm.propTypes = {
-  defaultValues: PropTypes.object,
   fields: PropTypes.object.isRequired,
   submitted: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
