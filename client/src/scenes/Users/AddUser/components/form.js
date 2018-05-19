@@ -106,6 +106,7 @@ const addUserForm = props => {
       label: "Roles",
       type: "select",
       options: props.roles,
+      rules: [{required: true, message: "Debe tener un rol"}],
       props: {
         mode: "multiple",
         placeholder: "Roles"
