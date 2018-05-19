@@ -1,9 +1,11 @@
 import React, { Component } from "react"
 import { Form, Button, Row } from "antd"
 import Input from "./formItem"
-import SearchItem from "./searchItem"
-import NormalItem from "./normalItem"
-import VerticalItem from "./verticalItem"
+import SearchItem from "./inputLayouts/searchItem"
+import NormalItem from "./inputLayouts/normalItem"
+import VerticalItem from "./inputLayouts/verticalItem"
+
+import PropTypes from 'prop-types';
 
 const FormItem = Form.Item
 
@@ -95,12 +97,20 @@ class BaseForm extends Component {
             style={{ float: "right" }}
             loading={this.props.loading}
           >
-            {this.props.buttonText}
+            {this.props.buttonText ? this.props.buttonText : "Guardar"}
           </Button>
         </FormItem>
       </Form>
     )
   }
+}
+
+BaseForm.propTypes = {
+  defaultValues: PropTypes.object,
+  fields: PropTypes.object.isRequired,
+  submitted: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  buttonText: PropTypes.string
 }
 
 export default Form.create()(BaseForm)
