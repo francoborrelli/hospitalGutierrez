@@ -7,7 +7,6 @@ import PersonalForm from "./components/form"
 class AddUser extends Component {
   state = {
     loading: false,
-    current: 0,
     roles: [
       { id: 0, nombre: "Administrador" },
       { id: 1, nombre: "Pediatra" },
