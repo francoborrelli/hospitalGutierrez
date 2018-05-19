@@ -3,13 +3,6 @@ import {Card} from "antd"
 import Icon from "../../../components/icon/icon"
 import Form from "../../../containers/Form/Form"
 
-//Mock data
-const data = {
-  title: "Hospital Gutierrez",
-  email: "hospital@gmail.com",
-  description: "Esto es un hospital"
-}
-
 const titleIcon = <Icon type="flag" />
 const emailIcon = <Icon type="mail" />
 const descriptionIcon = <Icon type="idcard" />
@@ -53,11 +46,12 @@ const fields = {
 }
 
 const pageConfiguration = props => (
-  <Card title="Datos del Sitio">
+  <Card title="Datos del Sitio" style={{padding: "8px 0px"}}>
     <Form
       className="ant-advanced-search-form"
       fields={fields}
-      values={data}
+      defaultValues={props.values}
+      {...props}
       style={{padding: "0px 20px"}}
       buttonText="Guardar"
     />

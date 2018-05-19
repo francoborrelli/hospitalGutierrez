@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Input, Select, Checkbox } from "antd"
+import { Input, Select, Checkbox, InputNumber } from "antd"
 import DatePicker from "../../components/datePicker/datePicker"
 
 class Item extends Component {
@@ -22,9 +22,15 @@ class Item extends Component {
     return <Select {...item.props}>{options}</Select>
   }
 
-  getDatePicker = item => {
-    return <DatePicker {...item.props} />
-  }
+  getDatePicker = item => <DatePicker {...item.props} />
+
+
+  getInputNumber = item => (
+    <InputNumber
+    {...item.props}
+    formatter={value => value ? `${Math.round(value)}`: ''}
+    />
+  )
 
   getCheckbox = item => <Checkbox> {item.text} </Checkbox>
 
@@ -69,10 +75,12 @@ class Item extends Component {
       case "datePicker":
         result = this.getDatePicker(item)
         break
+      case "inputNumber":
+        result = this.getInputNumber(item)
+        break
       default:
         return null
     }
-
     return this.wrapItem(item, result)
   }
 }
