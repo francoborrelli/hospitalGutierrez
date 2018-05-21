@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 
-import {Row} from "antd";
 import Report from "./components/report"
 import Section from "../../components/header/sectionHeader/sectionHeader"
+import Row from "../../components/grid/row";
 
 class Reports extends Component {
   state = {
@@ -43,7 +43,7 @@ class Reports extends Component {
 
   render = () => (
     <Section title="Reportes">
-      <Row gutter={10} style={{padding: 10}}>
+      <Row>
         <Report
           type="pie"
           title="Tipos de Viviendas"

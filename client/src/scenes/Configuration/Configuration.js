@@ -1,10 +1,11 @@
 import React, { Component } from "react"
-import { Row, Col} from "antd"
-
+import {Row, Col} from "antd"
+import RowGutter from '../../components/grid/row';
 import Section from "../../components/header/sectionHeader/sectionHeader"
 import PageConfiguration from "./components/pageConfiguration"
 import MantainmentConfiguration from "./components/mantainmentConfiguration"
 import ElementsConfiguration from "./components/elementsConfiguration"
+
 
 class Configuration extends Component {
   state = {
@@ -48,8 +49,8 @@ class Configuration extends Component {
   render() {
     return (
       <Section title="Configuración">
-        <Row gutter={16} style={{padding: 25}}>
-          <Col xs={24} xl={14} style={{marginBottom: 20}}>
+        <RowGutter>
+          <Col xs={24} xl={14} style={{marginBottom: 10}}>
             <PageConfiguration
             values={this.state.pageInfo}
             loading={this.state.pageInfoRequest}
@@ -57,8 +58,8 @@ class Configuration extends Component {
             />
           </Col>
           <Col xs={24} xl={10}>
-            <Row gutter={16}>
-              <Col md={12} xl={24} xxl={12} style={{marginBottom: 20}}>
+            <Row gutter={10}>
+              <Col md={12} xl={24} xxl={12} style={{marginBottom: 10}}>
                 <ElementsConfiguration
                 value={this.state.elementsNumber}
                 submitted={this.updateElementsNumberHandler}
@@ -74,7 +75,7 @@ class Configuration extends Component {
               </Col>
             </Row>
           </Col>
-        </Row>
+        </RowGutter>
       </Section>
     )
   }

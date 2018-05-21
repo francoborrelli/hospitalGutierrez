@@ -1,10 +1,10 @@
 import React, { Component } from "react"
-import { Row, Col, message } from "antd"
-
-import Card from "../../../components/card/card"
+import {Col, message } from "antd"
+import Row from '../../../components/grid/row';
 import Section from "../../../components/header/sectionHeader/sectionHeader"
 import SearchForm from "./components/searchForm"
 import Table from "./components/table"
+
 
 class UserList extends Component {
   state = {
@@ -46,22 +46,18 @@ class UserList extends Component {
       <Section title="usuarios">
         <Row>
           <Col xl={7}>
-            <Card title="Busqueda">
               <SearchForm
                 loading={this.state.searching}
                 documentTypes={this.state.documentTypes}
                 submitted={this.searchHandler}
               />
-            </Card>
           </Col>
           <Col xl={17}>
-            <Card >
               <Table
                 loading={this.state.loading}
                 onDelete={this.deleteUserHandler}
                 addPath="/users/add"
               />
-            </Card>
           </Col>
         </Row>
       </Section>

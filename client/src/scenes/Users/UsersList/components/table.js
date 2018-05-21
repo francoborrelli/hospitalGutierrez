@@ -1,7 +1,8 @@
 import React from "react"
-import { Table, Button, Icon } from "antd"
+import {Button, Icon, Card} from "antd"
 import Dropdown from "./dropdown"
-import { Link } from "react-router-dom"
+import {Link} from "react-router-dom"
+import Table from '../../../../components/table/table';
 
 const data = [
   {
@@ -12,8 +13,7 @@ const data = [
     email: "FrancoBorrelli@gmai.com",
     role: "Administrador",
     status: "Activo"
-  },
-  {
+  }, {
     key: "2",
     name: "Pedro",
     lastname: "Brost",
@@ -21,8 +21,7 @@ const data = [
     email: "pedrobrost@gmail.com",
     role: "",
     status: "Activo"
-  },
-  {
+  }, {
     key: "3",
     name: "Juan",
     lastname: "Perez",
@@ -30,8 +29,7 @@ const data = [
     email: 397872,
     role: "",
     status: "Bloqueado"
-  },
-  {
+  }, {
     key: "4",
     name: "John",
     lastname: "Garcia",
@@ -49,59 +47,47 @@ const tableUsers = props => {
       dataIndex: "name",
       key: "name",
       sorter: (a, b) => a.name < b.name
-    },
-    {
+    }, {
       title: "Apellido",
       dataIndex: "lastname",
       key: "lastname",
       sorter: (a, b) => a.lastname < b.lastname
-    },
-    {
+    }, {
       title: "Nombre de Usuario",
       dataIndex: "username",
       key: "username",
       sorter: (a, b) => a.username < b.username
-    },
-    {
+    }, {
       title: "Email",
       dataIndex: "email",
       key: "email",
       sorter: (a, b) => a.email < b.email
-    },
-    {
+    }, {
       title: "Roles",
       dataIndex: "role",
       key: "role"
-    },
-    {
+    }, {
       title: "Estado",
       dataIndex: "status",
       key: "status"
-    },
-    {
+    }, {
       title: "Acciones",
       key: "action",
       align: "center",
       fixed: "right",
       width: 120,
-      render: (text, record) => (
-        <Dropdown
-          record={record}
-          onDelete={props.onDelete}
-        />
-      )
+      render: (text, record) => (<Dropdown record={record} onDelete={props.onDelete}/>)
     }
   ]
   return (
-    <div>
+    <Card>
       <div className="table-operations">
         <Link to={props.addPath}>
           <Button
             onClick={props.onAdd}
             type="primary"
-            style={{ marginBottom: 15 }}
-          >
-            <Icon type="user-add" />Agregar
+            style={{marginBottom: 15}}>
+            <Icon type="user-add"/>Agregar
           </Button>
         </Link>
       </div>
@@ -109,10 +95,10 @@ const tableUsers = props => {
         columns={columns}
         dataSource={data}
         loading={props.loading}
-        locale={{ emptyText: "No hay datos" }}
-        scroll={{ x: 950 }}
-      />
-    </div>
+        scroll={{
+        x: 950
+      }}/>
+    </Card>
   )
 }
 

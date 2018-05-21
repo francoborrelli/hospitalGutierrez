@@ -1,4 +1,5 @@
 import React from "react"
+import { Card } from 'antd';
 import Form from "../../../../containers/Form/Form"
 
 const searchForm = props => {
@@ -25,13 +26,15 @@ const searchForm = props => {
   }
 
   return (
-    <Form
-      className="ant-advanced-search-form"
-      fields={fields}
-      {...props}
-      inline
-      buttonText="Buscar"
-    />
+    <Card title="Buscar" style={{marginBottom: 10}}>
+      <Form
+        className="ant-advanced-search-form"
+        fields={fields}
+        {...props}
+        inline
+        buttonText="Buscar"
+      />
+    </Card>
   )
 }
 
