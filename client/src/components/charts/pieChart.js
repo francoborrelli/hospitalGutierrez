@@ -1,7 +1,7 @@
 import React from "react";
 
 import HighchartsChart from "./highcharts"
-import { PieSeries, Tooltip } from 'react-jsx-highcharts';
+import {PieSeries} from 'react-jsx-highcharts';
 
 const pieChart = props => {
   return <HighchartsChart {...props}>

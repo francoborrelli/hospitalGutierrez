@@ -3,6 +3,8 @@ import {Card} from "antd"
 import moment from 'moment';
 
 import Highcharts from 'highcharts';
+import applyExporting from 'highcharts/modules/exporting';
+import applyOffline from 'highcharts/modules/offline-exporting';
 import {
   withHighcharts,
   Chart,
@@ -14,8 +16,6 @@ import {
   HighchartsChart,
   Tooltip
 } from 'react-jsx-highcharts';
-import applyExporting from 'highcharts/modules/exporting';
-import applyOffline from 'highcharts/modules/offline-exporting';
 
 applyExporting(Highcharts);
 applyOffline(Highcharts);
@@ -37,9 +37,7 @@ const lang = {
 
 const pieColors = () => {
   let colors = []
-  let base = Highcharts
-    .getOptions()
-    .colors[0]
+  let base = Highcharts.getOptions().colors[0]
   for (let i = 0; i < 10; i += 1) {
     colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());
   }
@@ -62,8 +60,9 @@ const plotOptions = {
   },
   column: {
     dataLabels: {
-      enabled: true
+      enabled: true,
     },
+    showInLegend: true,
     enableMouseTracking: true
   },
   pie: {
@@ -97,6 +96,7 @@ const highchart = props => {
   let exporting = props.exporting || {
     filename: 'chart'
   }
+
   let today = moment().format('DD/MM/YYYY');
   exporting = {
     filename: exporting.filename + ' - ' + today
@@ -107,7 +107,10 @@ const highchart = props => {
       marginBottom: 10,
       minHeight: 300
     }}>
-      <HighchartsChart plotOptions={plotOptions} exporting={exporting} lang={lang}>
+      <HighchartsChart
+        plotOptions={plotOptions}
+        exporting={exporting}
+        lang={lang}>
         <Chart zoomType="xy"/>
 
         <Title>{props.title}</Title>
