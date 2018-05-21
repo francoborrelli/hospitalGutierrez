@@ -45,9 +45,7 @@ class elementsNumberForm extends Component {
               type="primary"
               htmlType="submit"
               loading={this.props.loading}
-              style={{
-              marginLeft: 10
-            }}>
+              style={{marginLeft: 10, width: "100%"}}>
               Guardar
             </Button>
           </FormItem>
