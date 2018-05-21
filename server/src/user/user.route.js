@@ -19,6 +19,8 @@ router
 
   .delete(userCtrl.remove);
 
+router.route('/:userId/roles').patch(userCtrl.addRole);
+
 router.param('userId', userCtrl.load);
 
 module.exports = router;

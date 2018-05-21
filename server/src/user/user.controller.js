@@ -1,4 +1,5 @@
 const User = require('./user.model');
+require('../role/role.model');
 
 /**
  * Load user and append to req.
@@ -86,4 +87,13 @@ function remove(req, res, next) {
     .catch(e => next(e));
 }
 
-module.exports = { load, get, create, update, list, remove };
+function addRole(req, res, next) {
+  const user = req.user;
+  user.roles.push(req.body.roleId);
+  user
+    .save()
+    .then(savedUser => res.json(savedUser))
+    .catch(e => next(e));
+}
+
+module.exports = { load, get, create, update, list, remove, addRole };

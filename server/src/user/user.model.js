@@ -29,6 +29,7 @@ const UserSchema = new mongoose.Schema({
       'Please fill a valid email address'
     ]
   },
+  roles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Role' }],
   active: {
     type: Boolean,
     required: true
@@ -66,6 +67,7 @@ UserSchema.statics = {
    */
   get(id) {
     return this.findById(id)
+      .populate('roles')
       .exec()
       .then(user => {
         if (user) {
