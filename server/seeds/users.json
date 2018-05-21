@@ -1,0 +1,38 @@
+[
+  {
+    "_id": { "$oid": "5b0343111993e300b02f4480" },
+    "roles": [{ "$oid": "5b0342132fb40a2151d9c1d6" }],
+    "firstName": "Franco",
+    "lastName": "Borrelli",
+    "username": "fborrelli",
+    "email": "francoborrelli@gmail.com",
+    "active": true,
+    "createdAt": { "$date": "2018-05-21T22:07:13.913Z" },
+    "updatedAt": { "$date": "2018-05-21T22:07:13.913Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5b0344371993e300b02f4481" },
+    "roles": [{ "$oid": "5b0342132fb40a2151d9c1d6" }],
+    "firstName": "Pedro",
+    "lastName": "Brost",
+    "username": "pbrost",
+    "email": "pedro.brost97@gmail.com",
+    "active": true,
+    "createdAt": { "$date": "2018-05-21T22:12:07.074Z" },
+    "updatedAt": { "$date": "2018-05-21T22:12:07.074Z" },
+    "__v": 1
+  },
+  {
+    "_id": { "$oid": "5b0344651993e300b02f4483" },
+    "roles": [{ "$oid": "5b0342692fb40a2151d9c1db" }],
+    "firstName": "Camila",
+    "lastName": "Onofri",
+    "username": "conofri",
+    "email": "cami@gmail.com",
+    "active": true,
+    "createdAt": { "$date": "2018-05-21T22:12:53.986Z" },
+    "updatedAt": { "$date": "2018-05-21T22:12:53.986Z" },
+    "__v": 1
+  }
+]
