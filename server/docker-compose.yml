@@ -14,3 +14,10 @@ services:
 
   mongo:
     image: "mongo:3.4.14"
+    volumes:
+      - hospital-data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  hospital-data:
