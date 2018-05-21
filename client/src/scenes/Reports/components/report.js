@@ -24,7 +24,7 @@ const report = props => {
       filename: "Reporte: " + props.title
     }
   }
-  return <Col md={12} xxl={8} {...props}><Chart {...config}/></Col>
+  return <Col md={12} xl={8} {...props}><Chart {...config}/></Col>
 }
 
 export default report;

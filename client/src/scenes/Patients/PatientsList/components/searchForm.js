@@ -1,4 +1,5 @@
 import React from "react"
+import {Card} from 'antd';
 import Form from "../../../../containers/Form/Form"
 
 const searchForm = props => {
@@ -39,7 +40,9 @@ const searchForm = props => {
         type: "select",
         name: "documentType",
         props: {
-          style: { width: 70 },
+          style: {
+            width: 70
+          },
           placeholder: "Tipo",
           allowClear: true
         },
@@ -58,20 +61,26 @@ const searchForm = props => {
         allowClear: true
       },
       options: [
-        { id: "active", nombre: "Activo" },
-        { id: "deleted", nombre: "Eliminado" }
+        {
+          id: "active",
+          nombre: "Activo"
+        }, {
+          id: "deleted",
+          nombre: "Eliminado"
+        }
       ]
     }
   }
 
   return (
-    <Form
-      className="ant-advanced-search-form"
-      fields={fields}
-      {...props}
-      inline
-      buttonText="Buscar"
-    />
+    <Card title="Búsqueda">
+      <Form
+        className="ant-advanced-search-form"
+        fields={fields}
+        {...props}
+        inline
+        buttonText="Buscar"/>
+    </Card>
   )
 }
 
