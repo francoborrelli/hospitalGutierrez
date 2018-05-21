@@ -19,7 +19,9 @@ router
 
   .delete(userCtrl.remove);
 
-router.route('/:userId/roles').patch(userCtrl.addRole);
+router
+  .route('/:userId/roles')
+  .post(validate(paramValidation.addRoleToUser), userCtrl.addRole);
 
 router.param('userId', userCtrl.load);
 

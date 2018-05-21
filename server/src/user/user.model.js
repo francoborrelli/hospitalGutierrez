@@ -54,7 +54,18 @@ const UserSchema = new mongoose.Schema({
 /**
  * Methods
  */
-UserSchema.method({});
+UserSchema.method({
+  hasRole(roleId) {
+    console.log('ASDASDASDASDA', this.roles);
+    let hasRole = false;
+    this.roles.forEach(role => {
+      if (role.id === roleId) {
+        hasRole = true;
+      }
+    });
+    return hasRole;
+  }
+});
 
 /**
  * Statics
