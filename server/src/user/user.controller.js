@@ -5,7 +5,7 @@ const User = require('./user.model');
  */
 function load(req, res, next, id) {
   User.get(id)
-    .then((user) => {
+    .then(user => {
       req.user = user; // eslint-disable-line no-param-reassign
       return next();
     })
@@ -28,11 +28,15 @@ function get(req, res) {
  */
 function create(req, res, next) {
   const user = new User({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     username: req.body.username,
-    mobileNumber: req.body.mobileNumber
+    email: req.body.email,
+    active: true
   });
 
-  user.save()
+  user
+    .save()
     .then(savedUser => res.json(savedUser))
     .catch(e => next(e));
 }
@@ -45,10 +49,14 @@ function create(req, res, next) {
  */
 function update(req, res, next) {
   const user = req.user;
+  user.firstName = req.body.firstName;
+  user.lastName = req.body.lastName;
   user.username = req.body.username;
-  user.mobileNumber = req.body.mobileNumber;
+  user.email = req.body.email;
+  user.active = req.body.active;
 
-  user.save()
+  user
+    .save()
     .then(savedUser => res.json(savedUser))
     .catch(e => next(e));
 }
@@ -72,7 +80,8 @@ function list(req, res, next) {
  */
 function remove(req, res, next) {
   const user = req.user;
-  user.remove()
+  user
+    .remove()
     .then(deletedUser => res.json(deletedUser))
     .catch(e => next(e));
 }
