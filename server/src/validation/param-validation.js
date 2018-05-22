@@ -45,13 +45,11 @@ module.exports = {
   },
 
   removeRoleToUser: {
-    body: {
-      roleId: Joi.string()
-        .hex()
-        .required()
-    },
     params: {
       userId: Joi.string()
+        .hex()
+        .required(),
+      roleId: Joi.string()
         .hex()
         .required()
     }

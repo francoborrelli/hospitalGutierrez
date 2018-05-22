@@ -118,7 +118,7 @@ async function addRole(req, res, next) {
 
 async function removeRole(req, res, next) {
   const user = req.user;
-  const role = await Role.findById(req.body.roleId).exec();
+  const role = await Role.findById(req.params.roleId).exec();
   if (!role) {
     const err = new APIError(
       'Role does not exist',
@@ -135,7 +135,7 @@ async function removeRole(req, res, next) {
     );
     return next(err);
   }
-  user.roles.remove(req.body.roleId);
+  user.roles.remove(req.params.roleId);
   user
     .save()
     .then(savedUser => res.json(savedUser))
