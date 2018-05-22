@@ -3,24 +3,38 @@ import {Row, Card} from "antd"
 import Element from './dataElement';
 import Dropdown from './dropdown';
 
+const data = (patient) => [
+  {title: "Fecha de Nacimiento", data: patient.birthday.format("DD/MM/YYYY") },
+  {title: "Género", data: patient.gender ? "Masculino" : "Femenino" },
+  {title: "Teléfono", data: patient.phone || "-" },
+  {title: "Obra Social", data: patient.insurence || "-" },
+  {title: "Dirección", data: patient.adress, sm: 24 },
+  {title: "Tipo de Vivienda", data: patient.houseTypes },
+  {title: "Tipo de Calefacción", data: patient.heatTypes },
+  {title: "Tipo de Agua", data: patient.waterTypes },
+  {title: "¿Heladera?", data: patient.fridge ? 'Si' : 'No' },
+  {title: "¿Mascotas?", data: patient.pets ? 'Si' : 'No' },
+  {title: "¿Electricidad?", data: patient.electricity ? 'Si' : 'No' },
+]
+
 const patientCard = props => {
   const dropdown = <Dropdown/>
+
+  const elements = data(props.patient)
+  .map((element, index) => (
+    <Element
+    key={index}
+    sm={element.sm || 12 }
+    title={element.title}
+    data={element.data}/>
+  )
+  )
 
   return(
     <Card title="Datos" extra={dropdown}>
       <div style={{paddingTop: 10}} >
         <Row gutter={10} style={{padding: "0px 10px 0"}}>
-          <Element sm={12} title="Fecha de Nacimiento" data={props.patient.birthday}/>
-          <Element sm={12} title="Género" data={props.patient.gender}/>
-          <Element sm={12} title="Teléfono" data={props.patient.phone || "-"}/>
-          <Element sm={12} title="Obra Social" data={props.patient.phone || "-"}/>
-          <Element sm={24} title="Dirección" data={props.patient.adress}/>
-          <Element sm={12} title="Tipo de Vivienda" data={props.patient.houseType}/>
-          <Element sm={12} title="Tipo de Calefacción" data={props.patient.heatType}/>
-          <Element sm={12} title="Tipo de Agua" data={props.patient.waterType}/>
-          <Element sm={12} title="¿Heladera?" data={props.patient.fridge ? 'Si' : 'No'}/>
-          <Element sm={12} title="¿Mascotas?" data={props.patient.pets ? 'Si' : 'No'}/>
-          <Element sm={12} title="¿Electricidad?" data={props.patient.electricity ? 'Si' : 'No'}/>
+          {elements}
         </Row>
       </div>
     </Card>

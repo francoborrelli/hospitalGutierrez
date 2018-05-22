@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 
 class ClinicHistoryList extends Component {
 
-
   componentDidMount = () => {
+
   }
 
   render() {
-    const extra = <Link to="/">
-    <Button onClick="/" size="small" type="primary">
+    const extra = <Link to={this.props.patient.id + '/addRecord'}>
+    <Button size="small" type="primary">
       <Icon type="user-add"/>
     </Button>
     </Link>

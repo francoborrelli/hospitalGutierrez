@@ -1,7 +1,5 @@
 import React, { Component } from "react"
 import { message } from "antd"
-
-import Section from '../../components/patientHeader';
 import RecordForm from '../components/form';
 
 class AddRecord extends Component {
@@ -21,9 +19,7 @@ class AddRecord extends Component {
 
   render() {
     return (
-      <Section patient={this.props.patient}>
-              <RecordForm title="Nuevo Control"/>
-      </Section>
+      <RecordForm title="Nuevo Control"/>
     )
   }
 }

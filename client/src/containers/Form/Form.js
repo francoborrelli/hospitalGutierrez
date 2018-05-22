@@ -17,7 +17,7 @@ class BaseForm extends Component {
   componentDidUpdate = (prevProps, prevState) => {
     if (prevProps.fields !== this.props.fields && this.props.track) {
       const key = this.props.track
-      this.props.form.setFieldsValue({ [key]: "1" })
+      this.props.form.setFieldsValue({ [key]: this.props.defaultValues[key] || "1" })
     }
   }
 
@@ -34,13 +34,10 @@ class BaseForm extends Component {
     switch (this.props.layout) {
       case "inline":
         return SearchItem
-        break;
       case "vertical":
         return VerticalItem
-        break;
       default:
         return NormalItem
-        break;
     }
   }
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 import HighchartsChart from "./highcharts"
-import { LineSeries, Tooltip } from 'react-jsx-highcharts';
+import { LineSeries } from 'react-jsx-highcharts';
 
 
 const lineChart = props => {

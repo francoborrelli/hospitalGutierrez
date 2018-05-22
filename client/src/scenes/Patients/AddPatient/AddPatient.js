@@ -59,6 +59,7 @@ class AddPatient extends Component {
             submitted={this.personalDataSubmitHandler}
             data={this.props.apiData}
             defaultValues={this.state.personalData}
+            loading={false}
             btnText="Continuar"
           />
         )

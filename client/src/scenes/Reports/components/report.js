@@ -14,6 +14,8 @@ const report = props => {
     case "column":
       Chart = ColumnChart
       break;
+    default:
+      break
   }
 
   const config = {
