@@ -1,10 +1,9 @@
-import React from "react";
-import {Card} from "antd"
-import moment from 'moment';
+import React from "react"
+import moment from 'moment'
 
-import Highcharts from 'highcharts';
-import applyExporting from 'highcharts/modules/exporting';
-import applyOffline from 'highcharts/modules/offline-exporting';
+import Highcharts from 'highcharts'
+import applyExporting from 'highcharts/modules/exporting'
+import applyOffline from 'highcharts/modules/offline-exporting'
 import {
   withHighcharts,
   Chart,
@@ -15,10 +14,10 @@ import {
   YAxis,
   HighchartsChart,
   Tooltip
-} from 'react-jsx-highcharts';
+} from 'react-jsx-highcharts'
 
-applyExporting(Highcharts);
-applyOffline(Highcharts);
+applyExporting(Highcharts)
+applyOffline(Highcharts)
 
 const lang = {
   decimalPoint: ',',
@@ -103,14 +102,12 @@ const highchart = props => {
   }
 
   return (
-    <Card style={{
-      marginBottom: 10,
-      minHeight: 300
-    }}>
       <HighchartsChart
         plotOptions={plotOptions}
         exporting={exporting}
-        lang={lang}>
+        lang={lang}
+        chart={props.chart}
+        >
         <Chart zoomType="xy"/>
 
         <Title>{props.title}</Title>
@@ -125,9 +122,8 @@ const highchart = props => {
           <YAxis.Title>{props.yTitle}</YAxis.Title>
           {props.children}
         </YAxis>
-        <Tooltip formatter={formatter}></Tooltip>
+        <Tooltip formatter={props.formatter || formatter}></Tooltip>
       </HighchartsChart>
-    </Card>
   )
 }
 

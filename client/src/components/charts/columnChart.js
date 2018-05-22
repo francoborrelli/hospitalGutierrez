@@ -1,7 +1,7 @@
-import React from "react";
-
+import React from "react"
+import {Card} from "antd"
 import HighchartsChart from "./highcharts"
-import {ColumnSeries} from 'react-jsx-highcharts';
+import {ColumnSeries} from 'react-jsx-highcharts'
 
 const columnChart = props => {
   let columns = props
@@ -14,9 +14,11 @@ const columnChart = props => {
     />)
   )
   return (
+    <Card style={{marginBottom: 10,minHeight: 300}}>
     <HighchartsChart {...props}>
       {columns}
     </HighchartsChart>
+    </Card>
   )
 }
 

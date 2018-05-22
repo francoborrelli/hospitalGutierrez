@@ -1,12 +1,16 @@
 import React from "react";
-
+import {Card} from "antd"
 import HighchartsChart from "./highcharts"
-import {PieSeries} from 'react-jsx-highcharts';
+import {PieSeries} from 'react-jsx-highcharts'
 
 const pieChart = props => {
-  return <HighchartsChart {...props}>
+  return (
+  <Card style={{marginBottom: 10,minHeight: 300}}>
+  <HighchartsChart {...props}>
     <PieSeries data={props.data} showInLegend={true}/>
   </HighchartsChart>
+  </Card>
+  )
 }
 
 export default pieChart
