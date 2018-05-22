@@ -29,15 +29,12 @@ const UserSchema = new mongoose.Schema({
       'Please fill a valid email address'
     ]
   },
+  roles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Role' }],
   active: {
     type: Boolean,
     required: true
   },
   createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
     type: Date,
     default: Date.now
   }
@@ -53,7 +50,18 @@ const UserSchema = new mongoose.Schema({
 /**
  * Methods
  */
-UserSchema.method({});
+UserSchema.method({
+  hasRole(roleId) {
+    console.log('ASDASDASDASDA', this.roles);
+    let hasRole = false;
+    this.roles.forEach(role => {
+      if (role.id === roleId) {
+        hasRole = true;
+      }
+    });
+    return hasRole;
+  }
+});
 
 /**
  * Statics
@@ -66,6 +74,7 @@ UserSchema.statics = {
    */
   get(id) {
     return this.findById(id)
+      .populate('roles')
       .exec()
       .then(user => {
         if (user) {

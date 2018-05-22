@@ -1,0 +1,16 @@
+[
+  {
+    "_id": { "$oid": "5b0342132fb40a2151d9c1d6" },
+    "name": "admin",
+    "permissions": [
+      { "$oid": "5b0341822fb40a2151d9c1d3" },
+      { "$oid": "5b0341892fb40a2151d9c1d4" },
+      { "$oid": "5b0341912fb40a2151d9c1d5" }
+    ]
+  },
+  {
+    "_id": { "$oid": "5b0342692fb40a2151d9c1db" },
+    "name": "pediatra",
+    "permissions": [{ "$oid": "5b0341912fb40a2151d9c1d5" }]
+  }
+]

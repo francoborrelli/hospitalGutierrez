@@ -31,6 +31,32 @@ module.exports = {
     }
   },
 
+  addRoleToUser: {
+    body: {
+      roleId: Joi.string()
+        .hex()
+        .required()
+    },
+    params: {
+      userId: Joi.string()
+        .hex()
+        .required()
+    }
+  },
+
+  removeRoleToUser: {
+    body: {
+      roleId: Joi.string()
+        .hex()
+        .required()
+    },
+    params: {
+      userId: Joi.string()
+        .hex()
+        .required()
+    }
+  },
+
   // POST /auth/login
   login: {
     body: {

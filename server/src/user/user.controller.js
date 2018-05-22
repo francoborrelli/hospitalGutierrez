@@ -1,4 +1,8 @@
+const httpStatus = require('http-status');
+const APIError = require('../helpers/APIError');
+
 const User = require('./user.model');
+const Role = require('../role/role.model');
 
 /**
  * Load user and append to req.
@@ -86,4 +90,65 @@ function remove(req, res, next) {
     .catch(e => next(e));
 }
 
-module.exports = { load, get, create, update, list, remove };
+async function addRole(req, res, next) {
+  const user = req.user;
+  const role = await Role.findById(req.body.roleId).exec();
+  if (!role) {
+    const err = new APIError(
+      'Role does not exist',
+      httpStatus.BAD_REQUEST,
+      true
+    );
+    return next(err);
+  }
+  if (user.hasRole(role.id)) {
+    const err = new APIError(
+      'User already has role',
+      httpStatus.BAD_REQUEST,
+      true
+    );
+    return next(err);
+  }
+  user.roles.push(req.body.roleId);
+  user
+    .save()
+    .then(savedUser => res.json(savedUser))
+    .catch(e => next(e));
+}
+
+async function removeRole(req, res, next) {
+  const user = req.user;
+  const role = await Role.findById(req.body.roleId).exec();
+  if (!role) {
+    const err = new APIError(
+      'Role does not exist',
+      httpStatus.BAD_REQUEST,
+      true
+    );
+    return next(err);
+  }
+  if (!user.hasRole(role.id)) {
+    const err = new APIError(
+      'User doesn not have the role',
+      httpStatus.BAD_REQUEST,
+      true
+    );
+    return next(err);
+  }
+  user.roles.remove(req.body.roleId);
+  user
+    .save()
+    .then(savedUser => res.json(savedUser))
+    .catch(e => next(e));
+}
+
+module.exports = {
+  load,
+  get,
+  create,
+  update,
+  list,
+  remove,
+  addRole,
+  removeRole
+};
