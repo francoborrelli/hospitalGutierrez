@@ -30,10 +30,23 @@ class BaseForm extends Component {
     })
   }
 
+  getWrapper = () => {
+    switch (this.props.layout) {
+      case "inline":
+        return SearchItem
+        break;
+      case "vertical":
+        return VerticalItem
+        break;
+      default:
+        return NormalItem
+        break;
+    }
+  }
+
   getFields = fields => {
     const { getFieldDecorator } = this.props.form
-    let Wrapper = this.props.inline ? SearchItem : NormalItem
-    Wrapper = this.props.vertical ? VerticalItem : Wrapper
+    let Wrapper = this.getWrapper()
     const items = []
     for (let key in fields) {
       items.push({
@@ -106,6 +119,7 @@ class BaseForm extends Component {
 }
 
 BaseForm.propTypes = {
+  layout: PropTypes.string,
   fields: PropTypes.object.isRequired,
   submitted: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,

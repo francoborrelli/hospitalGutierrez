@@ -40,7 +40,7 @@ const fields = {
     ],
     props: {
       placeholder: "Descripción del sitio",
-      prefix: descriptionIcon
+      prefix: descriptionIcon,
     }
   }
 }
