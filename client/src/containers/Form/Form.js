@@ -16,8 +16,12 @@ class BaseForm extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevProps.fields !== this.props.fields && this.props.track) {
-      const key = this.props.track
-      this.props.form.setFieldsValue({ [key]: this.props.defaultValues[key] || "1" })
+      const keys = this.props.track
+      keys.forEach(key => {
+        let value = this.props.defaultValues ? this.props.defaultValues[key] : "1"
+        this.props.form.setFieldsValue({ [key]: value })
+      });
+
     }
   }
 

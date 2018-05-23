@@ -113,7 +113,7 @@ const personalDataForm = props => {
         { required: true, whitespace: true, message: "Ingrese la dirección" }
       ]
     },
-    insurances: {
+    insurance: {
       name: "insurence",
       label: "Obras Social",
       type: "select",
@@ -135,12 +135,30 @@ const personalDataForm = props => {
     }
   }
 
+  let values;
+  const patient = props.patient
+  if (patient){
+    values = {
+      documentType: patient.documentType,
+      name: patient.name,
+      lastname: patient.name,
+      birthday: patient.birthday,
+      phone: patient.phone,
+      insurence: patient.insurance,
+      address: patient.address,
+      gender: patient.gender,
+      documentNumber: patient.documentNumber
+    }
+  }
+
+
   return (
     <Form
       fields={fields}
       {...props}
       buttonText={props.btnText ? props.btnText : "Confirmar"}
-      track="documentType"
+      defaultValues={values}
+      track={["documentType"]}
     />
   )
 }

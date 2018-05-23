@@ -21,7 +21,7 @@ class App extends Component {
           <Route path="/login" component={LoginPage} />
           <Route path="/patients/add" exact component={AddPatientPage} />
           <Route path="/patients" component={PatientsListPage} />
-          <Route path="/patient/:patientId" component={PatientPage} />
+          <Route path="/patient/:patientId(\d+)" component={PatientPage} />
           <Route path="/users/add" component={AddUserPage} />
           <Route path="/users" component={UsersListPage} />
           <Route path="/settings" component={ConfigurationPage} />

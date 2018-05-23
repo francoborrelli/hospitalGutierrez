@@ -8,7 +8,7 @@ const data = (patient) => [
   {title: "Género", data: patient.gender ? "Masculino" : "Femenino" },
   {title: "Teléfono", data: patient.phone || "-" },
   {title: "Obra Social", data: patient.insurence || "-" },
-  {title: "Dirección", data: patient.adress, sm: 24 },
+  {title: "Dirección", data: patient.address, sm: 24 },
   {title: "Tipo de Vivienda", data: patient.houseTypes },
   {title: "Tipo de Calefacción", data: patient.heatTypes },
   {title: "Tipo de Agua", data: patient.waterTypes },

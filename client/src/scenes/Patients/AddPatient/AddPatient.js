@@ -58,7 +58,7 @@ class AddPatient extends Component {
           <PersonalForm
             submitted={this.personalDataSubmitHandler}
             data={this.props.apiData}
-            defaultValues={this.state.personalData}
+            patient={this.state.personalData}
             loading={false}
             btnText="Continuar"
           />
@@ -70,7 +70,7 @@ class AddPatient extends Component {
           <DemographicForm
             submitted={this.demographicDataSubmitHandler}
             data={this.props.apiData}
-            defaultValues={this.state.demographicData}
+            patient={this.state.demographicData}
             prevStep={this.prevStepHandler}
             loading={this.state.loading}
           />
