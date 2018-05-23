@@ -9,4 +9,16 @@ const dropdown = props => (
   </Dropdown>
 )
 
+
+const dropdownCard = props => (
+  <Dropdown overlay={props.menu} trigger={["click"]} placement="bottomRight">
+    <a className="ant-dropdown-link">
+      ...
+    </a>
+  </Dropdown>
+)
+
+
+
 export default dropdown
+export {dropdownCard}

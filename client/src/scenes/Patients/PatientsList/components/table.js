@@ -70,18 +70,15 @@ const tablePatients = props => {
     }
   ]
 
+
+  const extra = <Link to={props.addPath}>
+    <Button ghost onClick={props.onAdd} type="primary">
+      <Icon type="user-add"/>Agregar
+    </Button>
+  </Link>
+
   return (
-    <Card>
-      <div className="table-operations">
-        <Link to={props.addPath}>
-          <Button
-            onClick={props.onAdd}
-            type="primary"
-            style={{marginBottom: 15}}>
-            <Icon type="user-add"/>Agregar
-          </Button>
-        </Link>
-      </div>
+    <Card extra={extra}>
       <Table
         columns={columns}
         dataSource={data}

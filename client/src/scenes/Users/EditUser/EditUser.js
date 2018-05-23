@@ -1,10 +1,11 @@
 import React, {Component} from "react"
 import {Row, Col, message} from "antd"
-
+import RowGutter from '../../../components/grid/row';
 import Section from "../../../components/header/sectionHeader/sectionHeader"
 import PersonalForm from "./components/personalInfoForm"
 import RolesForm from "./components/rolesForm"
 import PasswordForm from "./components/passwordForm"
+
 
 class EditUser extends Component {
   state = {
@@ -12,16 +13,24 @@ class EditUser extends Component {
     passwordRequest: false,
     rolesRequest: false,
 
-    personalData: {},
+    personalData: {
+      name: "Franco",
+      lastname: "Borrelli",
+      username: "francoborrelli",
+      email: "francoborrelli@gmail.com",
+    },
+    personalRoles: {
+      roles: ["0", "2"]
+    },
     roles: [
       {
-        id: 0,
+        id: "0",
         nombre: "Administrador"
       }, {
-        id: 1,
+        id: "1",
         nombre: "Pediatra"
       }, {
-        id: 2,
+        id: "2",
         nombre: "Recepcionista"
       }
     ]
@@ -48,6 +57,7 @@ class EditUser extends Component {
   rolesHandler = data => {
     this.setState({rolesRequest: true})
     //request
+    console.log(data)
     this.setState({rolesRequest: false})
     message.success("Roles de usuario modificados correctamente")
   }
@@ -55,18 +65,16 @@ class EditUser extends Component {
   render = () => {
     return (
       <Section title="Editar Usuario">
-        <Row gutter={16} style={{padding: 25}}>
-          <Col xs={24} xl={14} style={{marginBottom: 20}}>
+        <RowGutter>
+          <Col xs={24} xl={14} style={{marginBottom: 10}}>
             <PersonalForm
               submitted={this.personalDataHandler}
               loading={this.state.personalDataRequest}
               defaultValues={this.state.personalData}/>
           </Col>
           <Col xs={24} xl={10}>
-            <Row gutter={16}>
-              <Col md={12} xl={24} style={{
-                marginBottom: 20
-              }}>
+            <Row gutter={10}>
+              <Col md={12} xl={24} style={{marginBottom: 10}}>
                 <PasswordForm
                   submitted={this.passwordHandler}
                   loading={this.state.passwordRequest}
@@ -76,13 +84,13 @@ class EditUser extends Component {
                 <RolesForm
                 submitted={this.rolesHandler}
                 loading={this.state.rolesRequest}
+                defaultValues={this.state.personalRoles}
                 roles={this.state.roles}
                 />
               </Col>
             </Row>
-
           </Col>
-        </Row>
+        </RowGutter>
       </Section>
     )
   }

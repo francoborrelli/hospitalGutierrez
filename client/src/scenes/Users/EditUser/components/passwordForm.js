@@ -47,7 +47,7 @@ const passwordForm = props => {
   return (
     <Card
       title="Reestablecer Contraseña">
-    <Form vertical fields={fields} {...props}/>
+    <Form layout="vertical" fields={fields} {...props}/>
     </Card>
   )
 

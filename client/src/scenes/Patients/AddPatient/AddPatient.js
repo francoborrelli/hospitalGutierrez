@@ -30,6 +30,10 @@ class AddPatient extends Component {
     }))
   }
 
+  redirect = () => {
+    this.props.history.push("/patients")
+  }
+
   personalDataSubmitHandler = data => {
     this.setState({ personalData: data })
     this.nextStep()
@@ -44,7 +48,7 @@ class AddPatient extends Component {
     this.setState({ loading: true })
     //request
     this.setState({ loading: false })
-    this.props.history.push("/patients")
+    this.redirect()
     message.success(
       "Se agregó a " + data.name + " " + data.lastname + " correctamente."
     )
@@ -56,9 +60,11 @@ class AddPatient extends Component {
         title: "Datos Personales",
         content: (
           <PersonalForm
+            onCancel={this.redirect}
             submitted={this.personalDataSubmitHandler}
             data={this.props.apiData}
-            defaultValues={this.state.personalData}
+            patient={this.state.personalData}
+            loading={false}
             btnText="Continuar"
           />
         )
@@ -69,7 +75,7 @@ class AddPatient extends Component {
           <DemographicForm
             submitted={this.demographicDataSubmitHandler}
             data={this.props.apiData}
-            defaultValues={this.state.demographicData}
+            patient={this.state.demographicData}
             prevStep={this.prevStepHandler}
             loading={this.state.loading}
           />

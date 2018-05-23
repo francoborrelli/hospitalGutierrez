@@ -79,25 +79,20 @@ const tableUsers = props => {
       render: (text, record) => (<Dropdown record={record} onDelete={props.onDelete}/>)
     }
   ]
+
+  const extra = <Link to={props.addPath}>
+    <Button ghost onClick={props.onAdd} type="primary">
+      <Icon type="user-add"/>Agregar
+    </Button>
+  </Link>
+
   return (
-    <Card>
-      <div className="table-operations">
-        <Link to={props.addPath}>
-          <Button
-            onClick={props.onAdd}
-            type="primary"
-            style={{marginBottom: 15}}>
-            <Icon type="user-add"/>Agregar
-          </Button>
-        </Link>
-      </div>
+    <Card extra={extra}>
       <Table
         columns={columns}
         dataSource={data}
         loading={props.loading}
-        scroll={{
-        x: 950
-      }}/>
+        scroll={{x: 950}}/>
     </Card>
   )
 }

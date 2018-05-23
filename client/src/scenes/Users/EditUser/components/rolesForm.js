@@ -20,7 +20,8 @@ const rolesForm = props => {
 
   return <Card title="Roles">
     <Form
-    vertical
+    reset
+    layout="vertical"
     fields={fields}
     {...props}
     />

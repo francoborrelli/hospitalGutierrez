@@ -8,7 +8,12 @@ body {
     .ant-layout-content {
         min-height: 350px;
         min-width: 310px;
-        padding-top: 64px;
+    }
+    .logged{
+      padding-top: 64px
+    }
+    .ant-tabs-tab-active{
+      color: black!important
     }
 }
 

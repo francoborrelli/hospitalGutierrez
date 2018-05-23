@@ -21,7 +21,7 @@ class Login extends Component {
 
   render(){
     return (
-      <div className="container loginPage">
+      <div className="loginPage">
           <Card title="Iniciar Sesión" style={styles}>
               <LoginForm submitted={this.submitHandler} loading={this.props.enterLoading}/>
           </Card>

@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { Input, Select, Checkbox, InputNumber } from "antd"
 import DatePicker from "../../components/datePicker/datePicker"
 
+const  { TextArea } = Input
+
 class Item extends Component {
   getInput = (item, added) => (
     <Input
@@ -10,6 +12,10 @@ class Item extends Component {
       autoComplete="true"
       {...item.props}
     />
+  )
+
+  getTextArea = (item, added) => (
+    <TextArea placeholder={item.label} autosize={true}/>
   )
 
   getSelect = item => {
@@ -27,8 +33,8 @@ class Item extends Component {
 
   getInputNumber = item => (
     <InputNumber
-    {...item.props}
-    formatter={value => value ? `${Math.round(value)}`: ''}
+      placeholder={item.label}
+      {...item.props}
     />
   )
 
@@ -61,6 +67,9 @@ class Item extends Component {
     switch (item.type) {
       case "input":
         result = this.getInput(item)
+        break
+      case "textarea":
+        result = this.getTextArea(item)
         break
       case "select":
         result = this.getSelect(item)
