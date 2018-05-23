@@ -16,8 +16,12 @@ class BaseForm extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevProps.fields !== this.props.fields && this.props.track) {
-      const key = this.props.track
-      this.props.form.setFieldsValue({ [key]: "1" })
+      const keys = this.props.track
+      keys.forEach(key => {
+        let value = this.props.defaultValues ? this.props.defaultValues[key] : "1"
+        this.props.form.setFieldsValue({ [key]: value })
+      });
+
     }
   }
 
@@ -30,10 +34,20 @@ class BaseForm extends Component {
     })
   }
 
+  getWrapper = () => {
+    switch (this.props.layout) {
+      case "inline":
+        return SearchItem
+      case "vertical":
+        return VerticalItem
+      default:
+        return NormalItem
+    }
+  }
+
   getFields = fields => {
     const { getFieldDecorator } = this.props.form
-    let Wrapper = this.props.inline ? SearchItem : NormalItem
-    Wrapper = this.props.vertical ? VerticalItem : Wrapper
+    let Wrapper = this.getWrapper()
     const items = []
     for (let key in fields) {
       items.push({
@@ -106,6 +120,7 @@ class BaseForm extends Component {
 }
 
 BaseForm.propTypes = {
+  layout: PropTypes.string,
   fields: PropTypes.object.isRequired,
   submitted: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,

@@ -1,7 +1,7 @@
 import React from "react"
 import {Menu} from "antd"
-import Dropdown from "../../../../components/dropdown/dropdown"
-import {deleteModal as Modal} from "../../../../components/modal/modal"
+import Dropdown from "../../../../../components/dropdown/dropdown"
+import {deleteModal as Modal} from "../../../../../components/modal/modal"
 
 const Item = Menu.Item
 const Divider = Menu.Divider

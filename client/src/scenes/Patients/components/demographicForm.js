@@ -1,9 +1,9 @@
 import React from "react"
 import Form from "../../../containers/Form/Form"
 
-const geographicForm = props => {
+const demographicForm = props => {
   const fields = {
-    houseTypes: {
+    houseType: {
       name: "houseType",
       label: "Tipo de Vivienda",
       type: "select",
@@ -18,8 +18,8 @@ const geographicForm = props => {
         }
       ]
     },
-    heatingTypes: {
-      name: "heatingTypes",
+    heatingType: {
+      name: "heatType",
       label: "Tipo de Calefacción",
       type: "select",
       props: {
@@ -33,7 +33,7 @@ const geographicForm = props => {
         }
       ]
     },
-    waterTypes: {
+    waterType: {
       name: "waterType",
       label: "Tipo de Agua",
       type: "select",
@@ -94,6 +94,18 @@ const geographicForm = props => {
       ]
     }
   }
+  let values;
+  const patient = props.patient
+  if (patient){
+    values = {
+      fridge: patient.fridge,
+      pets: patient.pets,
+      electricity: patient.electricity,
+      heatType: patient.heatType,
+      houseType: patient.heatType,
+      waterType: patient.waterType
+    }
+  }
 
   return (
     <Form
@@ -102,8 +114,10 @@ const geographicForm = props => {
       buttonText={props.btnText ? props.btnText : "Confirmar"}
       loading={props.loading}
       onBack={props.prevStep}
+      defaultValues={values}
+      track={["waterType", "houseType", "heatType"]}
     />
   )
 }
 
-export default geographicForm
+export default demographicForm

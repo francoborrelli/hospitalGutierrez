@@ -1,7 +1,6 @@
 import React from "react"
-import {Button, Icon} from "antd"
-import {Link} from "react-router-dom"
-import Table from '../../../../components/table/table';
+
+import Table from '../../../../../components/table/table';
 import Dropdown from "./dropdown"
 
 const data = [
@@ -16,7 +15,7 @@ const data = [
   }
 ]
 
-const tableUsers = props => {
+const tableRecords = props => {
   const columns = [
     {
       title: "Fecha",
@@ -71,4 +70,4 @@ const tableUsers = props => {
   )
 }
 
-export default tableUsers
+export default tableRecords

@@ -5,6 +5,7 @@ import Layout from "./containers/Layout/LoggedLayout"
 import HomePage from "./scenes/Home/Home"
 import LoginPage from "./scenes/Login/Login"
 import PatientsListPage from "./scenes/Patients/PatientsList/PatientsList"
+import PatientPage from "./scenes/Patient/Patient"
 import UsersListPage from "./scenes/Users/UsersList/UsersList"
 import AddPatientPage from "./scenes/Patients/AddPatient/AddPatient"
 import ConfigurationPage from "./scenes/Configuration/Configuration"
@@ -20,6 +21,7 @@ class App extends Component {
           <Route path="/login" component={LoginPage} />
           <Route path="/patients/add" exact component={AddPatientPage} />
           <Route path="/patients" component={PatientsListPage} />
+          <Route path="/patient/:patientId(\d+)" component={PatientPage} />
           <Route path="/users/add" component={AddUserPage} />
           <Route path="/users" component={UsersListPage} />
           <Route path="/settings" component={ConfigurationPage} />
