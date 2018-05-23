@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
+const bcrypt = require('bcrypt');
 
 const User = require('./user.model');
 const Role = require('../role/role.model');
@@ -30,15 +31,19 @@ function get(req, res) {
  * @property {string} req.body.mobileNumber - The mobileNumber of user.
  * @returns {User}
  */
-function create(req, res, next) {
+async function create(req, res, next) {
+  // TODO: chequear usuarios duplicados(no devolver 500)
+  const password = await bcrypt.hash(req.body.password, 10);
   const user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     username: req.body.username,
     email: req.body.email,
+    password,
     active: true
   });
 
+  // TODO: no devolver la password
   user
     .save()
     .then(savedUser => res.json(savedUser))
