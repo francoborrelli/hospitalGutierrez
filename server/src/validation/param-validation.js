@@ -1,12 +1,14 @@
 const Joi = require('joi');
 
 module.exports = {
+  // TODO: Validar password
   // POST /users
   createUser: {
     body: {
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
       username: Joi.string().required(),
+      password: Joi.string().required(),
       email: Joi.string()
         .email()
         .required()
@@ -58,7 +60,7 @@ module.exports = {
   // POST /auth/login
   login: {
     body: {
-      username: Joi.string().required(),
+      email: Joi.string().required(),
       password: Joi.string().required()
     }
   }
