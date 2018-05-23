@@ -106,7 +106,7 @@ const highchart = props => {
         plotOptions={plotOptions}
         exporting={exporting}
         lang={lang}
-        chart={props.chart}
+        chart={props.chart || {}}
         >
         <Chart zoomType="xy"/>
 
