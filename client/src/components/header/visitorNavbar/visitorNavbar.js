@@ -1,7 +1,7 @@
 import React from "react"
 import { Layout, Menu, Icon } from "antd"
 import logo from "../images/logo.png"
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 const { Header } = Layout
 const SubMenu = Menu.SubMenu
@@ -11,10 +11,10 @@ const visitorNavbar = props => {
   return (
     <Header className="navbar">
       <div>
-        <NavLink to="/" className="logo" id="logo">
+        <Link to="/" className="logo" id="logo">
           <img src={logo} />
           Hospital Gutierrez
-        </NavLink>
+        </Link>
       </div>
       <div>
         <Menu theme="light" mode="horizontal" style={{ lineHeight: "63px" }}>

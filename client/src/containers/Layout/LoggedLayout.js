@@ -52,8 +52,7 @@ class LoggedLayout extends Component {
             clicked={this.toggleHandler}
             collapsed={this.state.collapsed}
           />
-
-          <Drawer {...drawer}>{this.props.children}</Drawer>
+          <Drawer {...drawer}><div className="logged">{this.props.children}</div></Drawer>
         </Layout>
       </BaseLayout>
     )

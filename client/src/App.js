@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import { Route, Switch } from "react-router-dom"
 
-import Layout from "./containers/Layout/LoggedLayout"
+import LoggedLayout from "./containers/Layout/LoggedLayout"
+import VisitorLayout from "./containers/Layout/visitorLayout"
 import HomePage from "./scenes/Home/Home"
 import LoginPage from "./scenes/Login/Login"
 import PatientsListPage from "./scenes/Patients/PatientsList/PatientsList"
@@ -15,6 +16,9 @@ import Error404 from "./scenes/Errors/404"
 
 class App extends Component {
   render() {
+
+    const Layout = LoggedLayout
+
     return (
       <Layout>
         <Switch>
