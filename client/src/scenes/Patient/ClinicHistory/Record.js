@@ -28,6 +28,7 @@ class PatientPage extends Component {
   render() {
     return (
         <Switch>
+          <Route></Route>
         </Switch>
     )
   }

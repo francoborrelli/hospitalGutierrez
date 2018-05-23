@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import { message } from 'antd';
 import {Route, Switch} from "react-router-dom"
 import moment from "moment"
 import Section from "./components/patientHeader"
@@ -6,6 +7,7 @@ import ProfilePage from "./Profile/Profile"
 import AddRecordPage from "./ClinicHistory/AddRecord/AddRecord"
 import EditPatientPage from "../Patients/EditPatient/EditPatient"
 import RecordPage from "./ClinicHistory/Record"
+
 
 class PatientPage extends Component {
   state = {
@@ -40,12 +42,14 @@ class PatientPage extends Component {
     this.setState({personalDataRequest: true})
     //Request
     this.setState({personalDataRequest: false})
+    message.success("Los datos del paciente se actualizaron correctamente.")
   }
 
   editDemographicDataHandler = data => {
     this.setState({demographicDataRequest: true})
     //Request
     this.setState({demographicDataRequest: false})
+    message.success("Los datos demográficos del paciente se actualizaron correctamente.")
   }
 
   deletePatientHandler = () => {
@@ -71,7 +75,11 @@ class PatientPage extends Component {
             />
           <Route
             path={this.props.match.url + '/addRecord'}
-            render={() =><AddRecordPage patient = {this.state.patient} />}
+            render={() =>(
+            <AddRecordPage
+            patient = {this.state.patient}
+            loading={this.state.deleteRequest}
+            />)}
             />
           <Route
             path={this.props.match.url + '/:recordId(\d+)'}

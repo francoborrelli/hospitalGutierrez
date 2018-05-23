@@ -114,7 +114,7 @@ const personalDataForm = props => {
       ]
     },
     insurance: {
-      name: "insurence",
+      name: "insurance",
       label: "Obras Social",
       type: "select",
       props: {
@@ -144,7 +144,7 @@ const personalDataForm = props => {
       lastname: patient.name,
       birthday: patient.birthday,
       phone: patient.phone,
-      insurence: patient.insurance,
+      insurance: patient.insurance,
       address: patient.address,
       gender: patient.gender,
       documentNumber: patient.documentNumber

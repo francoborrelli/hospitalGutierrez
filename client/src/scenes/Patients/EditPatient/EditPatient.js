@@ -12,6 +12,7 @@ const editPatient = props => (
     <Col lg={12}>
       <Card title="Datos Personales">
         <PersonalForm
+          reset
           layout="vertical"
           data={props.apiData}
           submitted={props.personalDataSumitted}
@@ -23,6 +24,7 @@ const editPatient = props => (
     <Col lg={12}>
       <Card title="Datos Demográficos">
         <DemographicForm
+          reset
           layout="vertical"
           data={props.apiData}
           patient={props.patient}

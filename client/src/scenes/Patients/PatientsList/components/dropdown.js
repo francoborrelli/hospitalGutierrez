@@ -17,6 +17,12 @@ const menu = (record, onOk) => {
       </Item>
       <Divider />
       <Item key="1">
+      <Link to={"patient/" + record.key + "/edit"}>
+        Editar
+      </Link>
+      </Item>
+      <Divider />
+      <Item key="2">
         <a onClick={() => Modal("paciente", record, () => onOk(record))}>
           Eliminar
         </a>

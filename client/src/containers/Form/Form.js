@@ -10,8 +10,13 @@ import PropTypes from 'prop-types';
 const FormItem = Form.Item
 
 class BaseForm extends Component {
+  state = {
+    initialState: {}
+  }
+
   componentDidMount = () => {
     this.props.form.setFieldsValue(this.props.defaultValues)
+    this.setState({initialState: this.props.form.getFieldsValue()})
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -30,8 +35,13 @@ class BaseForm extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         this.props.submitted(values)
+        this.setState({initialState: values})
       }
     })
+  }
+
+  resetHandler = () => {
+    this.props.form.setFieldsValue(this.state.initialState)
   }
 
   getWrapper = () => {
@@ -86,16 +96,43 @@ class BaseForm extends Component {
       : item.rules
   }
 
-  render() {
-    let backButton = this.props.onBack ? (
+  getBackButton = () => {
+    return this.props.onBack ? (
       <Button
-        style={{ float: "right", marginLeft: 10 }}
+        style={{ float: "right", marginRight: 10 }}
         onClick={() => this.props.onBack(this.props.form.getFieldsValue())}
       >
         Volver
       </Button>
     ) : null
+  }
 
+  getResetButton = () => {
+    return this.props.reset ? (
+      <Button
+        style={{ float: "right", marginRight: 10 }}
+        onClick={this.resetHandler}
+      >
+        Restaurar
+      </Button>
+    ) : null
+  }
+
+  getCancelButton = () => {
+    return this.props.onCancel ? (
+      <Button
+        style={{ float: "right", marginRight: 10 }}
+        onClick={this.props.onCancel}
+      >
+        Cancelar
+      </Button>
+    ) : null
+  }
+
+  render() {
+    let backButton = this.getBackButton()
+    let resetButton = this.getResetButton()
+    let cancelButton = this.getCancelButton()
     return (
       <Form
         className={this.props.className}
@@ -104,7 +141,6 @@ class BaseForm extends Component {
       >
         <Row>{this.getFields(this.props.fields)}</Row>
         <FormItem style={{margin: 0}}>
-          {backButton}
           <Button
             type="primary"
             htmlType="submit"
@@ -113,6 +149,9 @@ class BaseForm extends Component {
           >
             {this.props.buttonText ? this.props.buttonText : "Guardar"}
           </Button>
+          {resetButton}
+          {cancelButton}
+          {backButton}
         </FormItem>
       </Form>
     )

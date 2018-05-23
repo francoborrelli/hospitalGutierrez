@@ -14,13 +14,17 @@ class AddUser extends Component {
     ]
   }
 
+  redirect = () => {
+    this.props.history.push("/users")
+  }
+
   addHandler = data => {
     this.setState({ loading: true })
 
     //request
 
     this.setState({ loading: false })
-    this.props.history.push("/users")
+    this.redirect()
     message.success(
       "Se agregó a " + data.name + " " + data.lastname + " correctamente."
     )
@@ -30,6 +34,7 @@ class AddUser extends Component {
       <Card style={{ margin: "24px" }}>
         <div style={{maxWidth: 700, margin: "0 auto"}}>
           <PersonalForm
+            onCancel={this.redirect}
             roles={this.state.roles}
             submitted={this.addHandler}
             loading={this.state.loading}

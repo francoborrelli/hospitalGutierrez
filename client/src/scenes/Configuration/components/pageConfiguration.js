@@ -49,6 +49,7 @@ const pageConfiguration = props => (
   <Card title="Datos del Sitio" style={{padding: "8px 0px"}}>
     <Form
       className="ant-advanced-search-form"
+      reset
       fields={fields}
       defaultValues={props.values}
       {...props}

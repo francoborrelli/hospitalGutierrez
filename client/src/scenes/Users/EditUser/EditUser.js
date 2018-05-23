@@ -1,10 +1,11 @@
 import React, {Component} from "react"
 import {Row, Col, message} from "antd"
-
+import RowGutter from '../../../components/grid/row';
 import Section from "../../../components/header/sectionHeader/sectionHeader"
 import PersonalForm from "./components/personalInfoForm"
 import RolesForm from "./components/rolesForm"
 import PasswordForm from "./components/passwordForm"
+
 
 class EditUser extends Component {
   state = {
@@ -64,18 +65,16 @@ class EditUser extends Component {
   render = () => {
     return (
       <Section title="Editar Usuario">
-        <Row gutter={16} style={{padding: 25}}>
-          <Col xs={24} xl={14} style={{marginBottom: 20}}>
+        <RowGutter>
+          <Col xs={24} xl={14} style={{marginBottom: 10}}>
             <PersonalForm
               submitted={this.personalDataHandler}
               loading={this.state.personalDataRequest}
               defaultValues={this.state.personalData}/>
           </Col>
           <Col xs={24} xl={10}>
-            <Row gutter={16}>
-              <Col md={12} xl={24} style={{
-                marginBottom: 20
-              }}>
+            <Row gutter={10}>
+              <Col md={12} xl={24} style={{marginBottom: 10}}>
                 <PasswordForm
                   submitted={this.passwordHandler}
                   loading={this.state.passwordRequest}
@@ -90,9 +89,8 @@ class EditUser extends Component {
                 />
               </Col>
             </Row>
-
           </Col>
-        </Row>
+        </RowGutter>
       </Section>
     )
   }

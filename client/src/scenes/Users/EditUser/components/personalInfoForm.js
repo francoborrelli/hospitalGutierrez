@@ -74,6 +74,7 @@ const personalDataForm = props => {
 
   return <Card title="Datos Personales">
     <Form
+    reset
     layout="vertical"
     fields={fields}
     {...props}
