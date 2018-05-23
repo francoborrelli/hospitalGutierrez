@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import {Row, Col} from "antd"
+import {Row, Col, message} from "antd"
 import RowGutter from '../../components/grid/row';
 import Section from "../../components/header/sectionHeader/sectionHeader"
 import PageConfiguration from "./components/pageConfiguration"
@@ -32,18 +32,25 @@ class Configuration extends Component {
     this.setState({pageInfoRequest: true})
     //resquest
     this.setState({pageInfoRequest: false})
+    message.success("Datos actualizados correctamente.")
   }
 
   updateElementsNumberHandler = data => {
     this.setState({elementsRequest: true})
     //resquest
     this.setState({elementsRequest: false})
+    message.success("Se actualizó la cantidad de elementos correctamente.")
   }
 
   mantaintmentHandler = boolean => {
     this.setState({mantaintmentRequest: true})
     //resquest
     this.setState({mantaintmentRequest: false})
+    if (boolean){
+      message.info("El sitio ya no esta en mantenimiento.")
+    }else{
+      message.warning("El sitio está en mantenimiento.")
+    }
   }
 
   render() {

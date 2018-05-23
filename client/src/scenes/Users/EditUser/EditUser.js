@@ -12,16 +12,24 @@ class EditUser extends Component {
     passwordRequest: false,
     rolesRequest: false,
 
-    personalData: {},
+    personalData: {
+      name: "Franco",
+      lastname: "Borrelli",
+      username: "francoborrelli",
+      email: "francoborrelli@gmail.com",
+    },
+    personalRoles: {
+      roles: ["0", "2"]
+    },
     roles: [
       {
-        id: 0,
+        id: "0",
         nombre: "Administrador"
       }, {
-        id: 1,
+        id: "1",
         nombre: "Pediatra"
       }, {
-        id: 2,
+        id: "2",
         nombre: "Recepcionista"
       }
     ]
@@ -48,6 +56,7 @@ class EditUser extends Component {
   rolesHandler = data => {
     this.setState({rolesRequest: true})
     //request
+    console.log(data)
     this.setState({rolesRequest: false})
     message.success("Roles de usuario modificados correctamente")
   }
@@ -76,6 +85,7 @@ class EditUser extends Component {
                 <RolesForm
                 submitted={this.rolesHandler}
                 loading={this.state.rolesRequest}
+                defaultValues={this.state.personalRoles}
                 roles={this.state.roles}
                 />
               </Col>

@@ -32,6 +32,7 @@ class AddUser extends Component {
           <PersonalForm
             roles={this.state.roles}
             submitted={this.addHandler}
+            loading={this.state.loading}
           />
         </div>
       </Card>
