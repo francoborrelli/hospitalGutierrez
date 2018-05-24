@@ -55,7 +55,15 @@ const demographicForm = props => {
       props: {
         placeholder: "¿Tiene Heladera?"
       },
-      options: [{ id: 0, nombre: "Si" }, { id: 1, nombre: "No" }],
+      options: [
+        {
+          id: 0,
+          nombre: "Si"
+        }, {
+          id: 1,
+          nombre: "No"
+        }
+      ],
       rules: [
         {
           required: true,
@@ -70,7 +78,15 @@ const demographicForm = props => {
       props: {
         placeholder: "¿Tiene Electricidad?"
       },
-      options: [{ id: 0, nombre: "Si" }, { id: 1, nombre: "No" }],
+      options: [
+        {
+          id: 0,
+          nombre: "Si"
+        }, {
+          id: 1,
+          nombre: "No"
+        }
+      ],
       rules: [
         {
           required: true,
@@ -85,7 +101,15 @@ const demographicForm = props => {
       props: {
         placeholder: "¿Tiene Mascotas?"
       },
-      options: [{ id: 0, nombre: "Si" }, { id: 1, nombre: "No" }],
+      options: [
+        {
+          id: 0,
+          nombre: "Si"
+        }, {
+          id: 1,
+          nombre: "No"
+        }
+      ],
       rules: [
         {
           required: true,
@@ -96,7 +120,7 @@ const demographicForm = props => {
   }
   let values;
   const patient = props.patient
-  if (patient){
+  if (patient) {
     values = {
       fridge: patient.fridge,
       pets: patient.pets,
@@ -107,17 +131,17 @@ const demographicForm = props => {
     }
   }
 
-  return (
-    <Form
-      fields={fields}
-      {...props}
-      buttonText={props.btnText ? props.btnText : "Confirmar"}
-      loading={props.loading}
-      onBack={props.prevStep}
-      defaultValues={values}
-      track={["waterType", "houseType", "heatType"]}
-    />
-  )
+  return (<Form
+    fields={fields}
+    {...props}
+    layout="vertical"
+    buttonText={props.btnText
+    ? props.btnText
+    : "Confirmar"}
+    loading={props.loading}
+    onBack={props.prevStep}
+    defaultValues={values}
+    track={["waterType", "houseType", "heatType"]}/>)
 }
 
 export default demographicForm

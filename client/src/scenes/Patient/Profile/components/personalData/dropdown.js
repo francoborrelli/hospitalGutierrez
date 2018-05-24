@@ -1,27 +1,33 @@
 import React from "react"
-import { Menu } from 'antd'
-import { dropdownCard as Dropdown } from "../../../../../components/dropdown/dropdown"
-import { Link } from 'react-router-dom'
+import {Menu} from 'antd'
+import {dropdownCard as Dropdown} from "../../../../../components/dropdown/dropdown"
+import {Link} from 'react-router-dom'
+import {deleteModal as Modal} from "../../../../../components/modal/modal"
+import {withRouter} from 'react-router-dom';
 
-const MenuItem = Menu.Item
+const Item = Menu.Item
 const Divider = Menu.Divider
 
-const menu = (
-  <Menu>
-    <MenuItem key="1">
-      <Link to="/">
-        Editar Datos
-      </Link>
-    </MenuItem>
-    <Divider/>
-    <MenuItem key="1">
-      <Link to="/">
-        Eliminar Paciente
-      </Link>
-    </MenuItem>
-  </Menu>
-)
+const dropdown = props => {
+  const menu = () => {
+    return (
+      <Menu>
+        <Item key="0">
+          <Link to={"./edit"}>
+            Editar Datos
+          </Link>
+        </Item>
+        <Divider/>
+        <Item key="1">
+          <a onClick={() => Modal("paciente", props.patient, () => props.onDelete(props.patient))}>
+            Eliminar Paciente
+          </a>
+        </Item>
+      </Menu>
+    )
+  }
 
+  return (<Dropdown menu={menu(props.patient, props.onDelete)}/>)
+}
 
-  export default props => <Dropdown menu={menu}/>
-
+export default withRouter(dropdown)

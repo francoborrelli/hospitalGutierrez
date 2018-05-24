@@ -18,7 +18,7 @@ const data = (patient) => [
 ]
 
 const patientCard = props => {
-  const dropdown = <Dropdown/>
+  const dropdown = <Dropdown patient={props.patient} onDelete={props.onDeletePatient}/>
 
   const elements = data(props.patient)
   .map((element, index) => (
@@ -29,7 +29,6 @@ const patientCard = props => {
     data={element.data}/>
   )
   )
-
   return(
     <Card title="Datos" extra={dropdown}>
       <div style={{paddingTop: 10}} >

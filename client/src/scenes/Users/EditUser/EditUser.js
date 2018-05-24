@@ -6,7 +6,6 @@ import PersonalForm from "./components/personalInfoForm"
 import RolesForm from "./components/rolesForm"
 import PasswordForm from "./components/passwordForm"
 
-
 class EditUser extends Component {
   state = {
     personalDataRequest: false,
@@ -17,7 +16,7 @@ class EditUser extends Component {
       name: "Franco",
       lastname: "Borrelli",
       username: "francoborrelli",
-      email: "francoborrelli@gmail.com",
+      email: "francoborrelli@gmail.com"
     },
     personalRoles: {
       roles: ["0", "2"]
@@ -66,7 +65,9 @@ class EditUser extends Component {
     return (
       <Section title="Editar Usuario">
         <RowGutter>
-          <Col xs={24} xl={14} style={{marginBottom: 10}}>
+          <Col xs={24} xl={14} style={{
+            marginBottom: 10
+          }}>
             <PersonalForm
               submitted={this.personalDataHandler}
               loading={this.state.personalDataRequest}
@@ -74,19 +75,19 @@ class EditUser extends Component {
           </Col>
           <Col xs={24} xl={10}>
             <Row gutter={10}>
-              <Col md={12} xl={24} style={{marginBottom: 10}}>
+              <Col md={12} xl={24} style={{
+                marginBottom: 10
+              }}>
                 <PasswordForm
                   submitted={this.passwordHandler}
-                  loading={this.state.passwordRequest}
-                />
+                  loading={this.state.passwordRequest}/>
               </Col>
               <Col md={12} xl={24}>
                 <RolesForm
-                submitted={this.rolesHandler}
-                loading={this.state.rolesRequest}
-                defaultValues={this.state.personalRoles}
-                roles={this.state.roles}
-                />
+                  submitted={this.rolesHandler}
+                  loading={this.state.rolesRequest}
+                  defaultValues={this.state.personalRoles}
+                  roles={this.state.roles}/>
               </Col>
             </Row>
           </Col>

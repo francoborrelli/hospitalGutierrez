@@ -12,9 +12,9 @@ const dropdown = props => (
 
 const dropdownCard = props => (
   <Dropdown overlay={props.menu} trigger={["click"]} placement="bottomRight">
-    <a className="ant-dropdown-link">
+    <span style={{cursor: "pointer"}}>
       ...
-    </a>
+    </span>
   </Dropdown>
 )
 
