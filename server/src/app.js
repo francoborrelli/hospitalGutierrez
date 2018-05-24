@@ -11,6 +11,7 @@ const winstonInstance = require('../config/winston');
 const routes = require('./index.route');
 const config = require('../config/config');
 const APIError = require('./helpers/APIError');
+const cors = require('cors');
 
 const app = express();
 
@@ -26,22 +27,29 @@ app.use(methodOverride());
 
 app.use(helmet());
 
+app.use(cors());
+
 if (config.env === 'development') {
   expressWinston.requestWhitelist.push('body');
   expressWinston.responseWhitelist.push('body');
-  app.use(expressWinston.logger({
-    winstonInstance,
-    meta: true,
-    msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
-    colorStatus: true
-  }));
+  app.use(
+    expressWinston.logger({
+      winstonInstance,
+      meta: true,
+      msg:
+        'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
+      colorStatus: true
+    })
+  );
 }
 
 app.use('/', routes);
 
 app.use((err, req, res, next) => {
   if (err instanceof expressValidation.ValidationError) {
-    const unifiedErrorMessage = err.errors.map(error => error.messages.join('. ')).join(' and ');
+    const unifiedErrorMessage = err.errors
+      .map(error => error.messages.join('. '))
+      .join(' and ');
     const error = new APIError(unifiedErrorMessage, err.status, true);
     return next(error);
   } else if (!(err instanceof APIError)) {
@@ -57,9 +65,11 @@ app.use((req, res, next) => {
 });
 
 if (config.env !== 'test') {
-  app.use(expressWinston.errorLogger({
-    winstonInstance
-  }));
+  app.use(
+    expressWinston.errorLogger({
+      winstonInstance
+    })
+  );
 }
 
 app.use((err, req, res, next) =>
