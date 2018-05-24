@@ -1,57 +1,70 @@
-import React, { Component } from "react"
-import { Menu } from "antd"
-import NavLink from "../components/navLink"
-import { withRouter } from "react-router-dom"
+import React from 'react';
+import { Menu } from 'antd';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const { Item } = Menu
+import * as actions from '../../../../store/actions';
+import NavLink from '../components/navLink';
 
-class SiderMenu extends Component {
-  getNavLinkClass = path => {
-    let pathname = this.props.location.pathname
-    if (path === "/") {
-      return pathname === path ? "ant-menu-item-selected" : ""
+const { Item } = Menu;
+
+const siderMenu = props => {
+  const getNavLinkClass = path => {
+    let pathname = props.location.pathname;
+    if (path === '/') {
+      return pathname === path ? 'ant-menu-item-selected' : '';
     }
-    return pathname.startsWith(path) ? "ant-menu-item-selected" : ""
-  }
+    return pathname.startsWith(path) ? 'ant-menu-item-selected' : '';
+  };
 
-  clickHandler = () => {
-    if (this.props.action) {
-      this.props.clicked()
+  const clickHandler = () => {
+    if (props.action) {
+      props.clicked();
     }
-  }
+  };
 
-  getNavItems = items =>
+  const getNavItems = items =>
     items.map((item, index) => (
-      <Item key={index} className={this.getNavLinkClass(item.path)}>
+      <Item key={index} className={getNavLinkClass(item.path)}>
         <NavLink
           path={item.path}
           icon={item.icon}
           text={item.text}
-          clicked={this.clickHandler}
+          clicked={clickHandler}
         />
       </Item>
-    ))
+    ));
 
-  render() {
-    const items = [
-      { text: "Inicio", path: "/", icon: "home" },
-      {
-        text: "Pacientes",
-        path: "/patients",
-        icon: "medicine-box"
-      },
-      { text: "Usuarios", path: "/users", icon: "team" },
-      { text: "Reportes", path: "/reports", icon: "pie-chart" },
-      { text: "Configuración", path: "/settings", icon: "setting" },
-      { text: "Cerrar Sesión", path: "/logout", icon: "logout" }
-    ]
+  const items = [
+    { text: 'Inicio', path: '/', icon: 'home' },
+    {
+      text: 'Pacientes',
+      path: '/patients',
+      icon: 'medicine-box'
+    },
+    { text: 'Usuarios', path: '/users', icon: 'team' },
+    { text: 'Reportes', path: '/reports', icon: 'pie-chart' },
+    { text: 'Configuración', path: '/settings', icon: 'setting' }
+    // { text: 'Cerrar Sesión', path: '/logout', icon: 'logout' }
+  ];
 
-    return (
-      <Menu theme="light" mode="inline">
-        {this.getNavItems(items)}
-      </Menu>
-    )
-  }
-}
+  return (
+    <Menu theme="light" mode="inline">
+      {getNavItems(items)}
+      <Item className="logout">
+        <NavLink
+          path="/"
+          icon="logout"
+          text="Cerrar sesión"
+          clicked={props.logout}
+        />
+      </Item>
+    </Menu>
+  );
+};
 
-export default withRouter(SiderMenu)
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(actions.logout())
+});
+
+export default withRouter(connect(null, mapDispatchToProps)(siderMenu));

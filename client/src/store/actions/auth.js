@@ -35,3 +35,7 @@ export const login = (email, password) => {
 export const seeSuccessMessage = () => ({
   type: types.AUTH_SEE_MESSAGE
 });
+
+export const logout = () => ({
+  type: types.AUTH_LOGOUT
+});
