@@ -16,8 +16,7 @@ const editPatient = props => (
           data={props.apiData}
           submitted={props.personalDataSumitted}
           patient={props.patient}
-          loading={props.loadingPersonal}
-          />
+          loading={props.loadingPersonal}/>
       </Card>
     </Col>
     <Col lg={12}>
@@ -27,8 +26,7 @@ const editPatient = props => (
           data={props.apiData}
           patient={props.patient}
           loading={props.loadingDemographic}
-          submitted={props.demographicDataSumitted}
-        />
+          submitted={props.demographicDataSumitted}/>
       </Card>
     </Col>
   </Row>

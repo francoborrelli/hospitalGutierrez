@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import LoginForm from "./components/loginForm"
-import { Card, message } from "antd";
+import LoginForm from './components/loginForm';
+import {Card, message} from "antd";
 
 const styles = {
   width: 350,
@@ -12,20 +12,25 @@ class Login extends Component {
     enterLoading: false
   }
 
-  submitHandler = e => {
-      this.setState({ enterLoading: true })
-      this.props.history.push("/")
-      message.success("Sesión iniciada correctamente.", 3)
-      this.setState({ enterLoading: false })
-    }
+  submitHandler = data => {
+    this.setState({enterLoading: true})
+    //Request
+    this
+      .props
+      .history
+      .push("/")
+    message.success("Sesión iniciada correctamente.", 3)
+    this.setState({enterLoading: false})
+  }
 
-  render(){
+  render() {
     return (
       <div className="loginPage">
-          <Card title="Iniciar Sesión" style={styles}>
-              <LoginForm submitted={this.submitHandler} loading={this.props.enterLoading}/>
-          </Card>
-      </div>);
+        <Card title="Iniciar Sesión" style={styles}>
+          <LoginForm submitted={this.submitHandler} loading={this.props.enterLoading}/>
+        </Card>
+      </div>
+    );
   }
 }
 

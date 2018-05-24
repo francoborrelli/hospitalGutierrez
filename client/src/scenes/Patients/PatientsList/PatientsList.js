@@ -49,7 +49,7 @@ class PatientsList extends Component {
     return (
       <Section title="pacientes">
         <Row>
-          <Col xl={7}>
+          <Col xl={7} style={{paddingBottom: 10}}>
             <SearchForm
               loading={this.state.searching}
               documentTypes={this.state.documentTypes}

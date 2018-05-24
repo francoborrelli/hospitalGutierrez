@@ -8,15 +8,15 @@ const loginForm = props => {
 
   const fields = {
     username: {
-      name: "username",
+      name: "email",
       type: "input",
       props: {
-        placeholder: "Nombre de usuario",
+        placeholder: "Email",
         prefix: userIcon
       },
       rules: [
         {
-          message: "Introduzca su nombre de usuario",
+          message: "Introduzca su email",
           required: true
         }
       ]
@@ -35,11 +35,6 @@ const loginForm = props => {
           required: true
         }
       ]
-    },
-    checkbox: {
-      name: "remember",
-      type: "checkbox",
-      text: "Recordarme"
     }
   }
   return <Form fields={fields} layout="inline" buttonText="Iniciar Sesión" {...props} />
