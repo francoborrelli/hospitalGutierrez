@@ -99,7 +99,7 @@ const recordForm = props => {
     },
     fisicExam: {
       name: "fisicExam",
-      label: "Examen físico normal?",
+      label: "¿Examen físico normal?",
       type: "select",
       props: {placeholder: "Seleccione una opción"},
       options: [

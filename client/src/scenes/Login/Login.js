@@ -7,8 +7,8 @@ import LoginForm from './components/loginForm';
 import * as actions from '../../store/actions';
 
 const styles = {
-  width: 350,
-  margin: '100px auto 40px'
+  maxWidth: 350,
+  margin: '130px auto 0px',
 };
 
 class Login extends Component {

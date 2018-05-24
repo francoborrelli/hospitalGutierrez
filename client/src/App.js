@@ -37,12 +37,12 @@ class App extends Component {
           <Route path="/login" component={LoginPage} />
           <Route path="/patient/:patientId(\d+)" component={PatientPage} />
           <Route path="/patients/add" exact component={AddPatientPage} />
-          <Route path="/patients" component={PatientsListPage} />
-          <Route path="/user/:userId(\d+)/edit" component={EditUserPage} />
-          <Route path="/users/add" component={AddUserPage} />
-          <Route path="/users" component={UsersListPage} />
-          <Route path="/settings" component={ConfigurationPage} />
-          <Route path="/reports" component={ReportsPage} />
+          <Route path="/patients" exact component={PatientsListPage} />
+          <Route path="/user/:userId(\d+)/edit" exact component={EditUserPage} />
+          <Route path="/users/add" exact component={AddUserPage} />
+          <Route path="/users" exact component={UsersListPage} />
+          <Route path="/settings" exact component={ConfigurationPage} />
+          <Route path="/reports" exact component={ReportsPage} />
           <Route path="/" exact component={HomePage} />
           <Route component={Error404} />
         </Switch>

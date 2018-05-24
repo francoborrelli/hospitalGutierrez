@@ -1,24 +1,27 @@
 import React, {Component} from "react"
 import { Route, Switch } from "react-router-dom"
-
-class PatientPage extends Component {
+import RecordPage from './DetailedRecord/record';
+import EditPage from "./components/form"
+class Record extends Component {
   state = {
     loading: true,
 
     //Mock data
-    patient: {
-      name: "Franco",
-      lastname: "Borrelli",
-      documentType: "DNI",
-      documentNumber: "39831178",
-      age: "5 meses",
-      visits: "53",
-      birthday: "27/08/1996",
-      gender: "Másculino",
-      adress: "11 1419, La Plata, Buenos Aires",
-      houseType: "Choza",
-      waterType: "Pozo",
-      heatType: "Estufa"
+    record: {
+      date: "23/06/2018",
+      weight: 90,
+      height: 23,
+      pc: 10,
+      ppc: 11,
+      vaccination: 0,
+      vaccinationObservation: "franco dice hola",
+      maduration: 1,
+      madurationObservation: "nada que comentar",
+      fisicExam: 0,
+      fisicExamObservation: "bla bla bla",
+      diet: "bien",
+      observations: "hrhrtr",
+      user: "franco"
     }
   }
 
@@ -28,10 +31,11 @@ class PatientPage extends Component {
   render() {
     return (
         <Switch>
-          <Route></Route>
+          <Route path="/" render={() => <RecordPage record={this.state.record}/> }/>
+          <Route path="/edit" render={() => <EditPage record={this.state.record}/> }/>
         </Switch>
     )
   }
 }
 
-export default PatientPage
+export default Record

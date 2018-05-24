@@ -37,7 +37,7 @@ const loginForm = props => {
       ]
     }
   }
-  return <Form fields={fields} layout="inline" buttonText="Iniciar Sesión" {...props} />
+  return <Form fields={fields} layout="vertical" buttonText="Iniciar Sesión" {...props} />
 }
 
 export default loginForm
