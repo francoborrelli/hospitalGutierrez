@@ -21,7 +21,13 @@ import ConfigurationPage from './scenes/Configuration/Configuration';
 
 import Error404 from './scenes/Errors/404';
 
+import * as actions from './store/actions';
+
 class App extends Component {
+  componentDidMount() {
+    this.props.checkAuth();
+  }
+
   render() {
     const Layout = this.props.loggedIn ? LoggedLayout : VisitorLayout;
 
@@ -49,4 +55,8 @@ const mapStateToProps = state => ({
   loggedIn: state.auth.jwt
 });
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = dispatch => ({
+  checkAuth: () => dispatch(actions.checkAuth())
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

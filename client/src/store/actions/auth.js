@@ -7,10 +7,10 @@ const authStart = () => ({
 });
 
 const authSuccess = jwt => {
-  const user = jwtDecode(jwt.token);
+  const user = jwtDecode(jwt);
   return {
     type: types.AUTH_SUCCESS,
-    jwt: jwt.token,
+    jwt,
     user
   };
 };
@@ -20,12 +20,18 @@ const authFail = error => ({
   error: error.response
 });
 
+const recentLogin = () => ({
+  type: types.AUTH_RECENT_LOGIN
+});
+
 export const login = (email, password) => {
   return async dispatch => {
     dispatch(authStart());
     try {
       const response = await axios.post('/auth/login', { email, password });
-      dispatch(authSuccess(response.data));
+      localStorage.setItem('token', response.data.token);
+      dispatch(recentLogin());
+      dispatch(authSuccess(response.data.token));
     } catch (error) {
       dispatch(authFail(error));
     }
@@ -36,6 +42,21 @@ export const seeSuccessMessage = () => ({
   type: types.AUTH_SEE_MESSAGE
 });
 
-export const logout = () => ({
-  type: types.AUTH_LOGOUT
-});
+export const logout = () => {
+  localStorage.removeItem('token');
+  return {
+    type: types.AUTH_LOGOUT
+  };
+};
+
+// TODO: expiration date
+export const checkAuth = () => {
+  return dispatch => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      dispatch(logout());
+    } else {
+      dispatch(authSuccess(token));
+    }
+  };
+};

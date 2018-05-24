@@ -8,7 +8,6 @@ const initialState = {
   recentLogin: false
 };
 
-// TODO: add user in success
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.AUTH_START:
@@ -19,9 +18,10 @@ const reducer = (state = initialState, action) => {
         loading: false,
         error: null,
         jwt: action.jwt,
-        user: action.user,
-        recentLogin: true
+        user: action.user
       };
+    case types.AUTH_RECENT_LOGIN:
+      return { ...state, recentLogin: true };
     case types.AUTH_FAIL:
       return { ...state, loading: false, error: action.error };
     case types.AUTH_LOGOUT:

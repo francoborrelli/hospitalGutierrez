@@ -1,1 +1,1 @@
-export { login, logout, seeSuccessMessage } from './auth';
+export { login, logout, seeSuccessMessage, checkAuth } from './auth';
