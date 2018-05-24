@@ -13,7 +13,7 @@ const dropdown = props => {
     return (
       <Menu>
         <Item key="0">
-          <Link to={"./edit"}>
+          <Link to={props.match.url + "/edit"}>
             Editar Datos
           </Link>
         </Item>
