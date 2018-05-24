@@ -9,7 +9,7 @@ import withApiRefData from "../../../hoc/withApiRefData"
 
 const editPatient = props => (
   <Row>
-    <Col lg={12}>
+    <Col lg={12} style={{marginBottom: 10}}>
       <Card title="Datos Personales">
         <PersonalForm
           reset

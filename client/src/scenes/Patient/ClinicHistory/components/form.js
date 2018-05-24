@@ -1,7 +1,7 @@
 import React from "react"
+import { Card } from 'antd';
 
 import Form from "../../../../containers/Form/Form"
-import Card from "../../../../components/card/card"
 
 const formatter = (value, metric) => { return value ? value + " " + metric : ""}
 const parser = value => value.replace('cm', '').replace(/\s/g,'')
@@ -131,7 +131,8 @@ const recordForm = props => {
   }
 
   return (
-    <Card title={props.title}>
+    <div style={{margin: 10}}>
+    <Card title={props.title} style={{maxWidth: 1000, margin: "0 auto"}}>
       <div className="container" style={{ maxWidth: 900 }}>
         <Form
           fields={fields}
@@ -140,6 +141,7 @@ const recordForm = props => {
         />
       </div>
   </Card>
+  </div>
   )
 }
 
