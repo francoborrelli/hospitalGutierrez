@@ -21,7 +21,10 @@ router
 
 router
   .route('/:userId/roles')
-  .post(validate(paramValidation.addRoleToUser), userCtrl.addRole)
+  .post(validate(paramValidation.addRoleToUser), userCtrl.addRole);
+
+router
+  .route('/:userId/roles/:roleId')
   .delete(validate(paramValidation.removeRoleToUser), userCtrl.removeRole);
 
 router.param('userId', userCtrl.load);

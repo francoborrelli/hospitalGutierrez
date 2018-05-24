@@ -1,12 +1,14 @@
 const Joi = require('joi');
 
 module.exports = {
+  // TODO: Validar password
   // POST /users
   createUser: {
     body: {
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
       username: Joi.string().required(),
+      password: Joi.string().required(),
       email: Joi.string()
         .email()
         .required()
@@ -45,13 +47,11 @@ module.exports = {
   },
 
   removeRoleToUser: {
-    body: {
-      roleId: Joi.string()
-        .hex()
-        .required()
-    },
     params: {
       userId: Joi.string()
+        .hex()
+        .required(),
+      roleId: Joi.string()
         .hex()
         .required()
     }
@@ -60,7 +60,7 @@ module.exports = {
   // POST /auth/login
   login: {
     body: {
-      username: Joi.string().required(),
+      email: Joi.string().required(),
       password: Joi.string().required()
     }
   }
