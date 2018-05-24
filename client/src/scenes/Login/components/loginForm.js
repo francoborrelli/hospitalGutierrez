@@ -22,7 +22,7 @@ const loginForm = props => {
       ]
     },
     password: {
-      name: "pass",
+      name: "password",
       type: "input",
       props: {
         placeholder: "Contraseña",
