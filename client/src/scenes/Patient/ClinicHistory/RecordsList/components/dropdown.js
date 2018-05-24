@@ -2,15 +2,19 @@ import React from "react"
 import {Menu} from "antd"
 import Dropdown from "../../../../../components/dropdown/dropdown"
 import {deleteModal as Modal} from "../../../../../components/modal/modal"
+import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 const Item = Menu.Item
 const Divider = Menu.Divider
 
-const menu = (record, onOk) => {
-  return (
+const dropdown = props => {
+  const menu = (
     <Menu>
       <Item key="0">
-        <a>Ver</a>
+        <Link to={props.match.path + "/record/" + props.record.key}>
+          Ver
+        </Link>
       </Item>
       <Divider/>
       <Item key="1">
@@ -19,14 +23,14 @@ const menu = (record, onOk) => {
       <Divider/>
       <Item key="2">
         <a
-          onClick={() => Modal("control del día " + record.date + " de", record, () => onOk(record))}>
+          onClick={() => Modal("control del día " + props.record.date + " de", props.record, () => props.onOk(props.record))}>
           Eliminar
         </a>
       </Item>
     </Menu>
   )
+
+return (<Dropdown menu={menu}/>)
 }
 
-const dropdown = props => <Dropdown menu={menu(props.record, props.onDelete)}/>
-
-export default dropdown
+export default withRouter(dropdown)
