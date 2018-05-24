@@ -111,6 +111,7 @@ const demographicForm = props => {
     <Form
       fields={fields}
       {...props}
+      layout="vertical"
       buttonText={props.btnText ? props.btnText : "Confirmar"}
       loading={props.loading}
       onBack={props.prevStep}

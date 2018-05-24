@@ -31,7 +31,7 @@ class AddUser extends Component {
   }
   render = () => (
     <Section title="Agregar Usuario">
-      <Card style={{ margin: "24px" }}>
+      <Card style={{ margin: "10px auto", maxWidth: 850 }}>
         <div style={{maxWidth: 700, margin: "0 auto"}}>
           <PersonalForm
             onCancel={this.redirect}

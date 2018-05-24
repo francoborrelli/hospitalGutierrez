@@ -156,6 +156,7 @@ const personalDataForm = props => {
     <Form
       fields={fields}
       {...props}
+      layout="vertical"
       buttonText={props.btnText ? props.btnText : "Confirmar"}
       defaultValues={values}
       track={["documentType"]}

@@ -85,7 +85,7 @@ class AddPatient extends Component {
 
     return (
       <Section title="Agregar Paciente">
-        <Card>
+        <Card style={{ maxWidth: 850, margin: "10px auto" }}>
           <div className="container" style={{ maxWidth: 700 }}>
             <Steps current={this.state.current} steps={steps} />
           </div>

@@ -114,7 +114,7 @@ const addUserForm = props => {
     }
   }
 
-  return <Form fields={fields} {...props} buttonText="Confirmar" />
+  return <Form fields={fields} layout="vertical" {...props} buttonText="Confirmar" />
 }
 
 export default withValidations(addUserForm)
