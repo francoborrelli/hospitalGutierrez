@@ -9,7 +9,7 @@ const router = express.Router();
 router
   .route('/')
   .get(hasPermission('usuario_index'), userCtrl.list)
-  .post(validate(paramValidation.createUser), userCtrl.create);
+  .post(hasPermission('usuario_new'), validate(paramValidation.createUser), userCtrl.create);
 
 router
   .route('/:userId')
