@@ -11,7 +11,8 @@ module.exports = {
       password: Joi.string().required(),
       email: Joi.string()
         .email()
-        .required()
+        .required(),
+      roles: Joi.array().required()
     }
   },
 

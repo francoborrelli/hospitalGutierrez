@@ -48,13 +48,13 @@ async function create(req, res, next) {
     username: req.body.username,
     email: req.body.email,
     password,
-    active: true
+    active: true,
+    roles: req.body.roles
   });
 
-  // TODO: no devolver la password
   user
     .save()
-    .then(savedUser => res.json(savedUser))
+    .then(savedUser => res.json({ _id: savedUser._id, email: savedUser.email }))
     .catch(e => next(e));
 }
 
