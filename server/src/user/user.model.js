@@ -73,7 +73,7 @@ UserSchema.statics = {
     return this.findById(id)
       .populate({
         path: 'roles',
-        populate: { path: 'permissions', model: 'Permission' }
+        select: 'name'
       })
       .exec()
       .then(user => {
