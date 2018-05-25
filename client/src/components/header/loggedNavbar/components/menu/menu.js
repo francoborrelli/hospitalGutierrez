@@ -1,14 +1,16 @@
 import React from 'react';
-import { Menu, Icon } from 'antd';
+import {Menu, Icon} from 'antd';
 import {Link} from 'react-router-dom'
 
-const menu = props =>
-    <Menu mode="horizontal" style={{lineHeight: "64px", position: "fixed", right: 0, top: -2}}>
-        <Menu.Item key="1">
-            <Link to="/logout">
-                <Icon type="logout" />
-            </Link>
-        </Menu.Item>
-    </Menu>
+const menu = props => <div
+  style={{
+  lineHeight: "64px",
+  position: "fixed",
+  right: 15,
+  top: 2,
+  color: "#969696"
+}}>
+  username
+</div>
 
 export default menu;
