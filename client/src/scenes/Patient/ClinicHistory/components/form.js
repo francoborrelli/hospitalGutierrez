@@ -1,5 +1,6 @@
 import React from "react"
 import { Card } from 'antd';
+import { withRouter } from 'react-router-dom';
 
 import Form from "../../../../containers/Form/Form"
 
@@ -135,6 +136,7 @@ const recordForm = props => {
     <Card title={props.title} style={{maxWidth: 1000, margin: "0 auto"}}>
       <div className="container" style={{ maxWidth: 900 }}>
         <Form
+          onCancel={props.history.goBack}
           fields={fields}
           {...props}
           buttonText={props.btnText ? props.btnText : "Confirmar"}
@@ -145,4 +147,4 @@ const recordForm = props => {
   )
 }
 
-export default recordForm
+export default withRouter(recordForm)

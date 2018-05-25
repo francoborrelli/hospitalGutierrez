@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import { Route, Switch } from "react-router-dom"
+import { Route, Switch, withRouter } from "react-router-dom"
 import RecordPage from './DetailedRecord/record';
 import EditPage from "./components/form"
 class Record extends Component {
@@ -25,17 +25,21 @@ class Record extends Component {
     }
   }
 
+  redirect = () => {
+    this.props.history.push(this.props.match.url)
+  }
+
   componentDidMount = () => {
   }
 
   render() {
     return (
         <Switch>
+          <Route path={this.props.match.url +"/edit"} render={() => <EditPage record={this.state.record}/> }/>
           <Route path="/" render={() => <RecordPage record={this.state.record}/> }/>
-          <Route path="/edit" render={() => <EditPage record={this.state.record}/> }/>
         </Switch>
     )
   }
 }
 
-export default Record
+export default withRouter(Record)

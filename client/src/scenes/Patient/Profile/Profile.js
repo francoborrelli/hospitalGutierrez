@@ -9,10 +9,14 @@ import ClinicHistory from '../ClinicHistory/RecordsList/RecordsList';
 
 const profile = props => (
   <Row>
-    <Col xl={9} xxl={7} style={{paddingBottom: 10}}>
+    <Col xl={9} xxl={7} style={{
+      paddingBottom: 10
+    }}>
       <PatientCard patient={props.patient} onDeletePatient={props.onDeletePatient}/>
     </Col>
-    <Col xl={15} xxl={17} style={{paddingBottom: 10}}>
+    <Col xl={15} xxl={17} style={{
+      paddingBottom: 10
+    }}>
       <ClinicHistory patient={props.patient} onDeleteRecord={props.onDeleteRecord}/>
     </Col>
     <Col xl={15} xxl={17}>
