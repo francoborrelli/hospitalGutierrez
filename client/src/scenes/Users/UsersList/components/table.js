@@ -81,7 +81,7 @@ const tableUsers = props => {
   ]
 
   const extra = <Link to={props.addPath}>
-    <Button ghost onClick={props.onAdd} type="primary">
+    <Button onClick={props.onAdd}>
       <Icon type="user-add"/>Agregar
     </Button>
   </Link>
