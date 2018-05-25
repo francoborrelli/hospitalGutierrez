@@ -2,21 +2,19 @@ const express = require('express');
 const validate = require('express-validation');
 const paramValidation = require('../validation/param-validation');
 const userCtrl = require('./user.controller');
+const hasPermission = require('../auth/hasPermission');
 
 const router = express.Router();
 
 router
   .route('/')
-  .get(userCtrl.list)
-
+  .get(hasPermission('usuario_index'), userCtrl.list)
   .post(validate(paramValidation.createUser), userCtrl.create);
 
 router
   .route('/:userId')
   .get(userCtrl.get)
-
   .put(validate(paramValidation.updateUser), userCtrl.update)
-
   .delete(userCtrl.remove);
 
 router
