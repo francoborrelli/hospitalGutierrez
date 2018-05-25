@@ -57,17 +57,16 @@ const tableRecords = props => {
       align: "center",
       fixed: "right",
       width: 120,
-      render: (text, record) => (<Dropdown onDelete={() => {}} record={record}/>)
+      render: (text, record) => (<Dropdown onOk={props.onDeleteRecord} patient={props.patient} record={record}/>)
     }
   ]
-
-  return (
-      <Table
-        columns={columns}
-        dataSource={data}
-        loading={props.loading}
-        scroll={{x: 950}}/>
-  )
+  return (<Table
+    columns={columns}
+    dataSource={data}
+    loading={props.loading}
+    scroll={{
+    x: 950
+  }}/>)
 }
 
 export default tableRecords

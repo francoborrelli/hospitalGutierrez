@@ -18,19 +18,21 @@ const dropdown = props => {
       </Item>
       <Divider/>
       <Item key="1">
-        <a>Editar</a>
+        <Link to={props.match.path + "/record/" + props.record.key + "/edit"}>
+          Editar
+        </Link>
       </Item>
       <Divider/>
       <Item key="2">
         <a
-          onClick={() => Modal("control del día " + props.record.date + " de", props.record, () => props.onOk(props.record))}>
+          onClick={() => Modal("control del día " + props.record.date + " de", props.patient, () => props.onOk(props.record))}>
           Eliminar
         </a>
       </Item>
     </Menu>
   )
 
-return (<Dropdown menu={menu}/>)
+  return (<Dropdown menu={menu}/>)
 }
 
 export default withRouter(dropdown)

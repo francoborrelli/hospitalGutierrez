@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import {message} from 'antd';
-import {Route, Switch} from "react-router-dom"
+import {Route, Switch, Redirect} from "react-router-dom"
 import moment from "moment"
 import Section from "./components/patientHeader"
 import ProfilePage from "./Profile/Profile"
@@ -67,7 +67,12 @@ class PatientPage extends Component {
         .history
         .push("/patients")
     }).catch(() => message.error("Algo falló. Intentá nuevamente."))
+  }
 
+  deleteRecordHandler = record => {
+    this.setState({deleteRequest: true})
+
+    this.setState({deleteRequest: false})
   }
 
   render() {
@@ -85,6 +90,7 @@ class PatientPage extends Component {
             loadingDemographic={this.state.demographicDataRequest}/>)}/>
           <Route
             path={this.props.match.url + '/addRecord'}
+            exact
             render={() => (<AddRecordPage patient={this.state.patient} loading={this.state.deleteRequest}/>)}/>
           <Route
             path={this.props.match.url + '/record/:recordId'}
@@ -96,7 +102,7 @@ class PatientPage extends Component {
             exact
             render={() => (<ProfilePage
             patient={this.state.patient}
-            exact
+            onDeleteRecord={this.deleteRecordHandler}
             onDeletePatient={this.deletePatientHandler}/>)}/>
         </Switch>
       </Section>

@@ -13,7 +13,7 @@ const profile = props => (
       <PatientCard patient={props.patient} onDeletePatient={props.onDeletePatient}/>
     </Col>
     <Col xl={15} xxl={17} style={{paddingBottom: 10}}>
-      <ClinicHistory patient={props.patient}/>
+      <ClinicHistory patient={props.patient} onDeleteRecord={props.onDeleteRecord}/>
     </Col>
     <Col xl={15} xxl={17}>
       <Reports patient={props.patient}/>
