@@ -16,7 +16,7 @@ const sectionHeader = props => {
         </Tooltip>
       </div>
     : null
-    console.log(props)
+
   return (
     <Content>
       <Header style={{
