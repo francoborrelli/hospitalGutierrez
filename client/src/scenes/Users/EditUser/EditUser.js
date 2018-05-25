@@ -56,14 +56,13 @@ class EditUser extends Component {
   rolesHandler = data => {
     this.setState({rolesRequest: true})
     //request
-    console.log(data)
     this.setState({rolesRequest: false})
     message.success("Roles de usuario modificados correctamente")
   }
 
   render = () => {
     return (
-      <Section title="Editar Usuario">
+      <Section title="Editar Usuario" goBackTo={"/users"}>
         <RowGutter>
           <Col xs={24} xl={14} style={{
             marginBottom: 10

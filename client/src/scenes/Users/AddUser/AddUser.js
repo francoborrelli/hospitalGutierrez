@@ -38,7 +38,7 @@ class AddUser extends Component {
     message.success("Se agregó a " + data.name + " " + data.lastname + " correctamente.")
   }
   render = () => (
-    <Section title="Agregar Usuario">
+    <Section title="Agregar Usuario" goBackTo="/users">
       <div style={{
         margin: "0 10px"
       }}>

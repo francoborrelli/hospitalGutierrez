@@ -43,13 +43,13 @@ const siderMenu = props => {
       path: '/',
       icon: 'home'
     }, {
-      text: 'Pacientes',
-      path: '/patients',
-      icon: 'medicine-box'
-    }, {
       text: 'Usuarios',
       path: '/users',
       icon: 'team'
+    }, {
+      text: 'Pacientes',
+      path: '/patients',
+      icon: 'medicine-box'
     }, {
       text: 'Reportes',
       path: '/reports',

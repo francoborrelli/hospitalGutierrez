@@ -84,7 +84,7 @@ class AddPatient extends Component {
     ]
 
     return (
-      <Section title="Agregar Paciente">
+      <Section title="Agregar Paciente" goBackTo="/patients">
       <div style={{margin: "0 10px"}}>
         <Card style={{ maxWidth: 850, margin: "10px auto" }}>
           <div className="container" style={{ maxWidth: 700 }}>

@@ -1,14 +1,38 @@
 import React from "react"
-import { Layout } from "antd"
+import {Layout, Button, Icon, Tooltip} from "antd"
+import {withRouter} from 'react-router-dom';
+const {Header, Content} = Layout
 
-const { Header, Content } = Layout
+const sectionHeader = props => {
+  const backButton = props.goBackTo
+    ? <div
+        style={{
+        position: "absolute",
+        top: 60,
+        right: 20
+      }}>
+        <Tooltip placement="right" title="Volver">
+          <Button onClick={() => props.history.push(props.goBackTo)}><Icon type="rollback"/></Button>
+        </Tooltip>
+      </div>
+    : null
+    console.log(props)
+  return (
+    <Content>
+      <Header style={{
+        height: "auto"
+      }}>
+        <h1
+          style={{
+          paddingTop: 18,
+          paddingLeft: 16,
+          marginBottom: 10
+        }}>{props.title}</h1>
+        {backButton}
+      </Header>
+      {props.children}
+    </Content>
+  )
+}
 
-const sectionHeader = props =>
-      <Content>
-        <Header style={{ padding: "17px", paddingLeft: "25px" }}>
-          <h1>{props.title}</h1>
-        </Header>
-          {props.children}
-      </Content>
-
-export default sectionHeader
+export default withRouter(sectionHeader)
