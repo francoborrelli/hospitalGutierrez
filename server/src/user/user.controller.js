@@ -32,7 +32,15 @@ function get(req, res) {
  * @returns {User}
  */
 async function create(req, res, next) {
-  // TODO: chequear usuarios duplicados(no devolver 500)
+  if (await User.findByEmail(req.body.email)) {
+    const err = new APIError(
+      'Email already used',
+      httpStatus.BAD_REQUEST,
+      true
+    );
+    return next(err);
+  }
+
   const password = await bcrypt.hash(req.body.password, 10);
   const user = new User({
     firstName: req.body.firstName,
