@@ -1,35 +1,30 @@
 [
   {
-    "_id": { "$oid": "5b0343111993e300b02f4480" },
+    "_id": { "$oid": "5b082ff2f196f1001cd99ce6" },
+    "roles": [
+      { "$oid": "5b0342132fb40a2151d9c1d6" },
+      { "$oid": "5b0342692fb40a2151d9c1db" },
+      { "$oid": "5b082e31f5feda1b7da87dd2" }
+    ],
+    "firstName": "Pedro",
+    "lastName": "Brost",
+    "username": "pbrost",
+    "email": "pedro.brost97@gmail.com",
+    "password": "$2b$10$7CxvNrAXS1G94JBTPJcssOsPMs4Q4GVWSdgDBH5UR9JOHC.EzE6/W",
+    "active": true,
+    "createdAt": { "$date": "2018-05-25T15:46:58.813Z" },
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5b083014f196f1001cd99ce7" },
     "roles": [{ "$oid": "5b0342132fb40a2151d9c1d6" }],
     "firstName": "Franco",
     "lastName": "Borrelli",
     "username": "fborrelli",
     "email": "francoborrelli@gmail.com",
+    "password": "$2b$10$efBDXh0cFSPqbKRSsgXegO/0VAIMpqe6b1m...9JcsxLuJdVO0Mhi",
     "active": true,
-    "createdAt": { "$date": "2018-05-21T22:07:13.913Z" },
-    "__v": 1
-  },
-  {
-    "_id": { "$oid": "5b0344371993e300b02f4481" },
-    "roles": [{ "$oid": "5b0342132fb40a2151d9c1d6" }],
-    "firstName": "Pedro",
-    "lastName": "Brost",
-    "username": "pbrost",
-    "email": "pedro.brost97@gmail.com",
-    "active": true,
-    "createdAt": { "$date": "2018-05-21T22:12:07.074Z" },
-    "__v": 1
-  },
-  {
-    "_id": { "$oid": "5b0344651993e300b02f4483" },
-    "roles": [{ "$oid": "5b0342692fb40a2151d9c1db" }],
-    "firstName": "Camila",
-    "lastName": "Onofri",
-    "username": "conofri",
-    "email": "cami@gmail.com",
-    "active": true,
-    "createdAt": { "$date": "2018-05-21T22:12:53.986Z" },
-    "__v": 1
+    "createdAt": { "$date": "2018-05-25T15:47:32.141Z" },
+    "__v": 0
   }
 ]

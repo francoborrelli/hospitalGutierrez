@@ -1,5 +1,23 @@
 [
-  { "_id": { "$oid": "5b0341822fb40a2151d9c1d3" }, "name": "create" },
-  { "_id": { "$oid": "5b0341892fb40a2151d9c1d4" }, "name": "remove" },
-  { "_id": { "$oid": "5b0341912fb40a2151d9c1d5" }, "name": "view" }
+  { "_id": { "$oid": "5b082d66f5feda1b7da87dbc" }, "name": "paciente_new" },
+  { "_id": { "$oid": "5b082d73f5feda1b7da87dbd" }, "name": "paciente_update" },
+  { "_id": { "$oid": "5b082d7ff5feda1b7da87dbe" }, "name": "paciente_destroy" },
+  { "_id": { "$oid": "5b082d87f5feda1b7da87dbf" }, "name": "paciente_index" },
+  { "_id": { "$oid": "5b082d8ef5feda1b7da87dc0" }, "name": "paciente_show" },
+  { "_id": { "$oid": "5b082d95f5feda1b7da87dc1" }, "name": "usuario_new" },
+  { "_id": { "$oid": "5b082d9ef5feda1b7da87dc2" }, "name": "usuario_update" },
+  { "_id": { "$oid": "5b082da5f5feda1b7da87dc3" }, "name": "usuario_destroy" },
+  { "_id": { "$oid": "5b082daef5feda1b7da87dc4" }, "name": "roles_index" },
+  { "_id": { "$oid": "5b082db6f5feda1b7da87dc5" }, "name": "permisos_index" },
+  { "_id": { "$oid": "5b082dbdf5feda1b7da87dc6" }, "name": "usuario_index" },
+  { "_id": { "$oid": "5b082dc3f5feda1b7da87dc7" }, "name": "datosDemograficos_show" },
+  { "_id": { "$oid": "5b082dcbf5feda1b7da87dc8" }, "name": "datosDemograficos_update" },
+  { "_id": { "$oid": "5b082dd1f5feda1b7da87dc9" }, "name": "config_index" },
+  { "_id": { "$oid": "5b082dd6f5feda1b7da87dca" }, "name": "config_update" },
+  { "_id": { "$oid": "5b082dddf5feda1b7da87dcb" }, "name": "control_new" },
+  { "_id": { "$oid": "5b082de3f5feda1b7da87dcc" }, "name": "control_show" },
+  { "_id": { "$oid": "5b082deaf5feda1b7da87dcd" }, "name": "control_update" },
+  { "_id": { "$oid": "5b082df0f5feda1b7da87dce" }, "name": "control_destroy" },
+  { "_id": { "$oid": "5b082df9f5feda1b7da87dcf" }, "name": "historiaClinica_index" },
+  { "_id": { "$oid": "5b082dfff5feda1b7da87dd0" }, "name": "reportes_index" }
 ]
