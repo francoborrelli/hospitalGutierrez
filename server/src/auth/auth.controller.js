@@ -11,11 +11,9 @@ function getAuthError() {
 }
 
 async function login(req, res, next) {
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findByEmail(req.body.email);
   if (!user) return next(getAuthError());
-
   const match = await bcrypt.compare(req.body.password, user.password);
-
   const permissions = user.getPermissions();
 
   if (match) {
@@ -25,7 +23,6 @@ async function login(req, res, next) {
     );
     return res.json({ token });
   }
-
   return next(getAuthError());
 }
 

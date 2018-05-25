@@ -46,7 +46,6 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.method({
   hasRole(roleId) {
-    console.log('ASDASDASDASDA', this.roles);
     let hasRole = false;
     this.roles.forEach(role => {
       if (role.id === roleId) {
@@ -57,32 +56,25 @@ UserSchema.method({
   },
 
   getPermissions() {
-    this.populate(
-      { path: 'roles', populate: { path: 'permissions', model: 'Permission' } },
-      (err, result) => {
-        result.roles.forEach(role => {
-          role.permissions.forEach(permission => {
-            console.log(permission.name);
-          });
-        });
-      }
-    );
-    return [];
+    const permissions = [];
+    this.roles.forEach(role => {
+      role.permissions.forEach(permission => {
+        if (!permissions.find(p => p.id === permission.id)) {
+          permissions.push(permission);
+        }
+      });
+    });
+    return permissions.map(p => p.name);
   }
 });
 
-/**
- * Statics
- */
 UserSchema.statics = {
-  /**
-   * Get user
-   * @param {ObjectId} id - The objectId of user.
-   * @returns {Promise<User, APIError>}
-   */
   get(id) {
     return this.findById(id)
-      .populate('roles')
+      .populate({
+        path: 'roles',
+        populate: { path: 'permissions', model: 'Permission' }
+      })
       .exec()
       .then(user => {
         if (user) {
@@ -93,12 +85,15 @@ UserSchema.statics = {
       });
   },
 
-  /**
-   * List users in descending order of 'createdAt' timestamp.
-   * @param {number} skip - Number of users to be skipped.
-   * @param {number} limit - Limit number of users to be returned.
-   * @returns {Promise<User[]>}
-   */
+  findByEmail(email) {
+    return this.findOne({ email })
+      .populate({
+        path: 'roles',
+        populate: { path: 'permissions', model: 'Permission' }
+      })
+      .exec();
+  },
+
   list({ skip = 0, limit = 50 } = {}) {
     return this.find()
       .sort({ createdAt: -1 })
@@ -108,7 +103,4 @@ UserSchema.statics = {
   }
 };
 
-/**
- * @typedef User
- */
 module.exports = mongoose.model('User', UserSchema);
