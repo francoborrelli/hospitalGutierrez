@@ -29,6 +29,7 @@ class App extends Component {
       .props
       .checkAuth();
 
+    this.props.checkAuth()
   }
 
   checkPath() {

@@ -21,6 +21,7 @@ const sider = props => {
         <img src={logo} alt="banner" />
       </div>
       <Menu
+        collapsed={props.collapsed}
         action={!props.collapsed && props.responsive}
         clicked={props.clicked}
       />
