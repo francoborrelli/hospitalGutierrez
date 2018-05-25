@@ -3,34 +3,23 @@ const mongoose = require('mongoose');
 const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
 
-/**
- * User Schema
- */
+require('../permission/permission.model');
+
 const RoleSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
-  }
+  },
+  permissions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Permission'
+    }
+  ]
 });
 
-/**
- * Add your
- * - pre-save hooks
- * - validations
- * - virtuals
- */
-
-/**
- * Methods
- */
 RoleSchema.method({});
 
-/**
- * Statics
- */
 RoleSchema.statics = {};
 
-/**
- * @typedef Role
- */
 module.exports = mongoose.model('Role', RoleSchema);

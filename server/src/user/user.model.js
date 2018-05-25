@@ -44,16 +44,6 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-/**
- * Add your
- * - pre-save hooks
- * - validations
- * - virtuals
- */
-
-/**
- * Methods
- */
 UserSchema.method({
   hasRole(roleId) {
     console.log('ASDASDASDASDA', this.roles);
@@ -64,6 +54,20 @@ UserSchema.method({
       }
     });
     return hasRole;
+  },
+
+  getPermissions() {
+    this.populate(
+      { path: 'roles', populate: { path: 'permissions', model: 'Permission' } },
+      (err, result) => {
+        result.roles.forEach(role => {
+          role.permissions.forEach(permission => {
+            console.log(permission.name);
+          });
+        });
+      }
+    );
+    return [];
   }
 });
 

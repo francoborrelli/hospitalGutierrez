@@ -16,8 +16,13 @@ async function login(req, res, next) {
 
   const match = await bcrypt.compare(req.body.password, user.password);
 
+  const permissions = user.getPermissions();
+
   if (match) {
-    const token = jwt.sign({ username: user.username }, config.jwtSecret);
+    const token = jwt.sign(
+      { username: user.username, permissions },
+      config.jwtSecret
+    );
     return res.json({ token });
   }
 
