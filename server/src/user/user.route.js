@@ -22,7 +22,7 @@ router
 router
   .route('/:userId')
   .get(userCtrl.get)
-  .put(validate(paramValidation.updateUser), userCtrl.update)
+  .patch(validate(paramValidation.patchUser), userCtrl.patch)
   .delete(userCtrl.remove);
 
 router

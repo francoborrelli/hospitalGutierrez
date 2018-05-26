@@ -5,32 +5,19 @@ const bcrypt = require('bcrypt');
 const User = require('./user.model');
 const Role = require('../role/role.model');
 
-/**
- * Load user and append to req.
- */
 function load(req, res, next, id) {
   User.get(id)
     .then(user => {
-      req.user = user; // eslint-disable-line no-param-reassign
+      req.user = user;
       return next();
     })
     .catch(e => next(e));
 }
 
-/**
- * Get user
- * @returns {User}
- */
 function get(req, res) {
   return res.json(req.user);
 }
 
-/**
- * Create new user
- * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
- * @returns {User}
- */
 async function create(req, res, next) {
   if (await User.findByEmail(req.body.email)) {
     const err = new APIError(
@@ -58,19 +45,25 @@ async function create(req, res, next) {
     .catch(e => next(e));
 }
 
-/**
- * Update existing user
- * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
- * @returns {User}
- */
-function update(req, res, next) {
+function patch(req, res, next) {
   const user = req.user;
-  user.firstName = req.body.firstName;
-  user.lastName = req.body.lastName;
-  user.username = req.body.username;
-  user.email = req.body.email;
-  user.active = req.body.active;
+
+  if (req.body.firstName) {
+    user.firstName = req.body.firstName;
+  }
+  if (req.body.lastName) {
+    user.lastName = req.body.lastName;
+  }
+  if (req.body.username) {
+    user.username = req.body.username;
+  }
+  // TODO: validar email
+  if (req.body.email) {
+    user.email = req.body.email;
+  }
+  if (req.body.active === false || req.body.active) {
+    user.active = req.body.active;
+  }
 
   user
     .save()
@@ -154,7 +147,7 @@ module.exports = {
   load,
   get,
   create,
-  update,
+  patch,
   list,
   remove,
   addRole,

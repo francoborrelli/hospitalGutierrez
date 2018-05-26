@@ -16,16 +16,14 @@ module.exports = {
     }
   },
 
-  // UPDATE /users/:userId
-  updateUser: {
+  patchUser: {
     body: {
-      firstName: Joi.string().required(),
-      lastName: Joi.string().required(),
-      username: Joi.string().required(),
-      email: Joi.string()
-        .email()
-        .required(),
-      active: Joi.bool().required()
+      firstName: Joi.string(),
+      lastName: Joi.string(),
+      username: Joi.string(),
+      email: Joi.string().email(),
+      active: Joi.bool(),
+      roles: Joi.array()
     },
     params: {
       userId: Joi.string()
