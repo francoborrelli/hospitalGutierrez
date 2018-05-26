@@ -52,30 +52,69 @@ class EditUser extends Component {
         }))
       });
     } catch (error) {
-      console.log(error);
       message.error('Ocurrió un error');
     }
   };
 
-  personalDataHandler = data => {
+  personalDataHandler = async data => {
     this.setState({ personalDataRequest: true });
-    //request
-    this.setState({ personalDataRequest: false });
-    message.success('Datos modificados correctamente');
+    try {
+      const response = await axios.patch(
+        `/users/${this.props.match.params.userId}`,
+        {
+          email: data.email,
+          lastName: data.lastname,
+          firstName: data.name,
+          username: data.username
+        }
+      );
+      const user = response.data;
+      this.setState({
+        personalDataRequest: false,
+        personalData: {
+          name: user.firstName,
+          lastname: user.lastName,
+          username: user.username,
+          email: user.email
+        }
+      });
+      message.success('Datos modificados correctamente');
+    } catch (error) {
+      this.setState({ personalDataRequest: false });
+      message.error('Ocurrió un error al actualizar los datos del usuario');
+    }
   };
 
-  passwordHandler = data => {
+  passwordHandler = async data => {
     this.setState({ passwordRequest: true });
-    //request
+    console.log(data);
+    try {
+      await axios.patch(`/users/${this.props.match.params.userId}`, {
+        password: data.password
+      });
+      message.success('Contraseña reestablecida correctamente');
+    } catch (error) {
+      message.error('Ocurrió un error al actualizar la contraseña');
+    }
     this.setState({ passwordRequest: false });
-    message.success('Contraseña reestablecida correctamente');
   };
 
-  rolesHandler = data => {
+  rolesHandler = async data => {
     this.setState({ rolesRequest: true });
-    //request
-    this.setState({ rolesRequest: false });
-    message.success('Roles de usuario modificados correctamente');
+    try {
+      const response = await axios.patch(
+        `/users/${this.props.match.params.userId}`,
+        { roles: data.roles }
+      );
+      this.setState({
+        rolesRequest: false,
+        personalRoles: response.data.roles
+      });
+      message.success('Roles de usuario modificados correctamente');
+    } catch (error) {
+      message.error('Ocurrió un error al actualizar los roles del usuario');
+      this.setState({ rolesRequest: false });
+    }
   };
 
   render = () => {
