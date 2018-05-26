@@ -26,11 +26,18 @@ async function login(req, res, next) {
   return next(getAuthError());
 }
 
-function getRandomNumber(req, res) {
-  return res.json({
-    user: req.user,
-    num: Math.random() * 100
+async function newToken(req, res, next) {
+  const user = await User.findById(req.user._id).populate({
+    path: 'roles',
+    populate: { path: 'permissions', model: 'Permission' }
   });
+  const permissions = user.getPermissions();
+
+  const token = jwt.sign(
+    { _id: user.id, username: user.username, permissions },
+    config.jwtSecret
+  );
+  return res.json({ token });
 }
 
-module.exports = { login, getRandomNumber };
+module.exports = { login, newToken };

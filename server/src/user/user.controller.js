@@ -47,7 +47,6 @@ async function create(req, res, next) {
 
 async function patch(req, res, next) {
   const user = req.user;
-
   if (req.body.firstName) {
     user.firstName = req.body.firstName;
   }
@@ -70,7 +69,6 @@ async function patch(req, res, next) {
   if (req.body.active === false || req.body.active) {
     user.active = req.body.active;
   }
-
   user
     .save()
     .then(savedUser => res.json(savedUser))
