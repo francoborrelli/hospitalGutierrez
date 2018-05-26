@@ -72,7 +72,7 @@ const personalDataForm = props => {
     }
   }
 
-  return <Card title="Datos Personales">
+  return <Card title="Datos Personales" bodyStyle={{padding: "37px 32px"}}>
     <Form
     reset
     layout="vertical"

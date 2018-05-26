@@ -78,7 +78,7 @@ const tableUsers = props => {
         dataSource={data}
         loading={props.loading}
         scroll={{
-          x: 950
+          x: 1060
         }}
       />
     </Card>
