@@ -1,10 +1,12 @@
-import React, {Component} from "react"
-import {Row, Col, message} from "antd"
+import React, { Component } from 'react';
+import { Row, Col, message } from 'antd';
 import RowGutter from '../../../components/grid/row';
-import Section from "../../../components/header/sectionHeader/sectionHeader"
-import PersonalForm from "./components/personalInfoForm"
-import RolesForm from "./components/rolesForm"
-import PasswordForm from "./components/passwordForm"
+import Section from '../../../components/header/sectionHeader/sectionHeader';
+import PersonalForm from './components/personalInfoForm';
+import RolesForm from './components/rolesForm';
+import PasswordForm from './components/passwordForm';
+
+import axios from '../../../axios-api';
 
 class EditUser extends Component {
   state = {
@@ -13,88 +15,111 @@ class EditUser extends Component {
     rolesRequest: false,
 
     personalData: {
-      name: "Franco",
-      lastname: "Borrelli",
-      username: "francoborrelli",
-      email: "francoborrelli@gmail.com"
+      name: '',
+      lastname: '',
+      username: '',
+      email: ''
     },
     personalRoles: {
-      roles: ["0", "2"]
+      roles: []
     },
-    roles: [
-      {
-        id: "0",
-        nombre: "Administrador"
-      }, {
-        id: "1",
-        nombre: "Pediatra"
-      }, {
-        id: "2",
-        nombre: "Recepcionista"
-      }
-    ]
-  }
+    roles: []
+  };
 
-  componentDidMount = () => {
-    //request user data
-  }
+  componentDidMount = async () => {
+    try {
+      const userResponse = await axios.get(
+        `/users/${this.props.match.params.userId}`
+      );
+      const roleResponse = await axios.get('/roles');
+      const roles = roleResponse.data;
+      const user = userResponse.data;
+      this.setState({
+        personalData: {
+          name: user.firstName,
+          lastname: user.lastName,
+          username: user.username,
+          email: user.email
+        },
+        personalRoles: {
+          roles: user.roles.map(role => role._id)
+        },
+        roles: roles.map(role => ({
+          id: role._id,
+          nombre: role.name
+        }))
+      });
+    } catch (error) {
+      message.error('Ocurrió un error');
+    }
+  };
 
   personalDataHandler = data => {
-    this.setState({personalDataRequest: true})
+    this.setState({ personalDataRequest: true });
     //request
-    this.setState({personalDataRequest: false})
-    message.success("Datos modificados correctamente")
-  }
+    this.setState({ personalDataRequest: false });
+    message.success('Datos modificados correctamente');
+  };
 
   passwordHandler = data => {
-    this.setState({passwordRequest: true})
+    this.setState({ passwordRequest: true });
     //request
-    this.setState({passwordRequest: false})
-    message.success("Contraseña reestablecida correctamente")
-  }
+    this.setState({ passwordRequest: false });
+    message.success('Contraseña reestablecida correctamente');
+  };
 
   rolesHandler = data => {
-    this.setState({rolesRequest: true})
+    this.setState({ rolesRequest: true });
     //request
-    this.setState({rolesRequest: false})
-    message.success("Roles de usuario modificados correctamente")
-  }
+    this.setState({ rolesRequest: false });
+    message.success('Roles de usuario modificados correctamente');
+  };
 
   render = () => {
     return (
-      <Section title="Editar Usuario" goBackTo={"/users"}>
+      <Section title="Editar Usuario" goBackTo={'/users'}>
         <RowGutter>
-          <Col xs={24} xl={14} style={{
-            marginBottom: 10
-          }}>
+          <Col
+            xs={24}
+            xl={14}
+            style={{
+              marginBottom: 10
+            }}
+          >
             <PersonalForm
               submitted={this.personalDataHandler}
               loading={this.state.personalDataRequest}
-              defaultValues={this.state.personalData}/>
+              defaultValues={this.state.personalData}
+            />
           </Col>
           <Col xs={24} xl={10}>
             <Row gutter={10}>
-              <Col md={12} xl={24} style={{
-                marginBottom: 10
-              }}>
+              <Col
+                md={12}
+                xl={24}
+                style={{
+                  marginBottom: 10
+                }}
+              >
                 <PasswordForm
                   submitted={this.passwordHandler}
-                  loading={this.state.passwordRequest}/>
+                  loading={this.state.passwordRequest}
+                />
               </Col>
               <Col md={12} xl={24}>
                 <RolesForm
                   submitted={this.rolesHandler}
                   loading={this.state.rolesRequest}
                   defaultValues={this.state.personalRoles}
-                  roles={this.state.roles}/>
+                  roles={this.state.roles}
+                />
               </Col>
             </Row>
           </Col>
         </RowGutter>
       </Section>
-    )
-  }
-
+    );
+  };
 }
 
-export default EditUser
+export default EditUser;

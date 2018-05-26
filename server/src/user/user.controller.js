@@ -45,7 +45,7 @@ async function create(req, res, next) {
     .catch(e => next(e));
 }
 
-function patch(req, res, next) {
+async function patch(req, res, next) {
   const user = req.user;
 
   if (req.body.firstName) {
@@ -56,6 +56,9 @@ function patch(req, res, next) {
   }
   if (req.body.username) {
     user.username = req.body.username;
+  }
+  if (req.body.password) {
+    user.password = await bcrypt.hash(req.body.password, 10);
   }
   // TODO: validar email
   if (req.body.email) {
