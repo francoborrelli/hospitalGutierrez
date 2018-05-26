@@ -9,6 +9,8 @@ import PersonalForm from "../components/personalForm"
 
 import withApiRefData from "../../../hoc/withApiRefData"
 
+import { withRouter } from 'react-router-dom';
+
 class AddPatient extends Component {
   state = {
     loading: false,
@@ -97,4 +99,4 @@ class AddPatient extends Component {
   }
 }
 
-export default withApiRefData()(AddPatient)
+export default withRouter(withApiRefData()(AddPatient))

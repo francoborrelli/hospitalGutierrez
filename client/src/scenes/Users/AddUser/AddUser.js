@@ -5,6 +5,7 @@ import axios from '../../../axios-api';
 import Section from '../../../components/header/sectionHeader/sectionHeader';
 import PersonalForm from './components/form';
 import hasPermission from '../../../hoc/hasPermission';
+import { withRouter } from 'react-router-dom';
 
 class AddUser extends Component {
   state = {
@@ -83,4 +84,4 @@ class AddUser extends Component {
   }
 }
 
-export default hasPermission(AddUser, ['usuario_index', 'usuario_new']);
+export default withRouter(hasPermission(AddUser, ['usuario_index', 'usuario_new']));

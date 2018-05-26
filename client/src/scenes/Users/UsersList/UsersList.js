@@ -12,7 +12,6 @@ class UserList extends Component {
     loading: true,
     searching: false,
     allUsers: [],
-    filtered: false,
     users: []
   };
 
@@ -38,8 +37,7 @@ class UserList extends Component {
         users = users.filter(user => !user.active)
       }
     }
-    const filtered = users === this.state.allUsers
-    this.setState({searching: false, users: users, filtered: filtered});
+    this.setState({searching: false, users: users});
   };
 
   resetHandler = () => {

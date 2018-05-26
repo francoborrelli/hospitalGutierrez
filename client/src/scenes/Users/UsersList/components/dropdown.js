@@ -12,7 +12,7 @@ const menu = (record, onOk) => {
 }
 
 const dropdown = props => {
-  const menu = props.user.active
+  const menu = props.record.status === "Activo"
     ? (
       <Menu>
         <Item key="0">
