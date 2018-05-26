@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import LoggedLayout from './containers/Layout/LoggedLayout';
 import VisitorLayout from './containers/Layout/visitorLayout';
@@ -24,51 +24,41 @@ import Error404 from './scenes/Errors/404';
 import * as actions from './store/actions';
 
 class App extends Component {
-  componentDidMount() {
-    this
-      .props
-      .checkAuth();
-
-    this.props.checkAuth()
-  }
-
   checkPath() {
-    const url = this.props.location.pathname
-    return (url.endsWith("/") && url !== "/")
-      ? <Redirect to={url.substring(0, url.length - 1)}/>
-      : null
+    const url = this.props.location.pathname;
+    return url.endsWith('/') && url !== '/' ? (
+      <Redirect to={url.substring(0, url.length - 1)} />
+    ) : null;
   }
 
   render() {
-    const Layout = this.props.loggedIn
-      ? LoggedLayout
-      : VisitorLayout;
+    const Layout = this.props.loggedIn ? LoggedLayout : VisitorLayout;
 
     return (
       <Layout>
         {this.checkPath()}
         <Switch>
-          <Route path="/login" component={LoginPage}/>
-          <Route path="/patient/:patientId(\d+)" component={PatientPage}/>
-          <Route path="/patients/add" exact component={AddPatientPage}/>
-          <Route path="/patients" exact component={PatientsListPage}/>
-          <Route path="/user/:userId(\d+)/edit" exact component={EditUserPage}/>
-          <Route path="/users/add" exact component={AddUserPage}/>
-          <Route path="/users" exact component={UsersListPage}/>
-          <Route path="/settings" exact component={ConfigurationPage}/>
-          <Route path="/reports" exact component={ReportsPage}/>
-          <Route path="/" exact component={HomePage}/>
-          <Route component={Error404}/>
+          <Route path="/login" component={LoginPage} />
+          <Route path="/patient/:patientId(\d+)" component={PatientPage} />
+          <Route path="/patients/add" exact component={AddPatientPage} />
+          <Route path="/patients" exact component={PatientsListPage} />
+          <Route
+            path="/user/:userId(\d+)/edit"
+            exact
+            component={EditUserPage}
+          />
+          <Route path="/users/add" exact component={AddUserPage} />
+          <Route path="/users" exact component={UsersListPage} />
+          <Route path="/settings" exact component={ConfigurationPage} />
+          <Route path="/reports" exact component={ReportsPage} />
+          <Route path="/" exact component={HomePage} />
+          <Route component={Error404} />
         </Switch>
       </Layout>
     );
   }
 }
 
-const mapStateToProps = state => ({loggedIn: state.auth.jwt});
+const mapStateToProps = state => ({ loggedIn: state.auth.jwt });
 
-const mapDispatchToProps = dispatch => ({
-  checkAuth: () => dispatch(actions.checkAuth())
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps)(App));
