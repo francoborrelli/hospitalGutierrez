@@ -71,6 +71,7 @@ class UserList extends Component {
           <Col xl={17}>
             <Table
               loading={this.state.loading}
+              permissions={this.props.user.permissions}
               onDelete={this.deleteUserHandler}
               data={this.state.users}
               addPath={

@@ -56,9 +56,10 @@ const tableUsers = props => {
       align: 'center',
       fixed: 'right',
       width: 120,
-      render: (text, record) => (
-        <Dropdown record={record} onDelete={props.onDelete} />
-      )
+      render: (text, record) => (<Dropdown
+        record={record}
+        permissions={props.permissions}
+        onDelete={props.onDelete}/>)
     }
   ];
 
