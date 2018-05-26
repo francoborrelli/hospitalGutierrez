@@ -27,15 +27,17 @@ const siderMenu = props => {
     }
   };
 
-  const getNavItems = items => items.map((item, index) => (
-    <Item key={index} className={getNavLinkClass(item.path)}>
-      <NavLink
-        path={item.path}
-        icon={item.icon}
-        text={item.text}
-        clicked={clickHandler}/>
-    </Item>
-  ));
+  const getNavItems = items => items.map((item, index) => !item.permission || props.permissions.includes(item.permission)
+    ? (
+      <Item key={index} className={getNavLinkClass(item.path)}>
+        <NavLink
+          path={item.path}
+          icon={item.icon}
+          text={item.text}
+          clicked={clickHandler}/>
+      </Item>
+    )
+    : null);
 
   const items = [
     {
@@ -45,19 +47,23 @@ const siderMenu = props => {
     }, {
       text: 'Usuarios',
       path: '/users',
-      icon: 'team'
+      icon: 'team',
+      permission: 'usuario_index'
     }, {
       text: 'Pacientes',
       path: '/patients',
-      icon: 'medicine-box'
+      icon: 'medicine-box',
+      permission: 'paciente_index'
     }, {
       text: 'Reportes',
       path: '/reports',
-      icon: 'pie-chart'
+      icon: 'pie-chart',
+      permission: 'reportes_index',
     }, {
       text: 'Configuración',
       path: '/settings',
-      icon: 'setting'
+      icon: 'setting',
+      permission: 'config_update',
     }
   ];
 
@@ -75,4 +81,6 @@ const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(actions.logout())
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(siderMenu));
+const mapStateToProps = state => ({permissions: state.auth.user.permissions});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(siderMenu));
