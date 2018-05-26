@@ -60,6 +60,9 @@ async function patch(req, res, next) {
   if (req.body.password) {
     user.password = await bcrypt.hash(req.body.password, 10);
   }
+  if (req.body.roles && (!req.body.roles.length || req.body.roles.length)) {
+    user.roles = req.body.roles;
+  }
   // TODO: validar email
   if (req.body.email) {
     user.email = req.body.email;
