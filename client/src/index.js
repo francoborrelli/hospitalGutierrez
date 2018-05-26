@@ -24,12 +24,10 @@ store.dispatch(actions.checkAuth());
 
 axios.interceptors.response.use(
   response => {
-    console.log('success', response);
     return response;
   },
   error => {
     if (error.response.status === 401) {
-      console.log('error', error.response);
       if (error.response.data.newToken) {
         const token = error.response.data.newToken;
         localStorage.setItem('token', token);

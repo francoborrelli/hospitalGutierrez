@@ -5,7 +5,8 @@ const initialState = {
   user: null,
   loading: false,
   error: null,
-  recentLogin: false
+  recentLogin: false,
+  appLoading: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +29,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, jwt: null, user: null };
     case types.AUTH_SEE_MESSAGE:
       return { ...state, recentLogin: false };
+    case types.APP_LOADING:
+      return { ...state, appLoading: true };
+    case types.APP_LOADED:
+      return { ...state, appLoading: false };
     default:
       return state;
   }

@@ -32,53 +32,59 @@ class App extends Component {
   }
 
   render() {
-    const Layout = this.props.loggedIn ? LoggedLayout : VisitorLayout;
-
-    return (
-      <Layout>
+    console.log(this.props.appLoading);
+    const content = this.props.loggedIn ? (
+      <LoggedLayout>
         {this.checkPath()}
         <Switch>
           <Route path="/patient/:patientId" component={PatientPage} />
           <Route path="/patients/add" exact component={AddPatientPage} />
           <Route path="/login" exact component={LoginPage} />
-
           <Route
             path="/patients"
             exact
             render={() => <PatientsListPage user={this.props.user} />}
           />
-
           <Route
             path="/user/:userId/edit"
             exact
             render={() => <EditUserPage user={this.props.user} />}
           />
-
           <Route
             path="/users/add"
             exact
             render={() => <AddUserPage user={this.props.user} />}
           />
-
           <Route
             path="/users"
             exact
             render={() => <UsersListPage user={this.props.user} />}
           />
-
           <Route path="/settings" exact component={ConfigurationPage} />
           <Route path="/reports" exact component={ReportsPage} />
           <Route path="/" exact component={HomePage} />
           <Route component={Error404} />
         </Switch>
-      </Layout>
+      </LoggedLayout>
+    ) : (
+      <VisitorLayout>
+        {this.checkPath()}
+        <Switch>
+          <Route path="/login" exact component={LoginPage} />
+          <Route path="/" exact component={HomePage} />
+          <Route component={Error404} />
+        </Switch>
+      </VisitorLayout>
     );
+
+    return content;
   }
 }
 
 const mapStateToProps = state => ({
   loggedIn: state.auth.jwt,
-  user: state.auth.user
+  user: state.auth.user,
+  appLoading: state.auth.appLoading
 });
 
 export default withRouter(connect(mapStateToProps)(App));
