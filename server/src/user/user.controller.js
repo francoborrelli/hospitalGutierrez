@@ -155,6 +155,11 @@ async function removeRole(req, res, next) {
     .catch(e => next(e));
 }
 
+async function checkEmail(req, res, next) {
+  const user = await User.findByEmail(req.query.email);
+  res.json(user !== null);
+}
+
 module.exports = {
   load,
   get,
@@ -163,5 +168,6 @@ module.exports = {
   list,
   remove,
   addRole,
-  removeRole
+  removeRole,
+  checkEmail
 };

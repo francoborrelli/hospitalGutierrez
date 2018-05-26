@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import LoggedLayout from './containers/Layout/LoggedLayout';
 import VisitorLayout from './containers/Layout/visitorLayout';
@@ -24,23 +24,15 @@ import Error404 from './scenes/Errors/404';
 import * as actions from './store/actions';
 
 class App extends Component {
-  componentDidMount() {
-    this
-      .props
-      .checkAuth()
-  }
-
   checkPath() {
-    const url = this.props.location.pathname
-    return (url.endsWith("/") && url !== "/")
-      ? <Redirect to={url.substring(0, url.length - 1)}/>
-      : null
+    const url = this.props.location.pathname;
+    return url.endsWith('/') && url !== '/' ? (
+      <Redirect to={url.substring(0, url.length - 1)} />
+    ) : null;
   }
 
   render() {
-    const Layout = this.props.loggedIn
-      ? LoggedLayout
-      : VisitorLayout;
+    const Layout = this.props.loggedIn ? LoggedLayout : VisitorLayout;
 
     return (
       <Layout>
@@ -78,8 +70,4 @@ class App extends Component {
 
 const mapStateToProps = state => ({loggedIn: state.auth.jwt, user: state.auth.user});
 
-const mapDispatchToProps = dispatch => ({
-  checkAuth: () => dispatch(actions.checkAuth())
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps)(App));

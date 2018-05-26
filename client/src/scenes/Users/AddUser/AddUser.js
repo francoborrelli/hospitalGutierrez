@@ -1,68 +1,87 @@
-import React, {Component} from "react"
-import {Card, message} from "antd"
+import React, { Component } from 'react';
+import { Card, message } from 'antd';
 
-import Section from "../../../components/header/sectionHeader/sectionHeader"
-import PersonalForm from "./components/form"
+import axios from '../../../axios-api';
+import Section from '../../../components/header/sectionHeader/sectionHeader';
+import PersonalForm from './components/form';
 
 class AddUser extends Component {
   state = {
     loading: false,
-    roles: [
-      {
-        id: 0,
-        nombre: "Administrador"
-      }, {
-        id: 1,
-        nombre: "Pediatra"
-      }, {
-        id: 2,
-        nombre: "Recepcionista"
-      }
-    ]
+    roles: []
+  };
+
+  async componentDidMount() {
+    try {
+      const response = await axios.get('/roles');
+      this.setState({
+        roles: response.data.map(role => ({ id: role._id, nombre: role.name }))
+      });
+    } catch (error) {
+      message.error('Ocurrió un error');
+    }
   }
 
   redirect = () => {
-    this
-      .props
-      .history
-      .push("/users")
-  }
+    this.props.history.push('/users');
+  };
 
-  addHandler = data => {
-    this.setState({loading: true})
+  addHandler = async data => {
+    this.setState({ loading: true });
+    try {
+      console.log(data);
+      const response = await axios.post('users', {
+        username: data.username,
+        firstName: data.name,
+        lastName: data.lastname,
+        email: data.email,
+        roles: data.roles,
+        password: data.password
+      });
+      this.setState({ loading: false });
+      message.success(
+        'Se agregó a ' + data.name + ' ' + data.lastname + ' correctamente.'
+      );
+      this.redirect();
+    } catch (error) {
+      console.log(error.response);
+      this.setState({ loading: false });
+      message.success('Ocurrió un error');
+    }
+  };
 
-    //request
-
-    this.setState({loading: false})
-    this.redirect()
-    message.success("Se agregó a " + data.name + " " + data.lastname + " correctamente.")
-  }
-  render = () => (
-    <Section title="Agregar Usuario" goBackTo="/users">
-      <div style={{
-        margin: "0 10px"
-      }}>
-        <Card
+  render() {
+    return (
+      <Section title="Agregar Usuario" goBackTo="/users">
+        <div
           style={{
-          margin: "10px auto",
-          maxWidth: 850
-        }}>
-          <div
+            margin: '0 10px'
+          }}
+        >
+          <Card
             style={{
-            maxWidth: 700,
-            margin: "0 auto"
-          }}>
-            <PersonalForm
-              onCancel={this.redirect}
-              roles={this.state.roles}
-              submitted={this.addHandler}
-              loading={this.state.loading}/>
-          </div>
-        </Card>
-      </div>
-
-    </Section>
-  )
+              margin: '10px auto',
+              maxWidth: 850
+            }}
+          >
+            <div
+              style={{
+                maxWidth: 700,
+                margin: '0 auto'
+              }}
+            >
+              <PersonalForm
+                onCancel={this.redirect}
+                roles={this.state.roles}
+                submitted={this.addHandler}
+                loading={this.state.loading}
+              />
+            </div>
+          </Card>
+        </div>
+      </Section>
+    );
+  }
 }
 
-export default AddUser
+export default AddUser;

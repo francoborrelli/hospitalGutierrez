@@ -64,5 +64,11 @@ module.exports = {
       email: Joi.string().required(),
       password: Joi.string().required()
     }
+  },
+
+  checkEmail: {
+    query: {
+      email: Joi.string().required()
+    }
   }
 };
