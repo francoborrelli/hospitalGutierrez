@@ -49,7 +49,7 @@ class PatientsList extends Component {
     return (
       <Section title="pacientes">
         <Row>
-          <Col xl={7} style={{
+          <Col xl={6} style={{
             paddingBottom: 10
           }}>
             <SearchForm
@@ -57,7 +57,7 @@ class PatientsList extends Component {
               documentTypes={this.state.documentTypes}
               submitted={this.searchHandler}/>
           </Col>
-          <Col xl={17}>
+          <Col xl={18}>
             <Table
               loading={this.state.loading}
               onDelete={this.deletePatientHandler}

@@ -31,7 +31,7 @@ const searchForm = props => {
         className="ant-advanced-search-form"
         fields={fields}
         {...props}
-        layout="inline"
+        layout="vertical"
         buttonText="Buscar"
       />
     </Card>

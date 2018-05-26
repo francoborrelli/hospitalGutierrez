@@ -65,7 +65,9 @@ class BaseForm extends Component {
           this
             .props
             .submitted(values)
-          this.setState({initialState: values})
+          if (!this.props.goBlank) {
+            this.setState({initialState: values})
+          }
         }
       })
   }
@@ -75,6 +77,9 @@ class BaseForm extends Component {
       .props
       .form
       .setFieldsValue(this.state.initialState)
+    try {
+      this.props.goBlank()
+    } catch (error) {}
   }
 
   getWrapper = () => {
@@ -120,6 +125,21 @@ class BaseForm extends Component {
         ...item.rules
       ]
       : item.rules
+  }
+
+  putItInBlank = () => {
+    return this.props.goBlank
+      ? (
+        <Button
+          style={{
+          float: "right",
+          marginRight: 10
+        }}
+          onClick={this.resetHandler}>
+          Restaurar
+        </Button>
+      )
+      : null
   }
 
   getBackButton = () => {
@@ -171,6 +191,7 @@ class BaseForm extends Component {
     let backButton = this.getBackButton()
     let resetButton = this.getResetButton()
     let cancelButton = this.getCancelButton()
+    let blankButton = this.putItInBlank()
     return (
       <Form
         className={this.props.className}
@@ -191,6 +212,7 @@ class BaseForm extends Component {
               ? this.props.buttonText
               : "Guardar"}
           </Button>
+          {blankButton}
           {resetButton}
           {cancelButton}
           {backButton}
