@@ -9,7 +9,15 @@ const router = express.Router();
 router
   .route('/')
   .get(hasPermission('usuario_index'), userCtrl.list)
-  .post(hasPermission('usuario_new'), validate(paramValidation.createUser), userCtrl.create);
+  .post(
+    hasPermission('usuario_new'),
+    validate(paramValidation.createUser),
+    userCtrl.create
+  );
+
+router
+  .route('/emailExists')
+  .get(validate(paramValidation.checkEmail), userCtrl.checkEmail);
 
 router
   .route('/:userId')
