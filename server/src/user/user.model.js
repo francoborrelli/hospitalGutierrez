@@ -96,6 +96,7 @@ UserSchema.statics = {
 
   list({ skip = 0, limit = 50 } = {}) {
     return this.find()
+      .populate({ path: 'roles', select: 'name' })
       .sort({ createdAt: -1 })
       .skip(+skip)
       .limit(+limit)
