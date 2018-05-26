@@ -46,28 +46,37 @@ class UserList extends Component {
     this.setState(prevState => ({users: prevState.allUsers}))
   }
 
-  deleteUserHandler = async user => {
+  changeUserStatusHandler = async user => {
     this.setState({loading: true});
     try {
       await axios.patch(`/users/${user.key}`, {active: false});
       const name = user.name + ' ' + user.lastname;
-      message.success('Se eliminó a ' + name + ' correctamente.');
+      let status;
       this.setState(prevState => {
         const newUsers = [];
         prevState
           .users
           .forEach(u => {
             if (u._id === user.key) {
+              status = !u.active
               newUsers.push({
                 ...u,
-                active: false
+                active: status
               });
             } else {
               newUsers.push(u);
             }
           });
-        return {users: newUsers, loading: false};
-      });
+        const allUsers = prevState
+          .allUsers
+          .map(obj => newUsers.find(o => o._id === obj._id) || obj);
+        return {allUsers: allUsers, users: newUsers, loading: false};
+      })
+      if (status) {
+        message.success('Se activó a ' + name + ' correctamente.');
+      } else {
+        message.success('Se bloquéo a ' + name + ' correctamente.');
+      };
     } catch (error) {
       message.error('Algo falló. Intentá nuevamente.');
       this.setState({loading: false});
@@ -89,7 +98,7 @@ class UserList extends Component {
             <Table
               loading={this.state.loading}
               permissions={this.props.user.permissions}
-              onDelete={this.deleteUserHandler}
+              onDelete={this.changeUserStatusHandler}
               data={this.state.users}
               user={this.props.user}
               addPath={this

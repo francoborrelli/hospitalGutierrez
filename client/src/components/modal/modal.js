@@ -10,9 +10,9 @@ const confirmationModal = (content, onOk) =>
     onOk: onOk
   })
 
-const deleteModal = (type, record, onOk) => {
+const deleteModal = (type, record, onOk, action) => {
   const content =
-    "Estas a punto de eliminar al " +
+    "Estas a punto de " + (action || "eliminar")  + " al " +
     type +
     " " +
     record.name +
