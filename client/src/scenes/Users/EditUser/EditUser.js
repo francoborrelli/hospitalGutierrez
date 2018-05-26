@@ -8,6 +8,7 @@ import PersonalForm from './components/personalInfoForm';
 import RolesForm from './components/rolesForm';
 import PasswordForm from './components/passwordForm';
 import hasPermission from '../../../hoc/hasPermission';
+import { withRouter } from 'react-router-dom';
 
 class EditUser extends Component {
   state = {
@@ -51,6 +52,7 @@ class EditUser extends Component {
         }))
       });
     } catch (error) {
+      console.log(error);
       message.error('Ocurrió un error');
     }
   };
@@ -123,4 +125,6 @@ class EditUser extends Component {
   };
 }
 
-export default hasPermission(EditUser, ['usuario_index', 'usuario_update']);
+export default withRouter(
+  hasPermission(EditUser, ['usuario_index', 'usuario_update'])
+);
