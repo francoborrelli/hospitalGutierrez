@@ -4,6 +4,7 @@ import Row from '../../../components/grid/row';
 import Section from "../../../components/header/sectionHeader/sectionHeader"
 import SearchForm from "./components/searchForm"
 import Table from "./components/table"
+import hasPermission from '../../../hoc/hasPermission';
 
 
 class UserList extends Component {
@@ -65,4 +66,4 @@ class UserList extends Component {
   }
 }
 
-export default UserList
+export default hasPermission(UserList, ["usuario_index"])

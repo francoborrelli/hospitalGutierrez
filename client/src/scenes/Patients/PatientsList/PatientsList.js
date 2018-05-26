@@ -4,7 +4,7 @@ import Row from "../../../components/grid/row";
 import Section from "../../../components/header/sectionHeader/sectionHeader"
 import SearchForm from "./components/searchForm"
 import Table from "./components/table"
-
+import hasPermission from "../../../hoc/hasPermission"
 import axios from "../../../axios-apiReferences"
 
 class PatientsList extends Component {
@@ -49,7 +49,9 @@ class PatientsList extends Component {
     return (
       <Section title="pacientes">
         <Row>
-          <Col xl={7} style={{paddingBottom: 10}}>
+          <Col xl={7} style={{
+            paddingBottom: 10
+          }}>
             <SearchForm
               loading={this.state.searching}
               documentTypes={this.state.documentTypes}
@@ -68,4 +70,4 @@ class PatientsList extends Component {
   }
 }
 
-export default PatientsList
+export default hasPermission(PatientsList, ["paciente_index"])

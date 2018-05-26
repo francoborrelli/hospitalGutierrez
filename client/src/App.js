@@ -27,9 +27,7 @@ class App extends Component {
   componentDidMount() {
     this
       .props
-      .checkAuth();
-
-    this.props.checkAuth()
+      .checkAuth()
   }
 
   checkPath() {
@@ -48,13 +46,26 @@ class App extends Component {
       <Layout>
         {this.checkPath()}
         <Switch>
-          <Route path="/login" component={LoginPage}/>
+
           <Route path="/patient/:patientId(\d+)" component={PatientPage}/>
           <Route path="/patients/add" exact component={AddPatientPage}/>
-          <Route path="/patients" exact component={PatientsListPage}/>
+          <Route
+            path="/patients"
+            exact
+            render={() => < PatientsListPage user = {
+            this.props.user
+          } />}/>
+
           <Route path="/user/:userId(\d+)/edit" exact component={EditUserPage}/>
           <Route path="/users/add" exact component={AddUserPage}/>
-          <Route path="/users" exact component={UsersListPage}/>
+
+          <Route
+            path="/users"
+            exact
+            render={() => < UsersListPage user = {
+            this.props.user
+          } />}/>
+
           <Route path="/settings" exact component={ConfigurationPage}/>
           <Route path="/reports" exact component={ReportsPage}/>
           <Route path="/" exact component={HomePage}/>
@@ -65,7 +76,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({loggedIn: state.auth.jwt});
+const mapStateToProps = state => ({loggedIn: state.auth.jwt, user: state.auth.user});
 
 const mapDispatchToProps = dispatch => ({
   checkAuth: () => dispatch(actions.checkAuth())
