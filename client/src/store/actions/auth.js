@@ -7,6 +7,7 @@ const authStart = () => ({
 });
 
 export const authSuccess = jwt => {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
   const user = jwtDecode(jwt);
   return {
     type: types.AUTH_SUCCESS,
@@ -31,7 +32,6 @@ export const login = (email, password) => {
       const response = await axios.post('/auth/login', { email, password });
       const token = response.data.token;
       localStorage.setItem('token', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       dispatch(recentLogin());
       dispatch(authSuccess(response.data.token));
     } catch (error) {
