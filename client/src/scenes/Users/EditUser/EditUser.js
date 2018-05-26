@@ -87,7 +87,6 @@ class EditUser extends Component {
 
   passwordHandler = async data => {
     this.setState({ passwordRequest: true });
-    console.log(data);
     try {
       await axios.patch(`/users/${this.props.match.params.userId}`, {
         password: data.password

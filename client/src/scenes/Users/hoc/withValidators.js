@@ -2,30 +2,18 @@ import React from 'react';
 import axios from '../../../axios-api';
 
 const withValidators = WrappedComponent => {
-  const emailValidator = async (form, rule, email, callback) => {
-    const response = await axios.get('/users/emailExists', {
-      params: { email }
-    });
-    if (response.data) {
-      callback('El email ya se encuentra registrado en el sistema');
+  const emailValidator = async (form, rule, email, callback, defaultValues) => {
+    if (defaultValues && defaultValues.email === email) {
+      callback();
+    } else {
+      const response = await axios.get('/users/emailExists', {
+        params: { email }
+      });
+      if (response.data) {
+        callback('El email ya se encuentra registrado en el sistema');
+      }
+      callback();
     }
-    callback();
-  };
-
-  const usernameValidator = (form, rule, username, callback) => {
-    return new Promise((resolve, reject) => {
-      //Change Timeout for request
-      setTimeout(resolve, 1000);
-    })
-      .then(() => {
-        if (username === 'franco') {
-          callback(
-            'El nombre de usuario ya se encuentra registrado en el sistema'
-          );
-        }
-        callback();
-      })
-      .catch();
   };
 
   const compareToFirstPassword = (form, rule, value, callback) => {
@@ -46,8 +34,9 @@ const withValidators = WrappedComponent => {
 
   return props => (
     <WrappedComponent
-      emailValidator={emailValidator}
-      usernameValidator={usernameValidator}
+      emailValidator={(form, rule, email, callback) =>
+        emailValidator(form, rule, email, callback, props.defaultValues)
+      }
       compareToFirstPassword={compareToFirstPassword}
       revalidate={revalidate}
       {...props}

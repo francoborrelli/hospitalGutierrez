@@ -30,7 +30,6 @@ class AddUser extends Component {
   addHandler = async data => {
     this.setState({ loading: true });
     try {
-      console.log(data);
       const response = await axios.post('users', {
         username: data.username,
         firstName: data.name,
@@ -45,9 +44,8 @@ class AddUser extends Component {
       );
       this.redirect();
     } catch (error) {
-      console.log(error.response);
       this.setState({ loading: false });
-      message.success('Ocurrió un error');
+      message.error('Ocurrió un error');
     }
   };
 
@@ -85,4 +83,4 @@ class AddUser extends Component {
   }
 }
 
-export default hasPermission(AddUser, ["usuario_index", "usuario_new"]);
+export default hasPermission(AddUser, ['usuario_index', 'usuario_new']);

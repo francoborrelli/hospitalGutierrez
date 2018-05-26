@@ -13,7 +13,6 @@ const arrayContainsArray = function (superset, subset) {
 const hasPermission = (WrappedObject, requiredPermissions) => {
   return props => {
     const permissions = props.user.permissions
-    console.log(permissions)
     return arrayContainsArray(permissions, requiredPermissions)
       ? <WrappedObject {...props}/>
       : <Error/>
