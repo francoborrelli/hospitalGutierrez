@@ -29,7 +29,9 @@ export const login = (email, password) => {
     dispatch(authStart());
     try {
       const response = await axios.post('/auth/login', { email, password });
-      localStorage.setItem('token', response.data.token);
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       dispatch(recentLogin());
       dispatch(authSuccess(response.data.token));
     } catch (error) {
