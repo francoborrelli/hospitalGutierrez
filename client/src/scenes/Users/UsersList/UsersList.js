@@ -74,6 +74,7 @@ class UserList extends Component {
               permissions={this.props.user.permissions}
               onDelete={this.deleteUserHandler}
               data={this.state.users}
+              user={this.props.user}
               addPath={
                 this.props.user.permissions.includes('usuario_new')
                   ? '/users/add'
