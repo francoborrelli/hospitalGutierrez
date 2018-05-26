@@ -4,6 +4,7 @@ import { Card, message } from 'antd';
 import axios from '../../../axios-api';
 import Section from '../../../components/header/sectionHeader/sectionHeader';
 import PersonalForm from './components/form';
+import hasPermission from '../../../hoc/hasPermission';
 
 class AddUser extends Component {
   state = {
@@ -84,4 +85,4 @@ class AddUser extends Component {
   }
 }
 
-export default AddUser;
+export default hasPermission(AddUser, ["usuario_index", "usuario_new"]);

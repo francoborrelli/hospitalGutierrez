@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Row, Col, message } from 'antd';
 import RowGutter from '../../../components/grid/row';
+
+import axios from '../../../axios-api';
 import Section from '../../../components/header/sectionHeader/sectionHeader';
 import PersonalForm from './components/personalInfoForm';
 import RolesForm from './components/rolesForm';
 import PasswordForm from './components/passwordForm';
-
-import axios from '../../../axios-api';
+import hasPermission from '../../../hoc/hasPermission';
 
 class EditUser extends Component {
   state = {
@@ -122,4 +123,4 @@ class EditUser extends Component {
   };
 }
 
-export default EditUser;
+export default hasPermission(EditUser, ['usuario_index', 'usuario_update']);
