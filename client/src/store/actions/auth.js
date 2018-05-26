@@ -6,7 +6,7 @@ const authStart = () => ({
   type: types.AUTH_START
 });
 
-const authSuccess = jwt => {
+export const authSuccess = jwt => {
   const user = jwtDecode(jwt);
   return {
     type: types.AUTH_SUCCESS,
@@ -53,12 +53,14 @@ export const logout = () => {
 
 // TODO: expiration date
 export const checkAuth = () => {
-  return dispatch => {
+  return async dispatch => {
     const token = localStorage.getItem('token');
     if (!token) {
       dispatch(logout());
     } else {
-      dispatch(authSuccess(token));
+      const response = await axios.post(`/auth/newToken`);
+      localStorage.setItem('token', response.data.token);
+      dispatch(authSuccess(response.data.token));
     }
   };
 };
