@@ -78,7 +78,7 @@ const tableUsers = props => {
   return (
     <Card extra={extra}>
       <Table
-        columns={columns}
+              columns={columns}
         dataSource={data}
         loading={props.loading}
         scroll={{
