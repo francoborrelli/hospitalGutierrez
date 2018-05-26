@@ -14,7 +14,7 @@ class BaseForm extends Component {
     initialState: {}
   }
 
-  componentDidMount = () => {
+  setDefaultState = () => {
     this
       .props
       .form
@@ -27,9 +27,19 @@ class BaseForm extends Component {
     })
   }
 
+  componentDidMount = () => {
+    this.setDefaultState()
+  }
+
   componentDidUpdate = (prevProps, prevState) => {
-    if (prevProps.defaultValues !== this.props.defaultValues){
-      this.componentDidMount()
+    if (prevProps.defaultValues !== this.props.defaultValues) {
+      this.setDefaultState()
+      this.setState({
+        initialState: this
+          .props
+          .form
+          .getFieldsValue()
+      })
     }
     if (prevProps.fields !== this.props.fields && this.props.track) {
       const keys = this.props.track
