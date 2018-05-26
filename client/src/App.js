@@ -39,14 +39,10 @@ class App extends Component {
         {this.checkPath()}
         <Switch>
           <Route path="/login" component={LoginPage} />
-          <Route path="/patient/:patientId(\d+)" component={PatientPage} />
+          <Route path="/patient/:patientId" component={PatientPage} />
           <Route path="/patients/add" exact component={AddPatientPage} />
           <Route path="/patients" exact component={PatientsListPage} />
-          <Route
-            path="/user/:userId(\d+)/edit"
-            exact
-            component={EditUserPage}
-          />
+          <Route path="/user/:userId/edit" exact component={EditUserPage} />
           <Route path="/users/add" exact component={AddUserPage} />
           <Route path="/users" exact component={UsersListPage} />
           <Route path="/settings" exact component={ConfigurationPage} />
