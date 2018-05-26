@@ -4,7 +4,7 @@ import Row from '../../../components/grid/row';
 import Section from '../../../components/header/sectionHeader/sectionHeader';
 import SearchForm from './components/searchForm';
 import Table from './components/table';
-
+import hasPermission from '../../../hoc/hasPermission';
 import axios from '../../../axios-api';
 
 class UserList extends Component {
@@ -72,8 +72,12 @@ class UserList extends Component {
             <Table
               loading={this.state.loading}
               onDelete={this.deleteUserHandler}
-              addPath="/users/add"
               data={this.state.users}
+              addPath={
+                this.props.user.permissions.includes('usuario_new')
+                  ? '/users/add'
+                  : null
+              }
             />
           </Col>
         </Row>
@@ -82,4 +86,4 @@ class UserList extends Component {
   }
 }
 
-export default UserList;
+export default hasPermission(UserList, ['usuario_index']);

@@ -62,13 +62,13 @@ const tableUsers = props => {
     }
   ];
 
-  const extra = (
+  const extra = props.addPath ? (
     <Link to={props.addPath}>
       <Button onClick={props.onAdd}>
         <Icon type="user-add" />Agregar
       </Button>
     </Link>
-  );
+  ) : null;
 
   return (
     <Card extra={extra}>
@@ -76,7 +76,9 @@ const tableUsers = props => {
         columns={columns}
         dataSource={data}
         loading={props.loading}
-        scroll={{ x: 950 }}
+        scroll={{
+          x: 950
+        }}
       />
     </Card>
   );

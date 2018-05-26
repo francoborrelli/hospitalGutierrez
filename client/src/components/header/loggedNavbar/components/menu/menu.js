@@ -7,7 +7,7 @@ const menu = props => (
     style={{
       lineHeight: '64px',
       position: 'fixed',
-      right: 20,
+      right: 30,
       top: 2,
       color: '#969696'
     }}
