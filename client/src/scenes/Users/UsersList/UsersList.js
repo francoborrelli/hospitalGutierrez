@@ -31,18 +31,30 @@ class UserList extends Component {
     this.setState({ searching: false });
   };
 
-  deleteUserHandler = user => {
-    return new Promise((resolve, reject) => {
-      //Change Timeout for delelte request
-      setTimeout(Math.random() > 0.3 ? resolve : reject, 1000);
-    })
-      .then(() => {
-        this.setState({ loading: true });
-        const name = user.name + ' ' + user.lastname;
-        message.success('Se eliminó a ' + name + ' correctamente.');
-        this.setState({ loading: false });
-      })
-      .catch(() => message.error('Algo falló. Intentá nuevamente.'));
+  deleteUserHandler = async user => {
+    this.setState({ loading: true });
+    try {
+      await axios.patch(`/users/${user.key}`, { active: false });
+      const name = user.name + ' ' + user.lastname;
+      message.success('Se eliminó a ' + name + ' correctamente.');
+      this.setState(prevState => {
+        const newUsers = [];
+        prevState.users.forEach(u => {
+          if (u._id === user.key) {
+            newUsers.push({ ...u, active: false });
+          } else {
+            newUsers.push(u);
+          }
+        });
+        return {
+          users: newUsers,
+          loading: false
+        };
+      });
+    } catch (error) {
+      message.error('Algo falló. Intentá nuevamente.');
+      this.setState({ loading: false });
+    }
   };
 
   render() {
