@@ -157,7 +157,7 @@ async function removeRole(req, res, next) {
 
 async function checkEmail(req, res, next) {
   const user = await User.findByEmail(req.query.email);
-  res.send(user !== null);
+  res.json(user !== null);
 }
 
 module.exports = {
