@@ -7,10 +7,6 @@ import {Link} from 'react-router-dom';
 const Item = Menu.Item
 const Divider = Menu.Divider
 
-const menu = (record, onOk) => {
-  return
-}
-
 const dropdown = props => {
   const menu = props.record.status === "Activo"
     ? (
