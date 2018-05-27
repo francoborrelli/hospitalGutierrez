@@ -12,4 +12,4 @@ if (jwt) {
   instance.defaults.headers['Authorization'] = `Bearer ${jwt}`;
 }
 
-export default instance;
+export default instance

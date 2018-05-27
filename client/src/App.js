@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
+import {withRouter, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import LoggedLayout from './scenes/App/logged';
@@ -17,9 +17,8 @@ class App extends Component {
   }
 
   render() {
-    {
       this.checkPath()
-    }
+
     if (this.props.appLoading) {
       return <Spinner/>
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {message} from "antd"
 import axios from '../axios-apiReferences';
 
 const withApiRefData = () => {
@@ -39,7 +39,9 @@ const withApiRefData = () => {
               }
             )
           )
-          .catch();
+          .catch(
+            message.error("Ha ocurrido un error. Intenta nuevamente")
+          )
       }
 
       render() {

@@ -27,22 +27,22 @@ const tableUsers = props => {
       title: 'Nombre',
       dataIndex: 'name',
       key: 'name',
-      sorter: (a, b) => a.name < b.name
+      sorter: (a, b) => a.name.toUpperCase() < b.name.toUpperCase()
     }, {
       title: 'Apellido',
       dataIndex: 'lastname',
       key: 'lastname',
-      sorter: (a, b) => a.lastname < b.lastname
+      sorter: (a, b) => a.lastname.toUpperCase() < b.lastname.toUpperCase()
     }, {
       title: 'Nombre de Usuario',
       dataIndex: 'username',
       key: 'username',
-      sorter: (a, b) => a.username < b.username
+      sorter: (a, b) => a.username.toUpperCase() < b.username.toUpperCase()
     }, {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      sorter: (a, b) => a.email < b.email
+      sorter: (a, b) => a.email.toUpperCase() < b.email.toUpperCase()
     }, {
       title: 'Roles',
       dataIndex: 'role',

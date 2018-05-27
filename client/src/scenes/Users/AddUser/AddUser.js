@@ -31,7 +31,7 @@ class AddUser extends Component {
   addHandler = async data => {
     this.setState({ loading: true });
     try {
-      const response = await axios.post('users', {
+      await axios.post('users', {
         username: data.username,
         firstName: data.name,
         lastName: data.lastname,
