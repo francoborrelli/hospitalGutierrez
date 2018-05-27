@@ -10,9 +10,14 @@ function getAuthError() {
   return new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
 }
 
+function getBlockedError() {
+  return new APIError('Blocked user', httpStatus.FORBIDDEN, true);
+}
+
 async function login(req, res, next) {
   const user = await User.findByEmail(req.body.email);
   if (!user) return next(getAuthError());
+  if (!user.active) return next(getBlockedError());
   const match = await bcrypt.compare(req.body.password, user.password);
   const permissions = user.getPermissions();
 

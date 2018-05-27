@@ -23,9 +23,7 @@ const store = createStore(
 store.dispatch(actions.checkAuth());
 
 axios.interceptors.response.use(
-  response => {
-    return response;
-  },
+  response => response,
   error => {
     if (error.response.status === 401) {
       if (error.response.data.newToken) {
@@ -33,8 +31,8 @@ axios.interceptors.response.use(
         localStorage.setItem('token', token);
         store.dispatch(actions.authSuccess(token));
       }
-      return Promise.reject(error);
     }
+    return Promise.reject(error);
   }
 );
 

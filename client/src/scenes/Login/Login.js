@@ -8,13 +8,17 @@ import * as actions from '../../store/actions';
 
 const styles = {
   maxWidth: 350,
-  margin: '130px auto 0px',
+  margin: '130px auto 0px'
 };
 
 class Login extends Component {
   componentDidUpdate() {
     if (this.props.error) {
-      message.error('El email y/o contraseña incorrectos', 3);
+      if (this.props.error.status === 403) {
+        message.error('Su usuario se encuentra bloqueado', 3);
+      } else {
+        message.error('El email y/o contraseña incorrectos', 3);
+      }
     }
   }
 
