@@ -31,6 +31,8 @@ axios.interceptors.response.use(
         localStorage.setItem('token', token);
         store.dispatch(actions.authSuccess(token));
       }
+    } else if (error.response.status === 403 && error.response.data.blocked) {
+      store.dispatch(actions.logout());
     }
     return Promise.reject(error);
   }

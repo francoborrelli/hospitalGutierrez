@@ -11,6 +11,10 @@ module.exports = permission => {
       path: 'roles',
       populate: { path: 'permissions', model: 'Permission' }
     });
+    if (!user.active) {
+      res.status(403);
+      return res.json({ blocked: true });
+    }
     const permissions = user.getPermissions();
     if (permissions.length !== req.user.permissions.length) {
       res.status(401);
