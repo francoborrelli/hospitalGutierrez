@@ -1,11 +1,8 @@
-import axios from "axios"
-
-const path = "https://api-referencias.proyecto2017.linti.unlp.edu.ar/"
+import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: path,
+  baseURL: 'https://api-referencias.proyecto2017.linti.unlp.edu.ar/',
+  headers: {}
 });
 
-export default instance
-
-export {path}
+export default instance;

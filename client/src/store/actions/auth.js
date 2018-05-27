@@ -7,7 +7,7 @@ const authStart = () => ({
 });
 
 export const authSuccess = jwt => {
-  axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
+  axios.defaults.headers['Authorization'] = `Bearer ${jwt}`;
   const user = jwtDecode(jwt);
   return {
     type: types.AUTH_SUCCESS,

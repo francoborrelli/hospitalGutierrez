@@ -1,23 +1,22 @@
-import React, { Component } from "react"
+import React, { Component } from 'react';
 
-import axios from "axios"
-import { path } from "../axios-apiReferences"
+import axios from '../axios-apiReferences';
 
 const withApiRefData = () => {
   return function(WrappedComponent) {
     class PatientReferenceData extends Component {
       state = {
         apiData: {}
-      }
+      };
 
       componentDidMount() {
         axios
           .all([
-            axios.get(path + "tipo-documento"),
-            axios.get(path + "obra-social"),
-            axios.get(path + "tipo-vivienda"),
-            axios.get(path + "tipo-agua"),
-            axios.get(path + "tipo-calefaccion")
+            axios.get('/tipo-documento'),
+            axios.get('/obra-social'),
+            axios.get('/tipo-vivienda'),
+            axios.get('/tipo-agua'),
+            axios.get('/tipo-calefaccion')
           ])
           .then(
             axios.spread(
@@ -36,19 +35,21 @@ const withApiRefData = () => {
                     waterTypes: waterTypes.data,
                     heatingTypes: heatingTypes.data
                   }
-                })
+                });
               }
             )
           )
-          .catch()
+          .catch();
       }
 
       render() {
-        return <WrappedComponent {...this.props} apiData={this.state.apiData} />
+        return (
+          <WrappedComponent {...this.props} apiData={this.state.apiData} />
+        );
       }
     }
-    return PatientReferenceData
-  }
-}
+    return PatientReferenceData;
+  };
+};
 
-export default withApiRefData
+export default withApiRefData;
