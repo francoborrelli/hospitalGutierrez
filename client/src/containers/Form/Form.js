@@ -65,7 +65,7 @@ class BaseForm extends Component {
           this
             .props
             .submitted(values)
-          if (!this.props.goBlank) {
+          if (!this.props.mantainDefault) {
             this.setState({initialState: values})
           }
         }
