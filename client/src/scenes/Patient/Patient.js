@@ -86,7 +86,11 @@ class PatientPage extends Component {
           .props
           .user
           .permissions
-          .includes('paciente_update')
+          .includes('paciente_update') || this
+          .props
+          .user
+          .permissions
+          .includes('datosDemograficos_update')
         case url === (this.props.match.url + '/addRecord'):
         return this
           .props

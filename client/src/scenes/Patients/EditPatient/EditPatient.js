@@ -7,33 +7,46 @@ import DemographicForm from "../components/demographicForm"
 import PersonalForm from "../components/personalForm"
 
 import withApiRefData from "../../../hoc/withApiRefData"
-import hasPermission from '../../../hoc/hasPermission';
 
-const editPatient = props => (
-  <Row>
-    <Col lg={12} style={{
-      marginBottom: 10
-    }}>
-      <Card title="Datos Personales">
-        <PersonalForm
-          reset
-          data={props.apiData}
-          submitted={props.personalDataSumitted}
-          patient={props.patient}
-          loading={props.loadingPersonal}/>
-      </Card>
-    </Col>
-    <Col lg={12}>
-      <Card title="Datos Demográficos">
-        <DemographicForm
-          reset
-          data={props.apiData}
-          patient={props.patient}
-          loading={props.loadingDemographic}
-          submitted={props.demographicDataSumitted}/>
-      </Card>
-    </Col>
-  </Row>
-)
+const editPatient = props => {
 
-export default withRouter(hasPermission(withApiRefData()(editPatient), ['paciente_update']))
+  const PdPermission = props.user.permissions.includes('paciente_update')
+  const DmPermission = props.user.permissions.includes('datosDemograficos_update')
+
+  const editPersonal = PdPermission
+    ? (
+      <Col lg={12} style={{marginBottom: 10}}>
+        <Card title="Datos Personales">
+          <PersonalForm
+            reset
+            data={props.apiData}
+            submitted={props.personalDataSumitted}
+            patient={props.patient}
+            loading={props.loadingPersonal}/>
+        </Card>
+      </Col>
+    )
+    : null
+
+  const editDemographic = DmPermission
+    ? <Col lg={12}>
+        <Card title="Datos Demográficos">
+          <DemographicForm
+            reset
+            data={props.apiData}
+            patient={props.patient}
+            loading={props.loadingDemographic}
+            submitted={props.demographicDataSumitted}/>
+        </Card>
+      </Col>
+    : null
+
+  return (
+    <Row justify={!DmPermission || !PdPermission } >
+      {editPersonal}
+      {editDemographic}
+    </Row>
+  )
+}
+
+export default withRouter(withApiRefData()(editPatient))
