@@ -12,8 +12,38 @@ class PatientsList extends Component {
   state = {
     loading: true,
     searching: false,
+    filtered: false,
     documentTypes: [],
-    data: []
+    patients: [
+      {
+        _id: "1",
+        firstName: "Franco",
+        lastName: "Borrelli",
+        documentType: "1",
+        documentNumber: 32
+      }, {
+        _id: "2",
+        firstName: "Pedro",
+        lastName: "Brost",
+        documentType: "2",
+        documentNumber: 3223423432
+      }
+    ],
+    allPatients: [
+      {
+        _id: "1",
+        firstName: "Franco",
+        lastName: "Borrelli",
+        documentType: "1",
+        documentNumber: "32"
+      }, {
+        _id: "2",
+        firstName: "Pedro",
+        lastName: "Brost",
+        documentType: "2",
+        documentNumber: "3223423432"
+      }
+    ]
   }
 
   componentDidMount = () => {
@@ -26,10 +56,27 @@ class PatientsList extends Component {
 
   searchHandler = data => {
     this.setState({searching: true})
+    let patients = this.state.allPatients
 
-    //Search Request
+    if (data.name) {
+      patients = patients.filter(patient => patient.firstName.toLowerCase().includes(data.name.toLowerCase()));
+    }
+    if (data.lastname) {
+      patients = patients.filter(patient => patient.lastName.toLowerCase().includes(data.lastname.toLowerCase()));
+    }
+    if (data.documentNumber) {
+      patients = patients.filter(patient => patient.documentNumber.toLowerCase().includes(data.documentNumber.toLowerCase()));
+    }
+    if (data.documentType) {
+      patients = patients.filter(patient => patient.documentType === data.documentType);
+    }
 
-    this.setState({searching: true})
+    let filtered = this.state.allPatients.length !== patients.length
+    this.setState({searching: false, patients: patients, filtered: filtered})
+  }
+
+  resetHandler = () => {
+    this.setState(prevState => ({patients: prevState.allPatients, filtered: false}))
   }
 
   deletePatientHandler = patient => {
@@ -54,6 +101,10 @@ class PatientsList extends Component {
             paddingBottom: 10
           }}>
             <SearchForm
+              mantainDefault
+              goBlank={this.state.filtered
+              ? this.resetHandler
+              : null}
               loading={this.state.searching}
               documentTypes={this.state.documentTypes}
               submitted={this.searchHandler}/>
@@ -61,6 +112,7 @@ class PatientsList extends Component {
           <Col xl={18}>
             <Table
               loading={this.state.loading}
+              data={this.state.patients}
               user={this.props.user}
               onDelete={this.deletePatientHandler}
               documentTypes={this.state.documentTypes}

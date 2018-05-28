@@ -4,35 +4,17 @@ import {Link} from "react-router-dom"
 import Dropdown from "./dropdown"
 import Table from '../../../../components/table/table';
 
-const data = [
-  {
-    key: "1",
-    name: "Franco",
-    lastname: "Borrelli",
-    documentType: "1",
-    documentNumber: 32
-  }, {
-    key: "2",
-    name: "Pedro",
-    lastname: "Brost",
-    documentType: "2",
-    documentNumber: 3223423432
-  }, {
-    key: "3",
-    name: "Juan",
-    lastname: "Perez",
-    documentType: "1",
-    documentNumber: 397872
-  }, {
-    key: "4",
-    name: "John",
-    lastname: "Garcia",
-    documentType: "3",
-    documentNumber: 41243
-  }
-]
-
 const tablePatients = props => {
+
+  const data = props
+    .data
+    .map(patient => ({
+      key: patient._id,
+      name: patient.firstName,
+      lastname: patient.lastName,
+      documentType: patient.documentType,
+      documentNumber: patient.documentNumber
+    }));
 
   const documentTypes = []
   Object
@@ -55,7 +37,7 @@ const tablePatients = props => {
     }, {
       title: "Tipo Doc.",
       dataIndex: "documentType",
-      render: (text, row, col) => <span>{documentTypes[text]}</span>
+      render: (text, row, col) => <span>{documentTypes[text]}</span>,
     }, {
       title: "Nº Doc.",
       dataIndex: "documentNumber",
