@@ -1,15 +1,19 @@
 import React from "react"
 import {Card, Col} from "antd"
+import {withRouter} from 'react-router-dom';
 
 import Row from '../../../components/grid/row';
 import DemographicForm from "../components/demographicForm"
 import PersonalForm from "../components/personalForm"
 
 import withApiRefData from "../../../hoc/withApiRefData"
+import hasPermission from '../../../hoc/hasPermission';
 
 const editPatient = props => (
   <Row>
-    <Col lg={12} style={{marginBottom: 10}}>
+    <Col lg={12} style={{
+      marginBottom: 10
+    }}>
       <Card title="Datos Personales">
         <PersonalForm
           reset
@@ -32,4 +36,4 @@ const editPatient = props => (
   </Row>
 )
 
-export default withApiRefData()(editPatient)
+export default withRouter(hasPermission(withApiRefData()(editPatient), ['paciente_update']))

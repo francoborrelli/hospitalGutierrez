@@ -9,25 +9,44 @@ const Item = Menu.Item
 const Divider = Menu.Divider
 
 const dropdown = props => {
-  const menu = () => {
-    return (
+  const edit = props
+    .user
+    .permissions
+    .includes('paciente_update')
+    ? <Item key="0">
+        <Link to={props.match.url + "/edit"}>
+          Editar Datos
+        </Link>
+      </Item>
+    : null
+
+  const destroy = props
+    .user
+    .permissions
+    .includes('paciente_destroy')
+    ? <Item key="1">
+        <a
+          onClick={() => Modal("paciente", props.patient, () => props.onDelete(props.patient))}>
+          Eliminar Paciente
+        </a>
+      </Item>
+    : null
+
+  const menu = edit || destroy
+    ? (
       <Menu>
-        <Item key="0">
-          <Link to={props.match.url + "/edit"}>
-            Editar Datos
-          </Link>
-        </Item>
-        <Divider/>
-        <Item key="1">
-          <a onClick={() => Modal("paciente", props.patient, () => props.onDelete(props.patient))}>
-            Eliminar Paciente
-          </a>
-        </Item>
+        {edit}
+        {edit && destroy
+          ? <Divider/>
+          : null}
+        {destroy}
       </Menu>
     )
-  }
+    : null
 
-  return (<Dropdown menu={menu(props.patient, props.onDelete)}/>)
+return (menu
+  ? <Dropdown menu={menu}/>
+  : null)
 }
 
 export default withRouter(dropdown)
