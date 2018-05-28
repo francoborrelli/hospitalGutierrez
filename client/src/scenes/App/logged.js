@@ -20,7 +20,6 @@ export default props => (
     <Switch>
       <Route
         path="/patient/:patientId"
-        exact
         render={() => <PatientPage user={props.user} />}
       />
       <Route

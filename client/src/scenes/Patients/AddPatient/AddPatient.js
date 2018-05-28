@@ -1,5 +1,6 @@
-import React, { Component } from "react"
-import { message } from "antd"
+import React, {Component} from "react"
+import {message} from "antd"
+import {withRouter} from 'react-router-dom';
 
 import Card from "../../../components/card/card"
 import Section from "../../../components/header/sectionHeader/sectionHeader"
@@ -8,15 +9,14 @@ import DemographicForm from "../components/demographicForm"
 import PersonalForm from "../components/personalForm"
 
 import withApiRefData from "../../../hoc/withApiRefData"
-
-import { withRouter } from 'react-router-dom';
+import hasPermission from '../../../hoc/hasPermission';
 
 class AddPatient extends Component {
   state = {
     loading: false,
     current: 0,
     personalData: [],
-    demographicData: [],
+    demographicData: []
   }
 
   nextStep = () => {
@@ -33,70 +33,75 @@ class AddPatient extends Component {
   }
 
   redirect = () => {
-    this.props.history.push("/patients")
+    this
+      .props
+      .history
+      .push("/patients")
   }
 
   personalDataSubmitHandler = data => {
-    this.setState({ personalData: data })
+    this.setState({personalData: data})
     this.nextStep()
   }
 
   demographicDataSubmitHandler = data => {
-    const result = { ...data, ...this.state.personalData }
+    const result = {
+      ...data,
+      ...this.state.personalData
+    }
     this.addHandler(result)
   }
 
   addHandler = data => {
-    this.setState({ loading: true })
+    this.setState({loading: true})
     //request
-    this.setState({ loading: false })
+    this.setState({loading: false})
     this.redirect()
-    message.success(
-      "Se agregó a " + data.name + " " + data.lastname + " correctamente."
-    )
+    message.success("Se agregó a " + data.name + " " + data.lastname + " correctamente.")
   }
 
   render() {
     const steps = [
       {
         title: "Datos Personales",
-        content: (
-          <PersonalForm
-            onCancel={this.redirect}
-            submitted={this.personalDataSubmitHandler}
-            data={this.props.apiData}
-            patient={this.state.personalData}
-            loading={false}
-            btnText="Continuar"
-          />
-        )
-      },
-      {
+        content: (<PersonalForm
+          onCancel={this.redirect}
+          submitted={this.personalDataSubmitHandler}
+          data={this.props.apiData}
+          patient={this.state.personalData}
+          loading={false}
+          btnText="Continuar"/>)
+      }, {
         title: "Datos Demográficos",
-        content: (
-          <DemographicForm
-            submitted={this.demographicDataSubmitHandler}
-            data={this.props.apiData}
-            patient={this.state.demographicData}
-            prevStep={this.prevStepHandler}
-            loading={this.state.loading}
-          />
-        )
+        content: (<DemographicForm
+          submitted={this.demographicDataSubmitHandler}
+          data={this.props.apiData}
+          patient={this.state.demographicData}
+          prevStep={this.prevStepHandler}
+          loading={this.state.loading}/>)
       }
     ]
 
     return (
       <Section title="Agregar Paciente" goBackTo="/patients">
-      <div style={{margin: "0 10px"}}>
-        <Card style={{ maxWidth: 850, margin: "10px auto" }}>
-          <div className="container" style={{ maxWidth: 700 }}>
-            <Steps current={this.state.current} steps={steps} />
-          </div>
-        </Card>
+        <div style={{
+          margin: "0 10px"
+        }}>
+          <Card
+            style={{
+            maxWidth: 850,
+            margin: "10px auto"
+          }}>
+            <div className="container" style={{
+              maxWidth: 700
+            }}>
+              <Steps current={this.state.current} steps={steps}/>
+            </div>
+          </Card>
         </div>
       </Section>
     )
   }
 }
 
-export default withRouter(withApiRefData()(AddPatient))
+export default withRouter(hasPermission(withApiRefData()(AddPatient), ['paciente_new']))
