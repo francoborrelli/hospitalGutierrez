@@ -13,7 +13,7 @@ const row = props => {
 
   return (
 
-    <Row gutter={10} style={{padding: 10, ...justify}} {...props}>
+    <Row gutter={10} style={{padding: 10, ...justify}} {...props} justify="">
       {props.children}
     </Row>
   )
