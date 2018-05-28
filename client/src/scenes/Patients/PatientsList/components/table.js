@@ -60,22 +60,33 @@ const tablePatients = props => {
       title: "Nº Doc.",
       dataIndex: "documentNumber",
       key: "documentNumber"
-    }, {
+    }
+  ]
+
+  const includes = permission => {
+    return props.user.permissions.includes(permission)
+  }
+
+  if (includes('paciente_show') || includes('paciente_update') || includes('paciente_destroy')) {
+    columns.push({
       title: "Acciones",
       key: "action",
       align: "center",
       fixed: "right",
       width: 110,
-      render: (text, record) => (<Dropdown onDelete={props.onDelete} record={record}/>)
-    }
-  ]
+      render: (text, record) => (<Dropdown user={props.user} onDelete={props.onDelete} record={record}/>)
+    })
+  }
 
-
-  const extra = <Link to={props.addPath}>
-    <Button onClick={props.onAdd}>
-      <Icon type="user-add"/>Agregar
-    </Button>
-  </Link>
+  const extra = props.addPath && includes('paciente_new')
+    ? (
+      <Link to={props.addPath}>
+        <Button onClick={props.onAdd}>
+          <Icon type="user-add"/>Agregar
+        </Button>
+      </Link>
+    )
+    : null;
 
   return (
     <Card extra={extra}>
@@ -83,7 +94,9 @@ const tablePatients = props => {
         columns={columns}
         dataSource={data}
         loading={props.loading}
-        scroll={{x: 600}}/>
+        scroll={{
+        x: 600
+      }}/>
     </Card>
   )
 }

@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import {message} from 'antd';
-import {Route, Switch, Redirect} from "react-router-dom"
+import {Route, Switch, Redirect, withRouter} from "react-router-dom"
 import moment from "moment"
 import Section from "./components/patientHeader"
 import ProfilePage from "./Profile/Profile"
@@ -110,4 +110,4 @@ class PatientPage extends Component {
   }
 }
 
-export default PatientPage
+export default withRouter(PatientPage)

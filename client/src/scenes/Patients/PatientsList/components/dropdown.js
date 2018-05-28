@@ -1,36 +1,61 @@
 import React from "react"
-import { Menu } from "antd"
+import {Menu} from "antd"
 import Dropdown from "../../../../components/dropdown/dropdown"
-import { deleteModal as Modal } from "../../../../components/modal/modal"
-import { Link } from 'react-router-dom';
+import {deleteModal as Modal} from "../../../../components/modal/modal"
+import {Link} from 'react-router-dom';
 
 const Item = Menu.Item
 const Divider = Menu.Divider
 
-const menu = (record, onOk) => {
-  return (
-    <Menu>
-      <Item key="0">
-      <Link to={"patient/" + record.key}>
-        Ver Perfil
-      </Link>
+const dropdown = props => {
+
+  const show = props
+    .user
+    .permissions
+    .includes('paciente_show')
+    ? <Item key="0">
+        <Link to={"patient/" + props.record.key}>
+          Ver Perfil
+        </Link>
       </Item>
-      <Divider />
-      <Item key="1">
-      <Link to={"patient/" + record.key + "/edit"}>
-        Editar
-      </Link>
+    : null
+
+  const edit = props
+    .user
+    .permissions
+    .includes('paciente_update')
+    ? <Item key="1">
+        <Link to={"patient/" + props.record.key + "/edit"}>
+          Editar
+        </Link>
       </Item>
-      <Divider />
-      <Item key="2">
-        <a onClick={() => Modal("paciente", record, () => onOk(record))}>
+    : null
+
+  const destroy = props
+    .user
+    .permissions
+    .includes('paciente_destroy')
+    ? <Item key="2">
+        <a
+          onClick={() => Modal("paciente", props.record, () => props.onDelete(props.record))}>
           Eliminar
         </a>
       </Item>
-    </Menu>
-  )
-}
+    : null
 
-const dropdown = props => <Dropdown menu={menu(props.record, props.onDelete)} />
+  const menu = <Menu>
+    {show}
+    {show && edit
+      ? <Divider/>
+      : null}
+    {edit}
+    {edit && destroy
+      ? <Divider/>
+      : null}
+    {destroy}
+  </Menu>
+
+  return (<Dropdown menu={menu}/>)
+}
 
 export default dropdown

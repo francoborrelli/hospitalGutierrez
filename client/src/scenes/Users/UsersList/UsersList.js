@@ -101,7 +101,6 @@ class UserList extends Component {
           <Col xl={19} lg={17}>
             <Table
               loading={this.state.loading}
-              permissions={this.props.user.permissions}
               onDelete={this.changeUserStatusHandler}
               data={this.state.users}
               user={this.props.user}

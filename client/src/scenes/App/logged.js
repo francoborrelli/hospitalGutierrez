@@ -18,9 +18,16 @@ import Error404 from '../Errors/404';
 export default props => (
   <LoggedLayout>
     <Switch>
-      <Route path="/patient/:patientId" component={PatientPage} />
-      <Route path="/patients/add" exact component={AddPatientPage} />
-      <Route path="/login" exact component={LoginPage} />
+      <Route
+        path="/patient/:patientId"
+        exact
+        render={() => <PatientPage user={props.user} />}
+      />
+      <Route
+        path="/patients/add"
+        exact
+        render={() => <AddPatientPage user={props.user} />}
+      />
       <Route
         path="/patients"
         exact
@@ -41,8 +48,17 @@ export default props => (
         exact
         render={() => <UsersListPage user={props.user} />}
       />
-      <Route path="/settings" exact component={ConfigurationPage} />
-      <Route path="/reports" exact component={ReportsPage} />
+      <Route
+        path="/settings"
+        exact
+        render={() => <ConfigurationPage user={props.user} />}
+      />
+      <Route
+        path="/reports"
+        exact
+        render={() => <ReportsPage user={props.user} />}
+      />
+      <Route path="/login" exact component={LoginPage} />
       <Route path="/" exact component={HomePage} />
       <Route component={Error404} />
     </Switch>

@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import {Col, message} from "antd"
+import {withRouter} from "react-router-dom"
 import Row from "../../../components/grid/row";
 import Section from "../../../components/header/sectionHeader/sectionHeader"
 import SearchForm from "./components/searchForm"
@@ -60,9 +61,10 @@ class PatientsList extends Component {
           <Col xl={18}>
             <Table
               loading={this.state.loading}
+              user={this.props.user}
               onDelete={this.deletePatientHandler}
-              addPath="/patients/add"
-              documentTypes={this.state.documentTypes}/>
+              documentTypes={this.state.documentTypes}
+              addPath={'/patients/add'}/>
           </Col>
         </Row>
       </Section>
@@ -70,4 +72,4 @@ class PatientsList extends Component {
   }
 }
 
-export default hasPermission(PatientsList, ["paciente_index"])
+export default withRouter(hasPermission(PatientsList, ["paciente_index"]))

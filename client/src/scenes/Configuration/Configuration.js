@@ -5,7 +5,7 @@ import Section from "../../components/header/sectionHeader/sectionHeader"
 import PageConfiguration from "./components/pageConfiguration"
 import MantainmentConfiguration from "./components/mantainmentConfiguration"
 import ElementsConfiguration from "./components/elementsConfiguration"
-
+import hasPermission from "../../hoc/hasPermission"
 
 class Configuration extends Component {
   state = {
@@ -88,4 +88,4 @@ class Configuration extends Component {
   }
 }
 
-export default Configuration
+export default hasPermission(Configuration, ['config_index', 'config_update'])

@@ -136,7 +136,7 @@ class BaseForm extends Component {
           marginRight: 10
         }}
           onClick={this.resetHandler}>
-          Restaurar
+          Limpiar
         </Button>
       )
       : null

@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import Report from "./components/report"
 import Section from "../../components/header/sectionHeader/sectionHeader"
 import Row from "../../components/grid/row";
+import hasPermission from "../../hoc/hasPermission"
 
 class Reports extends Component {
   state = {
@@ -80,4 +81,4 @@ class Reports extends Component {
 
 }
 
-export default Reports;
+export default hasPermission(Reports, ['reportes_index'])
