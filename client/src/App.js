@@ -10,6 +10,10 @@ import * as actions from './store/actions';
 
 class App extends Component {
 
+  setTitle(){
+    document.title = "Hospital Gutierrez"
+  }
+
   checkPath() {
     const url = this.props.location.pathname;
     return url.endsWith('/') && url !== '/'
@@ -18,6 +22,9 @@ class App extends Component {
   }
 
   render() {
+
+    this.setTitle()
+
     const checkPath = this.checkPath()
     if (checkPath) {
       return checkPath
