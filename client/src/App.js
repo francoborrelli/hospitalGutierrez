@@ -9,6 +9,7 @@ import Spinner from './components/spinner/spinner';
 import * as actions from './store/actions';
 
 class App extends Component {
+
   checkPath() {
     const url = this.props.location.pathname;
     return url.endsWith('/') && url !== '/'
@@ -17,11 +18,15 @@ class App extends Component {
   }
 
   render() {
-      this.checkPath()
+    const checkPath = this.checkPath()
+    if (checkPath) {
+      return checkPath
+    }
 
     if (this.props.appLoading) {
       return <Spinner/>
     }
+
     return this.props.loggedIn
       ? <LoggedLayout user={this.props.user}/>
       : <VisitorLayout/>
