@@ -126,12 +126,16 @@ class PatientPage extends Component {
         <Route
           path={this.props.match.url + '/addRecord'}
           exact
-          render={() => (<AddRecordPage patient={this.state.patient} loading={this.state.deleteRequest}/>)}/>
+          render={() => (<AddRecordPage
+          user={this.props.user}
+          patient={this.state.patient}
+          loading={this.state.deleteRequest}/>)}/>
         <Route
           path={this.props.match.url + '/record/:recordId'}
-          render={() =>< RecordPage patient = {
-          this.state.patient
-        } />}/>
+          render={() => (<RecordPage
+          user={this.props.user}
+          onDeleteRecord={this.deleteRecordHandler}
+          patient={this.state.patient}/>)}/>
         <Route
           path={this.props.match.url}
           exact

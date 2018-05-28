@@ -1,7 +1,10 @@
 import React, {Component} from "react"
-import { Route, Switch, withRouter } from "react-router-dom"
+import {Route, Switch, withRouter} from "react-router-dom"
 import RecordPage from './DetailedRecord/record';
 import EditPage from "./components/form"
+
+import hasPermission from '../../../hoc/hasPermission';
+
 class Record extends Component {
   state = {
     loading: true,
@@ -26,18 +29,31 @@ class Record extends Component {
   }
 
   redirect = () => {
-    this.props.history.push(this.props.match.url)
+    this
+      .props
+      .history
+      .push(this.props.match.url)
   }
 
-  componentDidMount = () => {
-  }
+  componentDidMount = () => {}
 
   render() {
     return (
-        <Switch>
-          <Route path={this.props.match.url +"/edit"} render={() => <EditPage record={this.state.record}/> }/>
-          <Route path="/" render={() => <RecordPage record={this.state.record}/> }/>
-        </Switch>
+      <Switch>
+        <Route
+          path={this.props.match.url + "/edit"}
+          exact
+          render={() => hasPermission(
+          <EditPage user={this.props.user} record={this.state.record}/>, ['control_update'])}/>
+        <Route
+          path={this.props.match.url}
+          exact
+          render={() => <RecordPage
+          user={this.props.user}
+          patient={this.props.patient}
+          onDelete={this.props.onDeleteRecord}
+          record={this.state.record}/>}/>
+      </Switch>
     )
   }
 }

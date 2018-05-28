@@ -2,6 +2,7 @@ import React from 'react';
 import {Row, Card} from "antd"
 import Element from "../../Profile/components/personalData/dataElement"
 import Dropdown from "./components/dropdown"
+import hasPermission from '../../../../hoc/hasPermission';
 
 const data = (record) => [
   {
@@ -70,22 +71,16 @@ const recordCard = props => {
     data={element.data}/>))
 
   return (
-    <div style={{
-      padding: 10
-    }}>
+    <div style={{padding: 10}}>
       <Card
         title={"Control: " + props.record.date}
-        extra={< Dropdown />}
+        extra={< Dropdown user={props.user} patient={props.patient} record={props.record} onDelete={props.onDelete}/>}
         style={{
         maxWidth: 700,
         margin: "0 auto"
       }}>
-        <div style={{
-          paddingTop: 10
-        }}>
-          <Row gutter={10} style={{
-            padding: "0px 10px 0"
-          }}>
+        <div style={{paddingTop: 10}}>
+          <Row gutter={10} style={{padding: "0px 10px 0"}}>
             {elements}
           </Row>
         </div>
@@ -94,4 +89,4 @@ const recordCard = props => {
   )
 }
 
-export default recordCard
+export default hasPermission(recordCard, ['control_show'])
