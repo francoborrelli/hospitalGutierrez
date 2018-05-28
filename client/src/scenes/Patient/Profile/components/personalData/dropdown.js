@@ -44,9 +44,9 @@ const dropdown = props => {
     )
     : null
 
-return (menu
-  ? <Dropdown menu={menu}/>
-  : null)
+  return (menu
+    ? <Dropdown menu={menu}/>
+    : null)
 }
 
 export default withRouter(dropdown)

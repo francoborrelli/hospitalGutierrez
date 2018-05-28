@@ -9,26 +9,53 @@ const Item = Menu.Item
 const Divider = Menu.Divider
 
 const dropdown = props => {
-  const menu = (
-    <Menu>
+  const show = props
+    .user
+    .permissions
+    .includes('control_show')
+    ? (
       <Item key="0">
         <Link to={props.match.path + "/record/" + props.record.key}>
           Ver
         </Link>
       </Item>
-      <Divider/>
+    )
+    : null
+
+  const update = props
+    .user
+    .permissions
+    .includes('control_update')
+    ? (
       <Item key="1">
         <Link to={props.match.path + "/record/" + props.record.key + "/edit"}>
           Editar
         </Link>
       </Item>
-      <Divider/>
+    )
+    : null
+
+  const destroy = props
+    .user
+    .permissions
+    .includes('control_destroy')
+    ? (
       <Item key="2">
         <a
           onClick={() => Modal("control del día " + props.record.date + " de", props.patient, () => props.onOk(props.record))}>
           Eliminar
         </a>
       </Item>
+    )
+    : null
+
+  const menu = (
+    <Menu>
+      {show}
+      {show && (update || destroy) ? <Divider/> : null}
+      {update}
+      {destroy && update ? <Divider/> : null}
+      {destroy}
     </Menu>
   )
 

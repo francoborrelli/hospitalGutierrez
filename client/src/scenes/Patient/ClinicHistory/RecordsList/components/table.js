@@ -3,19 +3,20 @@ import React from "react"
 import Table from '../../../../../components/table/table';
 import Dropdown from "./dropdown"
 
-const data = [
-  {
-    key: "1",
-    date: "11/45/2016",
-    user: "francoborrelli",
-    weight: "10",
-    height: "102",
-    pc: "23",
-    ppc: "32"
-  }
-]
-
 const tableRecords = props => {
+
+  const data = props
+    .data
+    .map(record => ({
+      key: record._id,
+      date: record.date,
+      user: record.user.firstName + record.user.lastName,
+      height: record.height,
+      weight: record.weight,
+      pc: record.pc,
+      ppc: record.ppc
+    }))
+
   const columns = [
     {
       title: "Fecha",
@@ -51,22 +52,37 @@ const tableRecords = props => {
       key: "ppc",
       sorter: (a, b) => a.ppc < b.ppc,
       render: (text, record) => (text + " cm")
-    }, {
+    }
+  ]
+
+  const check = (permission) => {
+    return props
+      .user
+      .permissions
+      .includes(permission)
+  }
+
+  if (check('control_show') || check('control_update') || check('control_destroy')) {
+    columns.push({
       title: "Acciones",
       key: "action",
       align: "center",
       fixed: "right",
       width: 120,
-      render: (text, record) => (<Dropdown onOk={props.onDeleteRecord} patient={props.patient} record={record}/>)
-    }
-  ]
+      render: (text, record) => (<Dropdown
+        user={props.user}
+        onOk={props.onDeleteRecord}
+        patient={props.patient}
+        record={record}/>)
+    })
+  }
+
   return (<Table
     columns={columns}
     dataSource={data}
     loading={props.loading}
-    scroll={{
-    x: 950
-  }}/>)
+    scroll={{x: 950}}
+    />)
 }
 
 export default tableRecords
