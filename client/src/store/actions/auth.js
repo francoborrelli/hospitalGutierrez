@@ -1,6 +1,8 @@
+import jwtDecode from 'jwt-decode';
+
 import axios from '../../axios-api';
 import * as types from './types';
-import jwtDecode from 'jwt-decode';
+import * as actions from './index';
 
 const authStart = () => ({
   type: types.AUTH_START
@@ -51,14 +53,6 @@ export const logout = () => {
   };
 };
 
-const appLoading = () => ({
-  type: types.APP_LOADING
-});
-
-const appLoaded = () => ({
-  type: types.APP_LOADED
-});
-
 // TODO: expiration date
 export const checkAuth = () => {
   return async dispatch => {
@@ -66,11 +60,11 @@ export const checkAuth = () => {
     if (!token) {
       dispatch(logout());
     } else {
-      dispatch(appLoading());
+      dispatch(actions.appLoading());
       const response = await axios.post(`/auth/newToken`);
       localStorage.setItem('token', response.data.token);
       dispatch(authSuccess(response.data.token));
-      dispatch(appLoaded());
+      dispatch(actions.appFetchData());
     }
   };
 };
