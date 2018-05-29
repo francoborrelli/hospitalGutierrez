@@ -21,7 +21,7 @@
     "firstName": "Franco",
     "lastName": "Borrelli",
     "username": "fborrelli",
-    "email": "francoborrelli@gmail.com",
+    "email": "francoborrelli96@gmail.com",
     "password": "$2b$10$efBDXh0cFSPqbKRSsgXegO/0VAIMpqe6b1m...9JcsxLuJdVO0Mhi",
     "active": true,
     "createdAt": { "$date": "2018-05-25T15:47:32.141Z" },
