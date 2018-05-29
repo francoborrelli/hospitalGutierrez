@@ -1,0 +1,11 @@
+[
+  {
+    "_id": { "$oid": "5b0cb95037fae6004c8dfdaa" },
+    "title": "Hospital",
+    "email": "hospital@gmail.com",
+    "description":"Esto es un hospital",
+    "mantaintment":false,
+    "elements": 4,
+    "__v": 0
+  }
+]
