@@ -76,7 +76,7 @@ const recordCard = props => {
         title={"Control: " + props.record.date}
         extra={< Dropdown user={props.user} patient={props.patient} record={props.record} onDelete={props.onDelete}/>}
         style={{
-        maxWidth: 700,
+        maxWidth: 800,
         margin: "0 auto"
       }}>
         <div style={{paddingTop: 10}}>

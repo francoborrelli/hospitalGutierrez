@@ -1,13 +1,13 @@
 import React, {Component} from "react"
 import {Route, Switch, withRouter} from "react-router-dom"
 import RecordPage from './DetailedRecord/record';
-import EditPage from "./components/form"
+import EditPage from "./EditRecord/editRecord"
 
 import hasPermission from '../../../hoc/hasPermission';
 
 class Record extends Component {
   state = {
-    loading: true,
+    loading: false,
 
     //Mock data
     record: {
@@ -35,7 +35,7 @@ class Record extends Component {
       .push(this.props.match.url)
   }
 
-  componentDidMount = () => {}
+  editRecordHandler = () => {}
 
   render() {
     return (
@@ -43,8 +43,11 @@ class Record extends Component {
         <Route
           path={this.props.match.url + "/edit"}
           exact
-          render={() => hasPermission(
-          <EditPage user={this.props.user} record={this.state.record}/>, ['control_update'])}/>
+          render={() => <EditPage
+          user={this.props.user}
+          submitted={this.editRecordHandler}
+          loading={this.state.loading}
+          record={this.state.record}/>}/>
         <Route
           path={this.props.match.url}
           exact
