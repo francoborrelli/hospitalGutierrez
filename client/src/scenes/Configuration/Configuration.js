@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import {Row, Col, message} from "antd"
+
 import RowGutter from '../../components/grid/row';
 import Section from "../../components/header/sectionHeader/sectionHeader"
 import PageConfiguration from "./components/pageConfiguration"
@@ -7,21 +8,13 @@ import MantainmentConfiguration from "./components/mantainmentConfiguration"
 import ElementsConfiguration from "./components/elementsConfiguration"
 import hasPermission from "../../hoc/hasPermission"
 
+import {connect} from 'react-redux';
+
 class Configuration extends Component {
   state = {
     pageInfoRequest: false,
     elementsRequest: false,
     mantaintmentRequest: false,
-
-    //MOCK DATA
-    pageInfo:
-      {
-        title: "Hospital Gutierrez",
-        email: "hospital@gmail.com",
-        description: "Esto es un hospital"
-    },
-    elementsNumber: 4,
-    mantainment: false
   }
 
   componentDidMount = () => {
@@ -59,7 +52,7 @@ class Configuration extends Component {
         <RowGutter>
           <Col xs={24} xl={14} style={{marginBottom: 10}}>
             <PageConfiguration
-            values={this.state.pageInfo}
+            values={this.props.site}
             loading={this.state.pageInfoRequest}
             submitted={this.updatePageInfoHandler}
             />
@@ -68,14 +61,14 @@ class Configuration extends Component {
             <Row gutter={10}>
               <Col md={12} xl={24} xxl={12} style={{marginBottom: 10}}>
                 <ElementsConfiguration
-                value={this.state.elementsNumber}
+                value={this.props.site.listAmount}
                 submitted={this.updateElementsNumberHandler}
                 loading={this.state.elementsRequest}
                 />
               </Col>
               <Col md={12} xl={24} xxl={12}>
                 <MantainmentConfiguration
-                value={this.state.mantainment}
+                value={this.props.site.enabled}
                 loading={this.state.mantaintmentRequest}
                 clicked={this.mantaintmentHandler}
                 />
@@ -88,4 +81,6 @@ class Configuration extends Component {
   }
 }
 
-export default hasPermission(Configuration, ['config_index', 'config_update'])
+const mapStateToProps = state => ({site: state.app});
+
+export default hasPermission(connect(mapStateToProps)(Configuration), ['config_index', 'config_update'])

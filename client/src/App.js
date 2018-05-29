@@ -10,10 +10,6 @@ import * as actions from './store/actions';
 
 class App extends Component {
 
-  setTitle(){
-    document.title = "Hospital Gutierrez"
-  }
-
   checkPath() {
     const url = this.props.location.pathname;
     return url.endsWith('/') && url !== '/'
@@ -21,8 +17,11 @@ class App extends Component {
       : null;
   }
 
-  render() {
+  setTitle() {
+    document.title = this.props.title
+  }
 
+  render() {
     this.setTitle()
 
     const checkPath = this.checkPath()
@@ -33,13 +32,12 @@ class App extends Component {
     if (this.props.appLoading) {
       return <Spinner/>
     }
-
     return this.props.loggedIn
       ? <LoggedLayout user={this.props.user}/>
       : <VisitorLayout/>
   }
 }
 
-const mapStateToProps = state => ({loggedIn: state.auth.jwt, user: state.auth.user, appLoading: state.auth.appLoading});
+const mapStateToProps = state => ({loggedIn: state.auth.jwt, user: state.auth.user, appLoading: state.auth.appLoading, title: state.app.title});
 
 export default withRouter(connect(mapStateToProps)(App));
