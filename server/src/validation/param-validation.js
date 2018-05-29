@@ -59,14 +59,24 @@ module.exports = {
   // POST /auth/login
   login: {
     body: {
-      email: Joi.string().required(),
+      email: Joi.string().email().required(),
       password: Joi.string().required()
     }
   },
 
   checkEmail: {
     query: {
-      email: Joi.string().required()
+      email: Joi.string().email().required()
+    }
+  },
+
+  updateSite: {
+    body: {
+      email: Joi.string().email(),
+      title: Joi.string(),
+      footer: Joi.string(),
+      listAmount: Joi.number(),
+      enabled: Joi.boolean()
     }
   }
 };
