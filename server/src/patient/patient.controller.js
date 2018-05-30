@@ -50,6 +50,10 @@ async function create(req, res, next) {
 async function patch(req, res, next) {
   try {
     const patient = await Patient.findById(req.params.patientId);
+    if (!patient) {
+      const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
+      return next(err);
+    }
     if (req.body.firstName) {
       patient.firstName = req.body.firstName;
     }
@@ -82,14 +86,17 @@ async function patch(req, res, next) {
       .then(savedPatient => res.json(savedPatient))
       .catch(e => next(e));
   } catch (error) {
-    const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
-    return next(err);
+    return next(error);
   }
 }
 
 async function patchDemographicData(req, res, next) {
   try {
     const patient = await Patient.findById(req.params.patientId);
+    if (!patient) {
+      const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
+      return next(err);
+    }
     if (req.body.hasRefrigerator) {
       patient.hasRefrigerator = req.body.hasRefrigerator;
     }
@@ -116,18 +123,20 @@ async function patchDemographicData(req, res, next) {
       .then(savedPatient => res.json(savedPatient))
       .catch(e => next(e));
   } catch (error) {
-    const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
-    return next(err);
+    return next(error);
   }
 }
 
 async function get(req, res, next) {
   try {
     const patient = await Patient.findById(req.params.patientId);
+    if (!patient) {
+      const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
+      return next(err);
+    }
     return res.json(patient);
   } catch (error) {
-    const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
-    return next(err);
+    return next(error);
   }
 }
 
