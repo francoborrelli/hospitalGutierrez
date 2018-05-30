@@ -42,4 +42,4 @@ SiteSchema.statics = {
   }
 };
 
-module.exports = mongoose.model('Site', SiteSchema, 'site');
+module.exports = mongoose.model('Site', SiteSchema);

@@ -24,7 +24,7 @@ class elementsNumberForm extends Component {
             style={{margin: 0,width: "51.5%"}}
             wrapperCol={{style: {width: "100%"}}}
           >
-            {getFieldDecorator('elements', {initialValue: this.props.value})(
+            {getFieldDecorator('listAmount', {initialValue: this.props.value})(
             <InputNumber
               min={1}
               max={1000}

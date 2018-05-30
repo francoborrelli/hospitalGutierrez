@@ -8,10 +8,10 @@ import VerticalItem from "./inputLayouts/verticalItem"
 import PropTypes from 'prop-types';
 
 const FormItem = Form.Item
-
 class BaseForm extends Component {
   state = {
-    initialState: {}
+    initialState: {},
+    submitted: false,
   }
 
   setDefaultState = () => {
@@ -32,7 +32,7 @@ class BaseForm extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (prevProps.defaultValues !== this.props.defaultValues) {
+    if (!this.state.submitted && prevProps.defaultValues !== this.props.defaultValues) {
       this.setDefaultState()
       this.setState({
         initialState: this
@@ -57,6 +57,7 @@ class BaseForm extends Component {
 
   submitHandler = e => {
     e.preventDefault()
+    this.setState({submitted: true})
     this
       .props
       .form
@@ -66,7 +67,8 @@ class BaseForm extends Component {
             .props
             .submitted(values)
           if (!this.props.mantainDefault) {
-            this.setState({initialState: values})
+            this.setState({initialState: values, submitted: true})
+            this.props.form.setFieldsValue(values)
           }
         }
       })
@@ -221,6 +223,7 @@ class BaseForm extends Component {
     )
   }
 }
+
 
 BaseForm.propTypes = {
   layout: PropTypes.string,
