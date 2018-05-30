@@ -9,7 +9,7 @@ const mantainment = props => (
         onChange={props.clicked}
         checkedChildren={<Icon type="check" />}
         unCheckedChildren={<Icon type="cross" />}
-        defaultChecked
+        defaultChecked={props.value}
       />
     </div>
   </Card>

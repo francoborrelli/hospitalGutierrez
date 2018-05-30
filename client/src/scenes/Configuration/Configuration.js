@@ -90,6 +90,7 @@ class Configuration extends Component {
               </Col>
               <Col md={12} xl={24} xxl={12}>
                 <MantainmentConfiguration
+                  data={this.props.site.enabled}
                   value={this.props.site.enabled}
                   loading={this.state.mantaintmentRequest}
                   clicked={this.mantaintmentHandler}/>

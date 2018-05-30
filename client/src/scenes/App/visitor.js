@@ -11,17 +11,16 @@ import Mantainment from "../Errors/maintenance"
 import LoginPage from '../Login/Login';
 
 const visitor = props => {
-  const Component = props.enabled ? Error401 : Mantainment
   const Home = props.enabled ? HomePage : Mantainment
   return (<VisitorLayout>
   <Switch>
-    <Route path="/settings" exact component={Component}/>
-    <Route path="/reports" exact component={Component}/>
-    <Route path="/users" exact component={Component}/>
-    <Route path="/users/add" exact component={Component}/>
-    <Route path="/patients" component={Component}/>
-    <Route path="/patients/add" component={Component}/>
-    <Route path="/patient/:userId" component={Component}/>
+    <Route path="/settings" exact component={Error401}/>
+    <Route path="/reports" exact component={Error401}/>
+    <Route path="/users" exact component={Error401}/>
+    <Route path="/users/add" exact component={Error401}/>
+    <Route path="/patients" component={Error401}/>
+    <Route path="/patients/add" component={Error401}/>
+    <Route path="/patient/:userId" component={Error401}/>
 
     <Route path="/login" exact component={LoginPage}/>
     <Route path="/" exact component={Home}/>
