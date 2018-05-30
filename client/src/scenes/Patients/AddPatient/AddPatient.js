@@ -17,8 +17,8 @@ class AddPatient extends Component {
   state = {
     loading: false,
     current: 0,
-    personalData: [],
-    demographicData: []
+    personalData: null,
+    demographicData: null,
   }
 
   nextStep = () => {
@@ -82,8 +82,8 @@ class AddPatient extends Component {
         content: (<PersonalForm
           onCancel={this.redirect}
           submitted={this.personalDataSubmitHandler}
-          data={this.props.apiData}
           patient={this.state.personalData}
+          data={this.props.apiData}
           loading={false}
           btnText="Continuar"/>)
       }, {

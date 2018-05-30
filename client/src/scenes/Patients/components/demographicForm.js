@@ -118,16 +118,16 @@ const demographicForm = props => {
       ]
     }
   }
-  let values;
+  let values={}
   const patient = props.patient
   if (patient) {
     values = {
-      hasRefrigerator: patient.hasRefrigerator,
-      hasPet: patient.hasPet,
-      hasElectricity: patient.hasElectricity,
-      heatingType: patient.heatingType,
-      houseType: patient.houseType,
-      waterType: patient.waterType
+      hasRefrigerator: patient.hasRefrigerator ? 1 : 0,
+      hasPet: patient.hasPet ? 1 : 0,
+      hasElectricity: patient.hasElectricity ? 1 : 0,
+      heatingType: patient.heatingType ? patient.heatingType.toString() : "",
+      houseType: patient.houseType ? patient.houseType.toString() : "",
+      waterType: patient.waterType ? patient.waterType.toString() : "",
     }
   }
 

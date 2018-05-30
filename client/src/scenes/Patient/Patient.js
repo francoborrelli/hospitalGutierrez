@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {message} from 'antd';
 import {Route, Switch, withRouter} from "react-router-dom"
-import moment from "moment"
+
 import Section from "./components/patientHeader"
 import ProfilePage from "./Profile/Profile"
 import AddRecordPage from "./ClinicHistory/AddRecord/AddRecord"
@@ -17,6 +17,7 @@ class PatientPage extends Component {
   state = {
     personalDataRequest: false,
     demographicDataRequest: false,
+    loadingPage: true,
     deleteRequest: false,
 
     patient: {}
@@ -26,8 +27,7 @@ class PatientPage extends Component {
     axios
       .get('patients/' + this.props.match.params.patientId)
       .then(response => {
-        this.setState({patient: response.data})
-        console.log(response.data)
+        this.setState({patient: response.data, loadingPage: false})
       })
   }
 
@@ -112,6 +112,7 @@ class PatientPage extends Component {
           user={this.props.user}
           personalDataSumitted={this.editPersonalDataHandler}
           demographicDataSumitted={this.editDemographicDataHandler}
+          loadingPage={this.state.loadingPage}
           loadingPersonal={this.state.personalDataRequest}
           loadingDemographic={this.state.demographicDataRequest}/>)}/>
         <Route
@@ -119,7 +120,6 @@ class PatientPage extends Component {
           exact
           render={() => (<AddRecordPage
           user={this.props.user}
-          patient={this.state.patient}
           loading={this.state.deleteRequest}/>)}/>
         <Route
           path={this.props.match.url + '/record/:recordId'}
@@ -133,6 +133,7 @@ class PatientPage extends Component {
           render={() => (<ProfilePage
           patient={this.state.patient}
           user={this.props.user}
+          loadingPage={this.state.loadingPage}
           onDeleteRecord={this.deleteRecordHandler}
           onDeletePatient={this.deletePatientHandler}/>)}/>
       </Switch>

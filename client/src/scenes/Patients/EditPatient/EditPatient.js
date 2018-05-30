@@ -16,7 +16,7 @@ const editPatient = props => {
   const editPersonal = PdPermission
     ? (
       <Col lg={12} style={{marginBottom: 10}}>
-        <Card title="Datos Personales">
+        <Card title="Datos Personales" loading={props.loadingPage}>
           <PersonalForm
             reset
             data={props.apiData}
@@ -30,7 +30,7 @@ const editPatient = props => {
 
   const editDemographic = DmPermission
     ? <Col lg={12}>
-        <Card title="Datos Demográficos">
+        <Card title="Datos Demográficos" loading={props.loadingPage}>
           <DemographicForm
             reset
             data={props.apiData}

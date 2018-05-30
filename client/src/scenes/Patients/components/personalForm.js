@@ -1,5 +1,6 @@
 import React from "react"
 import Form from "../../../containers/Form/Form"
+import moment from "moment"
 
 const personalDataForm = props => {
 
@@ -139,12 +140,12 @@ const personalDataForm = props => {
   const patient = props.patient
   if (patient){
     values = {
-      documentType: patient.documentType,
+      documentType: patient.documentType ? patient.documentType.toString() : "",
       firstName: patient.firstName,
       lastName: patient.lastName,
-      birthday: patient.birthday,
+      birthday: moment(patient.birthday),
       phone: patient.phone,
-      insurance: patient.insurance,
+      insurance: patient.insurance ? patient.insurance.toString() : "",
       address: patient.address,
       gender: patient.gender,
       documentNumber: patient.documentNumber
