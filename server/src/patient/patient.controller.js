@@ -22,7 +22,7 @@ async function create(req, res, next) {
   const patient = new Patient({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    dni: req.body.dni,
+    documentNumber: req.body.documentNumber,
     birthday: new Date(req.body.birthday),
     gender: req.body.gender,
     address: req.body.address,
@@ -56,8 +56,8 @@ async function patch(req, res, next) {
     if (req.body.lastName) {
       patient.lastName = req.body.lastName;
     }
-    if (req.body.dni) {
-      patient.dni = req.body.dni;
+    if (req.body.documentNumber) {
+      patient.documentNumber = req.body.documentNumber;
     }
     if (req.body.birthday) {
       patient.birthday = new Date(req.body.birthday);

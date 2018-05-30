@@ -88,7 +88,7 @@ module.exports = {
     body: {
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
-      dni: Joi.string().required(),
+      documentNumber: Joi.string().required(),
       birthday: Joi.date().required(),
       gender: Joi.string().required(),
       address: Joi.string().required(),
@@ -108,7 +108,7 @@ module.exports = {
     body: {
       firstName: Joi.string(),
       lastName: Joi.string(),
-      dni: Joi.string(),
+      documentNumber: Joi.string(),
       birthday: Joi.date(),
       gender: Joi.string(),
       address: Joi.string(),

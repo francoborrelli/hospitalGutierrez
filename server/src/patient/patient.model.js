@@ -11,7 +11,7 @@ const PatientSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  dni: {
+  documentNumber: {
     type: String,
     required: true
   },
