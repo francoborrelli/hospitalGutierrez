@@ -59,14 +59,18 @@ module.exports = {
   // POST /auth/login
   login: {
     body: {
-      email: Joi.string().email().required(),
+      email: Joi.string()
+        .email()
+        .required(),
       password: Joi.string().required()
     }
   },
 
   checkEmail: {
     query: {
-      email: Joi.string().email().required()
+      email: Joi.string()
+        .email()
+        .required()
     }
   },
 
@@ -77,6 +81,52 @@ module.exports = {
       footer: Joi.string(),
       listAmount: Joi.number(),
       enabled: Joi.boolean()
+    }
+  },
+
+  createPatient: {
+    body: {
+      firstName: Joi.string().required(),
+      lastName: Joi.string().required(),
+      dni: Joi.string().required(),
+      birthday: Joi.date().required(),
+      gender: Joi.string().required(),
+      address: Joi.string().required(),
+      phone: Joi.string(),
+      hasRefrigerator: Joi.boolean().required(),
+      hasElectricity: Joi.boolean().required(),
+      hasPet: Joi.boolean().required(),
+      documentType: Joi.number().required(),
+      insurance: Joi.number(),
+      heatingType: Joi.number().required(),
+      houseType: Joi.number().required(),
+      waterType: Joi.number().required()
+    }
+  },
+
+  patchPatient: {
+    body: {
+      firstName: Joi.string(),
+      lastName: Joi.string(),
+      dni: Joi.string(),
+      birthday: Joi.date(),
+      gender: Joi.string(),
+      address: Joi.string(),
+      phone: Joi.string(),
+      documentType: Joi.number(),
+      insurance: Joi.number()
+    }
+  },
+
+  patchDemographicData: {
+    body: {
+      hasRefrigerator: Joi.boolean(),
+      hasElectricity: Joi.boolean(),
+      hasPet: Joi.boolean(),
+      insurance: Joi.number(),
+      heatingType: Joi.number(),
+      houseType: Joi.number(),
+      waterType: Joi.number()
     }
   }
 };
