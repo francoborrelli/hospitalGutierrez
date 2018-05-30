@@ -6,8 +6,6 @@ import LoggedLayout from './scenes/App/logged';
 import VisitorLayout from './scenes/App/visitor';
 import Spinner from './components/spinner/spinner';
 
-import * as actions from './store/actions';
-
 class App extends Component {
 
   checkPath() {

@@ -19,6 +19,4 @@ const hasPermission = (WrappedObject, requiredPermissions) => {
   }
 }
 
-const mapStateToProps = state => ({permissions: state.auth.user.permissions});
-
 export default hasPermission;

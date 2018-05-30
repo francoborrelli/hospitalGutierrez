@@ -12,7 +12,6 @@ import App from './App';
 import * as actions from './store/actions';
 import './main.css';
 import registerServiceWorker from './registerServiceWorker';
-import { AUTH_SUCCESS } from './store/actions/types';
 
 const store = createStore(
   reducer,

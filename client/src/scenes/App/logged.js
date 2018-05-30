@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {Route, Switch, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -20,7 +20,7 @@ import Mantainment from '../Errors/maintenance';
 const logged = props => {
 
   const Patient = props.enabled ? PatientPage : Mantainment
-  const AddPatient = props.enabled ? PatientPage : Mantainment
+  const AddPatient = props.enabled ? AddPatientPage : Mantainment
   const Patients = props.enabled ? PatientsListPage : Mantainment
   const EditUser = props.enabled ? EditUserPage : Mantainment
   const AddUser = props.enabled ? AddUserPage : Mantainment
@@ -45,7 +45,7 @@ const logged = props => {
         <Route
           path="/user/:userId/edit"
           exact
-          render={() => <EditUserPage user={props.user}/>}/>
+          render={() => <EditUser user={props.user}/>}/>
         <Route path="/users/add" exact render={() => <AddUser user={props.user}/>}/>
         <Route path="/users" exact render={() => <Users user={props.user}/>}/>
         <Route path="/reports" exact render={() => <Reports user={props.user}/>}/>

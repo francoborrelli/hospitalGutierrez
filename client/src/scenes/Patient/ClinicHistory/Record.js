@@ -3,8 +3,6 @@ import {Route, Switch, withRouter} from "react-router-dom"
 import RecordPage from './DetailedRecord/record';
 import EditPage from "./EditRecord/editRecord"
 
-import hasPermission from '../../../hoc/hasPermission';
-
 class Record extends Component {
   state = {
     loading: false,

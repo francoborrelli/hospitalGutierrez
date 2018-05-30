@@ -2,7 +2,6 @@ import React, {Component} from "react"
 import {Card, Icon, Button} from "antd"
 import Table from "./components/table"
 import {Link} from 'react-router-dom';
-import hasPermission from '../../../../hoc/hasPermission';
 
 class ClinicHistoryList extends Component {
 
