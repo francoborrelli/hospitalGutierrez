@@ -2,7 +2,7 @@ import React from "react"
 import { Switch, Icon, Card } from "antd"
 
 const mantainment = props => (
-  <Card title="Mantenimiento" >
+  <Card title="Sitio Activo" >
     <div style={{ textAlign: "center", padding: "11px 0px" }}>
       <Switch
         loading={props.loading}
