@@ -1,7 +1,22 @@
 import React from "react"
 import {Layout, Row, Col, Divider, Avatar} from 'antd';
+import moment from "moment"
 
 const {Header, Content} = Layout
+
+const getAge = (birthday) => {
+  const date = moment(birthday)
+  const years = moment().diff(birthday, 'years')
+  date.add(years, "years")
+  const months = moment().diff(birthday, 'months')
+  date.add(months, "months")
+  const days = moment().diff(birthday, 'days')
+  let result = years !== 0 ? years + ' ' +  (years !== 1 ? 'años' : 'año') : ""
+  result += months !== 0 ? months + ' ' +  (months !== 1 ? 'meses' : 'mes') : ""
+  result += days + ' ' + (days !== 1 ? 'días' : 'día')
+
+  return result
+}
 
 const patientHeader = props => (
 <Content>
@@ -14,7 +29,7 @@ const patientHeader = props => (
           </div>
           <div style={{paddingTop: 14, paddingLeft: 10}}>
             <h2 style={{margin: 0}}>
-              {props.patient.name} {props.patient.lastname}
+              {props.patient.firstName} {props.patient.lastName}
             </h2>
             <h5 style={{color: "rgba(0,0,0,.45)"}}>
               {props.patient.documentType} - {props.patient.documentNumber}
@@ -32,7 +47,7 @@ const patientHeader = props => (
         }}>
           <div>
             <h5 style={{color: "rgba(0,0,0,.45)"}}>Edad</h5>
-            <h3>{props.patient.age}</h3>
+            <h3>{getAge(props.patient.birthday)}</h3>
           </div>
           <Divider style={{margin: "0 15px", height: 39}} type="vertical"/>
           <div>

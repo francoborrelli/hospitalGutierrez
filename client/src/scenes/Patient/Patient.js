@@ -11,34 +11,25 @@ import RecordPage from "./ClinicHistory/Record"
 import hasPermission from '../../hoc/hasPermission';
 import Error403 from '../Errors/403';
 
+import axios from "../../axios-api.js"
+
 class PatientPage extends Component {
   state = {
     personalDataRequest: false,
     demographicDataRequest: false,
     deleteRequest: false,
 
-    //Mock data
-    patient: {
-      id: 1,
-      name: "Franco",
-      lastname: "Borrelli",
-      documentType: "1",
-      documentNumber: "39831178",
-      age: "5 meses",
-      visits: "53",
-      birthday: moment("05/06/2013", "DD/MM/YYYY"),
-      gender: "Másculino",
-      address: "11 1419, La Plata, Buenos Aires",
-      houseType: "1",
-      waterType: "1",
-      heatType: "1",
-      electricity: 0,
-      pets: 0,
-      fridge: 0
-    }
+    patient: {}
   }
 
-  componentDidMount = () => {}
+  componentDidMount = () => {
+    axios
+      .get('patients/' + this.props.match.params.patientId)
+      .then(response => {
+        this.setState({patient: response.data})
+        console.log(response.data)
+      })
+  }
 
   editPersonalDataHandler = data => {
     this.setState({personalDataRequest: true})
