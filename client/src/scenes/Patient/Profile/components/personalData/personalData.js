@@ -2,17 +2,16 @@ import React from 'react';
 import {Row, Card} from "antd"
 import Element from './dataElement';
 import Dropdown from './dropdown';
+import moment from "moment"
 
 const getData = (patient, user) => {
   const data = [
     {
       title: "Fecha de Nacimiento",
-      data: patient
-        .birthday
-        .format("DD/MM/YYYY")
+      data: patient.birthday ? moment(patient.birthday).format('DD/MM/YYYY') : "-"
     }, {
       title: "Género",
-      data: patient.gender
+      data: patient.gender === "male"
         ? "Masculino"
         : "Femenino"
     }, {
@@ -33,26 +32,26 @@ const getData = (patient, user) => {
     ? [
       {
         title: "Tipo de Vivienda",
-        data: patient.houseTypes
+        data: patient.houseType
       }, {
         title: "Tipo de Calefacción",
-        data: patient.heatTypes
+        data: patient.heatingType
       }, {
         title: "Tipo de Agua",
-        data: patient.waterTypes
+        data: patient.waterType
       }, {
         title: "¿Heladera?",
-        data: patient.fridge
+        data: patient.hasRefrigerator
           ? 'Si'
           : 'No'
       }, {
         title: "¿Mascotas?",
-        data: patient.pets
+        data: patient.hasPet
           ? 'Si'
           : 'No'
       }, {
         title: "¿Electricidad?",
-        data: patient.electricity
+        data: patient.hasElectricity
           ? 'Si'
           : 'No'
       }
