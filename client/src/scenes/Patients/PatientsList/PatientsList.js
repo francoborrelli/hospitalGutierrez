@@ -6,7 +6,8 @@ import Section from "../../../components/header/sectionHeader/sectionHeader"
 import SearchForm from "./components/searchForm"
 import Table from "./components/table"
 import hasPermission from "../../../hoc/hasPermission"
-import axios from "../../../axios-apiReferences"
+import axiosRef from "../../../axios-apiReferences"
+import axiosApi from "../../../axios-api"
 
 class PatientsList extends Component {
   state = {
@@ -14,43 +15,19 @@ class PatientsList extends Component {
     searching: false,
     filtered: false,
     documentTypes: [],
-    patients: [
-      {
-        _id: "1",
-        firstName: "Franco",
-        lastName: "Borrelli",
-        documentType: "1",
-        documentNumber: 32
-      }, {
-        _id: "2",
-        firstName: "Pedro",
-        lastName: "Brost",
-        documentType: "2",
-        documentNumber: 3223423432
-      }
-    ],
-    allPatients: [
-      {
-        _id: "1",
-        firstName: "Franco",
-        lastName: "Borrelli",
-        documentType: "1",
-        documentNumber: "32"
-      }, {
-        _id: "2",
-        firstName: "Pedro",
-        lastName: "Brost",
-        documentType: "2",
-        documentNumber: "3223423432"
-      }
-    ]
+    patients: []
   }
 
   componentDidMount = () => {
-    axios
-      .get("tipo-documento")
+    axiosRef
+      .get('tipo-documento')
       .then(response => {
-        this.setState({loading: false, documentTypes: response.data})
+        this.setState({documentTypes: response.data})
+      })
+    axiosApi
+      .get('/patients')
+      .then(response => {
+        this.setState({loading: false, allPatients: response.data, patients: response.data})
       })
   }
 

@@ -20,8 +20,8 @@ const personalDataForm = props => {
   }
 
   const fields = {
-    lastname: {
-      name: "lastname",
+    lastName: {
+      name: "lastName",
       label: "Apellido",
       type: "input",
       rules: [
@@ -32,12 +32,12 @@ const personalDataForm = props => {
         },
         {
           message: "Debe tener solo letras",
-          pattern: "^[a-zA-Z ]+$"
+          pattern: "^[a-zA-ZÀ-ÿ\u00f1\u00d1  _]*(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1  _]+$"
         }
       ]
     },
-    name: {
-      name: "name",
+    firstName: {
+      name: "firstName",
       label: "Nombre",
       type: "input",
       rules: [
@@ -48,7 +48,7 @@ const personalDataForm = props => {
         },
         {
           message: "Debe tener solo letras",
-          pattern: "^[a-zA-Z ]+$"
+          pattern: "^[a-zA-ZÀ-ÿ\u00f1\u00d1  _]*(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1  _]+$"
         }
       ]
     },
@@ -102,7 +102,7 @@ const personalDataForm = props => {
       props: {
         placeholder: "Género"
       },
-      options: [{ id: 0, nombre: "Másculino" }, { id: 1, nombre: "Femenino" }],
+      options: [{ id: "male", nombre: "Másculino" }, { id: "female", nombre: "Femenino" }],
       rules: [{ required: true, message: "Seleccione un género" }]
     },
     address: {
@@ -140,8 +140,8 @@ const personalDataForm = props => {
   if (patient){
     values = {
       documentType: patient.documentType,
-      name: patient.name,
-      lastname: patient.name,
+      firstName: patient.firstName,
+      lastName: patient.lastName,
       birthday: patient.birthday,
       phone: patient.phone,
       insurance: patient.insurance,

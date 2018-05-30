@@ -11,6 +11,8 @@ import PersonalForm from "../components/personalForm"
 import withApiRefData from "../../../hoc/withApiRefData"
 import hasPermission from '../../../hoc/hasPermission';
 
+import axios from '../../../axios-api';
+
 class AddPatient extends Component {
   state = {
     loading: false,
@@ -54,10 +56,23 @@ class AddPatient extends Component {
 
   addHandler = data => {
     this.setState({loading: true})
-    //request
-    this.setState({loading: false})
-    this.redirect()
-    message.success("Se agregó a " + data.name + " " + data.lastname + " correctamente.")
+    const result = {
+      ...data,
+      hasPet: data.hasPet === 1,
+      hasRefrigerator: data.hasRefrigerator === 1,
+      hasElectricity: data.hasElectricity === 1
+    }
+    axios
+      .post('patients', result)
+      .then(() => {
+        this.setState({loading: false})
+        this.redirect()
+        message.success("Se agregó a " + data.firstName + " " + data.lastName + " correctamente.")
+      })
+      .catch(() => {
+        this.setState({loading: false})
+        message.error("Ocurrió un error. Intanta nuevamente")
+      })
   }
 
   render() {

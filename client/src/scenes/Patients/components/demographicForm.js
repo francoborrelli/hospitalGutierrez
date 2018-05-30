@@ -19,7 +19,7 @@ const demographicForm = props => {
       ]
     },
     heatingType: {
-      name: "heatType",
+      name: "heatingType",
       label: "Tipo de Calefacción",
       type: "select",
       props: {
@@ -49,7 +49,7 @@ const demographicForm = props => {
       ]
     },
     fridge: {
-      name: "fridge",
+      name: "hasRefrigerator",
       label: "¿Tiene Heladera?",
       type: "select",
       props: {
@@ -57,10 +57,10 @@ const demographicForm = props => {
       },
       options: [
         {
-          id: 0,
+          id: 1,
           nombre: "Si"
         }, {
-          id: 1,
+          id: 0,
           nombre: "No"
         }
       ],
@@ -72,7 +72,7 @@ const demographicForm = props => {
       ]
     },
     electricity: {
-      name: "electricity",
+      name: "hasElectricity",
       label: "¿Tiene Electricidad?",
       type: "select",
       props: {
@@ -80,10 +80,10 @@ const demographicForm = props => {
       },
       options: [
         {
-          id: 0,
+          id: 1,
           nombre: "Si"
         }, {
-          id: 1,
+          id: 0,
           nombre: "No"
         }
       ],
@@ -95,7 +95,7 @@ const demographicForm = props => {
       ]
     },
     pets: {
-      name: "pets",
+      name: "hasPet",
       label: "¿Tiene Mascotas?",
       type: "select",
       props: {
@@ -103,10 +103,10 @@ const demographicForm = props => {
       },
       options: [
         {
-          id: 0,
+          id: 1,
           nombre: "Si"
         }, {
-          id: 1,
+          id: 0,
           nombre: "No"
         }
       ],
@@ -122,11 +122,11 @@ const demographicForm = props => {
   const patient = props.patient
   if (patient) {
     values = {
-      fridge: patient.fridge,
-      pets: patient.pets,
-      electricity: patient.electricity,
-      heatType: patient.heatType,
-      houseType: patient.heatType,
+      hasRefrigerator: patient.hasRefrigerator,
+      hasPet: patient.hasPet,
+      hasElectricity: patient.hasElectricity,
+      heatingType: patient.heatingType,
+      houseType: patient.houseType,
       waterType: patient.waterType
     }
   }
@@ -141,7 +141,7 @@ const demographicForm = props => {
     loading={props.loading}
     onBack={props.prevStep}
     defaultValues={values}
-    track={["waterType", "houseType", "heatType"]}/>)
+    track={["waterType", "houseType", "heatingType"]}/>)
 }
 
 export default demographicForm
