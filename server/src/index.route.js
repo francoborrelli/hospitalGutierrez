@@ -12,11 +12,11 @@ const router = express.Router();
 router.get('/health-check', (req, res) => res.send('OK'));
 
 router.use('/auth', authRoutes);
+router.use('/site', siteRoutes);
 
 const authRouter = express.Router();
 authRouter.use('/users', userRoutes);
 authRouter.use('/roles', roleRoutes);
-authRouter.use('/site', siteRoutes);
 authRouter.use('/patients', patientRoutes);
 router.use('/', expressJwt({ secret: config.jwtSecret }), authRouter);
 

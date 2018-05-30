@@ -6,6 +6,7 @@ const hasPermission = require('../auth/hasPermission');
 
 const router = express.Router();
 
+// TODO: Autorizacion
 router
   .route('/')
   .get(hasPermission('paciente_index'), patientCtrl.list)

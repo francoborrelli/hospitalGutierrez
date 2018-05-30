@@ -57,14 +57,14 @@ export const logout = () => {
 export const checkAuth = () => {
   return async dispatch => {
     const token = localStorage.getItem('token');
+    dispatch(actions.appLoading());
     if (!token) {
       dispatch(logout());
     } else {
-      dispatch(actions.appLoading());
       const response = await axios.post(`/auth/newToken`);
       localStorage.setItem('token', response.data.token);
       dispatch(authSuccess(response.data.token));
-      dispatch(actions.appFetchData());
     }
+    dispatch(actions.appFetchData());
   };
 };
