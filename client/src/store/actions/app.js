@@ -16,3 +16,11 @@ export const appFetchData = () => {
     return dispatch(appLoaded(response.data));
   };
 };
+
+export const appDisabled = () => ({
+  type: types.APP_DISABLED
+});
+
+export const appEnabled = () => ({
+  type: types.APP_ENABLED
+});

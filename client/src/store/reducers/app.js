@@ -23,6 +23,10 @@ const reducer = (state = initialState, action) => {
         enabled: action.site.enabled,
         listAmount: action.site.listAmount
       };
+    case types.APP_DISABLED:
+      return { ...state, enabled: false };
+    case types.APP_ENABLED:
+      return { ...state, enabled: true };
     default:
       return state;
   }
