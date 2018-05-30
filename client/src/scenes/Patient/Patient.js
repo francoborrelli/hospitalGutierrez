@@ -33,16 +33,36 @@ class PatientPage extends Component {
 
   editPersonalDataHandler = data => {
     this.setState({personalDataRequest: true})
-    //Request
-    this.setState({personalDataRequest: false})
-    message.success("Los datos del paciente se actualizaron correctamente.")
+    axios
+      .patch('patients/' + this.props.match.params.patientId, data)
+      .then(response => {
+        this.setState({patient: response.data, personalDataRequest: false})
+        message.success("Los datos del paciente se actualizaron correctamente.")
+      })
+      .catch(() => {
+        this.setState({personalDataRequest: false})
+        message.error("Ha ocurrido un error. Intenta nuevamente.")
+      })
   }
 
   editDemographicDataHandler = data => {
+    const result = {
+      ...data,
+      hasPet: data.hasPet === 1,
+      hasRefrigerator: data.hasRefrigerator === 1,
+      hasElectricity: data.hasElectricity === 1
+    }
     this.setState({demographicDataRequest: true})
-    //Request
-    this.setState({demographicDataRequest: false})
-    message.success("Los datos demográficos del paciente se actualizaron correctamente.")
+    axios
+      .patch('patients/' + this.props.match.params.patientId + '/demographicData', result)
+      .then(response => {
+        this.setState({patient: response.data, demographicDataRequest: false})
+        message.success("Los datos demográficos del paciente se actualizaron correctamente.")
+      })
+      .catch(() => {
+        this.setState({demographicDataRequest: false})
+        message.error("Ha ocurrido un error. Intenta nuevamente.")
+      })
   }
 
   deletePatientHandler = patient => {
@@ -118,9 +138,7 @@ class PatientPage extends Component {
         <Route
           path={this.props.match.url + '/addRecord'}
           exact
-          render={() => (<AddRecordPage
-          user={this.props.user}
-          loading={this.state.deleteRequest}/>)}/>
+          render={() => (<AddRecordPage user={this.props.user} loading={this.state.deleteRequest}/>)}/>
         <Route
           path={this.props.match.url + '/record/:recordId'}
           render={() => (<RecordPage
