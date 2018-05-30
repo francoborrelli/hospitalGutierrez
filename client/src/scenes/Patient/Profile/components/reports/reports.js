@@ -22,7 +22,7 @@ class Reports extends Component {
 
   render() {
     return (
-      <Card bodyStyle={{padding: "10px 20px"}}>
+      <Card bodyStyle={{padding: "10px 20px"}} loading={this.props.loading}>
         <Tabs defaultActiveKey="1" size="small">
           <TabPane tab="Curva de PPC" key="1"><PpcReport patient={this.props.patient}/></TabPane>
           <TabPane tab="Curva de Talla" key="2"><HeightReport patient={this.props.patient}/></TabPane>

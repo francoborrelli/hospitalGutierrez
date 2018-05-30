@@ -42,7 +42,7 @@ class ClinicHistoryList extends Component {
       : null
 
     return (
-      <Card title="Historia Clínica" extra={extra}>
+      <Card title="Historia Clínica" extra={extra} loading={this.props.loading}>
         <Table
           data={this.state.clinicHistory}
           user={this.props.user}

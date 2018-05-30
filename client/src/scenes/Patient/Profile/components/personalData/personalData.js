@@ -74,7 +74,7 @@ const patientCard = props => {
     data={element.data}/>))
 
   return (
-    <Card title="Datos" extra={dropdown}>
+    <Card title="Datos" extra={dropdown} loading={props.loading} style={{minHeight: 500}}>
       <div style={{paddingTop: 10}}>
         <Row gutter={10} style={{padding: "0px 10px 0"}}>
           {elements}
