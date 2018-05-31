@@ -11,6 +11,7 @@ const PatientSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  roles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ClinicalRecord' }],
   documentNumber: {
     type: String,
     required: true
