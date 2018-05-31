@@ -12,13 +12,15 @@ const getAge = (birthday) => {
   date.add(months, "months")
   const days = moment().diff(date, 'days')
 
-  let result
+  let result = ""
   if (years){
     result = years !== 0 ? years + ' ' +  (years !== 1 ? 'años ' : 'año ') : ""
     result += months !== 0 ? months + ' ' +  (months !== 1 ? 'meses ' : 'mes ') : ""
   }else{
     result += months !== 0 ? months + ' ' +  (months !== 1 ? 'meses ' : 'mes ') : ""
-    result += days + ' ' + (days !== 1 ? 'días' : 'día')
+    if (days !== 0){
+      result += days + ' ' + (days !== 1 ? 'días' : 'día')
+    }
   }
 
   return result

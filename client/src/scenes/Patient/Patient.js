@@ -11,7 +11,8 @@ import RecordPage from "./ClinicHistory/Record"
 import hasPermission from '../../hoc/hasPermission';
 import Error403 from '../Errors/403';
 
-import axios from "../../axios-api.js"
+import axiosApi from "../../axios-api.js"
+import axiosRef from "../../axios-apiReferences"
 
 class PatientPage extends Component {
   state = {
@@ -24,16 +25,45 @@ class PatientPage extends Component {
   }
 
   componentDidMount = () => {
-    axios
+    axiosApi
       .get('patients/' + this.props.match.params.patientId)
       .then(response => {
-        this.setState({patient: response.data, loadingPage: false})
+
+        const requests = [
+          axiosRef.get('/tipo-documento/' + response.data.documentType),
+          axiosRef.get('/tipo-vivienda/' + response.data.houseType),
+          axiosRef.get('/tipo-agua/' + response.data.waterType),
+          axiosRef.get('/tipo-calefaccion/' + response.data.heatingType)
+        ]
+
+        if (response.data.insurance) {
+          requests.push(axiosRef.get('/obra-social/' + response.data.insurance))
+        }
+
+        Promise
+          .all(requests)
+          .then((results) => {
+            this.setState({
+              loadingPage: false,
+              patient: {
+                ...response.data,
+                documentType: results[0].data.nombre,
+                houseType: results[1].data.nombre,
+                waterType: results[2].data.nombre,
+                heatingType: results[3].data.nombre,
+                insurance: results[4]
+                  ? results[4].data.nombre
+                  : null
+              }
+            })
+          })
+          .catch()
       })
   }
 
   editPersonalDataHandler = data => {
     this.setState({personalDataRequest: true})
-    axios
+    axiosApi
       .patch('patients/' + this.props.match.params.patientId, data)
       .then(response => {
         this.setState({patient: response.data, personalDataRequest: false})
@@ -53,7 +83,7 @@ class PatientPage extends Component {
       hasElectricity: data.hasElectricity === 1
     }
     this.setState({demographicDataRequest: true})
-    axios
+    axiosApi
       .patch('patients/' + this.props.match.params.patientId + '/demographicData', result)
       .then(response => {
         this.setState({patient: response.data, demographicDataRequest: false})
@@ -67,7 +97,7 @@ class PatientPage extends Component {
 
   deletePatientHandler = patient => {
     this.setState({deleteRequest: true})
-    return axios
+    return axiosApi
       .patch('patients/' + this.props.match.params.patientId, {deleted: true})
       .then(() => {
         const name = patient.firstName + " " + patient.lastName
