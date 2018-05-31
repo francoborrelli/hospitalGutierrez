@@ -43,7 +43,7 @@ class Reports extends Component {
   getPieData = (apiData, data) => {
     const result = []
     apiData.forEach(element => {
-      let e = data.find(x => parseInt(x.id, 10) === element.id)
+      let e = data.find(x => x.id === parseInt(element.id, 10))
       if (e) {
         result.push({name: element.nombre, y: e.amount})
       } else {
