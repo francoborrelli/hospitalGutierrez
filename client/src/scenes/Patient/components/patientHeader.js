@@ -40,7 +40,7 @@ const patientHeader = props => (
               {props.patient.firstName} {props.patient.lastName}
             </h2>
             <h5 style={{color: "rgba(0,0,0,.45)"}}>
-              {props.patient.documentType} - {props.patient.documentNumber}
+              {props.patient.documentName} - {props.patient.documentNumber}
             </h5>
           </div>
         </div>

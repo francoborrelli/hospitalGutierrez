@@ -19,7 +19,7 @@ const getData = (patient, user) => {
       data: patient.phone || "-"
     }, {
       title: "Obra Social",
-      data: patient.insurance || "-"
+      data: patient.insuranceName || "-"
     }, {
       title: "Dirección",
       data: patient.address,
@@ -32,13 +32,13 @@ const getData = (patient, user) => {
     ? [
       {
         title: "Tipo de Vivienda",
-        data: patient.houseType
+        data: patient.houseName
       }, {
         title: "Tipo de Calefacción",
-        data: patient.heatingType
+        data: patient.heatingName
       }, {
         title: "Tipo de Agua",
-        data: patient.waterType
+        data: patient.waterName
       }, {
         title: "¿Heladera?",
         data: patient.hasRefrigerator

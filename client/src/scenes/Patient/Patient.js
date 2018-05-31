@@ -47,11 +47,11 @@ class PatientPage extends Component {
               loadingPage: false,
               patient: {
                 ...response.data,
-                documentType: results[0].data.nombre,
-                houseType: results[1].data.nombre,
-                waterType: results[2].data.nombre,
-                heatingType: results[3].data.nombre,
-                insurance: results[4]
+                documentName: results[0].data.nombre,
+                houseName: results[1].data.nombre,
+                waterName: results[2].data.nombre,
+                heatingName: results[3].data.nombre,
+                insuranceName: results[4]
                   ? results[4].data.nombre
                   : null
               }
