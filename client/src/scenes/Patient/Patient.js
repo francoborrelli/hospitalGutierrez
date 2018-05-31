@@ -1,26 +1,24 @@
 import React, {Component} from "react"
 import {message} from 'antd';
 import {Route, Switch, withRouter} from "react-router-dom"
-
 import Section from "./components/patientHeader"
 import ProfilePage from "./Profile/Profile"
 import AddRecordPage from "./ClinicHistory/AddRecord/AddRecord"
 import EditPatientPage from "../Patients/EditPatient/EditPatient"
 import RecordPage from "./ClinicHistory/Record"
-
 import hasPermission from '../../hoc/hasPermission';
 import Error403 from '../Errors/403';
-
+import Error404 from '../Errors/404';
 import axiosApi from "../../axios-api.js"
 import axiosRef from "../../axios-apiReferences"
 
 class PatientPage extends Component {
   state = {
+    error: false,
     personalDataRequest: false,
     demographicDataRequest: false,
     loadingPage: true,
     deleteRequest: false,
-
     patient: {}
   }
 
@@ -28,37 +26,48 @@ class PatientPage extends Component {
     axiosApi
       .get('patients/' + this.props.match.params.patientId)
       .then(response => {
-
-        const requests = [
-          axiosRef.get('/tipo-documento/' + response.data.documentType),
-          axiosRef.get('/tipo-vivienda/' + response.data.houseType),
-          axiosRef.get('/tipo-agua/' + response.data.waterType),
-          axiosRef.get('/tipo-calefaccion/' + response.data.heatingType)
-        ]
-
-        if (response.data.insurance) {
-          requests.push(axiosRef.get('/obra-social/' + response.data.insurance))
-        }
-
-        Promise
-          .all(requests)
-          .then((results) => {
-            this.setState({
-              loadingPage: false,
-              patient: {
-                ...response.data,
-                documentName: results[0].data.nombre,
-                houseName: results[1].data.nombre,
-                waterName: results[2].data.nombre,
-                heatingName: results[3].data.nombre,
-                insuranceName: results[4]
-                  ? results[4].data.nombre
-                  : null
-              }
-            })
-          })
-          .catch()
+        this.setState({patient: response.data})
       })
+      .catch(() => {
+        this.setState({error: true})
+      })
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.patient !== this.state.patient && this.state.patient.houseType) {
+      if (this.state.patient.insurance && prevState.patient.insurance !== this.state.patient.insurance) {
+        axiosRef.get('/obra-social/' + this.state.patient.insurance).then((result) =>
+        {this.setState(prevState => ({patient: {...prevState.patient, insuranceName: result.data.nombre}}))
+      })
+      }
+
+      if (prevState.patient.documentType !== this.state.patient.documentType) {
+        axiosRef.get('/tipo-documento/' + this.state.patient.documentType).then((result) =>
+        {this.setState(prevState => ({patient: {...prevState.patient, documentName: result.data.nombre}}))
+      })
+      }
+
+      if (prevState.patient.houseType !== this.state.patient.houseType) {
+        axiosRef.get('/tipo-vivienda/' + this.state.patient.houseType).then((result) =>
+        {this.setState(prevState => ({patient: {...prevState.patient, houseName: result.data.nombre}}))
+      })
+      }
+
+      if (prevState.patient.waterType !== this.state.patient.waterType) {
+        axiosRef.get('/tipo-agua/' + this.state.patient.waterType).then((result) =>
+        {this.setState(prevState => ({patient: {...prevState.patient, waterName: result.data.nombre}}))
+      })
+      }
+      if (prevState.patient.heatingType !== this.state.patient.heatingType) {
+        axiosRef.get('/tipo-calefaccion/' + this.state.patient.heatingType).then((result) =>
+        {this.setState(prevState => ({patient: {...prevState.patient, heatingName: result.data.nombre}}))
+      })
+      }else{
+        if (prevState.loadingPage){
+          this.setState({loadingPage: false})
+        }
+      }
+    }
   }
 
   editPersonalDataHandler = data => {
@@ -66,7 +75,7 @@ class PatientPage extends Component {
     axiosApi
       .patch('patients/' + this.props.match.params.patientId, data)
       .then(response => {
-        this.setState({patient: response.data, personalDataRequest: false})
+        this.setState((prevState) => ({patient: {...prevState.patient, ...response.data}, personalDataRequest: false}))
         message.success("Los datos del paciente se actualizaron correctamente.")
       })
       .catch(() => {
@@ -86,7 +95,7 @@ class PatientPage extends Component {
     axiosApi
       .patch('patients/' + this.props.match.params.patientId + '/demographicData', result)
       .then(response => {
-        this.setState({patient: response.data, demographicDataRequest: false})
+        this.setState((prevState) => ({patient: {...prevState.patient, ...response.data},  demographicDataRequest: false}))
         message.success("Los datos demográficos del paciente se actualizaron correctamente.")
       })
       .catch(() => {
@@ -113,7 +122,6 @@ class PatientPage extends Component {
 
   deleteRecordHandler = record => {
     this.setState({deleteRequest: true})
-
     this.setState({deleteRequest: false})
   }
 
@@ -150,7 +158,7 @@ class PatientPage extends Component {
 
   render() {
 
-    const section = <Section patient={this.state.patient}>
+    let section = <Section patient={this.state.patient}>
       <Switch>
         <Route
           path={this.props.match.url + '/edit'}
@@ -166,7 +174,10 @@ class PatientPage extends Component {
         <Route
           path={this.props.match.url + '/addRecord'}
           exact
-          render={() => (<AddRecordPage user={this.props.user} loading={this.state.deleteRequest}/>)}/>
+          render={() => (<AddRecordPage
+          user={this.props.user}
+          patient={this.state.patient}
+          loading={this.state.deleteRequest}/>)}/>
         <Route
           path={this.props.match.url + '/record/:recordId'}
           render={() => (<RecordPage
@@ -184,6 +195,10 @@ class PatientPage extends Component {
           onDeletePatient={this.deletePatientHandler}/>)}/>
       </Switch>
     </Section>
+
+    section = this.state.error
+      ? <Error404/>
+      : section
 
     return this.checkPermissions()
       ? section

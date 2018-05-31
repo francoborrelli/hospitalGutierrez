@@ -46,7 +46,7 @@ function handlePet(withPet, patient) {
 
 async function get(req, res, next) {
   try {
-    const patients = await Patient.find();
+    const patients = await Patient.find({deleted: false});
     const houseTypes = [];
     const waterTypes = [];
     const heatingTypes = [];
