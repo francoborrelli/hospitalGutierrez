@@ -62,7 +62,7 @@ async function get(req, res, next) {
       handlePet(withPet, patient);
     });
     return res.json({
-      patient: patients.length,
+      totalPatients: patients.length,
       houseTypes,
       waterTypes,
       heatingTypes,
