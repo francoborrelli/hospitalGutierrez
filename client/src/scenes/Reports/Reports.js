@@ -14,35 +14,36 @@ class Reports extends Component {
     total: 10,
     withRefrigerator: [],
     withElectricity: [],
-    withPet: [],
+    withPet: []
   }
 
-  componentDidMount = () => {
-    axios
-      .get('reports')
-      .then((response) => {
-        const data = response.data
-        const apiData = this.props.apiData
-        this.setState({
-          total: data.totalPatients,
-          heatingTypes: this.getPieData(apiData.heatingTypes, data.heatingTypes),
-          houseTypes: this.getPieData(apiData.houseTypes, data.houseTypes),
-          waterTypes: this.getPieData(apiData.waterTypes, data.waterTypes),
-          withRefrigerator: this.getColumnData(data.withRefrigerator),
-          withElectricity: this.getColumnData(data.withElectricity),
-          withPet: this.getColumnData(data.withPet),
-          loading: false
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.fetchingApiData !== this.props.fetchingApiData) {
+      axios
+        .get('reports')
+        .then((response) => {
+          const data = response.data
+          this.setState({
+            total: data.totalPatients,
+            heatingTypes: this.getPieData(this.props.apiData.heatingTypes, data.heatingTypes),
+            houseTypes: this.getPieData(this.props.apiData.houseTypes, data.houseTypes),
+            waterTypes: this.getPieData(this.props.apiData.waterTypes, data.waterTypes),
+            withRefrigerator: this.getColumnData(data.withRefrigerator),
+            withElectricity: this.getColumnData(data.withElectricity),
+            withPet: this.getColumnData(data.withPet),
+            loading: false
+          })
         })
-      })
-      .catch(() => {
-        message.error('Hubo un error. Intenta nuevamente')
-      })
+        .catch((e) => {
+          message.error('Hubo un error. Intenta nuevamente')
+        })
+    }
   }
 
   getPieData = (apiData, data) => {
     const result = []
     apiData.forEach(element => {
-      let e = data.find(x => parseInt(x.id, 10) == element.id)
+      let e = data.find(x => parseInt(x.id, 10) === element.id)
       if (e) {
         result.push({name: element.nombre, y: e.amount})
       } else {
@@ -52,7 +53,23 @@ class Reports extends Component {
     return result
   }
 
-  getColumnData = (data) => [{name: "Si",data: [{y: data.yes}]}, {name: "No", data: [{y: data.no}]}]
+  getColumnData = (data) => [
+    {
+      name: "Si",
+      data: [
+        {
+          y: data.yes
+        }
+      ]
+    }, {
+      name: "No",
+      data: [
+        {
+          y: data.no
+        }
+      ]
+    }
+  ]
 
   render = () => (
     <Section title="Reportes">
