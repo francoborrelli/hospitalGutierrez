@@ -15,9 +15,9 @@ const deleteModal = (type, record, onOk, action) => {
     "Estas a punto de " + (action || "eliminar")  + " al " +
     type +
     " " +
-    record.name +
+    record.firstName +
     " " +
-    record.lastname +
+    record.lastName +
     "."
   return confirmationModal(content, onOk)
 }

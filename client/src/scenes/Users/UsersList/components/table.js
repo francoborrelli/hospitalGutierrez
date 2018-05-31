@@ -9,8 +9,8 @@ const tableUsers = props => {
     .data
     .map(user => ({
       key: user._id,
-      name: user.firstName,
-      lastname: user.lastName,
+      firstName: user.firstName,
+      lastName: user.lastName,
       username: user.username,
       email: user.email,
       role: user
@@ -25,14 +25,14 @@ const tableUsers = props => {
   const columns = [
     {
       title: 'Nombre',
-      dataIndex: 'name',
-      key: 'name',
-      sorter: (a, b) => a.name.toUpperCase() < b.name.toUpperCase()
+      dataIndex: 'firstName',
+      key: 'firstName',
+      sorter: (a, b) => a.firstName.toUpperCase() < b.firstName.toUpperCase()
     }, {
       title: 'Apellido',
-      dataIndex: 'lastname',
-      key: 'lastname',
-      sorter: (a, b) => a.lastname.toUpperCase() < b.lastname.toUpperCase()
+      dataIndex: 'lastName',
+      key: 'lastName',
+      sorter: (a, b) => a.lastName.toUpperCase() < b.lastName.toUpperCase()
     }, {
       title: 'Nombre de Usuario',
       dataIndex: 'username',

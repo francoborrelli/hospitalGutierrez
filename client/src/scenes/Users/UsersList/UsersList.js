@@ -57,7 +57,7 @@ class UserList extends Component {
       await axios.patch(`/users/${user.key}`, {
         active: !active
       });
-      const name = user.name + ' ' + user.lastname;
+      const name = user.firstName + ' ' + user.lastName;
       let status;
       this.setState(prevState => {
         const newUsers = [];

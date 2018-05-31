@@ -57,13 +57,24 @@ class PatientsList extends Component {
   }
 
   deletePatientHandler = patient => {
-    console.log(patient)
-    return axiosApi.delete('patients').then(() => {
-      this.setState({loading: true})
-      const name = patient.name + " " + patient.lastname
-      message.success("Se eliminó a " + name + " correctamente.")
-      this.setState({loading: false})
-    }).catch(() => message.error("Algo falló. Intentá nuevamente."))
+    this.setState({loading: true})
+    axiosApi
+      .delete('/patients/' + patient.key)
+      .then(() => {
+        const allPatients = this
+          .state
+          .allPatients
+          .filter(p => p._id !== patient.key)
+        const patients = this
+          .state
+          .patients
+          .filter(p => p._id !== patient.key)
+        this.setState({allPatients: allPatients, patients: patients, loading: false})
+        const name = patient.firstName + " " + patient.lastName
+        message.success("Se eliminó a " + name + " correctamente.")
+
+      })
+      .catch(() => message.error("Algo falló. Intentá nuevamente."))
   }
 
   render() {

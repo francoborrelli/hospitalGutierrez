@@ -10,8 +10,8 @@ const tablePatients = props => {
     .data
     .map(patient => ({
       key: patient._id,
-      name: patient.firstName,
-      lastname: patient.lastName,
+      firstName: patient.firstName,
+      lastName: patient.lastName,
       documentType: patient.documentType,
       documentNumber: patient.documentNumber
     }));
@@ -26,14 +26,14 @@ const tablePatients = props => {
   const columns = [
     {
       title: "Nombre",
-      dataIndex: "name",
-      key: "name",
-      sorter: (a, b) => a.name < b.name
+      dataIndex: "firstName",
+      key: "firstName",
+      sorter: (a, b) => a.firstName < b.firstName
     }, {
       title: "Apellido",
-      dataIndex: "lastname",
-      key: "lastname",
-      sorter: (a, b) => a.lastname < b.lastname
+      dataIndex: "lastName",
+      key: "lastName",
+      sorter: (a, b) => a.lastName < b.lastName
     }, {
       title: "Tipo Doc.",
       dataIndex: "documentType",

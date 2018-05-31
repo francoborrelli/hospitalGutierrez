@@ -98,7 +98,7 @@ class PatientPage extends Component {
   deletePatientHandler = patient => {
     this.setState({deleteRequest: true})
     return axiosApi
-      .patch('patients/' + this.props.match.params.patientId, {deleted: true})
+      .delete('patients/' + this.props.match.params.patientId)
       .then(() => {
         const name = patient.firstName + " " + patient.lastName
         message.success("Se eliminó a " + name + " correctamente.")
