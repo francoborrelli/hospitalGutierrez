@@ -1,46 +1,75 @@
 import React, {Component} from "react";
+import {message} from "antd"
+import axios from '../../axios-api';
 
 import Report from "./components/report"
 import Section from "../../components/header/sectionHeader/sectionHeader"
 import Row from "../../components/grid/row";
 import hasPermission from "../../hoc/hasPermission"
+import withApiRefData from '../../hoc/withApiRefData';
 
 class Reports extends Component {
   state = {
     loading: true,
     total: 10,
-
-    //MOCK DATA
-    pieData: [
-      {
-        name: 'Jane',
-        y: 13
-      }, {
-        name: 'John',
-        y: 23
-      }, {
-        name: 'Joe',
-        y: 19
-      }
-    ],
-    columnData: [
-      {
-        name: 'No',
-        data: [
-          {
-            y: 10
-          }
-        ]
-      }, {
-        name: 'Si',
-        data: [
-          {
-            y: 23
-          }
-        ]
-      }
-    ]
+    withRefrigerator: [],
+    withElectricity: [],
+    withPet: []
   }
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.fetchingApiData !== this.props.fetchingApiData) {
+      axios
+        .get('reports')
+        .then((response) => {
+          const data = response.data
+          this.setState({
+            total: data.totalPatients,
+            heatingTypes: this.getPieData(this.props.apiData.heatingTypes, data.heatingTypes),
+            houseTypes: this.getPieData(this.props.apiData.houseTypes, data.houseTypes),
+            waterTypes: this.getPieData(this.props.apiData.waterTypes, data.waterTypes),
+            withRefrigerator: this.getColumnData(data.withRefrigerator),
+            withElectricity: this.getColumnData(data.withElectricity),
+            withPet: this.getColumnData(data.withPet),
+            loading: false
+          })
+        })
+        .catch((e) => {
+          message.error('Hubo un error. Intenta nuevamente')
+        })
+    }
+  }
+
+  getPieData = (apiData, data) => {
+    const result = []
+    apiData.forEach(element => {
+      let e = data.find(x => x.id === parseInt(element.id, 10))
+      if (e) {
+        result.push({name: element.nombre, y: e.amount})
+      } else {
+        result.push({name: element.nombre, y: 0})
+      }
+    });
+    return result
+  }
+
+  getColumnData = (data) => [
+    {
+      name: "Si",
+      data: [
+        {
+          y: data.yes
+        }
+      ]
+    }, {
+      name: "No",
+      data: [
+        {
+          y: data.no
+        }
+      ]
+    }
+  ]
 
   render = () => (
     <Section title="Reportes">
@@ -48,32 +77,38 @@ class Reports extends Component {
         <Report
           type="pie"
           title="Tipos de Viviendas"
-          data={this.state.pieData}
+          loading={this.state.loading}
+          data={this.state.houseTypes}
           total={this.state.total}/>
         <Report
           type="pie"
           title="Tipos de Agua"
-          data={this.state.pieData}
+          loading={this.state.loading}
+          data={this.state.waterTypes}
           total={this.state.total}/>
         <Report
           type="pie"
           title="Tipos de Calefacción"
-          data={this.state.pieData}
+          loading={this.state.loading}
+          data={this.state.heatingTypes}
           total={this.state.total}/>
         <Report
           type="column"
           title="Pacientes con electricidad"
-          data={this.state.columnData}
+          loading={this.state.loading}
+          data={this.state.withElectricity}
           total={this.state.total}/>
         <Report
           type="column"
           title="Pacientes con Heladera"
-          data={this.state.columnData}
+          loading={this.state.loading}
+          data={this.state.withRefrigerator}
           total={this.state.total}/>
         <Report
           type="column"
           title="Pacientes con Mascotas"
-          data={this.state.columnData}
+          data={this.state.withPet}
+          loading={this.state.loading}
           total={this.state.total}/>
       </Row>
     </Section>
@@ -81,4 +116,4 @@ class Reports extends Component {
 
 }
 
-export default hasPermission(Reports, ['reportes_index'])
+export default withApiRefData()(hasPermission(Reports, ['reportes_index']))

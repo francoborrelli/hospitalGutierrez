@@ -5,7 +5,8 @@ const withApiRefData = () => {
   return function (WrappedComponent) {
     class PatientReferenceData extends Component {
       state = {
-        apiData: {}
+        apiData: {},
+        fetchingApiData: true
       };
 
       componentDidMount() {
@@ -17,6 +18,7 @@ const withApiRefData = () => {
           axios.get('/tipo-calefaccion')
         ]).then((results) => {
           this.setState({
+            fetchingApiData: false,
             apiData: {
               documentTypes: results[0].data,
               insurances: results[1].data,
@@ -29,7 +31,10 @@ const withApiRefData = () => {
       }
 
       render() {
-        return (<WrappedComponent {...this.props} apiData={this.state.apiData}/>);
+        return (<WrappedComponent
+          {...this.props}
+          fetchingApiData={this.state.fetchingApiData}
+          apiData={this.state.apiData}/>)
       }
     }
     return PatientReferenceData;

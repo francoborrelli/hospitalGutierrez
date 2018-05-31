@@ -26,7 +26,9 @@ const report = props => {
       filename: "Reporte: " + props.title
     }
   }
-  return <Col md={12} xl={8} {...props}><Chart {...config}/></Col>
+  const {loading, ...others} = props
+
+  return <Col md={12} xl={8} {...others}><Chart loading={props.loading} {...config}/></Col>
 }
 
 export default report;
