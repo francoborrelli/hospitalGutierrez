@@ -19,7 +19,8 @@ router
 router
   .route('/:patientId')
   .get(patientCtrl.get)
-  .patch(validate(paramValidation.patchPatient), patientCtrl.patch);
+  .patch(validate(paramValidation.patchPatient), patientCtrl.patch)
+  .delete(patientCtrl.remove);
 
 router
   .route('/:patientId/demographicData')

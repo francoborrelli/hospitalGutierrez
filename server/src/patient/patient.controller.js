@@ -5,7 +5,7 @@ const Patient = require('./patient.model');
 
 async function list(req, res, next) {
   try {
-    const patients = await Patient.find({deleted: false});
+    const patients = await Patient.find({ deleted: false });
     return res.json(patients);
   } catch (error) {
     const err = new APIError(
@@ -140,10 +140,28 @@ async function get(req, res, next) {
   }
 }
 
+async function remove(req, res, next) {
+  try {
+    const patient = await Patient.findById(req.params.patientId);
+    if (!patient) {
+      const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
+      return next(err);
+    }
+    patient.deleted = true;
+    patient
+      .save()
+      .then(savedPatient => res.send())
+      .catch(e => next(e));
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   list,
   create,
   get,
   patch,
-  patchDemographicData
+  patchDemographicData,
+  remove
 };
