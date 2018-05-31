@@ -45,7 +45,7 @@ class PatientsList extends Component {
       patients = patients.filter(patient => patient.documentNumber.toLowerCase().includes(data.documentNumber.toLowerCase()));
     }
     if (data.documentType) {
-      patients = patients.filter(patient => patient.documentType === data.documentType);
+      patients = patients.filter(patient => patient.documentType.toString() === data.documentType);
     }
 
     let filtered = this.state.allPatients.length !== patients.length
@@ -57,12 +57,8 @@ class PatientsList extends Component {
   }
 
   deletePatientHandler = patient => {
-    return new Promise((resolve, reject) => {
-      //Change Timeout for delelte request
-      setTimeout(Math.random() > 0.3
-        ? resolve
-        : reject, 1000)
-    }).then(() => {
+    console.log(patient)
+    return axiosApi.delete('patients').then(() => {
       this.setState({loading: true})
       const name = patient.name + " " + patient.lastname
       message.success("Se eliminó a " + name + " correctamente.")

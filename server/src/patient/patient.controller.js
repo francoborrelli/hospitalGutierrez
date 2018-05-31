@@ -5,7 +5,7 @@ const Patient = require('./patient.model');
 
 async function list(req, res, next) {
   try {
-    const patients = await Patient.find();
+    const patients = await Patient.find({deleted: false});
     return res.json(patients);
   } catch (error) {
     const err = new APIError(
@@ -130,7 +130,7 @@ async function patchDemographicData(req, res, next) {
 async function get(req, res, next) {
   try {
     const patient = await Patient.findById(req.params.patientId);
-    if (!patient) {
+    if (!patient || patient.deleted) {
       const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
       return next(err);
     }

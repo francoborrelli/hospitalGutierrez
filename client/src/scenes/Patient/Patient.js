@@ -67,20 +67,18 @@ class PatientPage extends Component {
 
   deletePatientHandler = patient => {
     this.setState({deleteRequest: true})
-    return new Promise((resolve, reject) => {
-      //Change Timeout for delete request
-      setTimeout(Math.random() > 0.3
-        ? resolve
-        : reject, 1000)
-    }).then(() => {
-      const name = patient.name + " " + patient.lastname
-      message.success("Se eliminó a " + name + " correctamente.")
-      this.setState({loading: false})
-      this
-        .props
-        .history
-        .push("/patients")
-    }).catch(() => message.error("Algo falló. Intentá nuevamente."))
+    return axios
+      .patch('patients/' + this.props.match.params.patientId, {deleted: true})
+      .then(() => {
+        const name = patient.firstName + " " + patient.lastName
+        message.success("Se eliminó a " + name + " correctamente.")
+        this.setState({loading: false})
+        this
+          .props
+          .history
+          .push("/patients")
+      })
+      .catch(() => message.error("Algo falló. Intentá nuevamente."))
   }
 
   deleteRecordHandler = record => {
