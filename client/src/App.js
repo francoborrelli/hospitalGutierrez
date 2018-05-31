@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   setTitle() {
-    document.title = this.props.title
+    document.title = this.props.title || "Cargando..."
   }
 
   render() {
