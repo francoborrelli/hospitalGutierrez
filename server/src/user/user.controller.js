@@ -8,7 +8,7 @@ const Role = require('../role/role.model');
 function load(req, res, next, id) {
   User.get(id)
     .then(user => {
-      req.user = user;
+      req.user = {...req.user, ...user};
       return next();
     })
     .catch(e => next(e));

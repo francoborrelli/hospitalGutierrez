@@ -24,6 +24,7 @@ class Configuration extends Component {
     axios
       .patch('/site', data)
       .then(() => {
+        this.props.appChangeData(data)
         this.setState({ pageInfoRequest: false });
         message.success('Datos actualizados correctamente.');
       })
@@ -37,6 +38,7 @@ class Configuration extends Component {
     axios
       .patch('/site', data)
       .then(() => {
+        this.props.appChangeElements(data.listAmount)
         this.setState({ elementsRequest: false });
         message.success('Se actualizó la cantidad de elementos correctamente.');
       })
@@ -116,7 +118,9 @@ class Configuration extends Component {
 const mapStateToProps = state => ({ site: state.app });
 const mapDispatchToProps = dispatch => ({
   appEnabled: () => dispatch(actions.appEnabled()),
-  appDisabled: () => dispatch(actions.appDisabled())
+  appDisabled: () => dispatch(actions.appDisabled()),
+  appChangeElements: (listAmount) => dispatch(actions.appChangeElements(listAmount)),
+  appChangeData: (data) => dispatch(actions.appChangeData(data))
 });
 
 export default hasPermission(

@@ -27,6 +27,15 @@ const reducer = (state = initialState, action) => {
       return { ...state, enabled: false };
     case types.APP_ENABLED:
       return { ...state, enabled: true };
+    case types.APP_CHANGE_ELEMENTS:
+      return { ...state, listAmount: action.listAmount }
+    case types.APP_CHANGE_DATA:
+      return {
+        ...state,
+        title: action.title,
+        footer: action.footer,
+        email: action.email
+      };
     default:
       return state;
   }

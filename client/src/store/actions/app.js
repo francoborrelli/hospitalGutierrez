@@ -24,3 +24,14 @@ export const appDisabled = () => ({
 export const appEnabled = () => ({
   type: types.APP_ENABLED
 });
+
+export const appChangeElements = listAmount => ({
+  type: types.APP_CHANGE_ELEMENTS,
+  listAmount
+});
+
+export const appChangeData = data => ({
+  type: types.APP_CHANGE_DATA,
+  ...data
+});
+

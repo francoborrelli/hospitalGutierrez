@@ -10,3 +10,5 @@ export const APP_LOADED = 'APP_LOADED';
 
 export const APP_DISABLED = 'APP_DISABLED';
 export const APP_ENABLED = 'APP_ENABLED';
+export const APP_CHANGE_ELEMENTS = 'APP_CHANGE_ELEMENTS';
+export const APP_CHANGE_DATA = 'APP_CHANGE_DATA';

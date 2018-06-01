@@ -16,6 +16,8 @@ module.exports = permission => {
       return res.json({ blocked: true });
     }
     const permissions = user.getPermissions();
+    console.log('HASPERMISSIONS....', req.user)
+
     if (permissions.length !== req.user.permissions.length) {
       res.status(401);
       const token = jwt.sign(
