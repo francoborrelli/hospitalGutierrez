@@ -33,6 +33,4 @@ router
   .route('/:userId/roles/:roleId')
   .delete(validate(paramValidation.removeRoleToUser), userCtrl.removeRole);
 
-// router.param('userId', userCtrl.load);
-
 module.exports = router;

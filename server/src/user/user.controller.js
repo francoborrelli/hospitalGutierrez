@@ -158,7 +158,6 @@ async function checkEmail(req, res, next) {
 }
 
 module.exports = {
-  load,
   get,
   create,
   patch,
