@@ -12,11 +12,15 @@ const personalDataForm = props => {
       axios
       .get('/patients/documentExists', {params: {documentNumber: documentNumber, documentType: documentType}})
       .then((response) => {
+        console.log(response)
         if (response.data){
           callback("El documento ya se encuentra registrado en el sistema")
+      }else{
+        callback()
       }})
-    }
+    }else{
       callback()
+    }
   }
 
   const revalidate = (form, rule, documentType, callback) => {

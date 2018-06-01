@@ -16,15 +16,7 @@ async function list(req, res, next) {
 // TODO: validar restricciones
 async function create(req, res, next) {
 
-  const existPatient = await Patient.findOne({
-    $and: [
-      {
-        documentType: req.query.documentType
-      }, {
-        documentNumber: req.query.documentNumber
-      }
-    ]
-  })
+  const existPatient = await Patient.findOne({documentType: req.query.documentType, documentNumber: req.query.documentNumber, deleted: false})
   if (existPatient) {
     const err = new APIError('Patient exists create', httpStatus.BAD_REQUEST, true);
     return next(err);
@@ -67,15 +59,7 @@ async function patch(req, res, next) {
     }
 
     if (patient.documentNumber !== req.body.documentNumber || patient.documentType !== req.body.documentType) {
-      const exists = Patient.findOne({
-        $and: [
-          {
-            documentType: req.query.documentType
-          }, {
-            documentNumber: req.query.documentNumber
-          }
-        ]
-      })
+      const exists = await Patient.findOne({documentType: req.query.documentType, documentNumber: req.query.documentNumber, deleted: false})
       if (exists) {
         const err = new APIError('Patient exists with that document', httpStatus.BAD_REQUEST, true);
         return next(err);
@@ -186,15 +170,7 @@ async function remove(req, res, next) {
 }
 
 async function checkDocument(req, res, next) {
-  const patient = await Patient.findOne({
-    $and: [
-      {
-        documentType: req.query.documentType
-      }, {
-        documentNumber: req.query.documentNumber
-      }
-    ]
-  })
+  const patient = await Patient.findOne({documentType: req.query.documentType, documentNumber: req.query.documentNumber, deleted: false})
   res.json(patient !== null);
 }
 
