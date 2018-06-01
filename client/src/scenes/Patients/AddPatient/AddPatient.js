@@ -28,6 +28,7 @@ class AddPatient extends Component {
   }
 
   prevStepHandler = data => {
+    console.log(data)
     this.setState((prevState, props) => ({
       current: prevState.current - 1,
       demographicData: data
@@ -80,6 +81,7 @@ class AddPatient extends Component {
       {
         title: "Datos Personales",
         content: (<PersonalForm
+          mantainDefault
           onCancel={this.redirect}
           submitted={this.personalDataSubmitHandler}
           patient={this.state.personalData}

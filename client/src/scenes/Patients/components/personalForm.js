@@ -12,7 +12,6 @@ const personalDataForm = props => {
       axios
       .get('/patients/documentExists', {params: {documentNumber: documentNumber, documentType: documentType}})
       .then((response) => {
-        console.log(response)
         if (response.data){
           callback("El documento ya se encuentra registrado en el sistema")
       }else{
@@ -151,12 +150,12 @@ const personalDataForm = props => {
   const patient = props.patient
   if (patient){
     values = {
-      documentType: patient.documentType ? patient.documentType.toString() : "",
+      documentType: patient.documentType ? patient.documentType.toString() : undefined,
       firstName: patient.firstName,
       lastName: patient.lastName,
       birthday: moment(patient.birthday),
       phone: patient.phone,
-      insurance: patient.insurance ? patient.insurance.toString() : "",
+      insurance: patient.insurance ? patient.insurance.toString() : undefined,
       address: patient.address,
       gender: patient.gender,
       documentNumber: patient.documentNumber

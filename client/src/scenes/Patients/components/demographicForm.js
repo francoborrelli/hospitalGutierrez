@@ -122,12 +122,12 @@ const demographicForm = props => {
   const patient = props.patient
   if (patient) {
     values = {
-      hasRefrigerator: patient.hasRefrigerator ? 1 : 0,
-      hasPet: patient.hasPet ? 1 : 0,
-      hasElectricity: patient.hasElectricity ? 1 : 0,
-      heatingType: patient.heatingType ? patient.heatingType.toString() : "",
-      houseType: patient.houseType ? patient.houseType.toString() : "",
-      waterType: patient.waterType ? patient.waterType.toString() : "",
+      hasRefrigerator: patient.hasRefrigerator === undefined ? undefined : patient.hasRefrigerator ? 1 : 0,
+      hasPet: patient.hasPet === undefined ? undefined : patient.hasPet ? 1 : 0,
+      hasElectricity: patient.hasElectricity === undefined ? undefined : patient.hasElectricity ? 1 : 0,
+      heatingType: patient.heatingType ? patient.heatingType.toString() : undefined,
+      houseType: patient.houseType ? patient.houseType.toString() : undefined,
+      waterType: patient.waterType ? patient.waterType.toString() : undefined,
     }
   }
 
