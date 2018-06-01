@@ -28,7 +28,6 @@ class AddPatient extends Component {
   }
 
   prevStepHandler = data => {
-    console.log(data)
     this.setState((prevState, props) => ({
       current: prevState.current - 1,
       demographicData: data
