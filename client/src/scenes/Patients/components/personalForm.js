@@ -8,24 +8,35 @@ const personalDataForm = props => {
   const documentValidator = (form, rule, documentNumber, callback) => {
 
     const documentType = form.getFieldValue("documentType")
-    if (documentType){
+    const patient = props.patient ? props.patient : {}
+    console.log()
+    if (documentType && (parseInt(documentType, 10) !== patient.documentType || documentNumber !== patient.documentNumber)) {
       axios
-      .get('/patients/documentExists', {params: {documentNumber: documentNumber, documentType: documentType}})
-      .then((response) => {
-        if (response.data){
-          callback("El documento ya se encuentra registrado en el sistema")
-      }else{
-        callback()
-      }})
-    }else{
+        .get('/patients/documentExists', {
+        params: {
+          documentNumber: documentNumber,
+          documentType: documentType,
+          id: patient
+            ? patient.id
+            : undefined
+        }
+      })
+        .then((response) => {
+          if (response.data) {
+            callback("El documento ya se encuentra registrado en el sistema")
+          } else {
+            callback()
+          }
+        })
+    } else {
       callback()
     }
   }
 
   const revalidate = (form, rule, documentType, callback) => {
     const documentNumber = form.getFieldValue("documentNumber")
-    if (documentNumber){
-      form.validateFields(["documentNumber"], { force: true })
+    if (documentNumber) {
+      form.validateFields(["documentNumber"], {force: true})
     }
     callback()
   }
@@ -40,10 +51,10 @@ const personalDataForm = props => {
           required: true,
           whitespace: true,
           message: "Ingrese el apellido"
-        },
-        {
+        }, {
           message: "Debe tener solo letras",
-          pattern: "^[a-zA-ZÀ-ÿ\u00f1\u00d1  _]*(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1  _]+$"
+          pattern: "^[a-zA-ZÀ-ÿ\u00f1\u00d1  _]*(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1" +
+              "  _]+$"
         }
       ]
     },
@@ -56,10 +67,10 @@ const personalDataForm = props => {
           required: true,
           whitespace: true,
           message: "Ingrese el nombre"
-        },
-        {
+        }, {
           message: "Debe tener solo letras",
-          pattern: "^[a-zA-ZÀ-ÿ\u00f1\u00d1  _]*(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1  _]+$"
+          pattern: "^[a-zA-ZÀ-ÿ\u00f1\u00d1  _]*(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1" +
+              "  _]+$"
         }
       ]
     },
@@ -79,7 +90,9 @@ const personalDataForm = props => {
         type: "select",
         name: "documentType",
         props: {
-          style: { width: 70 },
+          style: {
+            width: 70
+          },
           placeholder: "Tipo",
           required: true
         },
@@ -113,15 +126,32 @@ const personalDataForm = props => {
       props: {
         placeholder: "Género"
       },
-      options: [{ id: "male", nombre: "Másculino" }, { id: "female", nombre: "Femenino" }],
-      rules: [{ required: true, message: "Seleccione un género" }]
+      options: [
+        {
+          id: "male",
+          nombre: "Másculino"
+        }, {
+          id: "female",
+          nombre: "Femenino"
+        }
+      ],
+      rules: [
+        {
+          required: true,
+          message: "Seleccione un género"
+        }
+      ]
     },
     address: {
       name: "address",
       label: "Dirección",
       type: "input",
       rules: [
-        { required: true, whitespace: true, message: "Ingrese la dirección" }
+        {
+          required: true,
+          whitespace: true,
+          message: "Ingrese la dirección"
+        }
       ]
     },
     insurance: {
@@ -148,31 +178,37 @@ const personalDataForm = props => {
 
   let values;
   const patient = props.patient
-  if (patient){
+  if (patient) {
     values = {
-      documentType: patient.documentType ? patient.documentType.toString() : undefined,
+      documentType: patient.documentType
+        ? patient
+          .documentType
+          .toString()
+        : undefined,
       firstName: patient.firstName,
       lastName: patient.lastName,
       birthday: moment(patient.birthday),
       phone: patient.phone,
-      insurance: patient.insurance ? patient.insurance.toString() : undefined,
+      insurance: patient.insurance
+        ? patient
+          .insurance
+          .toString()
+        : undefined,
       address: patient.address,
       gender: patient.gender,
       documentNumber: patient.documentNumber
     }
   }
 
-
-  return (
-    <Form
-      fields={fields}
-      {...props}
-      layout="vertical"
-      buttonText={props.btnText ? props.btnText : "Confirmar"}
-      defaultValues={values}
-      track={["documentType"]}
-    />
-  )
+  return (<Form
+    fields={fields}
+    {...props}
+    layout="vertical"
+    buttonText={props.btnText
+    ? props.btnText
+    : "Confirmar"}
+    defaultValues={values}
+    track={["documentType"]}/>)
 }
 
 export default personalDataForm
