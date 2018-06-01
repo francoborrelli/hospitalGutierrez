@@ -1,6 +1,8 @@
 import React from "react"
-import {Layout, Row, Col, Divider, Avatar} from 'antd';
+import {Layout, Row, Col, Avatar, Icon, Tooltip, Button} from 'antd';
 import moment from "moment"
+import {withRouter} from "react-router-dom"
+import Divider from "../../../components/divider/divider"
 
 const {Header, Content} = Layout
 
@@ -22,7 +24,6 @@ const getAge = (birthday) => {
       result += days + ' ' + (days !== 1 ? 'días' : 'día')
     }
   }
-
   return result
 }
 
@@ -46,22 +47,22 @@ const patientHeader = props => (
         </div>
       </Col>
       <Col sm={11}>
-        <div style={{
-          display: "flex",
-          float: "right",
-          paddingTop: 13,
-          paddingRight: 25,
-          textAlign: "right"
-        }}>
+        <div style={{display: "flex", float: "right", paddingTop: 13,paddingRight: 25, textAlign: "right"}}>
           <div>
             <h5 style={{color: "rgba(0,0,0,.45)"}}>Edad</h5>
             <h3>{getAge(props.patient.birthday)}</h3>
           </div>
-          <Divider style={{margin: "0 15px", height: 39}} type="vertical"/>
+          <Divider/>
           <div>
             <h5 style={{ color: "rgba(0,0,0,.45)"}}>Consultas</h5>
             <h3>{props.patient.visits}</h3>
           </div>
+          <Divider/>
+          <div style={{verticalAlign: "text-bottom"}}>
+        <Tooltip placement="right" title="Volver">
+          <Button style={{verticalAlign: "text-bottom"}} onClick={() => props.goBackTo ? props.history.push(props.goBackTo) : props.history.goBack()}><Icon type="rollback"/></Button>
+        </Tooltip>
+      </div>
         </div>
       </Col>
     </Row>
@@ -70,4 +71,4 @@ const patientHeader = props => (
 </Content>
 )
 
-export default patientHeader
+export default withRouter(patientHeader)
