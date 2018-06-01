@@ -8,36 +8,43 @@ const tablePatients = props => {
 
   const data = props
     .data
-    .map(patient => ({
-      key: patient._id,
-      firstName: patient.firstName,
-      lastName: patient.lastName,
-      documentType: patient.documentType,
-      documentNumber: patient.documentNumber
-    }));
+    .map(patient => ({key: patient._id, firstName: patient.firstName, lastName: patient.lastName, documentType: patient.documentType, documentNumber: patient.documentNumber}));
 
   const documentTypes = []
+
   Object
     .values(props.documentTypes)
     .forEach(value => {
       documentTypes[value.id] = value.nombre
     })
 
+  const capitalize = (str) => {
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt
+        .charAt(0)
+        .toUpperCase() + txt
+        .substr(1)
+        .toLowerCase();
+    });
+  }
+
   const columns = [
     {
       title: "Nombre",
       dataIndex: "firstName",
       key: "firstName",
-      sorter: (a, b) => a.firstName < b.firstName
+      sorter: (a, b) => a.firstName.toUpperCase() < b.firstName.toUpperCase(),
+      render: (text, record) => (capitalize(text))
     }, {
       title: "Apellido",
       dataIndex: "lastName",
       key: "lastName",
-      sorter: (a, b) => a.lastName < b.lastName
+      sorter: (a, b) => a.lastName.toUpperCase() < b.lastName.toUpperCase(),
+      render: (text, record) => (capitalize(text))
     }, {
       title: "Tipo Doc.",
       dataIndex: "documentType",
-      render: (text, row, col) => <span>{documentTypes[text]}</span>,
+      render: (text, row, col) => <span>{documentTypes[text]}</span>
     }, {
       title: "Nº Doc.",
       dataIndex: "documentNumber",
@@ -46,7 +53,10 @@ const tablePatients = props => {
   ]
 
   const includes = permission => {
-    return props.user.permissions.includes(permission)
+    return props
+      .user
+      .permissions
+      .includes(permission)
   }
 
   if (includes('paciente_show') || includes('paciente_update') || includes('paciente_destroy')) {

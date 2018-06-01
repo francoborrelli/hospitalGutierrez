@@ -22,17 +22,29 @@ const tableUsers = props => {
         : 'Bloqueado'
     }));
 
+    const capitalize = (str) => {
+      return str.replace(/\w\S*/g, function (txt) {
+        return txt
+          .charAt(0)
+          .toUpperCase() + txt
+          .substr(1)
+          .toLowerCase();
+      });
+    }
+
   const columns = [
     {
       title: 'Nombre',
       dataIndex: 'firstName',
       key: 'firstName',
-      sorter: (a, b) => a.firstName.toUpperCase() < b.firstName.toUpperCase()
+      sorter: (a, b) => a.firstName.toUpperCase() < b.firstName.toUpperCase(),
+      render: text => capitalize(text)
     }, {
       title: 'Apellido',
       dataIndex: 'lastName',
       key: 'lastName',
-      sorter: (a, b) => a.lastName.toUpperCase() < b.lastName.toUpperCase()
+      sorter: (a, b) => a.lastName.toUpperCase() < b.lastName.toUpperCase(),
+      render: text => capitalize(text)
     }, {
       title: 'Nombre de Usuario',
       dataIndex: 'username',

@@ -9,7 +9,7 @@ const sectionHeader = props => {
         style={{
           display: "inline-block",
           float: "right",
-          paddingRight: 20,
+          paddingRight: 12,
       }}>
         <Tooltip placement="right" title="Volver">
           <Button onClick={() => props.history.push(props.goBackTo)}><Icon type="rollback"/></Button>
@@ -19,7 +19,7 @@ const sectionHeader = props => {
 
   return (
     <Content>
-      <Header style={{height: "auto"}}>
+      <Header style={{height: "65px"}}>
         {backButton}
         <h1
           style={{

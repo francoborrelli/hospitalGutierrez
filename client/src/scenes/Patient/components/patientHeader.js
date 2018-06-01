@@ -58,7 +58,7 @@ const patientHeader = props => (
             <h3>{props.patient.visits}</h3>
           </div>
           <Divider/>
-          <div style={{verticalAlign: "text-bottom"}}>
+          <div style={{verticalAlign: "text-bottom", height: 45}}>
         <Tooltip placement="right" title="Volver">
           <Button style={{verticalAlign: "text-bottom"}} onClick={() => props.goBackTo ? props.history.push(props.goBackTo) : props.history.goBack()}><Icon type="rollback"/></Button>
         </Tooltip>

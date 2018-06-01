@@ -52,23 +52,6 @@ const searchForm = props => {
         type: "input",
         label: "Número"
       }
-    },
-    state: {
-      name: "state",
-      type: "select",
-      props: {
-        placeholder: "Estado",
-        allowClear: true
-      },
-      options: [
-        {
-          id: "active",
-          nombre: "Activo"
-        }, {
-          id: "deleted",
-          nombre: "Eliminado"
-        }
-      ]
     }
   }
 
