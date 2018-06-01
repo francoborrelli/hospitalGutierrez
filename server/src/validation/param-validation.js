@@ -128,5 +128,12 @@ module.exports = {
       houseType: Joi.number(),
       waterType: Joi.number()
     }
+  },
+
+  checkDocument : {
+    body: {
+      documentType: Joi.number(),
+      documentNumber: Joi.string(),
+    }
   }
 };

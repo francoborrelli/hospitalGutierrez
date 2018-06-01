@@ -5,20 +5,31 @@ const Patient = require('./patient.model');
 
 async function list(req, res, next) {
   try {
-    const patients = await Patient.find({ deleted: false });
+    const patients = await Patient.find({deleted: false});
     return res.json(patients);
   } catch (error) {
-    const err = new APIError(
-      'Error fetching patients',
-      httpStatus.INTERNAL_SERVER_ERROR,
-      true
-    );
+    const err = new APIError('Error fetching patients', httpStatus.INTERNAL_SERVER_ERROR, true);
     return next(err);
   }
 }
 
 // TODO: validar restricciones
 async function create(req, res, next) {
+
+  const existPatient = await Patient.findOne({
+    $and: [
+      {
+        documentType: req.query.documentType
+      }, {
+        documentNumber: req.query.documentNumber
+      }
+    ]
+  })
+  if (existPatient) {
+    const err = new APIError('Patient exists create', httpStatus.BAD_REQUEST, true);
+    return next(err);
+  }
+
   const patient = new Patient({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -54,6 +65,23 @@ async function patch(req, res, next) {
       const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
       return next(err);
     }
+
+    if (patient.documentNumber !== req.body.documentNumber || patient.documentType !== req.body.documentType) {
+      const exists = Patient.findOne({
+        $and: [
+          {
+            documentType: req.query.documentType
+          }, {
+            documentNumber: req.query.documentNumber
+          }
+        ]
+      })
+      if (exists) {
+        const err = new APIError('Patient exists with that document', httpStatus.BAD_REQUEST, true);
+        return next(err);
+      }
+    }
+
     if (req.body.firstName) {
       patient.firstName = req.body.firstName;
     }
@@ -157,11 +185,25 @@ async function remove(req, res, next) {
   }
 }
 
+async function checkDocument(req, res, next) {
+  const patient = await Patient.findOne({
+    $and: [
+      {
+        documentType: req.query.documentType
+      }, {
+        documentNumber: req.query.documentNumber
+      }
+    ]
+  })
+  res.json(patient !== null);
+}
+
 module.exports = {
   list,
   create,
   get,
   patch,
   patchDemographicData,
-  remove
+  remove,
+  checkDocument
 };

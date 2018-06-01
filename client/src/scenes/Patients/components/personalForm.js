@@ -1,22 +1,29 @@
 import React from "react"
 import Form from "../../../containers/Form/Form"
 import moment from "moment"
+import axios from '../../../axios-api';
 
 const personalDataForm = props => {
 
   const documentValidator = (form, rule, documentNumber, callback) => {
-    //const documentType = form.getFieldValue("documentType")
 
-    //request
-
-    if (documentNumber === 4) {
-      callback("El documento ya se encuentra registrado en el sistema")
+    const documentType = form.getFieldValue("documentType")
+    if (documentType){
+      axios
+      .get('/patients/documentExists', {params: {documentNumber: documentNumber, documentType: documentType}})
+      .then((response) => {
+        if (response.data){
+          callback("El documento ya se encuentra registrado en el sistema")
+      }})
     }
-    callback()
+      callback()
   }
 
-  const revalidate = (form, rule, documentNumber, callback) => {
-    form.validateFields(["documentNumber"])
+  const revalidate = (form, rule, documentType, callback) => {
+    const documentNumber = form.getFieldValue("documentNumber")
+    if (documentNumber){
+      form.validateFields(["documentNumber"], { force: true })
+    }
     callback()
   }
 

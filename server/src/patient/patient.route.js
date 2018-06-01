@@ -17,6 +17,10 @@ router
   );
 
 router
+  .route('/documentExists')
+  .get(validate(paramValidation.checkDocument), patientCtrl.checkDocument)
+
+router
   .route('/:patientId')
   .get(patientCtrl.get)
   .patch(validate(paramValidation.patchPatient), patientCtrl.patch)
