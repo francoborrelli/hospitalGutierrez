@@ -25,47 +25,81 @@ class PatientPage extends Component {
   componentDidMount = () => {
     axiosApi
       .get('patients/' + this.props.match.params.patientId)
-      .then(response => {
-        this.setState({patient: response.data})
-      })
-      .catch(() => {
-        this.setState({error: true})
-      })
+      .then(response => {this.setState({patient: response.data})}).catch(() => {this.setState({error: true})})
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.patient !== this.state.patient && this.state.patient.houseType) {
-      if (this.state.patient.insurance && prevState.patient.insurance !== this.state.patient.insurance) {
-        axiosRef.get('/obra-social/' + this.state.patient.insurance).then((result) =>
-        {this.setState(prevState => ({patient: {...prevState.patient, insuranceName: result.data.nombre}}))
-      })
+    const patient = this.state.patient
+    if (prevState.patient !== patient && patient.houseType) {
+      if (patient.insurance && prevState.patient.insurance !== patient.insurance) {
+        axiosRef
+          .get('/obra-social/' + patient.insurance)
+          .then((result) => {
+            this.setState(prevState => ({
+              patient: {
+                ...prevState.patient,
+                insuranceName: result.data.nombre
+              }
+            }))
+          })
       }
+      if (prevState.patient.documentType !== patient.documentType) {
+        axiosRef
+          .get('/tipo-documento/' + patient.documentType)
+          .then((result) => {
+            this.setState(prevState => ({
+              patient: {
+                ...prevState.patient,
+                documentName: result.data.nombre
+              }
+            }))
+          })
+      }
+      if (prevState.patient.houseType !== patient.houseType) {
+        axiosRef
+          .get('/tipo-vivienda/' + patient.houseType)
+          .then((result) => {
+            this.setState(prevState => ({
+              patient: {
+                ...prevState.patient,
+                houseName: result.data.nombre
+              }
+            }))
+          })
+      }
+      if (prevState.patient.waterType !== patient.waterType) {
+        axiosRef
+          .get('/tipo-agua/' + this.state.patient.waterType)
+          .then((result) => {
+            this.setState(prevState => ({
+              patient: {
+                ...prevState.patient,
+                waterName: result.data.nombre
+              }
+            }))
+          })
+      }
+      if (prevState.patient.heatingType !== patient.heatingType) {
+        axiosRef
+          .get('/tipo-calefaccion/' + patient.heatingType)
+          .then((result) => {
+            this.setState(prevState => ({
+              patient: {
+                ...prevState.patient,
+                heatingName: result.data.nombre
+              }
+            }))
+          })
+      }
+    }
+    this.checkLoading()
+  }
 
-      if (prevState.patient.documentType !== this.state.patient.documentType) {
-        axiosRef.get('/tipo-documento/' + this.state.patient.documentType).then((result) =>
-        {this.setState(prevState => ({patient: {...prevState.patient, documentName: result.data.nombre}}))
-      })
-      }
-
-      if (prevState.patient.houseType !== this.state.patient.houseType) {
-        axiosRef.get('/tipo-vivienda/' + this.state.patient.houseType).then((result) =>
-        {this.setState(prevState => ({patient: {...prevState.patient, houseName: result.data.nombre}}))
-      })
-      }
-
-      if (prevState.patient.waterType !== this.state.patient.waterType) {
-        axiosRef.get('/tipo-agua/' + this.state.patient.waterType).then((result) =>
-        {this.setState(prevState => ({patient: {...prevState.patient, waterName: result.data.nombre}}))
-      })
-      }
-      if (prevState.patient.heatingType !== this.state.patient.heatingType) {
-        axiosRef.get('/tipo-calefaccion/' + this.state.patient.heatingType).then((result) =>
-        {this.setState(prevState => ({patient: {...prevState.patient, heatingName: result.data.nombre}}))
-      })
-      }else{
-        if (prevState.loadingPage){
-          this.setState({loadingPage: false})
-        }
+  checkLoading = () => {
+    const patient = this.state.patient
+    if (this.state.loadingPage) {
+      if (patient.documentName && patient.houseName && patient.waterName && patient.heatingName) {
+        return this.setState({loadingPage: false})
       }
     }
   }
@@ -75,7 +109,13 @@ class PatientPage extends Component {
     axiosApi
       .patch('patients/' + this.props.match.params.patientId, data)
       .then(response => {
-        this.setState((prevState) => ({patient: {...prevState.patient, ...response.data}, personalDataRequest: false}))
+        this.setState((prevState) => ({
+          patient: {
+            ...prevState.patient,
+            ...response.data
+          },
+          personalDataRequest: false
+        }))
         message.success("Los datos del paciente se actualizaron correctamente.")
       })
       .catch(() => {
@@ -95,7 +135,13 @@ class PatientPage extends Component {
     axiosApi
       .patch('patients/' + this.props.match.params.patientId + '/demographicData', result)
       .then(response => {
-        this.setState((prevState) => ({patient: {...prevState.patient, ...response.data},  demographicDataRequest: false}))
+        this.setState((prevState) => ({
+          patient: {
+            ...prevState.patient,
+            ...response.data
+          },
+          demographicDataRequest: false
+        }))
         message.success("Los datos demográficos del paciente se actualizaron correctamente.")
       })
       .catch(() => {

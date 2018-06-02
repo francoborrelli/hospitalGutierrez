@@ -19,7 +19,7 @@ const getData = (patient, user) => {
       data: patient.phone || "-"
     }, {
       title: "Obra Social",
-      data: patient.insuranceName || "-"
+      data: patient.insurance ? patient.insuranceName : "-"
     }, {
       title: "Dirección",
       data: patient.address,
