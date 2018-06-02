@@ -22,13 +22,14 @@ router
 
 router
   .route('/:patientId')
-  .get(patientCtrl.get)
-  .patch(validate(paramValidation.patchPatient), patientCtrl.patch)
+  .get(hasPermission('paciente_show'), patientCtrl.get)
+  .patch(hasPermission('paciente_update'), validate(paramValidation.patchPatient), patientCtrl.patch)
   .delete(patientCtrl.remove);
 
 router
   .route('/:patientId/demographicData')
   .patch(
+    hasPermission('datosDemograficos_update'),
     validate(paramValidation.patchDemographicData),
     patientCtrl.patchDemographicData
   );

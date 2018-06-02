@@ -9,11 +9,7 @@ const router = express.Router();
 router
   .route('/')
   .get(hasPermission('usuario_index'), userCtrl.list)
-  .post(
-    hasPermission('usuario_new'),
-    validate(paramValidation.createUser),
-    userCtrl.create
-  );
+  .post(hasPermission('usuario_new'), validate(paramValidation.createUser), userCtrl.create);
 
 router
   .route('/emailExists')
@@ -22,15 +18,15 @@ router
 router
   .route('/:userId')
   .get(userCtrl.get)
-  .patch(validate(paramValidation.patchUser), userCtrl.patch)
+  .patch(hasPermission('usuario_update'), validate(paramValidation.patchUser), userCtrl.patch)
   .delete(userCtrl.remove);
 
 router
   .route('/:userId/roles')
-  .post(validate(paramValidation.addRoleToUser), userCtrl.addRole);
+  .post(hasPermission('usuario_update'), validate(paramValidation.addRoleToUser), userCtrl.addRole);
 
 router
   .route('/:userId/roles/:roleId')
-  .delete(validate(paramValidation.removeRoleToUser), userCtrl.removeRole);
+  .delete(hasPermission('usuario_update'), validate(paramValidation.removeRoleToUser), userCtrl.removeRole);
 
 module.exports = router;
