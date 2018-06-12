@@ -6,7 +6,7 @@ import Dropdown from "./dropdown"
 const tableRecords = props => {
 
   const data = props
-    .data
+    .patient.clinicalRecords
     .map(record => ({
       key: record._id,
       date: record.date,
