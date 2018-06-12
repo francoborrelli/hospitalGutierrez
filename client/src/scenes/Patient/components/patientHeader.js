@@ -55,7 +55,7 @@ const patientHeader = props => (
           <Divider/>
           <div>
             <h5 style={{ color: "rgba(0,0,0,.45)"}}>Consultas</h5>
-            <h3>{props.patient.visits}</h3>
+            <h3>{props.patient.clinicalRecords ? props.patient.clinicalRecords.length : "" }</h3>
           </div>
           <Divider/>
           <div style={{verticalAlign: "text-bottom", height: 45, marginTop: -3}}>
