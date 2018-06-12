@@ -17,6 +17,7 @@
     "deleted": false,
     "insurance": 1,
     "phone": "2213566894",
+    "clinicalRecords": [],
     "__v": 0
   },
   {
@@ -37,6 +38,7 @@
     "deleted": false,
     "insurance": 1,
     "phone": "2213566894",
+    "clinicalRecords": [],
     "__v": 0
   },
   {
@@ -57,6 +59,7 @@
     "deleted": false,
     "insurance": 1,
     "phone": "2213566894",
+    "clinicalRecords": [],
     "__v": 0
   }
 ]

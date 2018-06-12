@@ -135,5 +135,24 @@ module.exports = {
       documentType: Joi.number(),
       documentNumber: Joi.string(),
     }
+  },
+
+  createClinicalRecord: {
+    body: {
+      controlDate: Joi.date().required(),
+      weight: Joi.number().required(),
+      pc: Joi.number().required(),
+      ppc: Joi.number().required(),
+      vaccination: Joi.boolean().required(),
+      maturation: Joi.boolean().required(),
+      fisicTest: Joi.boolean().required(),
+      vaccinationObservation: Joi.string(),
+      maturationObservation: Joi.string(),
+      fisicTestObservation: Joi.string(),
+      generalObservation: Joi.string(),
+      nutrition: Joi.string(),
+      user: Joi.string().required(),
+    }
   }
+
 };

@@ -36,6 +36,7 @@ async function create(req, res, next) {
     heatingType: req.body.heatingType,
     houseType: req.body.houseType,
     waterType: req.body.waterType,
+    clinicalRecords: [],
     deleted: false
   });
   if (req.body.insurance || req.body.insurance === 0) {
@@ -141,7 +142,7 @@ async function patchDemographicData(req, res, next) {
 
 async function get(req, res, next) {
   try {
-    const patient = await Patient.findById(req.params.patientId);
+    const patient = await Patient.findById(req.params.patientId).populate('clinicalRecords');
     if (!patient || patient.deleted) {
       const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
       return next(err);
