@@ -49,7 +49,7 @@ const ClinicalRecordSchema = new mongoose.Schema({
     type: String
   },
   deleted: {
-    type: String,
+    type: Boolean,
     required: true
   },
   user: {

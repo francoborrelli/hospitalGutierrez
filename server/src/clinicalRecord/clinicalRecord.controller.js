@@ -8,9 +8,9 @@ async function create(req, res, next) {
   const clinicalRecord = new ClinicalRecord({
     controlDate: new Date(req.body.controlDate),
     weight: req.body.weight,
-    height: req.body.weight,
-    pc: req.body.pc,
-    ppc: req.body.ppc,
+    height: req.body.height || null,
+    pc: req.body.pc || null,
+    ppc: req.body.ppc || null,
     vaccination: req.body.vaccination,
     maturation: req.body.maturation,
     fisicTest: req.body.fisicTest,

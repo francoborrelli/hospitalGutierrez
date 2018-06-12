@@ -41,7 +41,8 @@ router
 
 router
   .route('/:patientId/clinicalRecords/:recordId')
-  .get(hasPermission('control_show'), clinicalRecordCtrl.get);
+  .get(hasPermission('control_show'), clinicalRecordCtrl.get)
+  .delete(hasPermission('control_destroy'), clinicalRecordCtrl.remove);
 
 router
   .route('/:patientId/demographicData')

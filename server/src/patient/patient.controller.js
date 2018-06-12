@@ -166,6 +166,7 @@ async function get(req, res, next) {
   try {
     const patient = await Patient.findById(req.params.patientId).populate({
       path: 'clinicalRecords',
+      match: { deleted: { $eq: false } },
       populate: { path: 'user', model: 'User', select: 'username' }
     });
     if (!patient || patient.deleted) {
