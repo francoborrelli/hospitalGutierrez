@@ -8,6 +8,7 @@ async function create(req, res, next) {
   const clinicalRecord = new ClinicalRecord({
     controlDate: new Date(req.body.controlDate),
     weight: req.body.weight,
+    height: req.body.weight,
     pc: req.body.pc,
     ppc: req.body.ppc,
     vaccination: req.body.vaccination,
@@ -47,4 +48,20 @@ async function get(req, res, next) {
   }
 }
 
-module.exports = { create, get };
+async function remove(req, res, next) {
+  try {
+    const record = await ClinicalRecord.findById(req.params.recordId);
+    record.deleted = true;
+    record.save();
+    return res.json(record);
+  } catch (error) {
+    const err = new APIError(
+      'Record not found',
+      httpStatus.NOT_FOUND,
+      true
+    );
+    return next(err);
+  }
+}
+
+module.exports = { create, get, remove };

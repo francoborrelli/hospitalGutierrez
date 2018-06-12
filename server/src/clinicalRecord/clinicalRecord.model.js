@@ -12,7 +12,7 @@ const ClinicalRecordSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  hieght: {
+  height: {
     type: Number
   },
   pc: {

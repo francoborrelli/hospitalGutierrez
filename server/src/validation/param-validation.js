@@ -141,8 +141,9 @@ module.exports = {
     body: {
       controlDate: Joi.date().required(),
       weight: Joi.number().required(),
-      pc: Joi.number().required(),
-      ppc: Joi.number().required(),
+      height: Joi.number(),
+      pc: Joi.number(),
+      ppc: Joi.number(),
       vaccination: Joi.boolean().required(),
       maturation: Joi.boolean().required(),
       fisicTest: Joi.boolean().required(),
