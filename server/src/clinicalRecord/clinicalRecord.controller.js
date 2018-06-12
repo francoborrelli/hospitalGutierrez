@@ -4,20 +4,6 @@ const APIError = require('../helpers/APIError');
 const ClinicalRecord = require('./clinicalRecord.model');
 const Patient = require('../patient/patient.model');
 
-async function list(req, res, next) {
-  try {
-    const records = await ClinicalRecord.find({ deleted: false });
-    return res.json(records);
-  } catch (error) {
-    const err = new APIError(
-      'Error fetching clinical records',
-      httpStatus.INTERNAL_SERVER_ERROR,
-      true
-    );
-    return next(err);
-  }
-}
-
 async function create(req, res, next) {
   const clinicalRecord = new ClinicalRecord({
     controlDate: new Date(req.body.controlDate),
@@ -49,7 +35,7 @@ async function create(req, res, next) {
 
 async function get(req, res, next) {
   try {
-    const record = await ClinicalRecord.findById(req.params.recordId);
+    const record = await ClinicalRecord.findById(req.params.recordId).populate('user', 'username');
     return res.json(record);
   } catch (error) {
     const err = new APIError(
@@ -61,4 +47,4 @@ async function get(req, res, next) {
   }
 }
 
-module.exports = { list, create, get };
+module.exports = { create, get };

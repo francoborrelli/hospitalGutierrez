@@ -5,20 +5,31 @@ const Patient = require('./patient.model');
 
 async function list(req, res, next) {
   try {
-    const patients = await Patient.find({deleted: false});
+    const patients = await Patient.find({ deleted: false });
     return res.json(patients);
   } catch (error) {
-    const err = new APIError('Error fetching patients', httpStatus.INTERNAL_SERVER_ERROR, true);
+    const err = new APIError(
+      'Error fetching patients',
+      httpStatus.INTERNAL_SERVER_ERROR,
+      true
+    );
     return next(err);
   }
 }
 
 // TODO: validar restricciones
 async function create(req, res, next) {
-
-  const existPatient = await Patient.findOne({documentType: req.query.documentType, documentNumber: req.query.documentNumber, deleted: false})
+  const existPatient = await Patient.findOne({
+    documentType: req.query.documentType,
+    documentNumber: req.query.documentNumber,
+    deleted: false
+  });
   if (existPatient) {
-    const err = new APIError('Patient exists create', httpStatus.BAD_REQUEST, true);
+    const err = new APIError(
+      'Patient exists create',
+      httpStatus.BAD_REQUEST,
+      true
+    );
     return next(err);
   }
 
@@ -59,10 +70,21 @@ async function patch(req, res, next) {
       return next(err);
     }
 
-    if (patient.documentNumber !== req.body.documentNumber || patient.documentType !== req.body.documentType) {
-      const exists = await Patient.findOne({documentType: req.query.documentType, documentNumber: req.query.documentNumber, deleted: false})
+    if (
+      patient.documentNumber !== req.body.documentNumber ||
+      patient.documentType !== req.body.documentType
+    ) {
+      const exists = await Patient.findOne({
+        documentType: req.query.documentType,
+        documentNumber: req.query.documentNumber,
+        deleted: false
+      });
       if (exists) {
-        const err = new APIError('Patient exists with that document', httpStatus.BAD_REQUEST, true);
+        const err = new APIError(
+          'Patient exists with that document',
+          httpStatus.BAD_REQUEST,
+          true
+        );
         return next(err);
       }
     }
@@ -142,7 +164,10 @@ async function patchDemographicData(req, res, next) {
 
 async function get(req, res, next) {
   try {
-    const patient = await Patient.findById(req.params.patientId).populate('clinicalRecords');
+    const patient = await Patient.findById(req.params.patientId).populate({
+      path: 'clinicalRecords',
+      populate: { path: 'user', model: 'User', select: 'username' }
+    });
     if (!patient || patient.deleted) {
       const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
       return next(err);
@@ -171,7 +196,11 @@ async function remove(req, res, next) {
 }
 
 async function checkDocument(req, res, next) {
-  const patient = await Patient.findOne({documentType: req.query.documentType, documentNumber: req.query.documentNumber, deleted: false})
+  const patient = await Patient.findOne({
+    documentType: req.query.documentType,
+    documentNumber: req.query.documentNumber,
+    deleted: false
+  });
   res.json(patient !== null);
 }
 
