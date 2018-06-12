@@ -33,7 +33,6 @@ router
 
 router
   .route('/:patientId/clinicalRecords')
-  .get(hasPermission('historiaClinica_index'), clinicalRecordCtrl.list)
   .post(
     hasPermission('control_new'),
     validate(paramValidation.createClinicalRecord),
