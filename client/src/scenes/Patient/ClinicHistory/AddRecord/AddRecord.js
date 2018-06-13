@@ -14,17 +14,16 @@ class AddRecord extends Component {
   };
 
   submitHandler = data => {
+    this.setState({ loading: true });
     const url = '/patients/' + this.props.patient._id + '/clinicalRecords';
-
     const result = {
       ...data,
       user: this.props.user._id
     };
-
-    this.setState({ loading: true });
     axios
       .post(url, result)
       .then(() => {
+        this.props.reload();
         this.redirect();
         message.success(
           'Se agregó el control correctamente.'

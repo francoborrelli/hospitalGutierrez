@@ -167,9 +167,9 @@ class PatientPage extends Component {
   deletePatientHandler = patient => {
     this.setState({ deleteRequest: true });
 
-    if  (this.state.patient.clinicalRecords.length !== 0) {
-      message.error("No se puede eliminar con paciente que tenga controles")
-      return
+    if (this.state.patient.clinicalRecords.length !== 0) {
+      message.error('No se puede eliminar con paciente que tenga controles');
+      return;
     }
 
     return axiosApi
@@ -183,6 +183,23 @@ class PatientPage extends Component {
       .catch(() => message.error('Algo falló. Intentá nuevamente.'));
   };
 
+  setRecords = () => {
+    this.setState({ deleteRequest: true });
+    axiosApi
+      .get('patients/' + this.props.match.params.patientId)
+      .then(response => {
+        this.setState(prevState => ({
+          patient: {
+            ...prevState.patient,
+            clinicalRecords: response.data.clinicalRecords
+          }
+        }));
+      })
+      .catch(() => {
+        this.setState({ error: true, deleteRequest: false });
+      });
+  };
+
   deleteRecordHandler = record => {
     const url =
       'patients/' +
@@ -192,6 +209,12 @@ class PatientPage extends Component {
     return axiosApi
       .delete(url)
       .then(() => {
+        const records = this.state.patient.clinicalRecords.filter(r => {
+          return r._id !== record.key;
+        });
+        this.setState(prevState => ({
+          patient: { ...prevState.patient, clinicalRecords: records }
+        }));
         message.success('Control eliminado exitosamente');
       })
       .catch(() => {
@@ -242,6 +265,7 @@ class PatientPage extends Component {
               <AddRecordPage
                 user={this.props.user}
                 patient={this.state.patient}
+                reload={this.setRecords}
                 loading={this.state.deleteRequest}
               />
             )}
