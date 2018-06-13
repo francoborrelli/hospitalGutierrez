@@ -9,34 +9,34 @@
         margin: 0;
     }
     h2 {
-            font-size: 126px;
-            line-height: 126px;
+            font-size: 100px;
+            line-height: 100px;
             font-family: 'Roboto', 'Open Sans', sans-serif;
             font-weight: 700;
             margin: 0;
-            padding-top: 60px;
     }
     section {
         text-transform: uppercase;
-        font-size: 57px;
+        font-size: 50px;
         font-family: 'Roboto', 'Open Sans', sans-serif;
         font-weight: 200;
     }
 
 }
 
-@media(max-width: 1200px){
+@media(max-width: 1400px){
     .errores {
         h1 {
             font-size: 220px;
             line-height: 220px;
         }
         h2 {
-            font-size: 65px;
-            line-height: 65px;
+            font-size: 60px;
+            line-height: 60px;
+            padding-top: 0px;
         }
         section {
-            font-size: 45px;
+            font-size: 40px;
         }
     }
 }
@@ -49,11 +49,11 @@
             line-height: 200px;
         }
         h2 {
-            font-size: 55px;
-            line-height: 55px;
+            font-size: 50px;
+            line-height: 50px;
         }
         section {
-            font-size: 30px;
+            font-size: 25px;
         }
     }
 }
