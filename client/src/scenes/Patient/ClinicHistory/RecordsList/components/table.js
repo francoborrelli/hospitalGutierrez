@@ -9,7 +9,7 @@ const tableRecords = props => {
     .patient.clinicalRecords
     .map(record => ({
       key: record._id,
-      date: moment(record.date).format("DD/MM/YYYY"),
+      date: moment(record.controlDate).format("DD/MM/YYYY"),
       user: record.user.username,
       height: record.height,
       weight: record.weight,

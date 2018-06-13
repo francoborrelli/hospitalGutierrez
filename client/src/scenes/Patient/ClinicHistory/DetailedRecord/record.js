@@ -75,7 +75,7 @@ const recordCard = props => {
   return (
     <div style={{padding: 10}}>
       <Card
-        title={"Control: " + moment(props.record.date).format("DD/MM/YYYY")}
+        title={"Control: " + moment(props.record.controlDate).format("DD/MM/YYYY")}
         extra={< Dropdown user={props.user} patient={props.patient} record={props.record} onDelete={props.onDelete}/>}
         style={{
         maxWidth: 800,
