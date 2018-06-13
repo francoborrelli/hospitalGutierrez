@@ -1,15 +1,23 @@
 # Proyecto de Software 2017 - Grupo 2
 
+## Documentación
+
+
+## Iniciar Aplicación
+
+Tanto en la carpeta "client" como en "server" cuentan con su propio archivo Readme.
+En cada uno de ellos se explica como instalar las dependencias del proyecto y como inicializarlo.
+
 ## Cuentas
 
 * Cuenta Administrador
-  * Nombre de usuario: administrador
-  * Contraseña: 12admin34
+  * Email: admin@gmail.com
+  * Contraseña: 123456
 
 * Cuenta Pediatra
-  * Nombre de usuario: pediatra
-  * Contraseña: 12pediatra34
+  * Email: pediatra@gmail.com
+  * Contraseña: 123456
 
 * Cuenta Recepcionista
-  * Nombre de usuario: recepcionista
-  * Contraseña: proyecto789
+  * Email: recepcionista@gmail.com
+  * Contraseña: 123456
