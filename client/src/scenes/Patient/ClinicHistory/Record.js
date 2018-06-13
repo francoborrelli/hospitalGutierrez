@@ -11,23 +11,34 @@ class Record extends Component {
     record: {}
   };
 
-  componentDidMount() {
-    const url =
+  getURL() {
+    return (
       '/patients/' +
       this.props.patient._id +
       '/clinicalRecords/' +
-      this.props.match.params.recordId;
+      this.props.match.params.recordId
+    );
+  }
 
+  componentDidMount() {
+    const url = this.getURL();
     axios
       .get(url)
       .then(response => {
-        this.setState({record: response.data})
+        this.setState({ record: response.data });
       })
       .catch(() => message.error('Ocurrio un error. Intenta nuevamente'));
   }
 
-  redirect = () => {
-    this.props.history.push(this.props.match.url);
+  deleteRecordHandler = () => {
+    const url = this.getURL();
+    return axios
+      .delete(url)
+      .then(() => {
+        this.props.reload();
+        this.props.history.push('/patient/' + this.props.patient._id);
+      })
+      .catch(() => message.error('Ocurrio un error. Intenta nuevamente'));
   };
 
   editRecordHandler = () => {};
@@ -54,7 +65,7 @@ class Record extends Component {
             <RecordPage
               user={this.props.user}
               patient={this.props.patient}
-              onDelete={this.props.onDeleteRecord}
+              onDelete={this.deleteRecordHandler}
               record={this.state.record}
             />
           )}

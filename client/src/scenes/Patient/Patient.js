@@ -275,7 +275,7 @@ class PatientPage extends Component {
             render={() => (
               <RecordPage
                 user={this.props.user}
-                onDeleteRecord={this.deleteRecordHandler}
+                reload={this.setRecords}
                 patient={this.state.patient}
               />
             )}
