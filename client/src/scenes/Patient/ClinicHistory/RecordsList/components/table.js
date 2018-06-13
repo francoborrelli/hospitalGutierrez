@@ -14,6 +14,17 @@ const tableRecords = props => {
     ppc: record.ppc
   }));
 
+  const compareByAlph = (a, b) => {
+    if (a.toUpperCase() > b.toUpperCase()) {
+      return -1;
+    }
+    if (a.toUpperCase() < b.toUpperCase()) {
+      return 1;
+    }
+    return 0;
+  };
+
+
   const columns = [
     {
       title: 'Fecha',
@@ -31,7 +42,7 @@ const tableRecords = props => {
       title: 'Usuario',
       dataIndex: 'user',
       key: 'user',
-      sorter: (a, b) => a.user < b.user
+      sorter: (a, b) => compareByAlph(a.user, b.user)
     },
     {
       title: 'Peso',

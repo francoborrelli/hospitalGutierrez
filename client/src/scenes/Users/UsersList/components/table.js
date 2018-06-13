@@ -22,6 +22,16 @@ const tableUsers = props => {
         : 'Bloqueado'
     }));
 
+    const compareByAlph = (a, b) => {
+      if (a.toUpperCase() > b.toUpperCase()) {
+        return -1;
+      }
+      if (a.toUpperCase() < b.toUpperCase()) {
+        return 1;
+      }
+      return 0;
+    };
+
     const capitalize = (str) => {
       return str.replace(/\w\S*/g, function (txt) {
         return txt
@@ -34,27 +44,30 @@ const tableUsers = props => {
 
   const columns = [
     {
-      title: 'Nombre',
-      dataIndex: 'firstName',
-      key: 'firstName',
-      sorter: (a, b) => a.firstName.toUpperCase() < b.firstName.toUpperCase(),
-      render: text => capitalize(text)
-    }, {
-      title: 'Apellido',
-      dataIndex: 'lastName',
-      key: 'lastName',
-      sorter: (a, b) => a.lastName.toUpperCase() < b.lastName.toUpperCase(),
-      render: text => capitalize(text)
-    }, {
       title: 'Nombre de Usuario',
       dataIndex: 'username',
       key: 'username',
-      sorter: (a, b) => a.username.toUpperCase() < b.username.toUpperCase()
+      defaultSortOrder: "descend",
+      sorter: (a, b) => compareByAlph(a.username, b.username)
+    },
+    {
+      title: 'Apellido',
+      dataIndex: 'lastName',
+      key: 'lastName',
+      sorter: (a, b) => compareByAlph(a.lastName, b.lastName),
+      render: text => capitalize(text)
+    },
+    {
+      title: 'Nombre',
+      dataIndex: 'firstName',
+      key: 'firstName',
+      sorter: (a, b) => compareByAlph(a.firstName, b.firstName),
+      render: text => capitalize(text)
     }, {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      sorter: (a, b) => a.email.toUpperCase() < b.email.toUpperCase()
+      sorter: (a, b) => compareByAlph(a.email, b.email)
     }, {
       title: 'Roles',
       dataIndex: 'role',
@@ -94,7 +107,7 @@ const tableUsers = props => {
         dataSource={data}
         loading={props.loading}
         scroll={{
-        x: 1060
+        x: 1070
       }}/>
     </Card>
   );
