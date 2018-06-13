@@ -52,4 +52,11 @@ router
     patientCtrl.patchDemographicData
   );
 
+router
+  .route('/:patientId/reports')
+  .get(
+    hasPermission('historiaClinica_index'),
+    patientCtrl.reports
+  );
+
 module.exports = router;

@@ -205,6 +205,45 @@ async function checkDocument(req, res, next) {
   res.json(patient !== null);
 }
 
+async function reports(req, res, next) {
+  try {
+    let patient = await Patient.findById(req.params.patientId);
+    const cutoff = new Date(patient.birthday);
+    cutoff.setDate(cutoff.getDate() + 98);
+    patient = await patient
+      .populate({
+        path: 'clinicalRecords',
+        match: { deleted: { $eq: false }, controlDate: { $lt: cutoff } }
+      })
+      .execPopulate();
+    if (!patient) {
+      const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
+      return next(err);
+    }
+    let weeks = new Array(14).fill(null);
+    weeks = weeks.map((element, index) => {
+      const max = new Date(patient.birthday);
+      max.setDate(max.getDate() + 7 * (index + 1));
+      const min = new Date(patient.birthday);
+      min.setDate(min.getDate() + 7 * index);
+      const records = patient.clinicalRecords.filter(
+        r =>
+          r.ppc &&
+          (new Date(r.controlDate) < max && new Date(r.controlDate) >= min)
+      );
+      const makeSelect = comparator => (a, b) =>
+        comparator(a, b) ? a.ppc : b.ppc;
+      const maxByValue = makeSelect(
+        (a, b) => new Date(a.controlDate) >= new Date(b.controlDate)
+      );
+      return records.length === 0 ? null : records.reduce(maxByValue, {});
+    });
+    return res.json({ ppc: weeks });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   list,
   create,
@@ -212,5 +251,6 @@ module.exports = {
   patch,
   patchDemographicData,
   remove,
-  checkDocument
+  checkDocument,
+  reports
 };
