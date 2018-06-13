@@ -27,7 +27,7 @@ class AddRecord extends Component {
       .then(() => {
         this.redirect();
         message.success(
-          'Se agregó a ' + data.name + ' ' + data.lastname + ' correctamente.'
+          'Se agregó a ' + data.firstName + ' ' + data.lastName + ' correctamente.'
         );
       })
       .catch(() => {

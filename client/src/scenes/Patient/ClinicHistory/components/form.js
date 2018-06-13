@@ -95,7 +95,7 @@ const recordForm = props => {
       rules: [{ required: true, message: 'Seleccione una opción' }]
     },
     madurationObservation: {
-      name: 'madurationObservation',
+      name: 'maturationObservation',
       label: 'Observaciones - Maduración',
       type: 'textarea'
     },
