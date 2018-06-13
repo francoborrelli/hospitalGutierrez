@@ -4,23 +4,25 @@ import Element from "../../Profile/components/personalData/dataElement"
 import Dropdown from "./components/dropdown"
 import hasPermission from '../../../../hoc/hasPermission';
 
+import moment from "moment"
+
 const data = (record) => [
   {
     title: "Usuario",
-    data: record.user,
+    data: record.user ? record.user.username : "",
     sm: 24
   }, {
     title: "Peso",
     data: record.weight + " kg"
   }, {
     title: "Altura",
-    data: record.height + " cm" || "-"
+    data: record.height ? record.height + " cm" : "-"
   }, {
     title: "PC",
-    data: record.pc + " cm" || "-"
+    data: record.pc  ? record.pc + " cm" : "-"
   }, {
     title: "PPC",
-    data: record.ppc + " cm" || "-"
+    data: record.ppc ? record.ppc + " cm" : "-"
   }, {
     title: "¿Vacunación al día?",
     data: record.vaccination
@@ -33,31 +35,31 @@ const data = (record) => [
     sm: 24
   }, {
     title: "¿Maduración Acorde?",
-    data: record.maduration
+    data: record.maturation
       ? "Si"
       : "No",
     sm: 24
   }, {
     title: "Observaciones de Maduración",
-    data: record.madurationObservation || "-",
+    data: record.maturationObservation || "-",
     sm: 24
   }, {
     title: "¿Examen físico normal?",
-    data: record.fisicExam
+    data: record.fisicTest
       ? "Si"
       : "No",
     sm: 24
   }, {
     title: "Observaciones del Examen Físico",
-    data: record.fisicExamObservation || "-",
+    data: record.fisicTestObservation || "-",
     sm: 24
   }, {
     title: "Alimentación",
-    data: record.diet || "-",
+    data: record.nutrition || "-",
     sm: 24
   }, {
     title: "Observaciones generales",
-    data: record.observations || "-",
+    data: record.generalObservation || "-",
     sm: 24
   }
 ]
@@ -73,7 +75,7 @@ const recordCard = props => {
   return (
     <div style={{padding: 10}}>
       <Card
-        title={"Control: " + props.record.date}
+        title={"Control: " + moment(props.record.date).format("DD/MM/YYYY")}
         extra={< Dropdown user={props.user} patient={props.patient} record={props.record} onDelete={props.onDelete}/>}
         style={{
         maxWidth: 800,

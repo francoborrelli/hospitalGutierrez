@@ -1,7 +1,7 @@
 import React from "react"
-
 import Table from '../../../../../components/table/table';
 import Dropdown from "./dropdown"
+import moment from "moment";
 
 const tableRecords = props => {
 
@@ -9,8 +9,8 @@ const tableRecords = props => {
     .patient.clinicalRecords
     .map(record => ({
       key: record._id,
-      date: record.date,
-      user: record.user.firstName + record.user.lastName,
+      date: moment(record.date).format("DD/MM/YYYY"),
+      user: record.user.username,
       height: record.height,
       weight: record.weight,
       pc: record.pc,
@@ -34,24 +34,6 @@ const tableRecords = props => {
       key: "weight",
       sorter: (a, b) => a.weight < b.weight,
       render: (text, record) => (text + " kg")
-    }, {
-      title: "Talla",
-      dataIndex: "height",
-      key: "height",
-      sorter: (a, b) => a.height < b.height,
-      render: (text, record) => (text + " cm")
-    }, {
-      title: "PC",
-      dataIndex: "pc",
-      key: "pc",
-      sorter: (a, b) => a.pc < b.pc,
-      render: (text, record) => (text + " cm")
-    }, {
-      title: "PPC",
-      dataIndex: "ppc",
-      key: "ppc",
-      sorter: (a, b) => a.ppc < b.ppc,
-      render: (text, record) => (text + " cm")
     }
   ]
 
@@ -81,7 +63,7 @@ const tableRecords = props => {
     columns={columns}
     dataSource={data}
     loading={props.loading}
-    scroll={{x: 950}}
+    scroll={{x: 450}}
     />)
 }
 
