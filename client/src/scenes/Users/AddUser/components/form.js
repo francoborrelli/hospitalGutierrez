@@ -16,7 +16,8 @@ const addUserForm = props => {
         },
         {
           message: "Debe tener solo letras",
-          pattern: "^[a-zA-Z ]+$"
+          pattern: "^[a-zA-ZÀ-ÿ\u00f1\u00d1  _]*(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1" +
+              "  _]+$"
         }
       ]
     },
@@ -32,7 +33,8 @@ const addUserForm = props => {
         },
         {
           message: "Debe tener solo letras",
-          pattern: "^[a-zA-Z ]+$"
+          pattern: "^[a-zA-ZÀ-ÿ\u00f1\u00d1  _]*(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1" +
+              "  _]+$"
         }
       ]
     },

@@ -19,7 +19,8 @@ const personalDataForm = props => {
           message: "Ingrese el nombre"
         }, {
           message: "Debe tener solo letras",
-          pattern: "^[a-zA-Z ]+$"
+          pattern: "^[a-zA-ZÀ-ÿ\u00f1\u00d1  _]*(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1" +
+              "  _]+$"
         }
       ]
     },
@@ -34,7 +35,8 @@ const personalDataForm = props => {
           message: "Ingrese el apellido"
         }, {
           message: "Debe tener solo letras",
-          pattern: "^[a-zA-Z ]+$"
+          pattern: "^[a-zA-ZÀ-ÿ\u00f1\u00d1  _]*(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1" +
+              "  _]+$"
         }
       ]
     },
