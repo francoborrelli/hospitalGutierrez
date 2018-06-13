@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'antd';
 import { withRouter } from 'react-router-dom';
-
+import moment from "moment"
 import Form from '../../../../containers/Form/Form';
 
 const formatter = (value, metric) => {
@@ -15,7 +15,7 @@ const recordForm = props => {
       name: 'controlDate',
       label: 'Fecha del control',
       type: 'datePicker',
-      props: { placeholder: 'Fecha del control' },
+      props: { placeholder: 'Fecha del control', disabledDate: (currentDate) => (currentDate <= moment(props.patient.birthday) || currentDate >= moment()) },
       rules: [
         {
           type: 'object',
@@ -132,12 +132,21 @@ const recordForm = props => {
   const submit = data => {
     const result = {
       ...data,
-      vaccination: data.vaccination === 0 ? true : false,
+      fisicTest: data.fisicTest === 0 ? true : false,
       maturation: data.maturation === 0 ? true : false,
-      fisicTest: data.fisicTest === 0 ? true : false
+      vaccination: data.vaccination === 0 ? true : false
     };
     props.submit(result);
   };
+
+  const defaultValues = props.record ? {
+    ...props.record,
+    fisicTest: props.record.fisicTest ? 0 : 1,
+    maturation: props.record.maturation ? 0 : 1,
+    vaccination: props.record.vaccination ? 0 : 1,
+    controlDate: moment(props.record.controlDate)
+  }
+  : {}
 
   return (
     <div style={{ margin: 10 }}>
@@ -148,7 +157,7 @@ const recordForm = props => {
             fields={fields}
             submitted={submit}
             {...props}
-            defaultValues={props.record}
+            defaultValues={defaultValues}
             buttonText={props.btnText ? props.btnText : 'Confirmar'}
           />
         </div>

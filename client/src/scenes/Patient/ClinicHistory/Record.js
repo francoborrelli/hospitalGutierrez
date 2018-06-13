@@ -52,6 +52,7 @@ class Record extends Component {
           render={() => (
             <EditPage
               user={this.props.user}
+              patient={this.props.patient}
               submitted={this.editRecordHandler}
               loading={this.state.loading}
               record={this.state.record}

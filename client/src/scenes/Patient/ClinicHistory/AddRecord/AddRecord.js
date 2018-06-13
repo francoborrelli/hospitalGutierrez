@@ -39,6 +39,7 @@ class AddRecord extends Component {
     return (
       <RecordForm
         onCancel={this.redirect}
+        patient={this.props.patient}
         submit={this.submitHandler}
         loading={this.state.loading}
         title="Nuevo Control"
