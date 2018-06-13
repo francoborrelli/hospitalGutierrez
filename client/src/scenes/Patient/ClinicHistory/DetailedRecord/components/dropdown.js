@@ -10,11 +10,6 @@ const Item = Menu.Item;
 const Divider = Menu.Divider;
 
 const dropdown = props => {
-  const url = props.location.pathname.substring(
-    0,
-    props.location.pathname.lastIndexOf('/')
-  );
-
   const edit = props.user.permissions.includes('control_update') ? (
     <Item key="1">
       <Link to={props.location.pathname + '/edit'}>Editar</Link>

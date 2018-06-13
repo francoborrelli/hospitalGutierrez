@@ -38,7 +38,6 @@ class UserList extends Component {
         users = users.filter(user => !user.active);
       }
     }
-    console.log(users.length === this.state.allUsers.length)
     this.setState(prevState => ({
       searching: false,
       users: users,

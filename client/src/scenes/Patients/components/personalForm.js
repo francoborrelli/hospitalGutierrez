@@ -9,7 +9,6 @@ const personalDataForm = props => {
 
     const documentType = form.getFieldValue("documentType")
     const patient = props.patient ? props.patient : {}
-    console.log()
     if (documentType && (parseInt(documentType, 10) !== patient.documentType || documentNumber !== patient.documentNumber)) {
       axios
         .get('/patients/documentExists', {

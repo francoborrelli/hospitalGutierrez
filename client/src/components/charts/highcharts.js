@@ -48,7 +48,7 @@ const plotOptions = {
     marker: {
       symbol: 'circle'
     },
-    connectNulls: false,
+    connectNulls: true,
     lineWidth: 1
   },
   line: {

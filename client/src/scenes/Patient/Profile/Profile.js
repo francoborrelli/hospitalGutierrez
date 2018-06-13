@@ -24,7 +24,6 @@ const profile = props => {
         </Col>
       </Fragment>
     : null
-
   return (
     <Row justify={!HcPermission}>
       <Col xl={9} xxl={7} style={{paddingBottom: 10}}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import LineChart from '../../../../../components/charts/lineChart';
 
-const getData = patient => {
+const getData = (patient, data) => {
   switch (patient.gender) {
     //MALE
     case "0":
@@ -58,8 +58,10 @@ const getData = patient => {
 
 export default props => {
 
-  const data = getData(props.patient)
+  const data = getData(props.patient);
 
+  data.unshift({name: props.patient.firstName, data: props.data})
+  
   const config = {
     type: "Semana",
     title: "Curva de percentil perímetro cefálico",
