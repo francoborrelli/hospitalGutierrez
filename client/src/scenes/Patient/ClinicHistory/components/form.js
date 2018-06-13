@@ -148,6 +148,7 @@ const recordForm = props => {
             fields={fields}
             submitted={submit}
             {...props}
+            defaultValues={props.record}
             buttonText={props.btnText ? props.btnText : 'Confirmar'}
           />
         </div>

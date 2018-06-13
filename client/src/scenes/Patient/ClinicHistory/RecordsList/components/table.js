@@ -22,7 +22,7 @@ const tableRecords = props => {
       title: "Fecha",
       dataIndex: "date",
       key: "date",
-      sorter: (a, b) => a.date > b.date
+      sorter: (a, b) => new Date(a.date) > new Date(b.date)
     }, {
       title: "Usuario",
       dataIndex: "user",
