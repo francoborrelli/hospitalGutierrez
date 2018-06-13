@@ -12,6 +12,8 @@ class Reports extends Component {
   state = {
     loading: true,
     ppc: [],
+    height: [],
+    weight: []
   };
 
   componentDidUpdate = prevProps => {
@@ -21,7 +23,11 @@ class Reports extends Component {
       axios
         .get('/patients/' + this.props.patient._id + '/reports')
         .then(response => {
-          this.setState({ ppc: response.data.ppc });
+          this.setState({
+            ppc: response.data.ppc,
+            height: response.data.height,
+            weight: response.data.weight
+          });
         })
         .catch(() => {
           message.error('Ocurrió un error. Intenta nuevamente');
@@ -35,13 +41,13 @@ class Reports extends Component {
       <Card bodyStyle={{ padding: '10px 20px' }} loading={this.props.loading}>
         <Tabs defaultActiveKey="1" size="small">
           <TabPane tab="Curva de PPC" key="1">
-            <PpcReport patient={this.props.patient} data={this.state.ppc}/>
+            <PpcReport patient={this.props.patient} data={this.state.ppc} />
           </TabPane>
           <TabPane tab="Curva de Talla" key="2">
-            <HeightReport patient={this.props.patient} />
+            <HeightReport patient={this.props.patient} data={this.state.height} />
           </TabPane>
           <TabPane tab="Curva de Crecimiento" key="3">
-            <WeightReport patient={this.props.patient} />
+            <WeightReport patient={this.props.patient} data={this.state.weight} />
           </TabPane>
         </Tabs>
       </Card>

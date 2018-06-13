@@ -59,6 +59,8 @@ const getData = patient => {
   export default props => {
 
     const data = getData(props.patient)
+    
+    data.push({name: props.patient.firstName, data: props.data})
 
     const config = {
       type: "Semana",
