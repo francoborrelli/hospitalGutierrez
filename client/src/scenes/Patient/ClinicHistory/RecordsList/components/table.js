@@ -24,6 +24,15 @@ const tableRecords = props => {
     return 0;
   };
 
+  const compareDates = (a, b) => {
+    if (a > b) {
+      return -1;
+    }
+    if (a < b) {
+      return 1;
+    }
+    return 0;
+  };
 
   const columns = [
     {
@@ -34,7 +43,7 @@ const tableRecords = props => {
       sorter: (a, b) => {
         let dateA = a.date.split("/")
         let dateB = b.date.split("/")
-        return new Date(dateA[2], dateA[1], dateA[0]) < new Date(dateB[2], dateB[1], dateB[0])
+        return compareDates(new Date(dateA[2], dateA[1], dateA[0]), new Date(dateB[2], dateB[1], dateB[0]))
       }
 
     },

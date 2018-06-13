@@ -65,7 +65,12 @@
                         { "$oid": "5b20812f4b817748c02f01b2" },
                         { "$oid": "5b20816b4b817748c02f01b3" },
                         { "$oid": "5b2083384b817748c02f01b4" },
-                        { "$oid": "5b20842d4b817748c02f01b5" }
+                        { "$oid": "5b20842d4b817748c02f01b5" },
+                        { "$oid": "5b2140230e7e8a272d8ae427" },
+                        { "$oid": "5b21411b0e7e8a272d8ae428" },
+                        { "$oid": "5b2145be0e7e8a272d8ae42a" },
+                        { "$oid": "5b21418d0e7e8a272d8ae429" },
+                        { "$oid": "5b21465b0e7e8a272d8ae42b" }
     ],
     "__v": 0
   },
@@ -78,7 +83,7 @@
     "gender": "female",
     "address": "Cordoba Capital",
     "hasRefrigerator": true,
-    "hasElectricity": false,
+    "hasElectricity": true,
     "hasPet": false,
     "documentType": 1,
     "heatingType": 2,
@@ -99,7 +104,7 @@
     "gender": "male",
     "address": "Calle 15 nº 232 San Luis, Argentina",
     "hasRefrigerator": false,
-    "hasElectricity": false,
+    "hasElectricity": true,
     "hasPet": true,
     "documentType": 3,
     "heatingType": 3,
