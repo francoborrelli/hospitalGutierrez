@@ -207,14 +207,17 @@ async function checkDocument(req, res, next) {
 
 async function reports(req, res, next) {
   try {
-    const patient = await Patient.findById(req.params.patientId);
+    const patient = await Patient.findById(req.params.patientId).populate({
+      path: 'clinicalRecords',
+      match: { deleted: { $eq: false } }
+    });
     if (!patient) {
       const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
       return next(err);
     }
-    const ppc = await patient.getPpcReport();
-    const height = await patient.getHeightReport();
-    const weight = await patient.getWeightReport();
+    const ppc = patient.getPpcReport();
+    const height = patient.getHeightReport();
+    const weight = patient.getWeightReport();
     return res.json({ ppc, height, weight });
   } catch (error) {
     return next(error);

@@ -81,25 +81,20 @@ PatientSchema.method({
   getHeightReport() {
     return this.getReport('height', 30, 25);
   },
-  async getReport(field, days, amount) {
+  getReport(field, days, amount) {
     const cutoff = new Date(this.birthday);
-    cutoff.setDate(cutoff.getDate() + (days * amount));
-    await this
-      .populate({
-        path: 'clinicalRecords',
-        match: { deleted: { $eq: false }, controlDate: { $lt: cutoff } }
-      })
-      .execPopulate();
+    cutoff.setDate(cutoff.getDate() + days * amount);
+    const clinicalRecords = this.clinicalRecords.filter(
+      r => r[field] && new Date(r.controlDate) <= cutoff
+    );
     let array = new Array(amount).fill(null);
     array = array.map((element, index) => {
       const max = new Date(this.birthday);
       max.setDate(max.getDate() + days * (index + 1));
       const min = new Date(this.birthday);
       min.setDate(min.getDate() + days * index);
-      const records = this.clinicalRecords.filter(
-        r =>
-          r[field] &&
-          (new Date(r.controlDate) < max && new Date(r.controlDate) >= min)
+      const records = clinicalRecords.filter(
+        r => new Date(r.controlDate) < max && new Date(r.controlDate) >= min
       );
       const makeSelect = comparator => (a, b) =>
         comparator(a, b) ? a[field] : b[field];
