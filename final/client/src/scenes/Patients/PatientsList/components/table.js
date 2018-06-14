@@ -10,7 +10,8 @@ const tablePatients = props => {
     firstName: patient.firstName,
     lastName: patient.lastName,
     documentType: patient.documentType,
-    documentNumber: patient.documentNumber
+    documentNumber: patient.documentNumber,
+    controls: patient.clinicalRecords.length
   }));
 
   const documentTypes = [];
@@ -40,7 +41,7 @@ const tablePatients = props => {
       title: 'Apellido',
       dataIndex: 'lastName',
       key: 'lastName',
-      defaultSortOrder: "descend",
+      defaultSortOrder: 'descend',
       sorter: (a, b) => compareByAlph(a.lastName, b.lastName),
       render: (text, record) => capitalize(text)
     },
@@ -60,6 +61,11 @@ const tablePatients = props => {
       title: 'Nº Doc.',
       dataIndex: 'documentNumber',
       key: 'documentNumber'
+    },
+    {
+      title: 'Nº Controles',
+      dataIndex: 'controls',
+      key: 'controls'
     }
   ];
 

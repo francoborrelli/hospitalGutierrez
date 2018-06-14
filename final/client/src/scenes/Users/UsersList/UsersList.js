@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Col, message} from 'antd';
+import React, { Component } from 'react';
+import { Col, message } from 'antd';
 import Row from '../../../components/grid/row';
 import Section from '../../../components/header/sectionHeader/sectionHeader';
 import SearchForm from './components/searchForm';
@@ -16,20 +16,26 @@ class UserList extends Component {
     users: []
   };
 
-  componentDidMount = async() => {
+  componentDidMount = async () => {
     try {
       const response = await axios.get('/users');
-      this.setState({loading: false, users: response.data, allUsers: response.data});
+      this.setState({
+        loading: false,
+        users: response.data,
+        allUsers: response.data
+      });
     } catch (error) {
       message.error('Ocurrió un error al obtener los usuarios');
     }
   };
 
   searchHandler = data => {
-    this.setState({searching: true});
+    this.setState({ searching: true });
     let users = this.state.allUsers;
     if (data.username) {
-      users = users.filter(user => user.username.toLowerCase().includes(data.username.toLowerCase()));
+      users = users.filter(user =>
+        user.username.toLowerCase().includes(data.username.toLowerCase())
+      );
     }
     if (data.state) {
       if (data.state === 'active') {
@@ -42,15 +48,18 @@ class UserList extends Component {
       searching: false,
       users: users,
       filtered: users.length !== prevState.allUsers.length
-    }))
+    }));
   };
 
   resetHandler = () => {
-    this.setState(prevState => ({users: prevState.allUsers, filtered: false}));
+    this.setState(prevState => ({
+      users: prevState.allUsers,
+      filtered: false
+    }));
   };
 
   changeUserStatusHandler = async user => {
-    this.setState({loading: true});
+    this.setState({ loading: true });
     const active = user.status !== 'Bloqueado';
     try {
       await axios.patch(`/users/${user.key}`, {
@@ -60,23 +69,21 @@ class UserList extends Component {
       let status;
       this.setState(prevState => {
         const newUsers = [];
-        prevState
-          .users
-          .forEach(u => {
-            if (u._id === user.key) {
-              status = !u.active;
-              newUsers.push({
-                ...u,
-                active: status
-              });
-            } else {
-              newUsers.push(u);
-            }
-          });
-        const allUsers = prevState
-          .allUsers
-          .map(obj => newUsers.find(o => o._id === obj._id) || obj);
-        return {allUsers: allUsers, users: newUsers, loading: false};
+        prevState.users.forEach(u => {
+          if (u._id === user.key) {
+            status = !u.active;
+            newUsers.push({
+              ...u,
+              active: status
+            });
+          } else {
+            newUsers.push(u);
+          }
+        });
+        const allUsers = prevState.allUsers.map(
+          obj => newUsers.find(o => o._id === obj._id) || obj
+        );
+        return { allUsers: allUsers, users: newUsers, loading: false };
       });
       if (status) {
         message.success('Se activó a ' + name + ' correctamente.');
@@ -85,7 +92,7 @@ class UserList extends Component {
       }
     } catch (error) {
       message.error('Algo falló. Intentá nuevamente.');
-      this.setState({loading: false});
+      this.setState({ loading: false });
     }
   };
 
@@ -95,13 +102,12 @@ class UserList extends Component {
         <Row>
           <Col xl={5} lg={7}>
             <SearchForm
-              goBlank={this.state.filtered
-              ? this.resetHandler
-              : null}
+              goBlank={this.state.filtered ? this.resetHandler : null}
               mantainDefault
               loading={this.state.searching}
               documentTypes={this.state.documentTypes}
-              submitted={this.searchHandler}/>
+              submitted={this.searchHandler}
+            />
           </Col>
           <Col xl={19} lg={17}>
             <Table
@@ -109,13 +115,12 @@ class UserList extends Component {
               onDelete={this.changeUserStatusHandler}
               data={this.state.users}
               user={this.props.user}
-              addPath={this
-              .props
-              .user
-              .permissions
-              .includes('usuario_new')
-              ? '/users/add'
-              : null}/>
+              addPath={
+                this.props.user.permissions.includes('usuario_new')
+                  ? '/users/add'
+                  : null
+              }
+            />
           </Col>
         </Row>
       </Section>
