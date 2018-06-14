@@ -35,6 +35,11 @@ class Home extends Component {
     if (this.props.login) {
       message.success('Sesión iniciada correctamente.', 3);
       this.props.seeSuccessMessage();
+    }else{
+      if (this.props.logout) {
+        message.success('Se cerró la sesión correctamente.', 3);
+        this.props.seeSuccessMessage();
+      }
     }
   }
 
@@ -49,7 +54,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  login: state.auth.recentLogin
+  login: state.auth.recentLogin, logout: state.auth.recentLogout
 });
 
 const mapDispatchToProps = dispatch => ({
