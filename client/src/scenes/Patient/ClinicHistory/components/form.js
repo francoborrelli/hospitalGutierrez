@@ -130,6 +130,7 @@ const recordForm = props => {
   };
 
   const submit = data => {
+    console.log(data)
     const result = {
       ...data,
       fisicTest: data.fisicTest === 0,
@@ -155,8 +156,6 @@ const recordForm = props => {
     controlDate: moment(props.record.controlDate)
   }
   : {}
-
-  console.log(props.record)
 
   return (
     <div style={{ margin: 10 }}>
