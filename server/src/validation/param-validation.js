@@ -154,6 +154,25 @@ module.exports = {
       nutrition: Joi.string(),
       user: Joi.string().required(),
     }
+  },
+
+  patchClinicalRecord: {
+    body: {
+      controlDate: Joi.date(),
+      weight: Joi.number(),
+      height: Joi.number(),
+      pc: Joi.number(),
+      ppc: Joi.number(),
+      vaccination: Joi.boolean(),
+      maturation: Joi.boolean(),
+      fisicTest: Joi.boolean(),
+      vaccinationObservation: Joi.string(),
+      maturationObservation: Joi.string(),
+      fisicTestObservation: Joi.string(),
+      generalObservation: Joi.string(),
+      nutrition: Joi.string(),
+      user: Joi.string(),
+    }
   }
 
 };

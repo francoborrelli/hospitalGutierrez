@@ -42,6 +42,11 @@ router
 router
   .route('/:patientId/clinicalRecords/:recordId')
   .get(hasPermission('control_show'), clinicalRecordCtrl.get)
+  .patch(
+    hasPermission('control_update'),
+    validate(paramValidation.patchClinicalRecord),
+    clinicalRecordCtrl.patch
+  )
   .delete(hasPermission('control_destroy'), clinicalRecordCtrl.remove);
 
 router
@@ -54,9 +59,6 @@ router
 
 router
   .route('/:patientId/reports')
-  .get(
-    hasPermission('historiaClinica_index'),
-    patientCtrl.reports
-  );
+  .get(hasPermission('historiaClinica_index'), patientCtrl.reports);
 
 module.exports = router;
