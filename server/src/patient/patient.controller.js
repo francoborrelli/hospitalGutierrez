@@ -47,15 +47,11 @@ async function create(req, res, next) {
     heatingType: req.body.heatingType,
     houseType: req.body.houseType,
     waterType: req.body.waterType,
+    phone: req.body.phone || null,
+    insurance = req.body.insurance !== 'undefined' ? req.body.insurance : null,
     clinicalRecords: [],
     deleted: false
   });
-  if (req.body.insurance || req.body.insurance === 0) {
-    patient.insurance = req.body.insurance;
-  }
-  if (req.body.phone) {
-    patient.phone = req.body.phone;
-  }
   patient
     .save()
     .then(savedPatient => res.json(savedPatient))

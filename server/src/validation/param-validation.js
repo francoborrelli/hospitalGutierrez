@@ -112,9 +112,9 @@ module.exports = {
       birthday: Joi.date(),
       gender: Joi.string(),
       address: Joi.string(),
-      phone: Joi.string(),
+      phone: Joi.string().allow(null),
       documentType: Joi.number(),
-      insurance: Joi.number()
+      insurance: Joi.number().allow(null)
     }
   },
 
@@ -160,17 +160,17 @@ module.exports = {
     body: {
       controlDate: Joi.date(),
       weight: Joi.number(),
-      height: Joi.number(),
-      pc: Joi.number(),
-      ppc: Joi.number(),
+      height: Joi.number().allow(null),
+      pc: Joi.number().allow(null),
+      ppc: Joi.number().allow(null),
       vaccination: Joi.boolean(),
       maturation: Joi.boolean(),
       fisicTest: Joi.boolean(),
-      vaccinationObservation: Joi.string(),
-      maturationObservation: Joi.string(),
-      fisicTestObservation: Joi.string(),
-      generalObservation: Joi.string(),
-      nutrition: Joi.string(),
+      vaccinationObservation: Joi.string().allow(null),
+      maturationObservation: Joi.string().allow(null),
+      fisicTestObservation: Joi.string().allow(null),
+      generalObservation: Joi.string().allow(null),
+      nutrition: Joi.string().allow(null),
       user: Joi.string(),
     }
   }
