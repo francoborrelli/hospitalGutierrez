@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   error: null,
   recentLogin: false,
+  recentLogout: false,
   appLoading: false
 };
 
@@ -26,9 +27,9 @@ const reducer = (state = initialState, action) => {
     case types.AUTH_FAIL:
       return { ...state, loading: false, error: action.error };
     case types.AUTH_LOGOUT:
-      return { ...state, jwt: null, user: null };
+      return { ...state, jwt: null, user: null, recentLogout: true };
     case types.AUTH_SEE_MESSAGE:
-      return { ...state, recentLogin: false };
+      return { ...state, recentLogin: false, recentLogout: false };
     case types.APP_LOADING:
       return { ...state, appLoading: true };
     case types.APP_LOADED:

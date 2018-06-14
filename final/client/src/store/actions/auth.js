@@ -58,9 +58,7 @@ export const checkAuth = () => {
   return async dispatch => {
     const token = localStorage.getItem('token');
     dispatch(actions.appLoading());
-    if (!token) {
-      dispatch(logout());
-    } else {
+    if (token) {
       const response = await axios.post(`/auth/newToken`);
       localStorage.setItem('token', response.data.token);
       dispatch(authSuccess(response.data.token));
