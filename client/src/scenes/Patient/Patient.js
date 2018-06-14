@@ -277,6 +277,7 @@ class PatientPage extends Component {
                 user={this.props.user}
                 reload={this.setRecords}
                 patient={this.state.patient}
+                setRecords={this.setRecords}
               />
             )}
           />

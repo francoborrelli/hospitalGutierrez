@@ -41,7 +41,17 @@ class Record extends Component {
       .catch(() => message.error('Ocurrio un error. Intenta nuevamente'));
   };
 
-  editRecordHandler = () => {};
+  editRecordHandler = data => {
+    const url = this.getURL();
+    return axios
+      .patch(url, data)
+      .then(() => {
+        this.props.setRecords()
+        message.success("Se actualizó el control del día " + data.controlDate.format('DD/MM/YYYY') + " correctamente.")
+        this.props.history.push('/patient/' + this.props.patient._id)
+      })
+      .catch(() => message.error('Ocurrio un error. Intenta nuevamente'));
+  };
 
   render() {
     return (
@@ -53,7 +63,7 @@ class Record extends Component {
             <EditPage
               user={this.props.user}
               patient={this.props.patient}
-              submitted={this.editRecordHandler}
+              submit={this.editRecordHandler}
               loading={this.state.loading}
               record={this.state.record}
             />

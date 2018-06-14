@@ -16,10 +16,7 @@ class Reports extends Component {
     weight: []
   };
 
-  componentDidUpdate = prevProps => {
-    if (
-      prevProps.patient.clinicalRecords !== this.props.patient.clinicalRecords
-    ) {
+  componentDidMount = () => {
       axios
         .get('/patients/' + this.props.patient._id + '/reports')
         .then(response => {
@@ -27,15 +24,20 @@ class Reports extends Component {
             ppc: response.data.ppc,
             height: response.data.height,
             weight: response.data.weight,
-            loading: false
           });
         })
         .catch(() => {
           message.error('Ocurrió un error. Intenta nuevamente');
           this.setState({ loading: false });
-        });
-    }
+        })
   };
+
+
+  componentDidUpdate = () => {
+    if (this.state.loading){
+      this.setState({loading: false})
+    }
+  }
 
   render() {
     return (

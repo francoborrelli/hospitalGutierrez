@@ -132,21 +132,31 @@ const recordForm = props => {
   const submit = data => {
     const result = {
       ...data,
-      fisicTest: data.fisicTest === 0 ? true : false,
-      maturation: data.maturation === 0 ? true : false,
-      vaccination: data.vaccination === 0 ? true : false
+      fisicTest: data.fisicTest === 0,
+      maturation: data.maturation === 0, 
+      vaccination: data.vaccination === 0,
     };
     props.submit(result);
   };
 
   const defaultValues = props.record ? {
-    ...props.record,
+    weight: props.record.weight,
+    height: props.record.height,
+    pc: props.record.pc,
+    ppc: props.record.ppc,
+    fisicTestObservation: props.record.fisicTestObservation,
+    madurationObservation: props.record.madurationObservation,
+    generalObservation: props.record.generalObservation,
+    vaccinationObservation: props.record.vaccinationObservation,
+    nutrition: props.record.nutrition,
     fisicTest: props.record.fisicTest ? 0 : 1,
     maturation: props.record.maturation ? 0 : 1,
     vaccination: props.record.vaccination ? 0 : 1,
     controlDate: moment(props.record.controlDate)
   }
   : {}
+
+  console.log(props.record)
 
   return (
     <div style={{ margin: 10 }}>
@@ -156,8 +166,8 @@ const recordForm = props => {
             onCancel={props.history.goBack}
             fields={fields}
             submitted={submit}
-            {...props}
             defaultValues={defaultValues}
+            {...props}
             buttonText={props.btnText ? props.btnText : 'Confirmar'}
           />
         </div>
