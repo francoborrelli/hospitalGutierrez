@@ -11,7 +11,9 @@ const PatientSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  clinicalRecords: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ClinicalRecord' }],
+  clinicalRecords: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'ClinicalRecord' }
+  ],
   documentNumber: {
     type: String,
     required: true
@@ -69,7 +71,46 @@ const PatientSchema = new mongoose.Schema({
   }
 });
 
-PatientSchema.method({});
+PatientSchema.method({
+  getPpcReport() {
+    return this.getReport('ppc', 7, 14);
+  },
+  getWeightReport() {
+    return this.getReport('weight', 7, 14);
+  },
+  getHeightReport() {
+    return this.getReport('height', 30, 25);
+  },
+  async getReport(field, days, amount) {
+    const cutoff = new Date(this.birthday);
+    cutoff.setDate(cutoff.getDate() + (days * amount));
+    await this
+      .populate({
+        path: 'clinicalRecords',
+        match: { deleted: { $eq: false }, controlDate: { $lt: cutoff } }
+      })
+      .execPopulate();
+    let array = new Array(amount).fill(null);
+    array = array.map((element, index) => {
+      const max = new Date(this.birthday);
+      max.setDate(max.getDate() + days * (index + 1));
+      const min = new Date(this.birthday);
+      min.setDate(min.getDate() + days * index);
+      const records = this.clinicalRecords.filter(
+        r =>
+          r[field] &&
+          (new Date(r.controlDate) < max && new Date(r.controlDate) >= min)
+      );
+      const makeSelect = comparator => (a, b) =>
+        comparator(a, b) ? a[field] : b[field];
+      const maxByValue = makeSelect(
+        (a, b) => new Date(a.controlDate) >= new Date(b.controlDate)
+      );
+      return records.length === 0 ? null : records.reduce(maxByValue, {});
+    });
+    return array;
+  }
+});
 
 PatientSchema.statics = {};
 

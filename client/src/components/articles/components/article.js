@@ -1,6 +1,6 @@
-import React from "react"
-import { Col } from "antd"
-import { Icon } from "react-fa"
+import React from 'react';
+import { Col } from 'antd';
+import { Icon } from 'react-fa';
 
 const article = props => (
   <Col lg={8}>
@@ -12,6 +12,6 @@ const article = props => (
       <p>{props.text}</p>
     </div>
   </Col>
-)
+);
 
-export default article
+export default article;
