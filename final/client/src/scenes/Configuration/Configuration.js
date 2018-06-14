@@ -24,7 +24,7 @@ class Configuration extends Component {
     axios
       .patch('/site', data)
       .then(() => {
-        this.props.appChangeData(data)
+        this.props.appChangeData(data);
         this.setState({ pageInfoRequest: false });
         message.success('Datos actualizados correctamente.');
       })
@@ -38,7 +38,7 @@ class Configuration extends Component {
     axios
       .patch('/site', data)
       .then(() => {
-        this.props.appChangeElements(data.listAmount)
+        this.props.appChangeElements(data.listAmount);
         this.setState({ elementsRequest: false });
         message.success('Se actualizó la cantidad de elementos correctamente.');
       })
@@ -70,13 +70,7 @@ class Configuration extends Component {
     return (
       <Section title="Configuración">
         <RowGutter>
-          <Col
-            xs={24}
-            xl={14}
-            style={{
-              marginBottom: 10
-            }}
-          >
+          <Col xs={24} xl={14} style={{ marginBottom: 10 }}>
             <PageConfiguration
               values={this.props.site}
               loading={this.state.pageInfoRequest}
@@ -85,14 +79,7 @@ class Configuration extends Component {
           </Col>
           <Col xs={24} xl={10}>
             <Row gutter={10}>
-              <Col
-                md={12}
-                xl={24}
-                xxl={12}
-                style={{
-                  marginBottom: 10
-                }}
-              >
+              <Col md={12} xl={24} xxl={12} style={{ marginBottom: 10 }}>
                 <ElementsConfiguration
                   value={this.props.site.listAmount}
                   submitted={this.updateElementsNumberHandler}
@@ -116,14 +103,19 @@ class Configuration extends Component {
 }
 
 const mapStateToProps = state => ({ site: state.app });
+
 const mapDispatchToProps = dispatch => ({
   appEnabled: () => dispatch(actions.appEnabled()),
   appDisabled: () => dispatch(actions.appDisabled()),
-  appChangeElements: (listAmount) => dispatch(actions.appChangeElements(listAmount)),
-  appChangeData: (data) => dispatch(actions.appChangeData(data))
+  appChangeElements: listAmount =>
+    dispatch(actions.appChangeElements(listAmount)),
+  appChangeData: data => dispatch(actions.appChangeData(data))
 });
 
 export default hasPermission(
-  connect(mapStateToProps, mapDispatchToProps)(Configuration),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Configuration),
   ['config_index', 'config_update']
 );
