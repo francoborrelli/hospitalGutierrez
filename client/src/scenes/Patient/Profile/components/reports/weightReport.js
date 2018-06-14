@@ -4,7 +4,7 @@ import LineChart from '../../../../../components/charts/lineChart';
 const getData = patient => {
   switch (patient.gender) {
     //MALE
-    case "0":
+    case "male":
       return (
         [{
           name: 'P3',
@@ -59,12 +59,11 @@ const getData = patient => {
   export default props => {
 
     const data = getData(props.patient)
-    
-    data.push({name: props.patient.firstName, data: props.data})
 
+    data.push({name: props.patient.firstName, data: props.data})
     const config = {
       type: "Semana",
-      title: "Curva de crecimiento Masculina",
+      title: "Curva de crecimiento " + (props.patient.gender === "male" ? "Masculina" : "Femenino"),
       xTitle: "Edad (semanas)",
       yTitle: "Peso (kg)",
       series: data,

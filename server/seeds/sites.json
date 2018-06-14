@@ -1,9 +1,9 @@
 [
   {
     "_id": { "$oid": "5b0cb95037fae6004c8dfdaa" },
-    "title": "Hospital",
+    "title": "Hospital Gutierrez",
     "email": "hospital@gmail.com",
-    "footer":"Esto es un hospital",
+    "footer":"Trabajo final de promoción - Proyecto de Software - Grupo 02",
     "enabled": true,
     "listAmount": 4,
     "__v": 0

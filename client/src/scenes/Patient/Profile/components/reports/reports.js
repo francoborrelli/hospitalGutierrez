@@ -26,19 +26,20 @@ class Reports extends Component {
           this.setState({
             ppc: response.data.ppc,
             height: response.data.height,
-            weight: response.data.weight
+            weight: response.data.weight,
+            loading: false
           });
         })
         .catch(() => {
           message.error('Ocurrió un error. Intenta nuevamente');
+          this.setState({ loading: false });
         });
-      this.setState({ loading: true });
     }
   };
 
   render() {
     return (
-      <Card bodyStyle={{ padding: '10px 20px' }} loading={this.props.loading}>
+      <Card bodyStyle={{ padding: '10px 20px'}} style={{minHeight: 250}} loading={this.props.loading && this.state.loading}>
         <Tabs defaultActiveKey="1" size="small">
           <TabPane tab="Curva de PPC" key="1">
             <PpcReport patient={this.props.patient} data={this.state.ppc} />

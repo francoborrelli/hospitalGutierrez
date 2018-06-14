@@ -4,7 +4,7 @@ import LineChart from '../../../../../components/charts/lineChart';
 const getData = (patient, data) => {
   switch (patient.gender) {
     //MALE
-    case "0":
+    case "male":
       return (
         [{
           name: 'P3',
