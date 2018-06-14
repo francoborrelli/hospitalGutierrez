@@ -158,7 +158,8 @@ const personalDataForm = props => {
       label: "Obras Social",
       type: "select",
       props: {
-        placeholder: "Obra Social"
+        placeholder: "Obra Social",
+        allowClear: true
       },
       options: props.data.insurances || []
     },
@@ -169,7 +170,7 @@ const personalDataForm = props => {
       rules: [
         {
           pattern: "^([+]{1})?[0-9 -/]*$",
-          message: "Ingrese un teléfono válido"
+          message: "Ingrese un teléfono válido",
         }
       ]
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from 'antd';
 import { withRouter } from 'react-router-dom';
-import moment from "moment"
+import moment from 'moment';
 import Form from '../../../../containers/Form/Form';
 
 const formatter = (value, metric) => {
@@ -15,7 +15,12 @@ const recordForm = props => {
       name: 'controlDate',
       label: 'Fecha del control',
       type: 'datePicker',
-      props: { placeholder: 'Fecha del control', disabledDate: (currentDate) => (currentDate <= moment(props.patient.birthday) || currentDate >= moment()) },
+      props: {
+        placeholder: 'Fecha del control',
+        disabledDate: currentDate =>
+          currentDate <= moment(props.patient.birthday) ||
+          currentDate >= moment()
+      },
       rules: [
         {
           type: 'object',
@@ -129,33 +134,49 @@ const recordForm = props => {
     }
   };
 
+  const getValue = field => {
+    return typeof field !== 'undefined' ? field : null;
+  };
+
+  const setNull = field => {
+    return field !== '' ? field : null;
+  };
+
   const submit = data => {
-    console.log(data)
     const result = {
       ...data,
+      height: getValue(data.height),
+      pc: getValue(data.pc),
+      ppc: getValue(data.ppc),
+      fisicTestObservation: setNull(data.fisicTestObservation),
+      maturationObservation: setNull(data.maturationObservation),
+      generalObservation: setNull(data.generalObservation),
+      vaccinationObservation: setNull(data.vaccinationObservation),
+      nutrition: setNull(data.nutrition),
       fisicTest: data.fisicTest === 0,
-      maturation: data.maturation === 0, 
-      vaccination: data.vaccination === 0,
+      maturation: data.maturation === 0,
+      vaccination: data.vaccination === 0
     };
     props.submit(result);
   };
 
-  const defaultValues = props.record ? {
-    weight: props.record.weight,
-    height: props.record.height,
-    pc: props.record.pc,
-    ppc: props.record.ppc,
-    fisicTestObservation: props.record.fisicTestObservation,
-    madurationObservation: props.record.madurationObservation,
-    generalObservation: props.record.generalObservation,
-    vaccinationObservation: props.record.vaccinationObservation,
-    nutrition: props.record.nutrition,
-    fisicTest: props.record.fisicTest ? 0 : 1,
-    maturation: props.record.maturation ? 0 : 1,
-    vaccination: props.record.vaccination ? 0 : 1,
-    controlDate: moment(props.record.controlDate)
-  }
-  : {}
+  const defaultValues = props.record
+    ? {
+        weight: props.record.weight,
+        height: props.record.height,
+        pc: props.record.pc,
+        ppc: props.record.ppc,
+        fisicTestObservation: props.record.fisicTestObservation,
+        maturationObservation: props.record.maturationObservation,
+        generalObservation: props.record.generalObservation,
+        vaccinationObservation: props.record.vaccinationObservation,
+        nutrition: props.record.nutrition,
+        fisicTest: props.record.fisicTest ? 0 : 1,
+        maturation: props.record.maturation ? 0 : 1,
+        vaccination: props.record.vaccination ? 0 : 1,
+        controlDate: moment(props.record.controlDate)
+      }
+    : {};
 
   return (
     <div style={{ margin: 10 }}>

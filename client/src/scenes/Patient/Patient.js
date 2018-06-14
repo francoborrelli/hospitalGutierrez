@@ -113,8 +113,15 @@ class PatientPage extends Component {
 
   editPersonalDataHandler = data => {
     this.setState({ personalDataRequest: true });
+    
+    const result = {
+      ...data,
+      insurance: typeof data.insurance === 'undefined' ? null : data.insurance,
+      phone: data.phone === '' ? null : data.phone
+    };
+
     axiosApi
-      .patch('patients/' + this.props.match.params.patientId, data)
+      .patch('patients/' + this.props.match.params.patientId, result)
       .then(response => {
         this.setState(prevState => ({
           patient: {
