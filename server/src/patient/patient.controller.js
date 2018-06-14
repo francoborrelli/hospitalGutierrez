@@ -125,6 +125,10 @@ async function patch(req, res, next) {
   }
 }
 
+function fieldExists(field) {
+  return typeof field !== 'undefined';
+}
+
 async function patchDemographicData(req, res, next) {
   try {
     const patient = await Patient.findById(req.params.patientId);
@@ -132,25 +136,25 @@ async function patchDemographicData(req, res, next) {
       const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
       return next(err);
     }
-    if (req.body.hasRefrigerator) {
+    if (fieldExists(req.body.hasRefrigerator)) {
       patient.hasRefrigerator = req.body.hasRefrigerator;
     }
-    if (req.body.hasElectricity) {
+    if (fieldExists(req.body.hasElectricity)) {
       patient.hasElectricity = req.body.hasElectricity;
     }
-    if (req.body.hasPet) {
+    if (fieldExists(req.body.hasPet)) {
       patient.hasPet = req.body.hasPet;
     }
-    if (req.body.insurance) {
+    if (fieldExists(req.body.insurance)) {
       patient.insurance = req.body.insurance;
     }
-    if (req.body.heatingType) {
+    if (fieldExists(req.body.heatingType)) {
       patient.heatingType = req.body.heatingType;
     }
-    if (req.body.houseType) {
+    if (fieldExists(req.body.houseType)) {
       patient.houseType = req.body.houseType;
     }
-    if (req.body.waterType) {
+    if (fieldExists(req.body.waterType)) {
       patient.waterType = req.body.waterType;
     }
     patient
