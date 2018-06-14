@@ -109,7 +109,7 @@ async function patch(req, res, next) {
     if (req.body.documentType || req.body.documentType === 0) {
       patient.documentType = req.body.documentType;
     }
-    if (req.body.insurance || req.body.insurance === 0) {
+    if (typeof req.body.insurance !== 'undefined') {
       patient.insurance = req.body.insurance;
     }
     patient
