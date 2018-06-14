@@ -18,8 +18,7 @@ router
 router
   .route('/:userId')
   .get(userCtrl.get)
-  .patch(hasPermission('usuario_update'), validate(paramValidation.patchUser), userCtrl.patch)
-  .delete(userCtrl.remove);
+  .patch(hasPermission('usuario_update'), validate(paramValidation.patchUser), userCtrl.patch);
 
 router
   .route('/:userId/roles')

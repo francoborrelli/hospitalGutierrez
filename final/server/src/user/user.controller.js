@@ -7,7 +7,7 @@ const Role = require('../role/role.model');
 
 async function get(req, res) {
   try {
-    const user = await User.get(req.user._id);
+    const user = await User.get(req.params.userId);
     return res.json(user);
   } catch (error) {
     return next(error);
@@ -43,7 +43,7 @@ async function create(req, res, next) {
 
 async function patch(req, res, next) {
   try {
-    const user = await User.get(req.user._id);
+    const user = await User.get(req.params.userId);
     if (req.body.firstName) {
       user.firstName = req.body.firstName;
     }
@@ -82,19 +82,9 @@ function list(req, res, next) {
     .catch(e => next(e));
 }
 
-async function remove(req, res, next) {
-  try {
-    const user = await User.get(req.user._id);
-    const deleterUser = await user.remove();
-    res.json(deletedUser);
-  } catch (error) {
-    return next(error);
-  }
-}
-
 async function addRole(req, res, next) {
   try {
-    const user = await User.get(req.user._id);
+    const user = await User.get(req.params.userId);
     const role = await Role.findById(req.body.roleId).exec();
     if (!role) {
       const err = new APIError(
@@ -124,7 +114,7 @@ async function addRole(req, res, next) {
 
 async function removeRole(req, res, next) {
   try {
-    const user = await User.get(req.user._id);
+    const user = await User.get(req.params.userId);
     const role = await Role.findById(req.params.roleId).exec();
     if (!role) {
       const err = new APIError(
@@ -162,7 +152,6 @@ module.exports = {
   create,
   patch,
   list,
-  remove,
   addRole,
   removeRole,
   checkEmail
