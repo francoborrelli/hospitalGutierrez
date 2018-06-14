@@ -103,7 +103,7 @@ async function patch(req, res, next) {
     if (req.body.address) {
       patient.address = req.body.address;
     }
-    if (req.body.phone) {
+    if (typeof req.body.phone !== 'undefined') {
       patient.phone = req.body.phone;
     }
     if (req.body.documentType || req.body.documentType === 0) {
