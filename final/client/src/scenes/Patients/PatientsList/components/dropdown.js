@@ -7,47 +7,46 @@ import { Link } from 'react-router-dom';
 const Item = Menu.Item;
 const Divider = Menu.Divider;
 
-
 const dropdown = props => {
-  const show = props.user.permissions.includes('paciente_show') ? (
+  const check = (element, permission) => {
+    return props.user.permissions.includes(permission) ? element : null;
+  };
+
+  const show = (
     <Item key="0">
       <Link to={'patient/' + props.record.key}>Ver Perfil</Link>
     </Item>
-  ) : null;
+  );
 
-  const clinic = props.user.permissions.includes('control_new') ? (
-    <Item key="6">
-      <Link to={'patient/' + props.record.key + '/addRecord'}>Agregar Control</Link>
-    </Item>
-  ) : null;
-
-  const edit = props.user.permissions.includes('paciente_update') ? (
+  const edit = (
     <Item key="1">
       <Link to={'patient/' + props.record.key + '/edit'}>Editar</Link>
     </Item>
-  ) : null;
+  );
 
-  const destroy = props.user.permissions.includes('paciente_destroy') ? (
+  const destroy = (
     <Item key="2">
-      <a
-        onClick={() =>
-          Modal('paciente', props.record, () => props.onDelete(props.record))
-        }
-      >
+      <a onClick={() => Modal('paciente', props.record, () => props.onDelete(props.record))}>
         Eliminar
       </a>
     </Item>
-  ) : null;
+  );
+
+  const clinic = (
+    <Item key="3">
+      <Link to={'patient/' + props.record.key + '/addRecord'}>Agregar Control</Link>
+    </Item>
+  );
 
   const menu = (
     <Menu>
-      {show}
+      {check(show, 'paciente_show')}
       {show && clinic ? <Divider /> : null}
-      {clinic}
+      {check(clinic, 'control_new')}
       {clinic && edit ? <Divider /> : null}
-      {edit}
+      {check(edit, 'paciente_update')}
       {edit && destroy ? <Divider /> : null}
-      {destroy}
+      {check(destroy, 'paciente_destroy')}
     </Menu>
   );
 

@@ -1,32 +1,32 @@
-import React from "react"
+import React from 'react';
 import { Card } from 'antd';
-import Form from "../../../../containers/Form/Form"
+import Form from '../../../../containers/Form/Form';
 
 const searchForm = props => {
   const fields = {
     username: {
-      name: "username",
+      name: 'username',
       props: {
-        placeholder: "Nombre de Usuario"
+        placeholder: 'Nombre de Usuario'
       },
-      type: "input"
+      type: 'input'
     },
     state: {
-      name: "state",
-      type: "select",
+      name: 'state',
+      type: 'select',
       props: {
-        placeholder: "Estado",
+        placeholder: 'Estado',
         allowClear: true
       },
       options: [
-        { id: "active", nombre: "Activo" },
-        { id: "deleted", nombre: "Bloqueado" }
+        { id: 'active', nombre: 'Activo' },
+        { id: 'deleted', nombre: 'Bloqueado' }
       ]
     }
-  }
+  };
 
   return (
-    <Card title="Buscar" style={{marginBottom: 10}}>
+    <Card title="Buscar" style={{ marginBottom: 10 }}>
       <Form
         className="ant-advanced-search-form"
         fields={fields}
@@ -35,7 +35,7 @@ const searchForm = props => {
         buttonText="Buscar"
       />
     </Card>
-  )
-}
+  );
+};
 
-export default searchForm
+export default searchForm;
