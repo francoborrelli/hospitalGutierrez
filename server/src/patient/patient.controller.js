@@ -48,7 +48,7 @@ async function create(req, res, next) {
     houseType: req.body.houseType,
     waterType: req.body.waterType,
     phone: req.body.phone || null,
-    insurance = req.body.insurance !== 'undefined' ? req.body.insurance : null,
+    insurance: req.body.insurance !== 'undefined' ? req.body.insurance : null,
     clinicalRecords: [],
     deleted: false
   });
