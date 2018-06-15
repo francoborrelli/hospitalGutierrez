@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
-const httpStatus = require('http-status');
-const APIError = require('../helpers/APIError');
 
-// TODO: relaciones con paciente y usuario
 const ClinicalRecordSchema = new mongoose.Schema({
   controlDate: {
     type: Date,

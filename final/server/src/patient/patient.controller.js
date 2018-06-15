@@ -17,7 +17,6 @@ async function list(req, res, next) {
   }
 }
 
-// TODO: validar restricciones
 async function create(req, res, next) {
   const existPatient = await Patient.findOne({
     documentType: req.query.documentType,
@@ -58,9 +57,16 @@ async function create(req, res, next) {
     .catch(e => next(e));
 }
 
+function fieldExists(field) {
+  return typeof field !== 'undefined';
+}
+
 async function patch(req, res, next) {
   try {
-    const patient = await Patient.findById(req.params.patientId);
+    const patient = await Patient.find({
+      _id: req.params.patientId,
+      deleted: false
+    });
     if (!patient) {
       const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
       return next(err);
@@ -103,13 +109,13 @@ async function patch(req, res, next) {
     if (req.body.address) {
       patient.address = req.body.address;
     }
-    if (typeof req.body.phone !== 'undefined') {
+    if (fieldExists(req.body.phone)) {
       patient.phone = req.body.phone;
     }
     if (req.body.documentType || req.body.documentType === 0) {
       patient.documentType = req.body.documentType;
     }
-    if (typeof req.body.insurance !== 'undefined') {
+    if (fieldExists(req.body.insurance)) {
       patient.insurance = req.body.insurance;
     }
     patient
@@ -121,13 +127,12 @@ async function patch(req, res, next) {
   }
 }
 
-function fieldExists(field) {
-  return typeof field !== 'undefined';
-}
-
 async function patchDemographicData(req, res, next) {
   try {
-    const patient = await Patient.findById(req.params.patientId);
+    const patient = await Patient.find({
+      _id: req.params.patientId,
+      deleted: false
+    });
     if (!patient) {
       const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
       return next(err);
@@ -164,12 +169,15 @@ async function patchDemographicData(req, res, next) {
 
 async function get(req, res, next) {
   try {
-    const patient = await Patient.findById(req.params.patientId).populate({
+    const patient = await Patient.find({
+      _id: req.params.patientId,
+      deleted: false
+    }).populate({
       path: 'clinicalRecords',
       match: { deleted: { $eq: false } },
       populate: { path: 'user', model: 'User', select: 'username' }
     });
-    if (!patient || patient.deleted) {
+    if (!patient) {
       const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
       return next(err);
     }
@@ -181,15 +189,25 @@ async function get(req, res, next) {
 
 async function remove(req, res, next) {
   try {
-    const patient = await Patient.findById(req.params.patientId);
+    const patient = await Patient.find({
+      _id: req.params.patientId,
+      deleted: false
+    }).populate({
+      path: 'clinicalRecords',
+      match: { deleted: { $eq: false } }
+    });
     if (!patient) {
       const err = new APIError('Patient not found', httpStatus.NOT_FOUND, true);
+      return next(err);
+    }
+    if (patient.clinicalRecords.length) {
+      const err = new APIError('Patient cannot be deleted because he has clinical records', httpStatus.BAD_REQUEST, true);
       return next(err);
     }
     patient.deleted = true;
     patient
       .save()
-      .then(savedPatient => res.send())
+      .then(() => res.send())
       .catch(e => next(e));
   } catch (error) {
     return next(error);

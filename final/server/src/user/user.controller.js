@@ -59,7 +59,6 @@ async function patch(req, res, next) {
     if (req.body.roles && (!req.body.roles.length || req.body.roles.length)) {
       user.roles = req.body.roles;
     }
-    // TODO: validar email
     if (req.body.email) {
       user.email = req.body.email;
     }
@@ -76,8 +75,7 @@ async function patch(req, res, next) {
 }
 
 function list(req, res, next) {
-  const { limit = 50, skip = 0 } = req.query;
-  User.list({ limit, skip })
+  User.find()
     .then(users => res.json(users))
     .catch(e => next(e));
 }

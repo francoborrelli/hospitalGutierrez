@@ -5,26 +5,35 @@ const ClinicalRecord = require('./clinicalRecord.model');
 const Patient = require('../patient/patient.model');
 
 async function create(req, res, next) {
-  const clinicalRecord = new ClinicalRecord({
-    controlDate: new Date(req.body.controlDate),
-    weight: req.body.weight,
-    height: req.body.height || null,
-    pc: req.body.pc || null,
-    ppc: req.body.ppc || null,
-    vaccination: req.body.vaccination,
-    maturation: req.body.maturation,
-    fisicTest: req.body.fisicTest,
-    vaccinationObservation: req.body.vaccinationObservation || null,
-    maturationObservation: req.body.maturationObservation || null,
-    fisicTestObservation: req.body.fisicTestObservation || null,
-    generalObservation: req.body.generalObservation || null,
-    nutrition: req.body.nutrition || null,
-    user: req.body.user,
-    deleted: false
-  });
-
   try {
     const patient = await Patient.findById(req.params.patientId);
+
+    if (new Date(req.body.controlDate) < new Date(patient.birthday)) {
+      const err = new APIError(
+        'Control date cannot be lower than patient birthday',
+        httpStatus.BAD_REQUEST,
+        true
+      );
+      return next(err);
+    }
+
+    const clinicalRecord = new ClinicalRecord({
+      controlDate: new Date(req.body.controlDate),
+      weight: req.body.weight,
+      height: req.body.height || null,
+      pc: req.body.pc || null,
+      ppc: req.body.ppc || null,
+      vaccination: req.body.vaccination,
+      maturation: req.body.maturation,
+      fisicTest: req.body.fisicTest,
+      vaccinationObservation: req.body.vaccinationObservation || null,
+      maturationObservation: req.body.maturationObservation || null,
+      fisicTestObservation: req.body.fisicTestObservation || null,
+      generalObservation: req.body.generalObservation || null,
+      nutrition: req.body.nutrition || null,
+      user: req.body.user,
+      deleted: false
+    });
     const savedRecord = await clinicalRecord.save();
     patient.clinicalRecords.push(savedRecord._id);
     await patient.save();
@@ -40,7 +49,10 @@ function fieldExists(field) {
 
 async function patch(req, res, next) {
   try {
-    const record = await ClinicalRecord.findById(req.params.recordId);
+    const record = await ClinicalRecord.find({
+      _id: req.params.recordId,
+      deleted: false
+    });
     if (!record) {
       const err = new APIError('Record not found', httpStatus.NOT_FOUND, true);
       return next(err);
@@ -98,10 +110,10 @@ async function patch(req, res, next) {
 
 async function get(req, res, next) {
   try {
-    const record = await ClinicalRecord.findById(req.params.recordId).populate(
-      'user',
-      'username'
-    );
+    const record = await ClinicalRecord.find({
+      _id: req.params.recordId,
+      deleted: false
+    }).populate('user', 'username');
     return res.json(record);
   } catch (error) {
     const err = new APIError('Record not found', httpStatus.NOT_FOUND, true);
@@ -111,7 +123,10 @@ async function get(req, res, next) {
 
 async function remove(req, res, next) {
   try {
-    const record = await ClinicalRecord.findById(req.params.recordId);
+    const record = await ClinicalRecord.find({
+      _id: req.params.recordId,
+      deleted: false
+    });
     record.deleted = true;
     record.save();
     return res.json(record);

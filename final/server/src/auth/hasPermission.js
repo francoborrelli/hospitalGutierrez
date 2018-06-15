@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const _ = require('lodash');
 const APIError = require('../helpers/APIError');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/config');
@@ -16,9 +17,9 @@ module.exports = permission => {
       return res.json({ blocked: true });
     }
     const permissions = user.getPermissions();
-    console.log('HASPERMISSIONS....', req.user)
 
-    if (permissions.length !== req.user.permissions.length) {
+    // TODO: ver tema permisos cambiados
+    if (!_.isEqual(permissions.sort(), req.user.permissions.sort())) {
       res.status(401);
       const token = jwt.sign(
         { _id: user.id, username: user.username, permissions },
@@ -27,15 +28,14 @@ module.exports = permission => {
       return res.json({ newToken: token });
     }
     if (req.user.permissions.find(p => p === permission)) {
-      res.locals.hola = 'asdkhasdkhasjkd';
-      next();
+      return next();
     } else {
       const err = new APIError(
         'User does not have permission',
         httpStatus.FORBIDDEN,
         true
       );
-      next(err);
+      return next(err);
     }
   };
 };

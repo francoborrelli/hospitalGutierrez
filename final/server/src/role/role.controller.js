@@ -1,6 +1,3 @@
-const httpStatus = require('http-status');
-const APIError = require('../helpers/APIError');
-
 const Role = require('../role/role.model');
 
 async function list(req, res, next) {

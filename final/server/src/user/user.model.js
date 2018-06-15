@@ -5,7 +5,6 @@ const APIError = require('../helpers/APIError');
 
 /**
  * User Schema
- * TODO: Ver validaciones y password
  */
 const UserSchema = new mongoose.Schema({
   firstName: {
@@ -91,15 +90,6 @@ UserSchema.statics = {
         path: 'roles',
         populate: { path: 'permissions', model: 'Permission' }
       })
-      .exec();
-  },
-
-  list({ skip = 0, limit = 50 } = {}) {
-    return this.find()
-      .populate({ path: 'roles', select: 'name' })
-      .sort({ createdAt: -1 })
-      .skip(+skip)
-      .limit(+limit)
       .exec();
   }
 };
