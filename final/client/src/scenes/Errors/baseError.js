@@ -1,13 +1,14 @@
 import React from 'react';
 
 const baseError = props => {
-    const Tag = `${props.tag}`;
+  const Tag = `${props.tag}`;
 
-    return (
+  return (
     <div className="errores">
-        <Tag>{props.title}</Tag>
-        <section>{props.body}</section>
-    </div>);
-}
+      <Tag>{props.title}</Tag>
+      <section>{props.body}</section>
+    </div>
+  );
+};
 
 export default baseError;

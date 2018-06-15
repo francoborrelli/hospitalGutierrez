@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from '../axios-apiReferences';
 
 const withApiRefData = () => {
-  return function (WrappedComponent) {
+  return function(WrappedComponent) {
     class PatientReferenceData extends Component {
       state = {
         apiData: {},
@@ -16,25 +16,30 @@ const withApiRefData = () => {
           axios.get('/tipo-vivienda'),
           axios.get('/tipo-agua'),
           axios.get('/tipo-calefaccion')
-        ]).then((results) => {
-          this.setState({
-            fetchingApiData: false,
-            apiData: {
-              documentTypes: results[0].data,
-              insurances: results[1].data,
-              houseTypes: results[2].data,
-              waterTypes: results[3].data,
-              heatingTypes: results[4].data
-            }
+        ])
+          .then(results => {
+            this.setState({
+              fetchingApiData: false,
+              apiData: {
+                documentTypes: results[0].data,
+                insurances: results[1].data,
+                houseTypes: results[2].data,
+                waterTypes: results[3].data,
+                heatingTypes: results[4].data
+              }
+            });
           })
-        }).catch()
+          .catch();
       }
 
       render() {
-        return (<WrappedComponent
-          {...this.props}
-          fetchingApiData={this.state.fetchingApiData}
-          apiData={this.state.apiData}/>)
+        return (
+          <WrappedComponent
+            {...this.props}
+            fetchingApiData={this.state.fetchingApiData}
+            apiData={this.state.apiData}
+          />
+        );
       }
     }
     return PatientReferenceData;

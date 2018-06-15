@@ -4,6 +4,7 @@
 
 ```sh
 $ cd final/server
+$ cp .env.example .env
 $ docker-compose up
 ```
 
