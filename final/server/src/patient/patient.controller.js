@@ -5,7 +5,7 @@ const Patient = require('./patient.model');
 
 async function list(req, res, next) {
   try {
-    const patients = await Patient.find({ deleted: false });
+    const patients = await Patient.find({ deleted: false }).sort('lastName');
     return res.json(patients);
   } catch (error) {
     const err = new APIError(
@@ -175,6 +175,7 @@ async function get(req, res, next) {
     }).populate({
       path: 'clinicalRecords',
       match: { deleted: { $eq: false } },
+      options: { sort: {'controlDate': -1} },
       populate: { path: 'user', model: 'User', select: 'username' }
     });
     if (!patient) {

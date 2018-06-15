@@ -65,7 +65,8 @@ const tablePatients = props => {
     {
       title: 'Nº Controles',
       dataIndex: 'controls',
-      key: 'controls'
+      key: 'controls',
+      sorter: (a,b) => a.controls - b.controls
     }
   ];
 
