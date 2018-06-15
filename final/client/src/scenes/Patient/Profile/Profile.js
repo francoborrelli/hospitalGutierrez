@@ -11,7 +11,8 @@ const profile = props => {
   const HcPermission = props.user.permissions.includes('historiaClinica_index');
 
   const reports =
-    props.patient.clinicalRecords && props.patient.clinicalRecords.length !== 0 ? (
+    props.patient.clinicalRecords &&
+    props.patient.clinicalRecords.length !== 0 ? (
       <Col xl={15} xxl={17}>
         <Reports patient={props.patient} loading={props.loadingPage} />
       </Col>

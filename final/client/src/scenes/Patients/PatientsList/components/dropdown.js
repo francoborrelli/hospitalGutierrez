@@ -12,41 +12,51 @@ const dropdown = props => {
     return props.user.permissions.includes(permission) ? element : null;
   };
 
-  const show = (
+  const show = check(
     <Item key="0">
       <Link to={'patient/' + props.record.key}>Ver Perfil</Link>
-    </Item>
+    </Item>,
+    'paciente_show'
   );
 
-  const edit = (
+  const edit = check(
     <Item key="1">
       <Link to={'patient/' + props.record.key + '/edit'}>Editar</Link>
-    </Item>
+    </Item>,
+    'paciente_update'
   );
 
-  const destroy = (
+  const destroy = check(
     <Item key="2">
-      <a onClick={() => Modal('paciente', props.record, () => props.onDelete(props.record))}>
+      <a
+        onClick={() =>
+          Modal('paciente', props.record, () => props.onDelete(props.record))
+        }
+      >
         Eliminar
       </a>
-    </Item>
+    </Item>,
+    'paciente_destroy'
   );
 
-  const clinic = (
+  const clinic = check(
     <Item key="3">
-      <Link to={'patient/' + props.record.key + '/addRecord'}>Agregar Control</Link>
-    </Item>
+      <Link to={'patient/' + props.record.key + '/addRecord'}>
+        Agregar Control
+      </Link>
+    </Item>,
+    'control_new'
   );
 
   const menu = (
     <Menu>
-      {check(show, 'paciente_show')}
+      {show}
       {show && clinic ? <Divider /> : null}
-      {check(clinic, 'control_new')}
-      {clinic && edit ? <Divider /> : null}
-      {check(edit, 'paciente_update')}
+      {clinic}
+      {(show || clinic) && edit ? <Divider /> : null}
+      {edit}
       {edit && destroy ? <Divider /> : null}
-      {check(destroy, 'paciente_destroy')}
+      {destroy}
     </Menu>
   );
 

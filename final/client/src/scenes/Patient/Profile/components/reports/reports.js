@@ -17,40 +17,45 @@ class Reports extends Component {
   };
 
   componentDidMount = () => {
-      axios
-        .get('/patients/' + this.props.patient._id + '/reports')
-        .then(response => {
-          this.setState({
-            ppc: response.data.ppc,
-            height: response.data.height,
-            weight: response.data.weight,
-          });
-        })
-        .catch(() => {
-          message.error('Ocurrió un error. Intenta nuevamente');
-          this.setState({ loading: false });
-        })
+    axios
+      .get('/patients/' + this.props.patient._id + '/reports')
+      .then(response => {
+        this.setState({
+          ppc: response.data.ppc,
+          height: response.data.height,
+          weight: response.data.weight
+        });
+      })
+      .catch(() => {
+        message.error('Ocurrió un error. Intenta nuevamente');
+        this.setState({ loading: false });
+      });
   };
 
-
   componentDidUpdate = () => {
-    if (this.state.loading){
-      this.setState({loading: false})
+    if (this.state.loading) {
+      this.setState({ loading: false });
     }
-  }
+  };
 
   render() {
     return (
-      <Card bodyStyle={{ padding: '10px 20px'}} style={{minHeight: 250}} loading={this.props.loading && this.state.loading}>
+      <Card bodyStyle={{ padding: '10px 20px' }} style={{ minHeight: 250 }} loading={this.props.loading && this.state.loading}>
         <Tabs defaultActiveKey="1" size="small">
           <TabPane tab="Curva de PPC" key="1">
             <PpcReport patient={this.props.patient} data={this.state.ppc} />
           </TabPane>
           <TabPane tab="Curva de Talla" key="2">
-            <HeightReport patient={this.props.patient} data={this.state.height} />
+            <HeightReport
+              patient={this.props.patient}
+              data={this.state.height}
+            />
           </TabPane>
           <TabPane tab="Curva de Crecimiento" key="3">
-            <WeightReport patient={this.props.patient} data={this.state.weight} />
+            <WeightReport
+              patient={this.props.patient}
+              data={this.state.weight}
+            />
           </TabPane>
         </Tabs>
       </Card>

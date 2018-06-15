@@ -113,7 +113,7 @@ class PatientPage extends Component {
 
   editPersonalDataHandler = data => {
     this.setState({ personalDataRequest: true });
-    
+
     const result = {
       ...data,
       insurance: typeof data.insurance === 'undefined' ? null : data.insurance,
