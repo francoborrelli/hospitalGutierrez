@@ -32,6 +32,8 @@ axios.interceptors.response.use(
       }
     } else if (error.response.status === 403 && error.response.data.blocked) {
       store.dispatch(actions.logout());
+    } else if (error.response.status === 503) {
+      store.dispatch(actions.appDisabled());
     }
     return Promise.reject(error);
   }
