@@ -16,8 +16,20 @@ class Configuration extends Component {
   state = {
     pageInfoRequest: false,
     elementsRequest: false,
-    mantaintmentRequest: false
+    mantaintmentRequest: false,
+    data: {}
   };
+
+  componentDidMount() {
+    axios
+      .get('/site')
+      .then(response => {
+        this.setState({ data: response.data });
+      })
+      .catch(() => {
+        message.error('Ha ocurrido un error. Intenta nuevamente');
+      });
+  }
 
   updatePageInfoHandler = data => {
     this.setState({ pageInfoRequest: true });
@@ -72,7 +84,7 @@ class Configuration extends Component {
         <RowGutter>
           <Col xs={24} xl={14} style={{ marginBottom: 10 }}>
             <PageConfiguration
-              values={this.props.site}
+              values={this.state.data}
               loading={this.state.pageInfoRequest}
               submitted={this.updatePageInfoHandler}
             />
@@ -81,7 +93,7 @@ class Configuration extends Component {
             <Row gutter={10}>
               <Col md={12} xl={24} xxl={12} style={{ marginBottom: 10 }}>
                 <ElementsConfiguration
-                  value={this.props.site.listAmount}
+                  value={this.state.data.listAmount}
                   submitted={this.updateElementsNumberHandler}
                   loading={this.state.elementsRequest}
                 />
