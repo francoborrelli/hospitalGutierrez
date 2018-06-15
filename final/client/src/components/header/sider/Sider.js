@@ -9,6 +9,7 @@ const sider = props => {
   const width = props.responsive ? 0 : 80
   return (
     <Sider
+      aria-labelledby="sider"
       className="sider"
       style={{ zIndex: 1 }}
       trigger={null}

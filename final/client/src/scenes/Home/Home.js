@@ -35,7 +35,7 @@ class Home extends Component {
     if (this.props.login) {
       message.success('Sesión iniciada correctamente.', 3);
       this.props.seeSuccessMessage();
-    }else{
+    } else {
       if (this.props.logout) {
         message.success('Se cerró la sesión correctamente.', 3);
         this.props.seeSuccessMessage();
@@ -46,7 +46,7 @@ class Home extends Component {
   render() {
     return (
       <Fragment>
-        <img className="banner" src={banner} alt="banner" />
+        <img className="banner" src={banner} alt="banner Hospital" />
         <Articles articles={articles} />
       </Fragment>
     );
@@ -54,11 +54,15 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  login: state.auth.recentLogin, logout: state.auth.recentLogout
+  login: state.auth.recentLogin,
+  logout: state.auth.recentLogout
 });
 
 const mapDispatchToProps = dispatch => ({
   seeSuccessMessage: () => dispatch(actions.seeSuccessMessage())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

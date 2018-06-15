@@ -1,218 +1,182 @@
-import React, {Component} from "react"
-import {Form, Button, Row} from "antd"
-import Input from "./formItem"
-import SearchItem from "./inputLayouts/searchItem"
-import NormalItem from "./inputLayouts/normalItem"
-import VerticalItem from "./inputLayouts/verticalItem"
+import React, { Component } from 'react';
+import { Form, Button, Row } from 'antd';
+import Input from './formItem';
+import SearchItem from './inputLayouts/searchItem';
+import NormalItem from './inputLayouts/normalItem';
+import VerticalItem from './inputLayouts/verticalItem';
 
 import PropTypes from 'prop-types';
 
-const FormItem = Form.Item
+const FormItem = Form.Item;
 class BaseForm extends Component {
   state = {
     initialState: {},
-    submitted: false,
-  }
+    submitted: false
+  };
 
   setDefaultState = () => {
-    this
-      .props
-      .form
-      .setFieldsValue(this.props.defaultValues)
+    this.props.form.setFieldsValue(this.props.defaultValues);
     this.setState({
-      initialState: this
-        .props
-        .form
-        .getFieldsValue()
-    })
-  }
+      initialState: this.props.form.getFieldsValue()
+    });
+  };
 
   componentDidMount = () => {
-    this.setDefaultState()
-  }
+    this.setDefaultState();
+  };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (!this.state.submitted && prevProps.defaultValues !== this.props.defaultValues) {
-      this.setDefaultState()
-      this.setState({
-        initialState: this
-          .props
-          .form
-          .getFieldsValue()
-      })
+    if (
+      !this.state.submitted &&
+      prevProps.defaultValues !== this.props.defaultValues
+    ) {
+      this.setDefaultState();
     }
     if (prevProps.fields !== this.props.fields && this.props.track) {
-      const keys = this.props.track
+      const keys = this.props.track;
       keys.forEach(key => {
         let value = this.props.defaultValues
           ? this.props.defaultValues[key]
-          : "1"
-        this
-          .props
-          .form
-          .setFieldsValue({[key]: value})
+          : '1';
+        this.props.form.setFieldsValue({ [key]: value });
       });
     }
-  }
+  };
 
   submitHandler = e => {
-    e.preventDefault()
-    this.setState({submitted: true})
-    this
-      .props
-      .form
-      .validateFieldsAndScroll((err, values) => {
-        if (!err) {
-          this
-            .props
-            .submitted(values)
-          if (!this.props.mantainDefault) {
-            this.setState({initialState: values, submitted: true})
-            this.props.form.setFieldsValue(values)
-          }
+    e.preventDefault();
+    this.setState({ submitted: true });
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        this.props.submitted(values);
+        if (!this.props.mantainDefault) {
+          this.setState({ initialState: values, submitted: true });
+          this.props.form.setFieldsValue(values);
         }
-      })
-  }
+      }
+    });
+  };
 
   resetHandler = () => {
-    this
-      .props
-      .form
-      .setFieldsValue(this.state.initialState)
+    this.props.form.setFieldsValue(this.state.initialState);
     try {
-      this.props.goBlank()
+      this.props.goBlank();
     } catch (error) {}
-  }
+  };
 
   getWrapper = () => {
     switch (this.props.layout) {
-      case "inline":
-        return SearchItem
-      case "vertical":
-        return VerticalItem
+      case 'inline':
+        return SearchItem;
+      case 'vertical':
+        return VerticalItem;
       default:
-        return NormalItem
+        return NormalItem;
     }
-  }
+  };
 
   getFields = fields => {
-    const {getFieldDecorator} = this.props.form
-    let Wrapper = this.getWrapper()
-    const items = []
+    const { getFieldDecorator } = this.props.form;
+    let Wrapper = this.getWrapper();
+    const items = [];
     for (let key in fields) {
-      items.push({id: key, config: fields[key]})
+      items.push({ id: key, config: fields[key] });
     }
     const inputs = items.map((item, key) => {
-      const rules = this.getRules(item.config)
+      const rules = this.getRules(item.config);
       return (
         <Wrapper key={key} label={item.config.label}>
-          {getFieldDecorator(item.config.name, {rules: rules})(<Input
-            key={key}
-            item={item.config}
-            decorator={getFieldDecorator}
-            form={this.props.form}/>)}
+          {getFieldDecorator(item.config.name, { rules: rules })(
+            <Input
+              key={key}
+              item={item.config}
+              decorator={getFieldDecorator}
+              form={this.props.form}
+            />
+          )}
         </Wrapper>
-      )
-    })
+      );
+    });
 
-    return inputs
-  }
+    return inputs;
+  };
 
   getRules = item => {
     return item.customValidator
       ? [
-        {
-          validator: (rule, value, callback) => item.customValidator(this.props.form, rule, value, callback)
-        },
-        ...item.rules
-      ]
-      : item.rules
-  }
+          {
+            validator: (rule, value, callback) =>
+              item.customValidator(this.props.form, rule, value, callback)
+          },
+          ...item.rules
+        ]
+      : item.rules;
+  };
 
   putItInBlank = () => {
-    return this.props.goBlank
-      ? (
-        <Button
-          style={{
-          float: "right",
-          marginRight: 10
-        }}
-          onClick={this.resetHandler}>
-          Limpiar
-        </Button>
-      )
-      : null
-  }
+    return this.props.goBlank ? (
+      <Button
+        style={{ float: 'right', marginRight: 10 }}
+        onClick={this.resetHandler}
+      >
+        Limpiar
+      </Button>
+    ) : null;
+  };
 
   getBackButton = () => {
-    return this.props.onBack
-      ? (
-        <Button
-          style={{
-          float: "right",
-          marginRight: 10
-        }}
-          onClick={() => this.props.onBack(this.props.form.getFieldsValue())}>
-          Volver
-        </Button>
-      )
-      : null
-  }
+    return this.props.onBack ? (
+      <Button
+        style={{ float: 'right', marginRight: 10 }}
+        onClick={() => this.props.onBack(this.props.form.getFieldsValue())}
+      >
+        Volver
+      </Button>
+    ) : null;
+  };
 
   getResetButton = () => {
-    return this.props.reset
-      ? (
-        <Button
-          style={{
-          float: "right",
-          marginRight: 10
-        }}
-          onClick={this.resetHandler}>
-          Restaurar
-        </Button>
-      )
-      : null
-  }
+    return this.props.reset ? (
+      <Button
+        style={{ float: 'right', marginRight: 10 }}
+        onClick={this.resetHandler}
+      >
+        Restaurar
+      </Button>
+    ) : null;
+  };
 
   getCancelButton = () => {
-    return this.props.onCancel
-      ? (
-        <Button
-          style={{
-          float: "right",
-          marginRight: 10
-        }}
-          onClick={this.props.onCancel}>
-          Cancelar
-        </Button>
-      )
-      : null
-  }
+    return this.props.onCancel ? (
+      <Button
+        style={{ float: 'right', marginRight: 10 }}
+        onClick={this.props.onCancel}
+      >
+        Cancelar
+      </Button>
+    ) : null;
+  };
 
   render() {
-    let backButton = this.getBackButton()
-    let resetButton = this.getResetButton()
-    let cancelButton = this.getCancelButton()
-    let blankButton = this.putItInBlank()
+    let backButton = this.getBackButton();
+    let resetButton = this.getResetButton();
+    let cancelButton = this.getCancelButton();
+    let blankButton = this.putItInBlank();
     return (
       <Form
         className={this.props.className}
         onSubmit={this.submitHandler}
-        style={this.props.style}>
+        style={this.props.style}
+      >
         <Row>{this.getFields(this.props.fields)}</Row>
-        <FormItem style={{
-          margin: 0
-        }}>
+        <FormItem style={{ margin: 0 }}>
           <Button
             type="primary"
             htmlType="submit"
-            style={{
-            float: "right"
-          }}
-            loading={this.props.loading}>
-            {this.props.buttonText
-              ? this.props.buttonText
-              : "Guardar"}
+            style={{ float: 'right' }}
+            loading={this.props.loading}
+          >
+            {this.props.buttonText ? this.props.buttonText : 'Guardar'}
           </Button>
           {blankButton}
           {resetButton}
@@ -220,10 +184,9 @@ class BaseForm extends Component {
           {backButton}
         </FormItem>
       </Form>
-    )
+    );
   }
 }
-
 
 BaseForm.propTypes = {
   layout: PropTypes.string,
@@ -231,6 +194,6 @@ BaseForm.propTypes = {
   submitted: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   buttonText: PropTypes.string
-}
+};
 
-export default Form.create()(BaseForm)
+export default Form.create()(BaseForm);
