@@ -52,7 +52,7 @@
       "generalObservation": null,
       "fisicTestObservation": "El examen fisico mostro una mejora respecto a la última consulta",
       "nutrition": "Mejoro la alimentación",
-      "user": { "$oid": "5b213e492e68090330691603" },
+      "user": { "$oid": "5b083014f196f1001cd99ce7" },
       "deleted": false,
       "__v": 0
     },
@@ -104,7 +104,7 @@
       "vaccination": true,
       "maturation": false,
       "fisicTest": true,
-      "user": { "$oid": "5b082ff2f196f1001cd99ce6" },
+      "user": { "$oid": "5b083014f196f1001cd99ce7" },
       "deleted": false,
       "__v": 0
     },
@@ -123,7 +123,7 @@
       "fisicTestObservation": null,
       "generalObservation": null,
       "nutrition": null,
-      "user": { "$oid": "5b213e492e68090330691603" },
+      "user": { "$oid": "5b082ff2f196f1001cd99ce6" },
       "deleted": false,
       "__v": 0
     },
@@ -161,7 +161,7 @@
       "vaccinationObservation": "Esto es una descripcion valida",
       "generalObservation": "El crecimiento del paciente viene siendo constante",
       "nutrition": "Nada que agregar",
-      "user": { "$oid": "5b083014f196f1001cd99ce7" },
+      "user": { "$oid": "5b082ff2f196f1001cd99ce6" },
       "deleted": false,
       "__v": 0
     },
@@ -237,14 +237,14 @@
       "nutrition": null,
       "vaccinationObservation": "Se debe vacunar contra la gripe",
       "generalObservation": "La paciente se ve saludable",
-      "user": { "$oid": "5b213e492e68090330691603" },
+      "user": { "$oid": "5b082ff2f196f1001cd99ce6" },
       "deleted": false,
       "__v": 0
     },
     {
       "_id": { "$oid": "5b22567eebd0531f5ec4c589" },
       "controlDate": { "$date": "1998-05-11T00:00:00.000Z" },
-      "weight": 15.3,
+      "weight": 16.3,
       "height": 76,
       "pc": 55,
       "ppc": 55.7,
@@ -256,14 +256,14 @@
       "fisicTestObservation": null,
       "generalObservation": null,
       "nutrition": "Se recetaron vitamitas suplementarias",
-      "user": { "$oid": "5b213e492e68090330691603" },
+      "user": { "$oid": "5b083014f196f1001cd99ce7" },
       "deleted": false,
       "__v": 0
     },
     {
       "_id": { "$oid": "5b225751ebd0531f5ec4c58a" },
       "controlDate": { "$date": "1998-12-11T00:00:00.000Z" },
-      "weight": 18.3,
+      "weight": 17.5,
       "height": 82.6,
       "pc": 59,
       "ppc": 59.7,
@@ -294,7 +294,7 @@
       "fisicTestObservation": null,
       "generalObservation": null,
       "nutrition": null,
-      "user": { "$oid": "5b213e492e68090330691603" },
+      "user": { "$oid": "5b083014f196f1001cd99ce7" },
       "deleted": false,
       "__v": 0
     }                                    

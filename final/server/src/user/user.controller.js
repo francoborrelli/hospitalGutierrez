@@ -76,6 +76,7 @@ async function patch(req, res, next) {
 
 function list(req, res, next) {
   User.find()
+    .populate({path: 'roles', select: 'name'})
     .then(users => res.json(users))
     .catch(e => next(e));
 }
