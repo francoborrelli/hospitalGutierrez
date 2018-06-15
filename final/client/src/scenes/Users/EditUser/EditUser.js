@@ -120,13 +120,7 @@ class EditUser extends Component {
     return (
       <Section title="Editar Usuario" goBackTo={'/users'}>
         <RowGutter>
-          <Col
-            xs={24}
-            xl={14}
-            style={{
-              marginBottom: 10
-            }}
-          >
+          <Col xs={24} xl={14} style={{ marginBottom: 10 }}>
             <PersonalForm
               submitted={this.personalDataHandler}
               loading={this.state.personalDataRequest}
@@ -135,13 +129,7 @@ class EditUser extends Component {
           </Col>
           <Col xs={24} xl={10}>
             <Row gutter={10}>
-              <Col
-                md={12}
-                xl={24}
-                style={{
-                  marginBottom: 10
-                }}
-              >
+              <Col md={12} xl={24} style={{ marginBottom: 10 }}>
                 <PasswordForm
                   submitted={this.passwordHandler}
                   loading={this.state.passwordRequest}

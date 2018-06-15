@@ -1,11 +1,11 @@
-import React, {Component} from "react";
-import {message} from "antd"
+import React, { Component } from 'react';
+import { message } from 'antd';
 import axios from '../../axios-api';
 
-import Report from "./components/report"
-import Section from "../../components/header/sectionHeader/sectionHeader"
-import Row from "../../components/grid/row";
-import hasPermission from "../../hoc/hasPermission"
+import Report from './components/report';
+import Section from '../../components/header/sectionHeader/sectionHeader';
+import Row from '../../components/grid/row';
+import hasPermission from '../../hoc/hasPermission';
 import withApiRefData from '../../hoc/withApiRefData';
 
 class Reports extends Component {
@@ -15,61 +15,71 @@ class Reports extends Component {
     withRefrigerator: [],
     withElectricity: [],
     withPet: []
-  }
+  };
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate = prevProps => {
     if (prevProps.fetchingApiData !== this.props.fetchingApiData) {
       axios
         .get('reports')
-        .then((response) => {
-          const data = response.data
+        .then(response => {
+          const data = response.data;
           this.setState({
             total: data.totalPatients,
-            heatingTypes: this.getPieData(this.props.apiData.heatingTypes, data.heatingTypes),
-            houseTypes: this.getPieData(this.props.apiData.houseTypes, data.houseTypes),
-            waterTypes: this.getPieData(this.props.apiData.waterTypes, data.waterTypes),
+            heatingTypes: this.getPieData(
+              this.props.apiData.heatingTypes,
+              data.heatingTypes
+            ),
+            houseTypes: this.getPieData(
+              this.props.apiData.houseTypes,
+              data.houseTypes
+            ),
+            waterTypes: this.getPieData(
+              this.props.apiData.waterTypes,
+              data.waterTypes
+            ),
             withRefrigerator: this.getColumnData(data.withRefrigerator),
             withElectricity: this.getColumnData(data.withElectricity),
             withPet: this.getColumnData(data.withPet),
             loading: false
-          })
+          });
         })
-        .catch((e) => {
-          message.error('Hubo un error. Intenta nuevamente')
-        })
+        .catch(e => {
+          message.error('Hubo un error. Intenta nuevamente');
+        });
     }
-  }
+  };
 
   getPieData = (apiData, data) => {
-    const result = []
+    const result = [];
     apiData.forEach(element => {
-      let e = data.find(x => x.id === parseInt(element.id, 10))
+      let e = data.find(x => x.id === parseInt(element.id, 10));
       if (e) {
-        result.push({name: element.nombre, y: e.amount})
+        result.push({ name: element.nombre, y: e.amount });
       } else {
-        result.push({name: element.nombre, y: 0})
+        result.push({ name: element.nombre, y: 0 });
       }
     });
-    return result
-  }
+    return result;
+  };
 
-  getColumnData = (data) => [
+  getColumnData = data => [
     {
-      name: "Si",
+      name: 'Si',
       data: [
         {
           y: data.yes
         }
       ]
-    }, {
-      name: "No",
+    },
+    {
+      name: 'No',
       data: [
         {
           y: data.no
         }
       ]
     }
-  ]
+  ];
 
   render = () => (
     <Section title="Reportes">
@@ -79,41 +89,46 @@ class Reports extends Component {
           title="Tipos de Viviendas"
           loading={this.state.loading}
           data={this.state.houseTypes}
-          total={this.state.total}/>
+          total={this.state.total}
+        />
         <Report
           type="pie"
           title="Tipos de Agua"
           loading={this.state.loading}
           data={this.state.waterTypes}
-          total={this.state.total}/>
+          total={this.state.total}
+        />
         <Report
           type="pie"
           title="Tipos de Calefacción"
           loading={this.state.loading}
           data={this.state.heatingTypes}
-          total={this.state.total}/>
+          total={this.state.total}
+        />
         <Report
           type="column"
           title="Pacientes con electricidad"
           loading={this.state.loading}
           data={this.state.withElectricity}
-          total={this.state.total}/>
+          total={this.state.total}
+        />
         <Report
           type="column"
           title="Pacientes con Heladera"
           loading={this.state.loading}
           data={this.state.withRefrigerator}
-          total={this.state.total}/>
+          total={this.state.total}
+        />
         <Report
           type="column"
           title="Pacientes con Mascotas"
           data={this.state.withPet}
           loading={this.state.loading}
-          total={this.state.total}/>
+          total={this.state.total}
+        />
       </Row>
     </Section>
-  )
-
+  );
 }
 
-export default withApiRefData()(hasPermission(Reports, ['reportes_index']))
+export default withApiRefData()(hasPermission(Reports, ['reportes_index']));

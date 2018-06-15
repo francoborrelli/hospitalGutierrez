@@ -40,9 +40,7 @@ class AddUser extends Component {
         password: data.password
       });
       this.setState({ loading: false });
-      message.success(
-        'Se agregó a ' + data.name + ' ' + data.lastname + ' correctamente.'
-      );
+      message.success('Se agregó a ' + data.name + ' ' + data.lastname + ' correctamente.');
       this.redirect();
     } catch (error) {
       this.setState({ loading: false });
@@ -53,23 +51,9 @@ class AddUser extends Component {
   render() {
     return (
       <Section title="Agregar Usuario" goBackTo="/users">
-        <div
-          style={{
-            margin: '0 10px'
-          }}
-        >
-          <Card
-            style={{
-              margin: '10px auto',
-              maxWidth: 850
-            }}
-          >
-            <div
-              style={{
-                maxWidth: 700,
-                margin: '0 auto'
-              }}
-            >
+        <div style={{ margin: '0 10px' }}>
+          <Card style={{ margin: '10px auto', maxWidth: 850 }}>
+            <div style={{ maxWidth: 700, margin: '0 auto' }}>
               <PersonalForm
                 onCancel={this.redirect}
                 roles={this.state.roles}
@@ -84,4 +68,6 @@ class AddUser extends Component {
   }
 }
 
-export default withRouter(hasPermission(AddUser, ['usuario_index', 'usuario_new']));
+export default withRouter(
+  hasPermission(AddUser, ['usuario_index', 'usuario_new'])
+);
