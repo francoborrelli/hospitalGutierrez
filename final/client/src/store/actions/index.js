@@ -3,7 +3,8 @@ export {
   logout,
   authSuccess,
   seeSuccessMessage,
-  checkAuth
+  checkAuth,
+  updateUser
 } from './auth';
 export {
   appLoading,

@@ -4,6 +4,7 @@ export const AUTH_FAIL = 'AUTH_FAIL';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const AUTH_SEE_MESSAGE = 'AUTH_SEE_MESSAGE';
 export const AUTH_RECENT_LOGIN = 'AUTH_RECENT_LOGIN';
+export const UPDATE_USER = 'UPDATE_USER';
 
 export const APP_LOADING = 'APP_LOADING';
 export const APP_LOADED = 'APP_LOADED';

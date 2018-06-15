@@ -23,6 +23,12 @@ const authFail = error => ({
   error: error.response
 });
 
+export const updateUser = username => ({
+  type: types.UPDATE_USER,
+  username
+});
+
+
 const recentLogin = () => ({
   type: types.AUTH_RECENT_LOGIN
 });

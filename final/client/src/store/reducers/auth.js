@@ -34,6 +34,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, appLoading: true };
     case types.APP_LOADED:
       return { ...state, appLoading: false };
+    case types.UPDATE_USER:
+      return {...state, user: { ...state.user, username: action.username}}
     default:
       return state;
   }

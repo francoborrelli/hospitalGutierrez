@@ -10,6 +10,9 @@ import PasswordForm from './components/passwordForm';
 import hasPermission from '../../../hoc/hasPermission';
 import { withRouter } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+import * as actions from '../../../store/actions';
+
 class EditUser extends Component {
   state = {
     personalDataRequest: false,
@@ -69,6 +72,11 @@ class EditUser extends Component {
         }
       );
       const user = response.data;
+
+      if (this.props.user._id === this.props.match.params.userId){
+        this.props.updateUser(user.username)
+      }
+
       this.setState({
         personalDataRequest: false,
         personalData: {
@@ -80,6 +88,7 @@ class EditUser extends Component {
       });
       message.success('Datos modificados correctamente');
     } catch (error) {
+      console.log(error)
       this.setState({ personalDataRequest: false });
       message.error('Ocurrió un error al actualizar los datos del usuario');
     }
@@ -151,6 +160,13 @@ class EditUser extends Component {
   };
 }
 
-export default withRouter(
-  hasPermission(EditUser, ['usuario_index', 'usuario_update'])
-);
+const mapDispatchToProps = dispatch => ({
+  updateUser: username => dispatch(actions.updateUser(username))
+});
+
+
+export default withRouter(hasPermission(connect(null, mapDispatchToProps)(EditUser), [
+    'usuario_index',
+    'usuario_update'
+  ]
+));
