@@ -110,7 +110,7 @@ async function patch(req, res, next) {
 
 async function get(req, res, next) {
   try {
-    const record = await ClinicalRecord.find({
+    const record = await ClinicalRecord.findOne({
       _id: req.params.recordId,
       deleted: false
     }).populate('user', 'username');

@@ -169,7 +169,7 @@ async function patchDemographicData(req, res, next) {
 
 async function get(req, res, next) {
   try {
-    const patient = await Patient.find({
+    const patient = await Patient.findOne({
       _id: req.params.patientId,
       deleted: false
     }).populate({
