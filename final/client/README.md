@@ -1,13 +1,9 @@
 # Client-side application
 
-## Installation
-
-Requires [Node.js](https://nodejs.org/) to run.
-
-To install the dependencies and start the server run the following commands:
+## Setup
 
 ```sh
-$ cd client
-$ npm install
+$ cd final/client
+$ npm i
 $ npm start
 ```
