@@ -7,6 +7,7 @@ const roleRoutes = require('./role/role.route');
 const siteRoutes = require('./site/site.route');
 const patientRoutes = require('./patient/patient.route');
 const reportRoutes = require('./report/report.route');
+const siteAvailable = require('./site/siteAvailable')
 
 const router = express.Router();
 
@@ -20,6 +21,6 @@ authRouter.use('/users', userRoutes);
 authRouter.use('/roles', roleRoutes);
 authRouter.use('/patients', patientRoutes);
 authRouter.use('/reports', reportRoutes);
-router.use('/', expressJwt({ secret: config.jwtSecret }), authRouter);
+router.use('/', siteAvailable(), expressJwt({ secret: config.jwtSecret }), authRouter);
 
 module.exports = router;
