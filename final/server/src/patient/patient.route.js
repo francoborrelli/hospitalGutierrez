@@ -7,7 +7,6 @@ const clinicalRecordCtrl = require('../clinicalRecord/clinicalRecord.controller'
 
 const router = express.Router();
 
-// TODO: Autorizacion
 router
   .route('/')
   .get(hasPermission('paciente_index'), patientCtrl.list)
@@ -29,7 +28,7 @@ router
     validate(paramValidation.patchPatient),
     patientCtrl.patch
   )
-  .delete(patientCtrl.remove);
+  .delete(hasPermission('paciente_destroy'), patientCtrl.remove);
 
 router
   .route('/:patientId/clinicalRecords')

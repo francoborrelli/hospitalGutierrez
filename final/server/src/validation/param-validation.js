@@ -1,14 +1,12 @@
 const Joi = require('joi');
 
 module.exports = {
-  // TODO: Validar password
-  // POST /users
   createUser: {
     body: {
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
       username: Joi.string().required(),
-      password: Joi.string().required(),
+      password: Joi.string().min(6).required(),
       email: Joi.string()
         .email()
         .required(),
@@ -21,6 +19,7 @@ module.exports = {
       firstName: Joi.string(),
       lastName: Joi.string(),
       username: Joi.string(),
+      password: Joi.string().min(6),
       email: Joi.string().email(),
       active: Joi.bool(),
       roles: Joi.array()
@@ -62,7 +61,7 @@ module.exports = {
       email: Joi.string()
         .email()
         .required(),
-      password: Joi.string().required()
+      password: Joi.string().min(6).required()
     }
   },
 

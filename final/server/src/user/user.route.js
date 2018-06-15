@@ -17,7 +17,7 @@ router
 
 router
   .route('/:userId')
-  .get(userCtrl.get)
+  .get(hasPermission('usuario_update'), userCtrl.get)
   .patch(hasPermission('usuario_update'), validate(paramValidation.patchUser), userCtrl.patch);
 
 router

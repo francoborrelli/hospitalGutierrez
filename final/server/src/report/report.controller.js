@@ -1,6 +1,3 @@
-const httpStatus = require('http-status');
-const APIError = require('../helpers/APIError');
-
 const Patient = require('../patient/patient.model');
 
 function handleHouseType(houseTypes, patient) {
