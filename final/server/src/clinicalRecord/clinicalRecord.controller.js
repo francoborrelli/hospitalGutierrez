@@ -49,7 +49,7 @@ function fieldExists(field) {
 
 async function patch(req, res, next) {
   try {
-    const record = await ClinicalRecord.find({
+    const record = await ClinicalRecord.findOne({
       _id: req.params.recordId,
       deleted: false
     });
@@ -123,7 +123,7 @@ async function get(req, res, next) {
 
 async function remove(req, res, next) {
   try {
-    const record = await ClinicalRecord.find({
+    const record = await ClinicalRecord.findOne({
       _id: req.params.recordId,
       deleted: false
     });

@@ -63,7 +63,7 @@ function fieldExists(field) {
 
 async function patch(req, res, next) {
   try {
-    const patient = await Patient.find({
+    const patient = await Patient.findOne({
       _id: req.params.patientId,
       deleted: false
     });
@@ -129,7 +129,7 @@ async function patch(req, res, next) {
 
 async function patchDemographicData(req, res, next) {
   try {
-    const patient = await Patient.find({
+    const patient = await Patient.findOne({
       _id: req.params.patientId,
       deleted: false
     });
@@ -190,7 +190,7 @@ async function get(req, res, next) {
 
 async function remove(req, res, next) {
   try {
-    const patient = await Patient.find({
+    const patient = await Patient.findOne({
       _id: req.params.patientId,
       deleted: false
     }).populate({
