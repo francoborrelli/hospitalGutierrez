@@ -69,7 +69,7 @@ export default props => {
     xTitle: "Edad (meses)",
     yTitle: "Longitud (cm)",
     series: data,
-    exporting: {filename: props.patient.name + " " + props.patient.lastname + " - Curva de Talla"}
+    exporting: {filename: props.patient.firstName + " " + props.patient.lastName + " - Curva de Talla"}
   }
 
   return (<div style={{padding: "0px 20px"}}><LineChart {...config}/></div>)

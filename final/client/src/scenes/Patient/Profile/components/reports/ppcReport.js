@@ -68,7 +68,7 @@ export default props => {
     xTitle: "Edad (semanas)",
     yTitle: "Perímetro cefálico (cm)",
     series: data,
-    exporting: {filename: props.patient.name + " " + props.patient.lastname + " - PPC"}
+    exporting: {filename: props.patient.firstName + " " + props.patient.lastName + " - PPC"}
   }
 
   return (<div style={{padding: "0px 20px"}}><LineChart {...config}/></div>)

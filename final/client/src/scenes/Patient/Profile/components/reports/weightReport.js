@@ -67,7 +67,7 @@ const getData = patient => {
       xTitle: "Edad (semanas)",
       yTitle: "Peso (kg)",
       series: data,
-      exporting: {filename: props.patient.name + " " + props.patient.lastname + " - Curva de Crecimiento"}
+      exporting: {filename: props.patient.firstName + " " + props.patient.lastName + " - Curva de Crecimiento"}
     }
 
     return (<div style={{padding: "0px 20px"}}><LineChart {...config}/></div>)
