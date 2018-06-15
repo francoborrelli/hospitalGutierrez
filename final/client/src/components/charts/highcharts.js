@@ -46,7 +46,8 @@ const pieColors = () => {
 const plotOptions = {
   series: {
     marker: {
-      symbol: 'circle'
+      symbol: 'circle',
+      enabled: true
     },
     connectNulls: true,
     lineWidth: 1
