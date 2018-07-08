@@ -1,5 +1,8 @@
 # Proyecto de Software 2017 - Grupo 2
 
+## Bot de Turnos
+[@HospitalGutierrez_Bot](https://telegram.me/HospitalGutierrez_Bot)
+
 ## Documentación
 
 Se adjunta en formato de pdf la documentación relacionada al proyecto desarrollado. 
